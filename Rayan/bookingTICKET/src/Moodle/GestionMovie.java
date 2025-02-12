@@ -8,11 +8,12 @@ public class GestionMovie {
     public GestionMovie(ArrayList<ShoweTime> showeTimeList) {
         this.showeTimeList = showeTimeList;
     }
-    
+
     public void addShowTime(ShoweTime showeTime) {
         showeTimeList.add(showeTime);
     }
-    public removeShowtime(ShoweTime showeTime) {
+
+    public void removeShowtime(ShoweTime showeTime) {
         showeTimeList.remove(showeTime);
     }
 }
