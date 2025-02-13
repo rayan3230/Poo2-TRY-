@@ -36,6 +36,8 @@ public class MovieApp extends JFrame implements ActionListener {
 
     public MovieApp() {
         this.setTitle("MovieBooking App");
+        ImageIcon AppLogo = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\AppLogo.jpg");
+        this.setIconImage(AppLogo.getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1100, 650);
         this.setLocationRelativeTo(null);
@@ -43,13 +45,14 @@ public class MovieApp extends JFrame implements ActionListener {
         this.setResizable(false);
         this.setLayout(null);
         this.getContentPane().setBackground(new java.awt.Color(0xD2D2D2));
+        
 
         // Settings Button to open the SettingsPanel-------------------------
         Settings = new JButton();
         Settings.setBounds(15, 10, 40, 44);
         Settings.setBackground(new Color(0x005DD8));
         Settings.setFocusable(false);
-        Settings.setUI(new RoundButtonUI(new java.awt.Color(0x000000)));
+        Settings.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
         // Filter text -------------------------------------------------------
         FilterText = new JLabel("Filters : ");
@@ -85,7 +88,7 @@ public class MovieApp extends JFrame implements ActionListener {
         SearchBarPanel.setForeground(Color.WHITE);
         SearchBarPanel.setLayout(null);
         JTextField SearchBarTextField = new JTextField();
-        SearchBarTextField.setBounds(0, 0, 1002, 32);
+        SearchBarTextField.setBounds(0, 0, 1000, 30);
         SearchBarTextField.setFont(new Font("Arial", Font.BOLD, 17));
         SearchBarTextField.setBackground(new java.awt.Color(0x012757));
         SearchBarTextField.setForeground(Color.WHITE);
@@ -99,6 +102,14 @@ public class MovieApp extends JFrame implements ActionListener {
         this.add(Rating);
         this.add(SearchBarPanel);
 
+        JTextField SearchBarTextField = new JTextField();
+        SearchBarTextField.setBounds(0, 0, 1000, 30);
+        SearchBarTextField.setFont(new Font("Arial", Font.BOLD, 17));
+        SearchBarTextField.setBackground(new java.awt.Color(0x012757));
+        SearchBarTextField.setForeground(Color.WHITE);
+        SearchBarTextField.setCaretColor(Color.WHITE);
+        SearchBarPanel.add(SearchBarTextField);
+
     }
 
     @Override
@@ -108,7 +119,6 @@ public class MovieApp extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         MovieApp Frame = new MovieApp();
-
     }
 
 }

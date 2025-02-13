@@ -1,15 +1,18 @@
 package Basic_Classes;
 
+
 public class Salle {
 
     private int ID;
     private int capacite;
     private String type;
+    private int seatID = 0;
 
     public Salle(int ID, int capacite, String type) {
         this.ID = ID;
         this.capacite = capacite;
         this.type = type;
+        this.seatID ++;
     }
 
     public int getID() {
@@ -36,12 +39,14 @@ public class Salle {
         this.type = type;
     }
 
+
     @Override
     public String toString() {
         return "Salle{" +
                 "ID=" + ID +
                 ", capacite=" + capacite +
                 ", type='" + type + '\'' +
+                ", seatID='" + seatID + '\'' +
                 '}';
     }
 
