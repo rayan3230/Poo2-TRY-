@@ -90,11 +90,11 @@ public class MovieApp extends JFrame implements ActionListener {
         SearchBarPanel.setForeground(Color.WHITE);
         SearchBarPanel.setLayout(null);
         JTextField SearchBarTextField = new JTextField();
-        SearchBarPanel.setBounds(10, 10, 1000, 30);
-        SearchBarPanel.setFont(new Font("Arial", Font.BOLD, 17));
-        SearchBarPanel.setBackground(new java.awt.Color(0x012757));
-        SearchBarPanel.setForeground(Color.WHITE);
-        SearchBarPanel.add(SearchBarTextField);
+        SearchBarTextField.setBounds(10, 10, 1000, 30);
+        SearchBarTextField.setFont(new Font("Arial", Font.BOLD, 17));
+        SearchBarTextField.setBackground(new java.awt.Color(0x012757));
+        SearchBarTextField.setForeground(Color.WHITE);
+        SearchBarTextField.add(SearchBarTextField);
 
         this.add(Settings);
         this.add(FilterText);
