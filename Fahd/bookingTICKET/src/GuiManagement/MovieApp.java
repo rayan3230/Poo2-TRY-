@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicButtonUI;
 
 public class MovieApp extends JFrame implements ActionListener {
 
@@ -41,9 +42,8 @@ public class MovieApp extends JFrame implements ActionListener {
         Settings = new JButton();
         Settings.setBounds(15, 10, 40, 40);
         Settings.setBackground(new Color(0x005DD8));
-        Settings.addActionListener(e -> );
         Settings.setFocusable(false);
-        Settings.setBorder(BorderFactory.createEtchedBorder());
+        Settings.setUI(new RoundButtonUI());
 
         FilterText = new JLabel("Filters : ");
         FilterText.setBounds(75, 85, 80, 24);
