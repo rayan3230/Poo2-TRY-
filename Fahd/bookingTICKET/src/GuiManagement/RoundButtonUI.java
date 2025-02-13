@@ -16,8 +16,8 @@ public class RoundButtonUI extends BasicButtonUI {
         Dimension size = c.getSize();
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(c.getBackground().darker());
-        g2.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 10, 10);
+        g2.setColor(new java.awt.Color(0x000000));
+        g2.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 10, 20);
         g2.setColor(c.getBackground());
         g2.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 2, 10, 10);
     }
