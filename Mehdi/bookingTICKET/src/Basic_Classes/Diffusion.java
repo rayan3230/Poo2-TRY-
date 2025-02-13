@@ -62,7 +62,29 @@ public class Diffusion {
         return time2;
     }
 
-    public String Diff(){
+    public void setIDdiffusion(int IDdiffusion) {
+        this.IDdiffusion = IDdiffusion;
+    }
+
+    public void setSalle(Salle salle) {
+        this.salle = salle;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setTime1(LocalTime time1) {
+        this.time1 = time1;
+    }
+
+
+    @Override
+    public String toString(){
 
         return "Diffusion{" +
                 ", salle=" + salle +
