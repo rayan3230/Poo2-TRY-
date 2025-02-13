@@ -43,6 +43,7 @@ public class MovieApp extends JFrame implements ActionListener {
         Settings.setBackground(new Color(0x005DD8));
         Settings.addActionListener(e -> );
         Settings.setFocusable(false);
+        Settings.setBorder(BorderFactory.createEtchedBorder());
 
         FilterText = new JLabel("Filters : ");
         FilterText.setBounds(75, 85, 80, 24);
