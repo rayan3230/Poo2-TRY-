@@ -7,6 +7,8 @@ public class Hall {
     public String NameHall;
     public int seat, VipSeat;
     ArrayList<Integer> NbrSeat;
+    public boolean Vipavailable , seatAvailable;
+    public boolean HallAvailable;
     
     public Hall(int id, String nameHall, int seat, int VipSeat) {
         this.id = id + 1;

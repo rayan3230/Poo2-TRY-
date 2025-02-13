@@ -46,7 +46,7 @@ public class MovieApp extends JFrame implements ActionListener {
 
         // Settings Button to open the SettingsPanel-------------------------
         Settings = new JButton();
-        Settings.setBounds(15, 10, 40, 40);
+        Settings.setBounds(15, 10, 40, 44);
         Settings.setBackground(new Color(0x005DD8));
         Settings.setFocusable(false);
         Settings.setUI(new RoundButtonUI(new java.awt.Color(0x000000)));
@@ -85,7 +85,7 @@ public class MovieApp extends JFrame implements ActionListener {
         SearchBarPanel.setForeground(Color.WHITE);
         SearchBarPanel.setLayout(null);
         JTextField SearchBarTextField = new JTextField();
-        SearchBarTextField.setBounds(0, 0, 1000, 30);
+        SearchBarTextField.setBounds(0, 0, 1002, 32);
         SearchBarTextField.setFont(new Font("Arial", Font.BOLD, 17));
         SearchBarTextField.setBackground(new java.awt.Color(0x012757));
         SearchBarTextField.setForeground(Color.WHITE);

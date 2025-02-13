@@ -1,6 +1,8 @@
-package Moodle;
+package Controller;
 
 import java.util.ArrayList;
+
+import Moodle.ShoweTime;
 
 public class GestionMovie {
     ArrayList<ShoweTime> showeTimeList = new ArrayList<>();
