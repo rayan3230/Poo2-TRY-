@@ -81,6 +81,12 @@ public class GestionHall {
             System.out.println("Hall Id is null");
         }
     }
+
+    public void Displayhall(){
+        for(Hall hall : Salles){
+            System.out.println("Hall : " + hall.NameHall + " Seat : " + hall.seat + " Vip Seat : " + hall.VipSeat);
+        }
+    }
     
 
 }
