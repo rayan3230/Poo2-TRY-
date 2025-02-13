@@ -8,7 +8,9 @@ import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-public class MovieApp extends JFrame {
+public class MovieApp extends JFrame implements ActionListener {
+
+    public static JButton Settings;
 
     public static JLabel FilterText;
     public static JLabel Genre;
@@ -35,6 +37,12 @@ public class MovieApp extends JFrame {
         this.setResizable(false);
         this.setLayout(null);
         this.setBackground(new java.awt.Color(0xDEDEDE));
+
+        Settings = new JButton();
+        Settings.setBounds(15, 10, 40, 40);
+        Settings.setBackground(new Color(0x005DD8));
+        Settings.addActionListener(e -> );
+        Settings.setFocusable(false);
 
         FilterText = new JLabel("Filters : ");
         FilterText.setBounds(75, 85, 80, 24);
@@ -63,12 +71,19 @@ public class MovieApp extends JFrame {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
     public static void main(String[] args) {
         MovieApp Frame = new MovieApp();
+        Frame.add(Settings);
         Frame.add(FilterText);
         Frame.add(Genre);
         Frame.add(AgeRestriction);
         Frame.add(Duration);
         Frame.add(Rating);
     }
+
 }
