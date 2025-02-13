@@ -6,66 +6,88 @@ import java.util.List;
 import Personnel.*;
 
 public class Account {
+
+    public Admin admin;
+    public Client client;
+
     public String username;
     public String password;
-    public String email;
-    public String phoneNumber;
-    public String address;
-    public String name;
-    public String lastName;
-    public String id;
+
     public String role;
     public String status;
 
-    public List<Client> clients = new ArrayList<Client>();
-    public List<Admin> admins = new ArrayList<Admin>();
+    public List<Account> Clients = new ArrayList<Account>();
+    public List<Account> Admins = new ArrayList<Account>();
 
-    public Account(String username, String password, String email, String phoneNumber,
-            String address, String name, String lastName, String id, String role, String status) {
+    // Admin Account
+    public Account(Admin admin, String username, String password, String role, String status) {
 
+        this.admin = admin;
         this.username = username;
         this.password = password;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.name = name;
-        this.lastName = lastName;
-        this.id = id;
         this.role = role;
         this.status = status;
 
     }
 
-    public void AddClient(Client client) {
-        clients.add(client);
+    // Client Account
+    public Account(Client client, String username, String password) {
+
+        this.client = client;
+        this.username = username;
+        this.password = password;
     }
 
-    public void AddAdmin(Admin admin) {
-        admins.add(admin);
+    public void AddClient(Account client) {
+        Clients.add(client);
     }
 
-    public void RemoveClient(Client client) {
-        clients.remove(client);
+    public void AddAdmin(Account admin) {
+        Admins.add(admin);
     }
 
-    public void RemoveAdmin(Admin admin) {
-        admins.remove(admin);
+    public void RemoveClient(Account client) {
+        Clients.remove(client);
     }
 
-    public void UpdateClient(Client client, String newFirstName, String newLastName, String newAge, String newEmail,
+    public void RemoveAdmin(Account admin) {
+        Admins.remove(admin);
+    }
+
+    public void UpdateClient(Account client, String newFirstName, String newLastName, int newAge, String newEmail,
             String newPhoneNumber) {
-        client.FirstName = newFirstName;
-        client.LastName = newLastName;
-        client.Age = newAge;
-        client.Email = newEmail;
-        client.PhoneNumber = newPhoneNumber;
+        client.client.FirstName = newFirstName;
+        client.client.LastName = newLastName;
+        client.client.Age = newAge;
+        client.client.Email = newEmail;
+        client.client.PhoneNumber = newPhoneNumber;
     }
 
-    public void UpdateAdmin(Admin admin, String newFirstName, String newLastName, String newID, int newAge) {
-        admin.FirstName = newFirstName;
-        admin.LastName = newLastName;
-        admin.ID = newID;
-        admin.Age = newAge;
+    public void UpdateAdmin(Account admin, String newFirstName, String newLastName, int newID, int newAge) {
+        admin.admin.FirstName = newFirstName;
+        admin.admin.LastName = newLastName;
+        admin.admin.ID = newID;
+        admin.admin.Age = newAge;
+    }
+
+    public void ChangeUserName(Account account, String newUserName) {
+        account.username = newUserName;
+    }
+
+    public void ChangePassword(Account account, String newPassword) {
+        account.password = newPassword;
+    }
+
+    public void ChangeRole(Account account, String NewRole) {
+        account.role = NewRole;
+    }
+
+    public void ChangeStatus(Account account, String NewStatus) {
+        account.status = NewStatus;
+    }
+
+    public boolean CheckCredentials(String username, String password) {
+        return this.username.equals(username) && this.password.equals(password);
     }
 
 }
