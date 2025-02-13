@@ -13,11 +13,21 @@ public class MovieApp extends JFrame implements ActionListener {
 
     public static JButton Settings;
 
+    public static JPanel SearchBarPanel;
+
     public static JLabel FilterText;
+
     public static JLabel Genre;
+    public static JButton GenreButton;
+
     public static JLabel AgeRestriction;
+    public static JButton AgeRestrictionButton;
+
     public static JLabel Duration;
+    public static JButton DurationButton;
+
     public static JLabel Rating;
+    public static JButton RatingButton;
 
     public static JPanel Movie1;
     public static JPanel Movie2;
@@ -37,14 +47,16 @@ public class MovieApp extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setResizable(false);
         this.setLayout(null);
-        this.setBackground(new java.awt.Color(0xDEDEDE));
+        this.getContentPane().setBackground(new java.awt.Color(0xD2D2D2));
 
+        // Settings Button to open the SettingsPanel-------------------------
         Settings = new JButton();
         Settings.setBounds(15, 10, 40, 40);
         Settings.setBackground(new Color(0x005DD8));
         Settings.setFocusable(false);
-        Settings.setUI(new RoundButtonUI());
+        Settings.setUI(new RoundButtonUI(new java.awt.Color(0x000000)));
 
+        // Filter text -------------------------------------------------------
         FilterText = new JLabel("Filters : ");
         FilterText.setBounds(75, 85, 80, 24);
         FilterText.setFont(new Font("Arial", Font.BOLD, 20));
@@ -70,6 +82,28 @@ public class MovieApp extends JFrame implements ActionListener {
         Rating.setFont(new Font("Arial", Font.BOLD, 17));
         Rating.setBackground(new java.awt.Color(0x595959));
 
+        // search bar to filter movies by name ----------------------------
+        SearchBarPanel = new JPanel();
+        SearchBarPanel.setBounds(75, 15, 1000, 30);
+        SearchBarPanel.setFont(new Font("Arial", Font.BOLD, 17));
+        SearchBarPanel.setBackground(new java.awt.Color(0x012757));
+        SearchBarPanel.setForeground(Color.WHITE);
+        SearchBarPanel.setLayout(null);
+        JTextField SearchBarTextField = new JTextField();
+        SearchBarPanel.setBounds(10, 10, 1000, 30);
+        SearchBarPanel.setFont(new Font("Arial", Font.BOLD, 17));
+        SearchBarPanel.setBackground(new java.awt.Color(0x012757));
+        SearchBarPanel.setForeground(Color.WHITE);
+        SearchBarPanel.add(SearchBarTextField);
+
+        this.add(Settings);
+        this.add(FilterText);
+        this.add(Genre);
+        this.add(AgeRestriction);
+        this.add(Duration);
+        this.add(Rating);
+        this.add(SearchBarPanel);
+
     }
 
     @Override
@@ -79,12 +113,7 @@ public class MovieApp extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         MovieApp Frame = new MovieApp();
-        Frame.add(Settings);
-        Frame.add(FilterText);
-        Frame.add(Genre);
-        Frame.add(AgeRestriction);
-        Frame.add(Duration);
-        Frame.add(Rating);
+
     }
 
 }

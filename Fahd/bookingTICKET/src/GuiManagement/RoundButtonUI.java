@@ -5,6 +5,12 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 public class RoundButtonUI extends BasicButtonUI {
+    public Color color;
+
+    public RoundButtonUI(Color color) {
+        this.color = color;
+    }
+
     @Override
     public void paint(Graphics g, JComponent c) {
         AbstractButton b = (AbstractButton) c;
@@ -16,7 +22,7 @@ public class RoundButtonUI extends BasicButtonUI {
         Dimension size = c.getSize();
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(new java.awt.Color(0x000000));
+        g2.setColor(color);
         g2.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 10, 20);
         g2.setColor(c.getBackground());
         g2.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 2, 10, 10);
