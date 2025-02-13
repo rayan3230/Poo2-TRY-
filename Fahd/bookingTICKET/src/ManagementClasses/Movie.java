@@ -9,7 +9,7 @@ public class Movie {
     public String Director;
     public String Cast;
     public String ReleaseDate;
-    public int Rating; // out of 10
+    public float Rating; // out of 10
     public String AgeRating; // G, PG13, PG16, PG18
     public Theater Room;
 
@@ -23,8 +23,8 @@ public class Movie {
         G, PG6, PG8, PG13, PG16, PG18
     }
 
-    public Movie(String Title, String Genre, int Duration, String Description, String Director, String Cast,
-            String ReleaseDate, int Rating, String AgeRating, Theater Room) {
+    public Movie(String Title, String Genre, float Duration, String Description, String Director,
+            String Cast, String ReleaseDate, float Rating, String AgeRating, Theater Room) {
 
         this.Title = Title;
         this.Genre = Genre;

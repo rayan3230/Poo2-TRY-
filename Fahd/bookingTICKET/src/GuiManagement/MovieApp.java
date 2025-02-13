@@ -9,11 +9,22 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 public class MovieApp extends JFrame {
+
     public static JLabel FilterText;
     public static JLabel Genre;
     public static JLabel AgeRestriction;
     public static JLabel Duration;
     public static JLabel Rating;
+
+    public static JPanel Movie1;
+    public static JPanel Movie2;
+    public static JPanel Movie3;
+    public static JPanel Movie4;
+    public static JPanel Movie5;
+    public static JPanel Movie6;
+    public static JPanel Movie7;
+    public static JPanel Movie8;
+    public static JPanel Movie9;
 
     public MovieApp() {
         this.setTitle("MovieBooking App");

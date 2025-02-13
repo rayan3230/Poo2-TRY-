@@ -8,15 +8,18 @@ import java.util.Scanner;
 
 public class Cinema {
 
+    public Account accounts;
+
     public ArrayList<Movie> movies;
     public ArrayList<Admin> admins;
     public ArrayList<Theater> theaters;
     public ArrayList<Ticket> tickets;
+
     public Filters filter;
+
     public String[] Genres = { "Action", "Comedy", "Drama", "Horoor", "Science_Fiction", "Thriller",
             "Adventure", "Fantasy", "Mystery", "Romance", "Crime", "Animation", "Music", "Documentary",
             "Family", "Sport", "News", "Travel", "Game", "History" };
-
     public String[] AgeRestrictions = { "G", "PG6", "PG8", "PG13", "PG16", "PG18" };
     public String[] TicketType = { "VIP", "Normal" };
 
@@ -33,6 +36,87 @@ public class Cinema {
         this.tickets = new ArrayList<Ticket>();
 
         this.filter = new Filters();
+
+        Theater Room1 = new Theater(200, 40, 1, true);
+        Theater Room2 = new Theater(300, 60, 2, true);
+        Theater Room3 = new Theater(400, 80, 3, true);
+        Theater Room4 = new Theater(200, 40, 4, true);
+        Theater Room5 = new Theater(300, 60, 5, true);
+        Theater Room6 = new Theater(200, 40, 6, true);
+        Theater Room7 = new Theater(200, 40, 7, true);
+
+        AddTheater(Room1);
+        AddTheater(Room2);
+        AddTheater(Room3);
+        AddTheater(Room4);
+        AddTheater(Room5);
+        AddTheater(Room6);
+        AddTheater(Room7);
+
+        Movie Movie1 = new Movie("Interstellar", "Science_Fiction", 1.75f,
+                "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+                "Christopher Nolan", "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
+                "2014-11-07",
+                8.6f, "PG13", Room1);
+
+        Movie Movie2 = new Movie("Batman : the dark knight", "action", 1.5f,
+                "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+                "Christopher Nolan", "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page",
+                "2010-07-16",
+                9.5f, "PG18", Room3);
+
+        Movie Movie3 = new Movie("The Dark Knight", "Action", 2.5f,
+                "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+                "Christopher Nolan", "Christian Bale, Heath Ledger, Aaron Eckhart",
+                "2008-07-18",
+                9.0f, "PG13", Room2);
+
+        Movie Movie4 = new Movie("Inception", "Science_Fiction", 2.48f,
+                "A thief who enters the dreams of others to steal secrets from their subconscious is offered a chance to regain his old life as payment for a task considered to be impossible: 'inception'.",
+                "Christopher Nolan", "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page",
+                "2010-07-16",
+                8.8f, "PG13", Room4);
+
+        Movie Movie5 = new Movie("Pulp Fiction", "Crime", 2.54f,
+                "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+                "Quentin Tarantino", "John Travolta, Uma Thurman, Samuel L. Jackson",
+                "1994-10-14",
+                8.9f, "PG18", Room5);
+
+        Movie Movie6 = new Movie("The Shawshank Redemption", "Drama", 2.37f,
+                "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                "Frank Darabont", "Tim Robbins, Morgan Freeman, Bob Gunton",
+                "1994-09-23",
+                9.3f, "PG16", Room6);
+
+        Movie Movie7 = new Movie("The Matrix", "Science_Fiction", 2.30f,
+                "A computer programmer discovers that reality as he knows it is a simulation created by machines to subjugate humanity.",
+                "The Wachowskis", "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss",
+                "1999-03-31",
+                8.7f, "PG13", Room7);
+
+        Movie Movie8 = new Movie("Forrest Gump", "Drama", 2.22f,
+                "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75.",
+                "Robert Zemeckis", "Tom Hanks, Robin Wright, Gary Sinise",
+                "1994-07-06",
+                8.8f, "PG13", Room1);
+
+        Movie Movie9 = new Movie("The Godfather", "Crime", 2.55f,
+                "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+                "Francis Ford Coppola", "Marlon Brando, Al Pacino, James Caan",
+                "1972-03-24",
+                9.2f, "PG18", Room2);
+
+        AddMovie(Movie1);
+        AddMovie(Movie2);
+        AddMovie(Movie3);
+        AddMovie(Movie4);
+        AddMovie(Movie5);
+        AddMovie(Movie6);
+        AddMovie(Movie7);
+        AddMovie(Movie8);
+        AddMovie(Movie9);
+
     }
 
     public void AddMovie(Movie movie) {
@@ -45,6 +129,14 @@ public class Cinema {
 
     public void AddTheater(Theater theater) {
         theaters.add(theater);
+    }
+
+    public void AddTicket(Ticket Ticket) {
+        tickets.add(Ticket);
+    }
+
+    public void RemoveTicket(Ticket ticket) {
+        tickets.remove(ticket);
     }
 
     public void RemoveMovie(Movie movie) {
@@ -412,6 +504,69 @@ public class Cinema {
                     break;
             }
         }
+    }
+
+    public void DisplayAvailableSeatsInRoom(Theater Room) {
+        System.out.println("Normal places reamining  :  " + (Room.NormalCapacity - Room.NormalReservedPlaces)
+                + " VIP places remaining  :  " + (Room.VipCapacity - Room.VipReservedPlaces));
+    }
+
+    public void BookTicket(int MovieNumber, String TicketType, int Place) {
+        Ticket ticket = new Ticket(Place, TicketType, movies.get(MovieNumber).ReleaseDate, movies.get(MovieNumber));
+        AddTicket(ticket);
+    }
+
+    public Ticket saerchTicketByNumber(int TicketNumber) {
+
+        if (tickets.get(TicketNumber) == null) {
+            System.out.println("Ticket not found.");
+            return null;
+        }
+
+        Ticket t = tickets.get(TicketNumber);
+        System.out.println("Ticket Number : " + t.number);
+        System.out.println("Type : " + t.Type);
+        System.out.println("Date : " + t.Date);
+        System.out.println("Movie : " + t.movie.Title);
+        return t;
+    }
+
+    public Ticket SearchTicketByMovie(Movie movie) {
+        for (Ticket t : tickets) {
+            if (t.movie.equals(movie)) {
+                System.out.println("Ticket Number : " + t.number);
+                System.out.println("Type : " + t.Type);
+                System.out.println("Date : " + t.Date);
+                return t;
+            }
+        }
+        return null;
+    }
+
+    public Ticket SearchTicketByType(String type) {
+        for (Ticket t : tickets) {
+            if (t.Type.equalsIgnoreCase(type)) {
+                System.out.println("Ticket Number : " + t.number);
+                System.out.println("Type : " + t.Type);
+                System.out.println("Date : " + t.Date);
+                System.out.println("Movie : " + t.movie.Title);
+                return t;
+            }
+        }
+        return null;
+    }
+
+    public Ticket SearchTicketByDate(String Date) {
+        for (Ticket t : tickets) {
+            if (t.Date.equalsIgnoreCase(Date)) {
+                System.out.println("Ticket Number : " + t.number);
+                System.out.println("Type : " + t.Type);
+                System.out.println("Date : " + t.Date);
+                System.out.println("Movie : " + t.movie.Title);
+                return t;
+            }
+        }
+        return null;
     }
 
 }
