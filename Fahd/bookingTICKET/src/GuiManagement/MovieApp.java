@@ -1,13 +1,8 @@
 package GuiManagement;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.plaf.basic.BasicButtonUI;
 
 public class MovieApp extends JFrame implements ActionListener {
 
@@ -90,11 +85,11 @@ public class MovieApp extends JFrame implements ActionListener {
         SearchBarPanel.setForeground(Color.WHITE);
         SearchBarPanel.setLayout(null);
         JTextField SearchBarTextField = new JTextField();
-        SearchBarTextField.setBounds(10, 10, 1000, 30);
+        SearchBarTextField.setBounds(0, 0, 1000, 30);
         SearchBarTextField.setFont(new Font("Arial", Font.BOLD, 17));
         SearchBarTextField.setBackground(new java.awt.Color(0x012757));
         SearchBarTextField.setForeground(Color.WHITE);
-        SearchBarTextField.add(SearchBarTextField);
+        SearchBarPanel.add(SearchBarTextField);
 
         this.add(Settings);
         this.add(FilterText);
