@@ -114,8 +114,6 @@ public class MovieApp extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         MovieApp Frame = new MovieApp();
-        
-
     }
 
 }
