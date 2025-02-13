@@ -1,12 +1,10 @@
 package ManagementClasses;
 
-import java.util.Arrays;
-
 public class Filters {
 
     public String Genre = "NULL";
     public String AgeRestriction = "NULL";
-    public int Duration = 0;
+    public float Duration = 0f;
     public int Rating = 0;
     public String Date = "NULL";
     public String TicketType = "NULL";

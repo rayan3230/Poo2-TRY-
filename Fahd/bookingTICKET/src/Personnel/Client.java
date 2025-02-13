@@ -8,12 +8,12 @@ public class Client {
 
     public String FirstName;
     public String LastName;
-    public String Age;
+    public int Age;
     public String Email;
     public String PhoneNumber;
     public List<String> Intrests = new ArrayList<String>();
 
-    public Client(String firstName, String lastName, String age, String email, String phoneNumber) {
+    public Client(String firstName, String lastName, int age, String email, String phoneNumber) {
         FirstName = firstName;
         LastName = lastName;
         Age = age;
