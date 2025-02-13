@@ -4,7 +4,7 @@ public class Movie {
 
     public String Title;
     public String Genre;
-    public int Duration; // in hours
+    public float Duration; // in hours
     public String Description;
     public String Director;
     public String Cast;

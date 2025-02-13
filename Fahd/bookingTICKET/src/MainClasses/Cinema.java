@@ -11,6 +11,7 @@ public class Cinema {
     public ArrayList<Movie> movies;
     public ArrayList<Admin> admins;
     public ArrayList<Theater> theaters;
+    public ArrayList<Ticket> tickets;
     public Filters filter;
     public String[] Genres = { "Action", "Comedy", "Drama", "Horoor", "Science_Fiction", "Thriller",
             "Adventure", "Fantasy", "Mystery", "Romance", "Crime", "Animation", "Music", "Documentary",
@@ -21,12 +22,15 @@ public class Cinema {
 
     public int filterCount = 0;
     public int[] filterList;
+    public String[] Filters = { "Genre", "Age Restriction", "Duration", "Rating", "Date", "Ticket Type", "Release Date",
+            "Seats" };
 
     public Cinema() {
 
         this.movies = new ArrayList<Movie>();
         this.admins = new ArrayList<Admin>();
         this.theaters = new ArrayList<Theater>();
+        this.tickets = new ArrayList<Ticket>();
 
         this.filter = new Filters();
     }
@@ -127,6 +131,174 @@ public class Cinema {
         System.out.println("6. PG18");
     }
 
+    public void DisplayTicketType() {
+        System.out.println("Available Ticket Types: ");
+        System.out.println("1. VIP");
+        System.out.println("2. Normal");
+    }
+
+    public void DisplayMovieDates() {
+        System.out.println("Available Movie Dates: ");
+        for (Movie movie : movies) {
+            System.out.print("Title: " + movie.Title + ", Date: ");
+            for (Ticket ticket : tickets) {
+                if (ticket.movie == movie) {
+                    System.out.print(ticket.Date + ", ");
+                }
+            }
+            System.out.println(" ");
+        }
+    }
+
+    public void DisplayMoviesByGenre(String genre) {
+        for (Movie movie : movies) {
+            if (movie.Genre.equalsIgnoreCase(genre)) {
+                System.out.println("---------------------------------------------");
+                System.out.println("Title: " + movie.Title);
+                System.out.println("Genre: " + movie.Genre);
+                System.out.println("Duration: " + movie.Duration + " minutes");
+                System.out.println("Release Date: " + movie.ReleaseDate);
+                System.out.println("Rating: " + movie.Rating);
+                System.out.println("Age Rating: " + movie.AgeRating);
+                System.out.println("Description: " + movie.Description);
+                System.out.println("Director: " + movie.Director);
+                System.out.println("Cast: " + movie.Cast);
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
+
+    public void DisplayMoviesByAge(String age) {
+        for (Movie movie : movies) {
+            if (movie.AgeRating.equalsIgnoreCase(age)) {
+                System.out.println("---------------------------------------------");
+                System.out.println("Title: " + movie.Title);
+                System.out.println("Genre: " + movie.Genre);
+                System.out.println("Duration: " + movie.Duration + " minutes");
+                System.out.println("Release Date: " + movie.ReleaseDate);
+                System.out.println("Rating: " + movie.Rating);
+                System.out.println("Age Rating: " + movie.AgeRating);
+                System.out.println("Description: " + movie.Description);
+                System.out.println("Director: " + movie.Director);
+                System.out.println("Cast: " + movie.Cast);
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
+
+    public void DisplayMoviesByDuration(String duration) {
+        for (Movie movie : movies) {
+            if (movie.Duration <= Integer.parseInt(duration)) {
+                System.out.println("---------------------------------------------");
+                System.out.println("Title: " + movie.Title);
+                System.out.println("Genre: " + movie.Genre);
+                System.out.println("Duration: " + movie.Duration + " minutes");
+                System.out.println("Release Date: " + movie.ReleaseDate);
+                System.out.println("Rating: " + movie.Rating);
+                System.out.println("Age Rating: " + movie.AgeRating);
+                System.out.println("Description: " + movie.Description);
+                System.out.println("Director: " + movie.Director);
+                System.out.println("Cast: " + movie.Cast);
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
+
+    public void DisplayMoviesByRating(int rating) {
+        for (Movie movie : movies) {
+            if (movie.Rating >= rating) {
+                System.out.println("---------------------------------------------");
+                System.out.println("Title: " + movie.Title);
+                System.out.println("Genre: " + movie.Genre);
+                System.out.println("Duration: " + movie.Duration + " minutes");
+                System.out.println("Release Date: " + movie.ReleaseDate);
+                System.out.println("Rating: " + movie.Rating);
+                System.out.println("Age Rating: " + movie.AgeRating);
+                System.out.println("Description: " + movie.Description);
+                System.out.println("Director: " + movie.Director);
+                System.out.println("Cast: " + movie.Cast);
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
+
+    public void DisplayMoviesByDate(String date) {
+        for (Movie movie : movies) {
+            if (movie.ReleaseDate.equalsIgnoreCase(date)) {
+                System.out.println("---------------------------------------------");
+                System.out.println("Title: " + movie.Title);
+                System.out.println("Genre: " + movie.Genre);
+                System.out.println("Duration: " + movie.Duration + " minutes");
+                System.out.println("Release Date: " + movie.ReleaseDate);
+                System.out.println("Rating: " + movie.Rating);
+                System.out.println("Age Rating: " + movie.AgeRating);
+                System.out.println("Description: " + movie.Description);
+                System.out.println("Director: " + movie.Director);
+                System.out.println("Cast: " + movie.Cast);
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
+
+    public void DisplayMoviesByTicketType(String ticketType) {
+        for (Ticket ticket : tickets) {
+            if (ticket.Type.equalsIgnoreCase(ticketType)) {
+                System.out.println("---------------------------------------------");
+                System.out.println("Title: " + ticket.movie.Title);
+                System.out.println("Date: " + ticket.Date);
+                System.out.println("Type: " + ticket.Type);
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
+
+    public void DisplayMoviesByReleaseDate(String releaseDate) {
+        for (Movie movie : movies) {
+            if (movie.ReleaseDate.equalsIgnoreCase(releaseDate)) {
+                System.out.println("---------------------------------------------");
+                System.out.println("Title: " + movie.Title);
+                System.out.println("Genre: " + movie.Genre);
+                System.out.println("Duration: " + movie.Duration + " minutes");
+                System.out.println("Release Date: " + movie.ReleaseDate);
+                System.out.println("Rating: " + movie.Rating);
+                System.out.println("Age Rating: " + movie.AgeRating);
+                System.out.println("Description: " + movie.Description);
+                System.out.println("Director: " + movie.Director);
+                System.out.println("Cast: " + movie.Cast);
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
+
+    public void DisplayMoviesByDuration(Float Duration) {
+        for (Movie movie : movies) {
+            if (movie.Duration <= Duration) {
+                System.out.println("---------------------------------------------");
+                System.out.println("Title: " + movie.Title);
+                System.out.println("Genre: " + movie.Genre);
+                System.out.println("Duration: " + movie.Duration + " minutes");
+                System.out.println("Release Date: " + movie.ReleaseDate);
+                System.out.println("Rating: " + movie.Rating);
+                System.out.println("Age Rating: " + movie.AgeRating);
+                System.out.println("Description: " + movie.Description);
+                System.out.println("Director: " + movie.Director);
+                System.out.println("Cast: " + movie.Cast);
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
+
+    public void DisplaySeats(int[] seats) {
+        for (int i = 0; i < seats.length; i++) {
+            if (seats[i] == 1) {
+                System.out.print("Seat " + (i + 1) + " is booked. ");
+            } else {
+                System.out.print("Seat " + (i + 1) + " is available. ");
+            }
+        }
+        System.out.println();
+    }
+
     public void SetFilter() {
         System.out.println("Select a filter you want to apply : ");
         System.out.println("1. Genre");
@@ -144,43 +316,61 @@ public class Cinema {
         int x;
         switch (choice) {
             case 1:
+                filterList[filterCount] = choice;
+                filterCount++;
                 System.out.println("Enter the genre you want to filter by : ");
                 DisplayGenrer();
                 x = scanner.nextInt();
                 filter.SetGenreFilter(Genres[x]);
                 break;
             case 2:
+                filterList[filterCount] = choice;
+                filterCount++;
                 System.out.println("Enter the age restriction you want to filter by : ");
                 DisplayAgeRestriction();
                 x = scanner.nextInt();
                 filter.SetAgeRestrictionFilter(AgeRestrictions[x]);
                 break;
             case 3:
-                System.out.println("Enter the duration you want to filter by : ");
+                filterList[filterCount] = choice;
+                filterCount++;
+                System.out.println("Enter the duration (in hours) you want to filter by : ");
                 int duration = scanner.nextInt();
                 filter.SetDurationFilter(duration);
                 break;
             case 4:
+                filterList[filterCount] = choice;
+                filterCount++;
                 System.out.println("Enter the rating you want to filter by (out of 10): ");
                 int rating = scanner.nextInt();
                 filter.SetRatingFilter(rating);
                 break;
             case 5:
+                filterList[filterCount] = choice;
+                filterCount++;
                 System.out.println("Enter the date you want to filter by (this mounth) : ");
+                DisplayMovieDates();
                 String date = scanner.next();
                 filter.SetDateFilter(date);
                 break;
             case 6:
+                filterList[filterCount] = choice;
+                filterCount++;
                 System.out.println("Enter the ticket type you want to filter by : ");
+                DisplayTicketType();
                 String ticketType = scanner.next();
                 filter.SetTicketTypeFilter(ticketType);
                 break;
             case 7:
+                filterList[filterCount] = choice;
+                filterCount++;
                 System.out.println("Enter the release date you want to filter by : ");
                 String releaseDate = scanner.next();
                 filter.SetReleaseDateFilter(releaseDate);
                 break;
             case 8:
+                filterList[filterCount] = choice;
+                filterCount++;
                 System.out.println("Enter the seats you want to filter by : ");
                 int[] seats = new int[2];
                 seats[0] = scanner.nextInt();
@@ -194,7 +384,34 @@ public class Cinema {
     }
 
     public void ApplyFilter() {
-
+        for (int i = 0; i < filterCount; i++) {
+            switch (filterList[i]) {
+                case 1:
+                    DisplayMoviesByGenre(filter.Genre);
+                    break;
+                case 2:
+                    DisplayMoviesByAge(filter.AgeRestriction);
+                    break;
+                case 3:
+                    DisplayMoviesByDuration(filter.Duration);
+                    break;
+                case 4:
+                    DisplayMoviesByRating(filter.Rating);
+                    break;
+                case 5:
+                    DisplayMoviesByDate(filter.Date);
+                    break;
+                case 6:
+                    DisplayMoviesByTicketType(filter.TicketType);
+                    break;
+                case 7:
+                    DisplayMoviesByReleaseDate(filter.ReleaseDate);
+                    break;
+                case 8:
+                    DisplaySeats(filter.Seats);
+                    break;
+            }
+        }
     }
 
 }
