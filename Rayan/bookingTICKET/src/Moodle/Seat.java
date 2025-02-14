@@ -7,21 +7,14 @@ public class Seat {
     public double price;
 
     public enum SeatType {
-        REGULAR(800),
-        VIP(2000);
-
-        public  double basePrice;
-
-        SeatType(double basePrice) {
-            this.basePrice = basePrice;
-        }
+        REGULAR,
+        VIP;
     }
 
     public Seat(int seatNumber, SeatType type) {
         this.seatNumber = seatNumber;
         this.type = type;
         this.isAvailable = true;
-        this.price = type.basePrice;
     }
 
 } 
