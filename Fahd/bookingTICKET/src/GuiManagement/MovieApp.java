@@ -7,53 +7,35 @@ import javax.swing.*;
 
 public class MovieApp extends JFrame implements ActionListener {
 
-    public static Cinema CinemaManager;
+    //cinema manager---------------------------------------------------
+    public Cinema CinemaManager;
 
-    public static JButton Settings;
+    //settings configuration variables---------------------------------
+    public JButton Settings;
 
-    public static JPanel SearchBarPanel;
-    public static JTextField SearchBarTextField;
+    //Animation settings needed : 
+    public JPanel SettingsPanel;
+    public Timer timer;
+    public int xVelocity = 1;
+    public int x = -260;
 
-    public static JLabel FilterText;
+    //search bar configuration variables--------------------------------
+    public JPanel SearchBarPanel;
+    public JTextField SearchBarTextField;
 
-    public static JLabel Genre;
-    public static JButton GenreButton;
+    //filter configuration variables------------------------------------
+    public JLabel FilterText;
 
-    public static JLabel AgeRestriction;
-    public static JButton AgeRestrictionButton;
+    public JLabel Genre, AgeRestriction, Duration, Rating;
+    public JButton GenreButton, AgeRestrictionButton, DurationButton, RatingButton;
 
-    public static JLabel Duration;
-    public static JButton DurationButton;
+    //movie panels configuration variables------------------------------
 
-    public static JLabel Rating;
-    public static JButton RatingButton;
-
-    public static JPanel Movie1;
-    public static JButton Movie1ticket;
-
-    public static JPanel Movie2;
-    public static JButton Movie2ticket;
-
-    public static JPanel Movie3;
-    public static JButton Movie3ticket;
-
-    public static JPanel Movie4;
-    public static JButton Movie4ticket;
-
-    public static JPanel Movie5;
-    public static JButton Movie5ticket;
-
-    public static JPanel Movie6;
-    public static JButton Movie6ticket;
-
-    public static JPanel Movie7;
-    public static JButton Movie7ticket;
-
-    public static JPanel Movie8;
-    public static JButton Movie8ticket;
-
-    public static JPanel Movie9;
-    public static JButton Movie9ticket;
+    //panels :
+    public JPanel Movie1, Movie2, Movie3, Movie4, Movie5, Movie6, Movie7, Movie8, Movie9;
+    //Buttons :
+    public JButton Movie1ticket, Movie2ticket, Movie3ticket, Movie4ticket, Movie5ticket, 
+            Movie6ticket, Movie7ticket, Movie8ticket, Movie9ticket;
 
     public MovieApp() {
         this.setTitle("MovieBooking App");
@@ -74,6 +56,7 @@ public class MovieApp extends JFrame implements ActionListener {
         Settings.setBackground(new Color(0x005DD8));
         Settings.setFocusable(false);
         Settings.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+        Settings.addActionListener(e-> SettingsButtonPress());
 
         // Filter text -------------------------------------------------------
         FilterText = new JLabel("Filters : ");
@@ -270,13 +253,88 @@ public class MovieApp extends JFrame implements ActionListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public void SettingsButtonPress(){
+        SettingsPanel = new JPanel();
+        SettingsPanel.setBounds(x, 0, 260, 650);
+        SettingsPanel.setBackground(new java.awt.Color(0x00357B));
+        SettingsPanel.setVisible(true);
 
+        JLabel SettingsText = new JLabel("Settings");
+        SettingsText.setBounds(48, 16, 240, 30);
+        SettingsText.setFont(new Font("Arial", Font.BOLD, 40));
+        SettingsText.setBackground(Color.WHITE);
+
+        SettingsPanel.add(SettingsText);
+
+        JButton EditAccount = new JButton();
+        EditAccount.setBounds(48, 83, 225, 30);
+        EditAccount.setBackground(new Color(0x777777));
+        EditAccount.setFocusable(false);
+        EditAccount.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+
+        SettingsPanel.add(EditAccount);
+
+        JButton MoreFilters = new JButton();
+        MoreFilters.setBounds(48, 142, 225, 30);
+        MoreFilters.setBackground(new Color(0x777777));
+        MoreFilters.setFocusable(false);
+        MoreFilters.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+
+        SettingsPanel.add(MoreFilters);
+
+        JButton DarkTheme = new JButton();
+        DarkTheme.setBounds(48, 201, 225, 30);
+        DarkTheme.setBackground(new Color(0x777777));
+        DarkTheme.setFocusable(false);
+        DarkTheme.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+
+        SettingsPanel.add(DarkTheme);
+
+        JButton LogOut = new JButton();
+        LogOut.setBounds(48, 260, 225, 30);
+        LogOut.setBackground(new Color(0x777777));
+        LogOut.setFocusable(false);
+        LogOut.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+
+        SettingsPanel.add(LogOut);
+        
+        JButton Exit = new JButton();
+        Exit.setBounds(233, 15, 30, 30);
+        Exit.setBackground(new Color(0x777777));
+        Exit.setFocusable(false);
+        Exit.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+
+        JLabel X = new JLabel("X");
+        X.setBounds(239, 15, 30, 30);
+        X.setFont(new Font("Arial", Font.BOLD, 15));
+        X.setBackground(Color.WHITE);
+
+        SettingsPanel.add(Exit);
+        SettingsPanel.add(X);
+
+        timer = new Timer(100, e -> SlideSettingsPanel());
+        timer.start();
+
+    }
+
+    public void SlideSettingsPanel(){
+        if(x == 0){
+            timer.stop();
+            return;
+        }
+        SettingsPanel.setVisible(true);
+        SettingsPanel.setBounds(x, 0, 260, 650);
+        x += xVelocity;
     }
 
     public static void main(String[] args) {
         MovieApp Frame = new MovieApp();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        
     }
 
 }
