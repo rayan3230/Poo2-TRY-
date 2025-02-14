@@ -1,65 +1,44 @@
 package GuiManagement;
 
 import MainClasses.*;
-import ManagementClasses.*;
-import Personnel.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import javax.swing.*;
 
 public class MovieApp extends JFrame implements ActionListener {
 
-    public static Cinema CinemaManager;
-    public static Account AccountManager;
-    public static ArrayList<Admin> AdminManager;
-    public static ArrayList<Client> ClientManager;
+    //Action manager--------------------------------------------------
+    public static int Counter = 0;
+    //cinema manager---------------------------------------------------
+    public Cinema CinemaManager;
 
-    public static JButton Settings;
+    //settings configuration variables---------------------------------
+    public JButton Settings;
 
-    public static JPanel SearchBarPanel;
-    public static JTextField SearchBarTextField;
+    //Animation settings needed : 
+    public JPanel SettingsPanel;
+    public Timer timer;
+    public Timer timer2;
+    public int xVelocity = 20;
+    public int x = -260;
 
-    public static JLabel FilterText;
+    //search bar configuration variables--------------------------------
+    public JPanel SearchBarPanel;
+    public JTextField SearchBarTextField;
 
-    public static JLabel Genre;
-    public static JButton GenreButton;
+    //filter configuration variables------------------------------------
+    public JLabel FilterText;
 
-    public static JLabel AgeRestriction;
-    public static JButton AgeRestrictionButton;
+    public JLabel Genre, AgeRestriction, Duration, Rating;
+    public JButton GenreButton, AgeRestrictionButton, DurationButton, RatingButton;
 
-    public static JLabel Duration;
-    public static JButton DurationButton;
+    //movie panels configuration variables------------------------------
 
-    public static JLabel Rating;
-    public static JButton RatingButton;
-
-    public static JPanel Movie1;
-    public static JButton Movie1ticket;
-
-    public static JPanel Movie2;
-    public static JButton Movie2ticket;
-
-    public static JPanel Movie3;
-    public static JButton Movie3ticket;
-
-    public static JPanel Movie4;
-    public static JButton Movie4ticket;
-
-    public static JPanel Movie5;
-    public static JButton Movie5ticket;
-
-    public static JPanel Movie6;
-    public static JButton Movie6ticket;
-
-    public static JPanel Movie7;
-    public static JButton Movie7ticket;
-
-    public static JPanel Movie8;
-    public static JButton Movie8ticket;
-
-    public static JPanel Movie9;
-    public static JButton Movie9ticket;
+    //panels :
+    public JPanel Movie1, Movie2, Movie3, Movie4, Movie5, Movie6, Movie7, Movie8, Movie9;
+    //Buttons :
+    public JButton Movie1ticket, Movie2ticket, Movie3ticket, Movie4ticket, Movie5ticket, 
+            Movie6ticket, Movie7ticket, Movie8ticket, Movie9ticket;
 
     public MovieApp() {
         this.setTitle("MovieBooking App");
@@ -68,10 +47,21 @@ public class MovieApp extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1100, 650);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        this.setVisible(false);
         this.setResizable(false);
         this.setLayout(null);
         this.getContentPane().setBackground(new java.awt.Color(0xD2D2D2));
+
+        timer = new Timer(15, e -> SlideSettingsPanel());
+        timer2 = new Timer(15, e -> ExitSettings());
+
+        SettingsPanel = new JPanel();
+        SettingsPanel.setBounds(x, 0, 260, 650);
+        SettingsPanel.setBackground(new java.awt.Color(0x00357B));
+        SettingsPanel.setVisible(true);
+        SettingsPanel.setLayout(null);
+
+        this.add(SettingsPanel);
         
 
         // Settings Button to open the SettingsPanel-------------------------
@@ -80,12 +70,17 @@ public class MovieApp extends JFrame implements ActionListener {
         Settings.setBackground(new Color(0x005DD8));
         Settings.setFocusable(false);
         Settings.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+        Settings.addActionListener(e-> SettingsButtonPress());
+
+        this.add(Settings);
 
         // Filter text -------------------------------------------------------
         FilterText = new JLabel("Filters : ");
         FilterText.setBounds(75, 85, 80, 24);
         FilterText.setFont(new Font("Arial", Font.BOLD, 20));
         FilterText.setBackground(new java.awt.Color(0x595959));
+        
+        this.add(FilterText);
 
         Genre = new JLabel("Genre");
         Genre.setBounds(180, 85, 70, 24);
@@ -97,6 +92,9 @@ public class MovieApp extends JFrame implements ActionListener {
         GenreButton.setFocusable(false);
         GenreButton.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
+        this.add(Genre);
+        this.add(GenreButton);
+
         AgeRestriction = new JLabel("Age Restriction");
         AgeRestriction.setBounds(312, 85, 150, 24);
         AgeRestriction.setFont(new Font("Arial", Font.BOLD, 17));
@@ -106,6 +104,9 @@ public class MovieApp extends JFrame implements ActionListener {
         AgeRestrictionButton.setBackground(new java.awt.Color(0xA0B2ED));
         AgeRestrictionButton.setFocusable(false);
         AgeRestrictionButton.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+
+        this.add(AgeRestriction);
+        this.add(AgeRestrictionButton);
 
         Duration = new JLabel("Duration");
         Duration.setBounds(524, 85, 80, 24);
@@ -117,6 +118,9 @@ public class MovieApp extends JFrame implements ActionListener {
         DurationButton.setFocusable(false);
         DurationButton.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
+        this.add(Duration);
+        this.add(DurationButton);
+
         Rating = new JLabel("Rating");
         Rating.setBounds(671, 85, 80, 24);
         Rating.setFont(new Font("Arial", Font.BOLD, 17));
@@ -127,6 +131,9 @@ public class MovieApp extends JFrame implements ActionListener {
         RatingButton.setFocusable(false);
         RatingButton.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
+        this.add(Rating);
+        this.add(RatingButton);
+
         // search bar to filter movies by name ----------------------------
         SearchBarPanel = new JPanel();
         SearchBarPanel.setBounds(75, 15, 1000, 30);
@@ -134,6 +141,8 @@ public class MovieApp extends JFrame implements ActionListener {
         SearchBarPanel.setBackground(new java.awt.Color(0x012757));
         SearchBarPanel.setForeground(Color.WHITE);
         SearchBarPanel.setLayout(null);
+
+        this.add(SearchBarPanel);
 
         //movie panels ----------------------------------------------------
         Movie1 = new JPanel();
@@ -146,6 +155,9 @@ public class MovieApp extends JFrame implements ActionListener {
         Movie1ticket.setFocusable(false);
         Movie1ticket.setUI(new RoundButtonUI(new Color(0x000000)));
 
+        this.add(Movie1);
+        this.add(Movie1ticket);
+
         Movie2 = new JPanel();
         Movie2.setBounds(277, 150, 150, 150);
         Movie2.setBackground(new java.awt.Color(0xFFF0DA));
@@ -154,6 +166,9 @@ public class MovieApp extends JFrame implements ActionListener {
         Movie2ticket.setBackground(new java.awt.Color(0x27A600));
         Movie2ticket.setFocusable(false);
         Movie2ticket.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        this.add(Movie2);
+        this.add(Movie2ticket);
 
         Movie3 = new JPanel();
         Movie3.setBounds(474, 150, 150, 150);
@@ -164,6 +179,10 @@ public class MovieApp extends JFrame implements ActionListener {
         Movie3ticket.setFocusable(false);
         Movie3ticket.setUI(new RoundButtonUI(new Color(0x000000)));
 
+        this.add(Movie3);
+        this.add(Movie3ticket);
+        
+
         Movie4 = new JPanel();
         Movie4.setBounds(672, 150, 150, 150);
         Movie4.setBackground(new java.awt.Color(0xFFF0DA));
@@ -172,6 +191,9 @@ public class MovieApp extends JFrame implements ActionListener {
         Movie4ticket.setBackground(new java.awt.Color(0x27A600));
         Movie4ticket.setFocusable(false);
         Movie4ticket.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        this.add(Movie4);
+        this.add(Movie4ticket);
 
         Movie5 = new JPanel();
         Movie5.setBounds(871, 150, 150, 150);
@@ -182,6 +204,9 @@ public class MovieApp extends JFrame implements ActionListener {
         Movie5ticket.setFocusable(false);
         Movie5ticket.setUI(new RoundButtonUI(new Color(0x000000)));
 
+        this.add(Movie5);
+        this.add(Movie5ticket);
+
         Movie6 = new JPanel();
         Movie6.setBounds(78, 398, 150, 150);
         Movie6.setBackground(new java.awt.Color(0xFFF0DA));
@@ -190,6 +215,9 @@ public class MovieApp extends JFrame implements ActionListener {
         Movie6ticket.setBackground(new java.awt.Color(0x27A600));
         Movie6ticket.setFocusable(false);
         Movie6ticket.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        this.add(Movie6);
+        this.add(Movie6ticket);
 
         Movie7 = new JPanel();
         Movie7.setBounds(277, 398, 150, 150);
@@ -200,6 +228,9 @@ public class MovieApp extends JFrame implements ActionListener {
         Movie7ticket.setFocusable(false);
         Movie7ticket.setUI(new RoundButtonUI(new Color(0x000000)));
 
+        this.add(Movie7);
+        this.add(Movie7ticket);
+
         Movie8 = new JPanel();
         Movie8.setBounds(474, 398, 150, 150);
         Movie8.setBackground(new java.awt.Color(0xFFF0DA));
@@ -208,6 +239,9 @@ public class MovieApp extends JFrame implements ActionListener {
         Movie8ticket.setBackground(new java.awt.Color(0x27A600));
         Movie8ticket.setFocusable(false);
         Movie8ticket.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        this.add(Movie8);
+        this.add(Movie8ticket);
 
         Movie9 = new JPanel();
         Movie9.setBounds(672, 398, 150, 150);
@@ -218,52 +252,9 @@ public class MovieApp extends JFrame implements ActionListener {
         Movie9ticket.setFocusable(false);
         Movie9ticket.setUI(new RoundButtonUI(new Color(0x000000)));
 
-        this.add(Settings);
-
-        this.add(Movie1);
-        this.add(Movie1ticket);
-
-        this.add(Movie2);
-        this.add(Movie2ticket);
-
-        this.add(Movie3);
-        this.add(Movie3ticket);
-
-        this.add(Movie4);
-        this.add(Movie4ticket);
-
-        this.add(Movie5);
-        this.add(Movie5ticket);
-
-        this.add(Movie6);
-        this.add(Movie6ticket);
-
-        this.add(Movie7);
-        this.add(Movie7ticket);
-
-        this.add(Movie8);
-        this.add(Movie8ticket);
-
         this.add(Movie9);
         this.add(Movie9ticket);
 
-
-        this.add(FilterText);
-
-        this.add(Genre);
-        this.add(GenreButton);
-
-        this.add(AgeRestriction);
-        this.add(AgeRestrictionButton);
-
-        this.add(Duration);
-        this.add(DurationButton);
-
-        this.add(Rating);
-        this.add(RatingButton);
-
-        this.add(SearchBarPanel);
-        
 
         SearchBarTextField = new JTextField();
         SearchBarTextField.setBounds(0, 0, 1000, 30);
@@ -272,17 +263,134 @@ public class MovieApp extends JFrame implements ActionListener {
         SearchBarTextField.setForeground(Color.WHITE);
         SearchBarTextField.setCaretColor(Color.WHITE);
         SearchBarPanel.add(SearchBarTextField);
+
+
+        // Revalidate and repaint to ensure the SettingsPanel is displayed
+        this.revalidate();
+        this.repaint();
         
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public void SettingsButtonPress(){
+        
 
+        JLabel SettingsText = new JLabel("Settings");
+        SettingsText.setBounds(48, 16, 240, 50);
+        SettingsText.setFont(new Font("Arial", Font.BOLD, 40));
+        SettingsText.setForeground(Color.WHITE);
+
+        SettingsPanel.add(SettingsText);
+
+        JButton EditAccount = new JButton();
+        EditAccount.setBounds(40, 83, 190, 30);
+        EditAccount.setBackground(new Color(0xAAAAAA));
+        EditAccount.setFocusable(false);
+        EditAccount.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+
+        SettingsPanel.add(EditAccount);
+
+        JButton MoreFilters = new JButton();
+        MoreFilters.setBounds(40, 142, 190, 30);
+        MoreFilters.setBackground(new Color(0xAAAAAA));
+        MoreFilters.setFocusable(false);
+        MoreFilters.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+
+        SettingsPanel.add(MoreFilters);
+
+        JButton DarkTheme = new JButton();
+        DarkTheme.setBounds(40, 201, 190, 30);
+        DarkTheme.setBackground(new Color(0xAAAAAA));
+        DarkTheme.setFocusable(false);
+        DarkTheme.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+        DarkTheme.addActionListener(e-> DarkTheme());
+
+        SettingsPanel.add(DarkTheme);
+
+        JButton LogOut = new JButton();
+        LogOut.setBounds(40, 260, 190, 30);
+        LogOut.setBackground(new Color(0xAAAAAA));
+        LogOut.setFocusable(false);
+        LogOut.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+
+        SettingsPanel.add(LogOut);
+
+        JLabel X = new JLabel("X");
+        
+        X.setFont(new Font("Arial", Font.BOLD, 15));
+        X.setForeground(Color.WHITE);
+        JButton Exit = new JButton();
+        Exit.setBounds(230, 15, 20, 20);
+        Exit.setBackground(new Color(0x777777));
+        Exit.setFocusable(false);
+        Exit.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+        Exit.addActionListener(e-> ExitSettings());
+        Exit.setLayout(null);
+        X.setBounds(5, -5, 30, 30);
+        Exit.add(X);
+
+        SettingsPanel.add(Exit);
+        
+
+        // Revalidate and repaint to ensure the SettingsPanel is displayed
+        this.revalidate();
+        this.repaint();
+        
+        SettingsPanel.setVisible(true);
+
+        timer.start();
+
+    }
+
+    public void DarkTheme(){
+
+        if(Counter%2 == 0){
+            this.getContentPane().setBackground(new java.awt.Color(0x444444));
+            Counter++;
+            return;
+            
+        }
+        this.getContentPane().setBackground(new java.awt.Color(0xD2D2D2));
+        Counter++;
+        return;
+    }
+
+    public void ExitSettings(){
+        timer2.start();
+        if(x == -300){
+            timer2.stop();
+            SearchBarTextField.setVisible(true);
+            return;
+        }
+
+        x -= xVelocity;
+        SettingsPanel.setBounds(x, 0, 260, 650);
+    }
+
+    public void SlideSettingsPanel(){
+        if(x == 0){
+            timer.stop();
+            return;
+        }
+        
+        SearchBarTextField.setVisible(false);
+        x += xVelocity;
+        SettingsPanel.setBounds(x, 0, 260, 650);
     }
 
     public static void main(String[] args) {
         MovieApp Frame = new MovieApp();
+        Frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == Settings){
+            // Revalidate and repaint to ensure the SettingsPanel is displayed
+            this.revalidate();
+            this.repaint();
+        }
+        
     }
 
 }

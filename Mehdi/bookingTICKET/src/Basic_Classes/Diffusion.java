@@ -6,7 +6,8 @@ import java.time.LocalTime;
 
 public class Diffusion {
 
-    private int IDdiffusion = 0;
+    private static int diffusioncounter = 0;
+    private int IDdiffusion;
     private Salle salle;
     private Film film;
     private int day;
@@ -21,7 +22,7 @@ public class Diffusion {
     LocalTime time2 = LocalTime.of(this.hour2, this.minute2);
 
     public Diffusion(Salle salle, Film film, LocalDate date, LocalTime time1) {
-        this.IDdiffusion ++;
+        this.IDdiffusion = diffusioncounter + 1;
         this.salle = salle;
         this.film = film;
         this.date = date;

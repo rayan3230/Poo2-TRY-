@@ -8,11 +8,12 @@ import java.util.Scanner;
 
 public class Cinema {
 
-    public Account accounts;
-
     public ArrayList<Movie> movies;
     public ArrayList<Theater> theaters;
     public ArrayList<Ticket> tickets;
+
+    public ArrayList<Admin> admins;
+    public ArrayList<Client> clients;
 
     public Filters filter;
 
@@ -32,6 +33,8 @@ public class Cinema {
         this.movies = new ArrayList<Movie>();
         this.theaters = new ArrayList<Theater>();
         this.tickets = new ArrayList<Ticket>();
+        this.admins = new ArrayList<Admin>();
+        this.clients = new ArrayList<Client>();
 
         this.filter = new Filters();
 
@@ -159,12 +162,12 @@ public class Cinema {
     }
 
     public void DisplayAdmin() {
-        for (Account admin : accounts.Admins) {
+        for (Admin admin : admins) {
             System.out.println("---------------------------------------------");
-            System.out.println("Name: " + admin.admin.FirstName + " " + admin.admin.LastName);
-            System.out.println("Age: " + admin.admin.Age);
-            System.out.println("Email: " + admin.admin.Email);
-            System.out.println("Phone Number: " + admin.admin.PhoneNumber);
+            System.out.println("Name: " + admin.FirstName + " " + admin.LastName);
+            System.out.println("Age: " + admin.Age);
+            System.out.println("Email: " + admin.Email);
+            System.out.println("Phone Number: " + admin.PhoneNumber);
             System.out.println("---------------------------------------------");
         }
     }
