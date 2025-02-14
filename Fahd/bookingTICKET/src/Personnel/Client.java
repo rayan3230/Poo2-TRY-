@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Client {
+import ManagementClasses.*;
+
+public class Client extends Account{
 
     public String FirstName;
     public String LastName;
@@ -13,12 +15,23 @@ public class Client {
     public String PhoneNumber;
     public List<String> Intrests = new ArrayList<String>();
 
-    public Client(String firstName, String lastName, int age, String email, String phoneNumber) {
+    public Client(String firstName, String lastName, int age, String email, String phoneNumber, String username, String password) {
+
+        super(username, password);
         FirstName = firstName;
         LastName = lastName;
         Age = age;
         Email = email;
         PhoneNumber = phoneNumber;
+    }
+
+    public void UpdateClient(Account client, String newFirstName, String newLastName, int newAge, String newEmail,
+            String newPhoneNumber) {
+        this.FirstName = newFirstName;
+        this.LastName = newLastName;
+        this.Age = newAge;
+        this.Email = newEmail;
+        this.PhoneNumber = newPhoneNumber;
     }
 
     public void GetIntrests() {
