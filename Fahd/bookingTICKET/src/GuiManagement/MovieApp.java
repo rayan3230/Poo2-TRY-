@@ -92,16 +92,31 @@ public class MovieApp extends JFrame implements ActionListener {
         AgeRestriction.setBounds(312, 85, 150, 24);
         AgeRestriction.setFont(new Font("Arial", Font.BOLD, 17));
         AgeRestriction.setBackground(new java.awt.Color(0x595959));
+        AgeRestrictionButton = new JButton();
+        AgeRestrictionButton.setBounds(450, 88, 17, 17);
+        AgeRestrictionButton.setBackground(new java.awt.Color(0xA0B2ED));
+        AgeRestrictionButton.setFocusable(false);
+        AgeRestrictionButton.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
         Duration = new JLabel("Duration");
-        Duration.setBounds(564, 85, 80, 24);
+        Duration.setBounds(524, 85, 80, 24);
         Duration.setFont(new Font("Arial", Font.BOLD, 17));
         Duration.setBackground(new java.awt.Color(0x595959));
+        DurationButton = new JButton();
+        DurationButton.setBounds(610, 88, 17, 17);
+        DurationButton.setBackground(new java.awt.Color(0xA0B2ED));
+        DurationButton.setFocusable(false);
+        DurationButton.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
         Rating = new JLabel("Rating");
-        Rating.setBounds(711, 85, 80, 24);
+        Rating.setBounds(671, 85, 80, 24);
         Rating.setFont(new Font("Arial", Font.BOLD, 17));
         Rating.setBackground(new java.awt.Color(0x595959));
+        RatingButton = new JButton();
+        RatingButton.setBounds(740, 88, 17, 17);
+        RatingButton.setBackground(new java.awt.Color(0xA0B2ED));
+        RatingButton.setFocusable(false);
+        RatingButton.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
         // search bar to filter movies by name ----------------------------
         SearchBarPanel = new JPanel();
@@ -230,8 +245,13 @@ public class MovieApp extends JFrame implements ActionListener {
         this.add(GenreButton);
 
         this.add(AgeRestriction);
+        this.add(AgeRestrictionButton);
+
         this.add(Duration);
+        this.add(DurationButton);
+
         this.add(Rating);
+        this.add(RatingButton);
 
         this.add(SearchBarPanel);
         
