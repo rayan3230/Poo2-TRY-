@@ -15,5 +15,11 @@ public class Accounts {
         this.CCVnbr = CCVnbr;
     }
 
+    public Accounts(String username, String password){
+        this.username = "admin";
+        this.password = "admin";
+
+    }
+
 
 }
