@@ -7,6 +7,8 @@ import javax.swing.*;
 
 public class MovieApp extends JFrame implements ActionListener {
 
+    //Action manager--------------------------------------------------
+
     //cinema manager---------------------------------------------------
     public Cinema CinemaManager;
 
@@ -44,7 +46,7 @@ public class MovieApp extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1100, 650);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        this.setVisible(false);
         this.setResizable(false);
         this.setLayout(null);
         this.getContentPane().setBackground(new java.awt.Color(0xD2D2D2));
@@ -248,6 +250,10 @@ public class MovieApp extends JFrame implements ActionListener {
         SearchBarTextField.setForeground(Color.WHITE);
         SearchBarTextField.setCaretColor(Color.WHITE);
         SearchBarPanel.add(SearchBarTextField);
+
+        // Revalidate and repaint to ensure the SettingsPanel is displayed
+        this.revalidate();
+        this.repaint();
         
 
     }
@@ -311,6 +317,10 @@ public class MovieApp extends JFrame implements ActionListener {
         SettingsPanel.add(Exit);
         SettingsPanel.add(X);
 
+        // Revalidate and repaint to ensure the SettingsPanel is displayed
+        this.revalidate();
+        this.repaint();
+
         timer = new Timer(10, e -> SlideSettingsPanel());
         timer.start();
 
@@ -328,11 +338,16 @@ public class MovieApp extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         MovieApp Frame = new MovieApp();
+        Frame.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if(e.getSource() == Settings){
+            // Revalidate and repaint to ensure the SettingsPanel is displayed
+            this.revalidate();
+            this.repaint();
+        }
         
     }
 
