@@ -18,6 +18,7 @@ public class MovieApp extends JFrame implements ActionListener {
     //Animation settings needed : 
     public JPanel SettingsPanel;
     public Timer timer;
+    public Timer timer2;
     public int xVelocity = 20;
     public int x = -260;
 
@@ -50,6 +51,17 @@ public class MovieApp extends JFrame implements ActionListener {
         this.setResizable(false);
         this.setLayout(null);
         this.getContentPane().setBackground(new java.awt.Color(0xD2D2D2));
+
+        timer = new Timer(15, e -> SlideSettingsPanel());
+        timer2 = new Timer(15, e -> ExitSettings());
+
+        SettingsPanel = new JPanel();
+        SettingsPanel.setBounds(x, 0, 260, 650);
+        SettingsPanel.setBackground(new java.awt.Color(0x00357B));
+        SettingsPanel.setVisible(true);
+        SettingsPanel.setLayout(null);
+
+        this.add(SettingsPanel);
         
 
         // Settings Button to open the SettingsPanel-------------------------
@@ -169,6 +181,7 @@ public class MovieApp extends JFrame implements ActionListener {
 
         this.add(Movie3);
         this.add(Movie3ticket);
+        
 
         Movie4 = new JPanel();
         Movie4.setBounds(672, 150, 150, 150);
@@ -251,6 +264,7 @@ public class MovieApp extends JFrame implements ActionListener {
         SearchBarTextField.setCaretColor(Color.WHITE);
         SearchBarPanel.add(SearchBarTextField);
 
+
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
         this.repaint();
@@ -259,71 +273,89 @@ public class MovieApp extends JFrame implements ActionListener {
     }
 
     public void SettingsButtonPress(){
-        SettingsPanel = new JPanel();
-        SettingsPanel.setBounds(x, 0, 260, 650);
-        SettingsPanel.setBackground(new java.awt.Color(0x00357B));
-        SettingsPanel.setVisible(true);
+        
 
         JLabel SettingsText = new JLabel("Settings");
-        SettingsText.setBounds(48, 16, 240, 30);
+        SettingsText.setBounds(48, 16, 240, 50);
         SettingsText.setFont(new Font("Arial", Font.BOLD, 40));
-        SettingsText.setBackground(Color.WHITE);
+        SettingsText.setForeground(Color.WHITE);
 
         SettingsPanel.add(SettingsText);
 
         JButton EditAccount = new JButton();
-        EditAccount.setBounds(48, 83, 225, 30);
-        EditAccount.setBackground(new Color(0x777777));
+        EditAccount.setBounds(40, 83, 190, 30);
+        EditAccount.setBackground(new Color(0xAAAAAA));
         EditAccount.setFocusable(false);
         EditAccount.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
         SettingsPanel.add(EditAccount);
 
         JButton MoreFilters = new JButton();
-        MoreFilters.setBounds(48, 142, 225, 30);
-        MoreFilters.setBackground(new Color(0x777777));
+        MoreFilters.setBounds(40, 142, 190, 30);
+        MoreFilters.setBackground(new Color(0xAAAAAA));
         MoreFilters.setFocusable(false);
         MoreFilters.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
         SettingsPanel.add(MoreFilters);
 
         JButton DarkTheme = new JButton();
-        DarkTheme.setBounds(48, 201, 225, 30);
-        DarkTheme.setBackground(new Color(0x777777));
+        DarkTheme.setBounds(40, 201, 190, 30);
+        DarkTheme.setBackground(new Color(0xAAAAAA));
         DarkTheme.setFocusable(false);
         DarkTheme.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
+        DarkTheme.addActionListener(e-> DarkTheme());
 
         SettingsPanel.add(DarkTheme);
 
         JButton LogOut = new JButton();
-        LogOut.setBounds(48, 260, 225, 30);
-        LogOut.setBackground(new Color(0x777777));
+        LogOut.setBounds(40, 260, 190, 30);
+        LogOut.setBackground(new Color(0xAAAAAA));
         LogOut.setFocusable(false);
         LogOut.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
 
         SettingsPanel.add(LogOut);
+
+        JLabel X = new JLabel("X");
         
+        X.setFont(new Font("Arial", Font.BOLD, 15));
+        X.setForeground(Color.WHITE);
         JButton Exit = new JButton();
-        Exit.setBounds(233, 15, 30, 30);
+        Exit.setBounds(230, 15, 20, 20);
         Exit.setBackground(new Color(0x777777));
         Exit.setFocusable(false);
         Exit.setUI(new RoundButtonUI(new Color(0x000000))); // Set custom UI
-
-        JLabel X = new JLabel("X");
-        X.setBounds(239, 15, 30, 30);
-        X.setFont(new Font("Arial", Font.BOLD, 15));
-        X.setBackground(Color.WHITE);
+        Exit.addActionListener(e-> ExitSettings());
+        Exit.setLayout(null);
+        X.setBounds(5, -5, 30, 30);
+        Exit.add(X);
 
         SettingsPanel.add(Exit);
-        SettingsPanel.add(X);
+        
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
         this.repaint();
+        
+        SettingsPanel.setVisible(true);
 
-        timer = new Timer(10, e -> SlideSettingsPanel());
         timer.start();
 
+    }
+
+    public void DarkTheme(){
+        this.getContentPane().setBackground(new java.awt.Color(0x444444));
+    }
+
+    public void ExitSettings(){
+        timer2.start();
+        if(x == -300){
+            timer2.stop();
+            SearchBarTextField.setVisible(true);
+            return;
+        }
+
+        x -= xVelocity;
+        SettingsPanel.setBounds(x, 0, 260, 650);
     }
 
     public void SlideSettingsPanel(){
@@ -331,9 +363,10 @@ public class MovieApp extends JFrame implements ActionListener {
             timer.stop();
             return;
         }
-        SettingsPanel.setVisible(true);
-        SettingsPanel.setBounds(x, 0, 260, 650);
+        
+        SearchBarTextField.setVisible(false);
         x += xVelocity;
+        SettingsPanel.setBounds(x, 0, 260, 650);
     }
 
     public static void main(String[] args) {
