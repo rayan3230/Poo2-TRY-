@@ -1,10 +1,19 @@
 package GuiManagement;
 
+import MainClasses.*;
+import ManagementClasses.*;
+import Personnel.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class MovieApp extends JFrame implements ActionListener {
+
+    public static Cinema CinemaManager;
+    public static Account AccountManager;
+    public static ArrayList<Admin> AdminManager;
+    public static ArrayList<Client> ClientManager;
 
     public static JButton Settings;
 
