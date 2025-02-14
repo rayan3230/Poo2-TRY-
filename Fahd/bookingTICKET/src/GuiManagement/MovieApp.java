@@ -8,7 +8,7 @@ import javax.swing.*;
 public class MovieApp extends JFrame implements ActionListener {
 
     //Action manager--------------------------------------------------
-
+    public static int Counter = 0;
     //cinema manager---------------------------------------------------
     public Cinema CinemaManager;
 
@@ -343,7 +343,16 @@ public class MovieApp extends JFrame implements ActionListener {
     }
 
     public void DarkTheme(){
-        this.getContentPane().setBackground(new java.awt.Color(0x444444));
+
+        if(Counter%2 == 0){
+            this.getContentPane().setBackground(new java.awt.Color(0x444444));
+            Counter++;
+            return;
+            
+        }
+        this.getContentPane().setBackground(new java.awt.Color(0xD2D2D2));
+        Counter++;
+        return;
     }
 
     public void ExitSettings(){
