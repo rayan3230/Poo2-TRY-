@@ -2,14 +2,15 @@ package Basic_Classes;
 
 public class Ticket {
 
-    private int IDticket = 0;
+    private static int ticketcounter = 0;
+    private int IDticket;
     private Diffusion diffusion;
     private int seat;
     private double price;
     private boolean isAvailable = true;
 
     public Ticket(Diffusion diffusion, int seat, double price) {
-        this.IDticket ++;
+        this.IDticket = ticketcounter + 1;
         this.diffusion = diffusion;
         this.seat = seat;
         this.price = price;

@@ -5,82 +5,79 @@ import java.util.ArrayList;
 
 
 public class GestionHall {
+    public ArrayList<Hall> halls = new ArrayList<>();
+    public int hallCount = 0;
 
-    public ArrayList<Hall> Salles = new ArrayList<Hall>();
-    public int NbrHalls = 0;
-
-    public void addHall(String nameHall,int seat , int VipSeat) {
-        NbrHalls++;
-        Hall hall = new Hall(NbrHalls, nameHall, seat, VipSeat);
-        hall.seatAvailable = true;
-        hall.Vipavailable = true;
-        Salles.add(hall);
-
+    public void addHall(String hallNameHall, int regularSeats, int vipSeats) {
+        hallCount++;
+        Hall hall = new Hall(hallCount, hallNameHall, regularSeats, vipSeats);
+        halls.add(hall);
     }
 
-    public void ModifierHall(int HallId , String nameHall , int NewVipSeat , int NewSeat){
-        if(Salles.get(HallId) != null){
-            Salles.get(HallId).VipSeat = NewVipSeat;
-            Salles.get(HallId).seat = NewSeat;
-            return ;
-        }else{
+
+
+    public void modifyHall(int hallId, String hallNameHall, int newVipSeats, int newSeats) {
+        if(halls.get(hallId) != null) {
+            halls.get(hallId).totalVipSeats = newVipSeats;
+            halls.get(hallId).totalRegularSeats = newSeats;
+            halls.get(hallId).NameHall = hallNameHall;
+        } else {
             System.out.println("Hall Id is null");
         }
     }
 
-    public void SuprimmerHall(int HallId ){
-        if(Salles.get(HallId) != null){
-            System.out.println("Hall : " + Salles.get(HallId).NameHall + " Deleted ");
-            Salles.remove(HallId);
-            NbrHalls--;
-            return ;
-        }else{
+    public void SuprimmerHall(int HallId) {
+        if(halls.get(HallId) != null) {
+            System.out.println("Hall : " + halls.get(HallId).NameHall + " Deleted ");
+            halls.remove(HallId);
+            hallCount--;
+        } else {
             System.out.println("Hall Id is null");
         }
     }
 
-    public void ReserveSimpleSeat(int Salleid){
-        if(Salles.get(Salleid) != null && Salles.get(Salleid).seatAvailable){
-            Salles.get(Salleid).seat--;
-            if(Salles.get(Salleid).seat == 0){
-                Salles.get(Salleid).seatAvailable = false;
+    public void ReserveSimpleSeat(int Salleid) {
+        if(halls.get(Salleid) != null && halls.get(Salleid).regularSeatsAvailable) {
+            halls.get(Salleid).totalRegularSeats--;
+            if(halls.get(Salleid).totalRegularSeats == 0) {
+                halls.get(Salleid).regularSeatsAvailable = false;
             }
-            
-            System.out.println("Simple Seat Reserved in Hall : " + Salles.get(Salleid).NameHall);
-        }else{
+            System.out.println("Simple Seat Reserved in Hall : " + halls.get(Salleid).NameHall);
+        } else {
             System.out.println("Simple Seat not available or Hall Id is null");
         }
-
     }
     
-    public void ReserveVipSeat(int Salleid){
-        if(Salles.get(Salleid) != null && Salles.get(Salleid).Vipavailable){
-            Salles.get(Salleid).VipSeat--;
-            if(Salles.get(Salleid).VipSeat == 0){
-                Salles.get(Salleid).Vipavailable = false;
+       public void ReserveVipSeat(int Salleid) {
+        if(halls.get(Salleid) != null && halls.get(Salleid).vipSeatsAvailable) {
+            halls.get(Salleid).totalVipSeats--;
+            if(halls.get(Salleid).totalVipSeats == 0) {
+                halls.get(Salleid).vipSeatsAvailable = false;
             }
-            
-            System.out.println("Vip Seat Reserved in Hall : " + Salles.get(Salleid).NameHall);
-        }else{
+            System.out.println("Vip Seat Reserved in Hall : " + halls.get(Salleid).NameHall);
+        } else {
             System.out.println("Vip Seat not available or Hall Id is null");
         }
     }
 
-    public void SimpleSeatRemaining(int idsalle){
-        if(Salles.get(idsalle)!= null){
-            System.out.println("Simple Seat remaining in Hall : " + Salles.get(idsalle).NameHall + " : " + Salles.get(idsalle).seat);
-        }else{
+    public void SimpleSeatRemaining(int idsalle) {
+        if(halls.get(idsalle) != null) {
+            System.out.println("Simple Seat remaining in Hall : " + halls.get(idsalle).NameHall + " : " + halls.get(idsalle).totalRegularSeats);
+        } else {
             System.out.println("Hall Id is null");
         }
     }
     
-    public void VipSeatRemaining(int idsalle){
-        if(Salles.get(idsalle)!= null){
-            System.out.println("Vip Seat remaining in Hall : " + Salles.get(idsalle).NameHall + " : " + Salles.get(idsalle).VipSeat);
-        }else{
+    public void VipSeatRemaining(int idsalle) {
+        if(halls.get(idsalle) != null) {
+            System.out.println("Vip Seat remaining in Hall : " + halls.get(idsalle).NameHall + " : " + halls.get(idsalle).totalVipSeats);
+        } else {
             System.out.println("Hall Id is null");
         }
     }
-    
+
+
+
+  
 
 }
