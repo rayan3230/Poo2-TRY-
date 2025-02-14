@@ -11,7 +11,6 @@ public class Cinema {
     public Account accounts;
 
     public ArrayList<Movie> movies;
-    public ArrayList<Admin> admins;
     public ArrayList<Theater> theaters;
     public ArrayList<Ticket> tickets;
 
@@ -31,7 +30,6 @@ public class Cinema {
     public Cinema() {
 
         this.movies = new ArrayList<Movie>();
-        this.admins = new ArrayList<Admin>();
         this.theaters = new ArrayList<Theater>();
         this.tickets = new ArrayList<Ticket>();
 
@@ -123,9 +121,6 @@ public class Cinema {
         movies.add(movie);
     }
 
-    public void AddAdmin(Admin admin) {
-        admins.add(admin);
-    }
 
     public void AddTheater(Theater theater) {
         theaters.add(theater);
@@ -141,10 +136,6 @@ public class Cinema {
 
     public void RemoveMovie(Movie movie) {
         movies.remove(movie);
-    }
-
-    public void RemoveAdmin(Admin admin) {
-        admins.remove(admin);
     }
 
     public void RemoveTheater(Theater theater) {
@@ -168,12 +159,12 @@ public class Cinema {
     }
 
     public void DisplayAdmin() {
-        for (Admin admin : admins) {
+        for (Account admin : accounts.Admins) {
             System.out.println("---------------------------------------------");
-            System.out.println("Name: " + admin.FirstName + " " + admin.LastName);
-            System.out.println("Age: " + admin.Age);
-            System.out.println("Email: " + admin.Email);
-            System.out.println("Phone Number: " + admin.PhoneNumber);
+            System.out.println("Name: " + admin.admin.FirstName + " " + admin.admin.LastName);
+            System.out.println("Age: " + admin.admin.Age);
+            System.out.println("Email: " + admin.admin.Email);
+            System.out.println("Phone Number: " + admin.admin.PhoneNumber);
             System.out.println("---------------------------------------------");
         }
     }
