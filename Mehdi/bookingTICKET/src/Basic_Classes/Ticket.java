@@ -7,6 +7,7 @@ public class Ticket {
     private Diffusion diffusion;
     private int seat;
     private double price;
+    private String customerID;
     private boolean isAvailable = true;
 
     public Ticket(Diffusion diffusion, int seat, double price) {
@@ -32,6 +33,10 @@ public class Ticket {
         return price;
     }
 
+    public String getCustomerID() {
+        return customerID;
+    }
+
     public boolean isAvailable() {
         return isAvailable;
     }
@@ -50,6 +55,10 @@ public class Ticket {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
     }
 
     public void setAvailable(boolean available) {
