@@ -28,8 +28,9 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
     //log in elements : 
     public JPanel LogInPanel;
-    public JLabel LogInText1, LogInText2;
+    public JLabel LogInText1, LogInText2, LogInText3;
     public JTextField LogAdressInput, LogPassWord;
+    public JButton LogInButton, SignInReturn;
 
     //sign in elements : 
     public JLabel PooMovie, WelcomText1, WelcomText2, DescriptionText;
@@ -274,8 +275,17 @@ public class CinemaApp extends JFrame implements ActionListener  {
     }
 
     public JPanel CreatLogInElementsPanel(){
+        LogInElements = new JPanel();
+        LogInElements.setBounds(360, 115, 470, 690);
+        LogInElements.setBackground(Color.BLACK);
+        LogInElements.setLayout(null);
+        LogInElements.setOpaque(true);
+
+        LogInButton = new JButton();
+
         return LogInElements;
     }
+
 
     public JPanel CreatFinishSignInPanel(){
         //Finish signing in panel ------------------------------------------------
