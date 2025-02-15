@@ -1,15 +1,12 @@
 package GuiManager;
 
-import java.awt.CardLayout;
-
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class GuiApp extends JFrame{
     public JPanel mainPanel;
     public CardLayout cardLayout;
-    
+    public Timer timer;
 
     public GuiApp(){
         setUndecorated(true); 
@@ -749,7 +746,7 @@ public class GuiApp extends JFrame{
 
     public static void main(String[] args) {
         try {
-            UiClass frame = new UiClass();
+            GuiApp frame = new GuiApp();
             frame.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
