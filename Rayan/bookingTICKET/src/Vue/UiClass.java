@@ -1,13 +1,17 @@
 package Vue;
 
+import Controller.GestionAccounts;
 import java.awt.*;
 import javax.swing.*;
 public class UiClass extends JFrame {
     public JPanel mainPanel;
     public CardLayout cardLayout;
+    public GestionAccounts Accounts;  // Field declaration
     
-
     public UiClass(){
+        // Initialize Accounts in the constructor
+        Accounts = new GestionAccounts();
+        
         setUndecorated(true); 
         setTitle("POO_Movies");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,11 +29,13 @@ public class UiClass extends JFrame {
         JPanel loginPanel = createLoginPanel();
         JPanel registerPanel = createRegisterPanel();
         JPanel forgotPasswordPanel = createForgotPasswordPanel();
+        JPanel homeUserPanel = createHomeUserPanel();
 
         mainPanel.add(welcomePanel, "welcome");
         mainPanel.add(loginPanel, "login");
         mainPanel.add(registerPanel, "register");
         mainPanel.add(forgotPasswordPanel, "forgotPassword");
+        mainPanel.add(homeUserPanel, "homeUser");
 
         setContentPane(mainPanel);
         cardLayout.show(mainPanel, "welcome");
@@ -585,6 +591,39 @@ public class UiClass extends JFrame {
         ConfirmSignUpButton.setBackground(Color.red);
         ConfirmSignUpButton.setBorder(null);
         RectangleRegister.add(ConfirmSignUpButton);
+        ConfirmSignUpButton.addActionListener(e -> {
+
+            String username = UserNameField.getText().trim();
+            String password = new String(PasswordsField.getPassword());
+            String email = EmailField.getText().trim();
+            String cardNumber = CardNmbrField.getText().trim();
+            String ccvNumber = CCVNmbrField.getText().trim();
+
+                if (username.equals("    Username") || password.equals("    Password") || 
+                email.equals("   email@example.com") || cardNumber.equals("   Card Number") || 
+                ccvNumber.equals("   CCV Number")) {
+                JOptionPane.showMessageDialog(registerPanel, 
+                    "Please fill in all fields", 
+                    "Registration Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+                if (username.isEmpty() || password.isEmpty() || email.isEmpty() || 
+                cardNumber.isEmpty() || ccvNumber.isEmpty()) {
+                JOptionPane.showMessageDialog(registerPanel, 
+                    "All fields are required", 
+                    "Registration Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+           HandleSignIn(UserNameField, PasswordsField, EmailField, CardNmbrField, CCVNmbrField);
+            cardLayout.show(mainPanel, "login");
+
+        });
+
+
 
         RoundedButton ReturnBtn = new RoundedButton("Return",10);
         ReturnBtn.setBounds(20, 490, 180, 50);
@@ -722,7 +761,50 @@ public class UiClass extends JFrame {
         return forgotPanel;
     }
     
-    // Helper method for placeholder text behavior
+
+    public JPanel createHomeUserPanel(){
+
+        JPanel homePanel = new JPanel();
+        homePanel.setLayout(null);
+        homePanel.setBounds(0, 0, 1200, 750);
+
+
+
+        return homePanel;
+    }
+
+
+   
+
+    public void HandleLogin(String username, String password){
+        
+
+
+
+    }
+    public void HandleSignIn(JTextField username, JPasswordField password , JTextField email , JTextField cardNumber ,JTextField ccvnbr){
+        try {
+            if(!Accounts.CheckAccountIfCreated(username.getText(), password.getText())){
+
+                String cardNumberText = cardNumber.getText().replaceAll("[^0-9.]", "");
+                double cardNum = Double.parseDouble(cardNumberText);
+        
+                String ccvnbrText = ccvnbr.getText().replaceAll("[^0-9.]", "");
+                int CCVnbr = Integer.parseInt(ccvnbrText);
+        
+                Accounts.AddAccount(username.getText(), password.getText(), email.getText(), cardNum, CCVnbr);
+                JOptionPane.showMessageDialog(null, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            
+            } else {
+                JOptionPane.showMessageDialog(null, "Account already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid card number or CCV format.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     public void addPlaceholderBehavior(JTextField field, String placeholder) {
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
