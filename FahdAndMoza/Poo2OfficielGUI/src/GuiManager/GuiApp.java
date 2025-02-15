@@ -408,23 +408,38 @@ public class GuiApp extends JFrame{
 
     public JPanel createRegisterPanel(){
 
-        JPanel registerPanel = new JPanel() {
-            ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
- 
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
-                // Draw the background with opacity
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
-                g2d.drawImage(bgIcon.getImage(), 0, 0, getWidth(), getHeight(), this);
-                // Overlay a black layer
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
-                g2d.setColor(Color.black);
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-                g2d.dispose();
-            }
-        };
+        JPanel registerPanel = new JPanel();
+
+        JPanel BackgroundPanel = new JPanel();
+        BackgroundPanel.setBounds(0, 0, 1200, 750);
+
+        //the background image :
+        Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\BackGround2.jpg").getImage();
+        JLabel Background = new JLabel();
+        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
+        Background.setIcon(new ImageIcon(BackgroundImage));
+        BackgroundPanel.setLayout(null);
+
+        registerPanel.add(BackgroundPanel);
+        
+
+        //Blur panel--------------------------------------------------
+        TransparentPanel BlurPanel = new TransparentPanel(0.85f);
+        BlurPanel.setBounds(0, 0, 1200, 750);
+        BlurPanel.setLayout(null);
+        BlurPanel.setBackground(new java.awt.Color(0x999999));
+
+        BlurPanel.setVisible(true);
+
+
+        BackgroundPanel.add(Background);
+        BackgroundPanel.add(BlurPanel);
+
+        BackgroundPanel.setComponentZOrder(Background, 1);
+        BackgroundPanel.setComponentZOrder(BlurPanel, 0);
+
+        registerPanel.add(BackgroundPanel);
+
         registerPanel.setLayout(null);
         registerPanel.setBounds(0, 0, 1200, 750);
 
@@ -458,6 +473,7 @@ public class GuiApp extends JFrame{
         RectangleRegister.setLayout(null);
         RectangleRegister.setOpaque(false); 
         registerPanel.add(RectangleRegister);
+        
         /*
         public String username;
         public String password;
