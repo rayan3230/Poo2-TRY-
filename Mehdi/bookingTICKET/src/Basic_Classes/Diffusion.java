@@ -3,6 +3,7 @@ package Basic_Classes;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Diffusion {
 
@@ -17,6 +18,7 @@ public class Diffusion {
     private int minute1;
     private int hour2;
     private int minute2;
+    private ArrayList<Seat> seats;
     LocalDate date = LocalDate.of(this.year, this.month, this.day);
     LocalTime time1 = LocalTime.of(this.hour1, this.minute1);
     LocalTime time2 = LocalTime.of(this.hour2, this.minute2);
@@ -27,6 +29,10 @@ public class Diffusion {
         this.film = film;
         this.date = date;
         this.time1 = time1;
+        this.seats = new ArrayList<>(salle.getCapacite());
+        for (int i = 0; i < salle.getCapacite(); i++) {
+            seats.add(new Seat(i, true));
+        }
         if (this.minute1 + film.duration % 60 > 60) {
 
             this.minute2 = this.minute1 - 60 + film.duration % 60;
@@ -81,6 +87,14 @@ public class Diffusion {
 
     public void setTime1(LocalTime time1) {
         this.time1 = time1;
+    }
+
+    public void DisplayAvaibleSeats() {
+        for (Seat seat : seats) {
+            if (seat.isAvaible()) {
+                System.out.println(seat.getSeatID());
+            }
+        }
     }
 
 
