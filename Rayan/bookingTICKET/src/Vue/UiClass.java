@@ -21,11 +21,12 @@ public class UiClass extends JFrame {
         JPanel welcomePanel = createWelcomePanel();
         JPanel loginPanel = createLoginPanel();
         JPanel registerPanel = createRegisterPanel();
-
+        JPanel forgotPasswordPanel = createForgotPasswordPanel();
 
         mainPanel.add(welcomePanel, "welcome");
         mainPanel.add(loginPanel, "login");
         mainPanel.add(registerPanel, "register");
+        mainPanel.add(forgotPasswordPanel, "forgotPassword");
 
         setContentPane(mainPanel);
         cardLayout.show(mainPanel, "welcome");
@@ -300,6 +301,9 @@ public class UiClass extends JFrame {
         btnforgetpassword.setContentAreaFilled(false);
         btnforgetpassword.setBorderPainted(false);
         btnforgetpassword.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnforgetpassword.addActionListener(e -> {
+            cardLayout.show(mainPanel, "forgotPassword");
+        });
         RectangleLogin.add(btnforgetpassword);
 
 
@@ -561,6 +565,148 @@ public class UiClass extends JFrame {
 
         return registerPanel;
     }
+
+
+
+    private JPanel createForgotPasswordPanel() {
+        JPanel forgotPanel = new JPanel() {
+            ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
+     
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+                g2d.drawImage(bgIcon.getImage(), 0, 0, getWidth(), getHeight(), this);
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
+                g2d.setColor(Color.black);
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                g2d.dispose();
+            }
+        };
+        forgotPanel.setLayout(null);
+        forgotPanel.setBounds(0, 0, 1200, 750);
+    
+        // Logo
+        JLabel LogoName = new JLabel("LaLaLand");
+        LogoName.setBounds(20, 0, 192, 52);
+        LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
+        LogoName.setForeground(Color.red);
+        forgotPanel.add(LogoName);
+    
+        // Center Rectangle Panel
+        JPanel rectangleForgot = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+                g2d.setColor(new Color(0, 0, 0));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                g2d.dispose();
+            }
+        };
+        rectangleForgot.setBounds(400, 100, 440, 620);
+        rectangleForgot.setLayout(null);
+        rectangleForgot.setOpaque(false);
+        forgotPanel.add(rectangleForgot);
+    
+        // Title
+        JLabel titleLabel = new JLabel("Password Recovery");
+        titleLabel.setBounds(50, 40, 300, 50);
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        titleLabel.setForeground(Color.white);
+        rectangleForgot.add(titleLabel);
+    
+        // Username field
+        JTextField usernameField = new JTextField("Enter your username");
+        usernameField.setBounds(50, 120, 340, 40);
+        usernameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        usernameField.setForeground(Color.gray);
+        usernameField.setBackground(new Color(80, 77, 74));
+        usernameField.setCaretColor(Color.white);
+        usernameField.setOpaque(true);
+        usernameField.setBorder(null);
+        addPlaceholderBehavior(usernameField, "Enter your username");
+        rectangleForgot.add(usernameField);
+    
+        // Security Question
+        JLabel questionLabel = new JLabel("Security Question: What is 15 + 7 ?");
+        questionLabel.setBounds(50, 190, 340, 30);
+        questionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        questionLabel.setForeground(Color.white);
+        rectangleForgot.add(questionLabel);
+    
+        // Answer field
+        JTextField answerField = new JTextField("Enter your answer");
+        answerField.setBounds(50, 230, 340, 40);
+        answerField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        answerField.setForeground(Color.gray);
+        answerField.setBackground(new Color(80, 77, 74));
+        answerField.setCaretColor(Color.white);
+        answerField.setOpaque(true);
+        answerField.setBorder(null);
+        addPlaceholderBehavior(answerField, "Enter your answer");
+        rectangleForgot.add(answerField);
+    
+        // Submit Button
+        RoundedButton submitButton = new RoundedButton("Submit", 10);
+        submitButton.setBounds(50, 300, 340, 40);
+        submitButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        submitButton.setBackground(Color.red);
+        submitButton.setForeground(Color.white);
+        submitButton.setFocusPainted(false);
+        submitButton.addActionListener(e -> {
+            if (answerField.getText().equals("22")) {
+                // Show password in a dialog
+                JOptionPane.showMessageDialog(forgotPanel, 
+                    "Your password is: YourStoredPassword", 
+                    "Password Recovery", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                cardLayout.show(mainPanel, "login");
+            } else {
+                JOptionPane.showMessageDialog(forgotPanel, 
+                    "Incorrect answer. Please try again.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        rectangleForgot.add(submitButton);
+    
+        // Return Button
+        RoundedButton returnButton = new RoundedButton("Return to Login", 10);
+        returnButton.setBounds(50, 360, 340, 40);
+        returnButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        returnButton.setBackground(Color.gray);
+        returnButton.setForeground(Color.white);
+        returnButton.setFocusPainted(false);
+        returnButton.addActionListener(e -> cardLayout.show(mainPanel, "login"));
+        rectangleForgot.add(returnButton);
+    
+        return forgotPanel;
+    }
+    
+    // Helper method for placeholder text behavior
+    private void addPlaceholderBehavior(JTextField field, String placeholder) {
+        field.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (field.getText().equals(placeholder)) {
+                    field.setText("");
+                    field.setForeground(Color.WHITE);
+                }
+            }
+    
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (field.getText().isEmpty()) {
+                    field.setText(placeholder);
+                    field.setForeground(Color.gray);
+                }
+            }
+        });
+    }
+
     public static void main(String[] args) {
         try {
             UiClass frame = new UiClass();
