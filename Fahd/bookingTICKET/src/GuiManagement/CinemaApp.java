@@ -23,6 +23,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
     //sign in elements : 
     public JPanel SignInPanel;
     public JPanel SignInElements;
+    public JButton ChangeTheme;
 
     //Finish signing in panel ------------------------------------------------
     public JPanel RegisterPanel;
@@ -58,7 +59,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         MainPanel = new JPanel(MainCardLayout);
 
-
+        
         //openning panel --------------------------------------------------
         SignInPanel = new JPanel();
         SignInPanel.setBounds(0, 0, 1200, 750);
@@ -71,23 +72,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         SignInPanel.add(SignInBackgroundPanel);
         SignInPanel.add(SignInElements);
 
-        
-        JPanel RedPanel = new JPanel();
-        RedPanel.setBounds(0, 710, 1200, 60);
-        RedPanel.setBackground(new java.awt.Color(0x550000));
-
-        SignInPanel.add(RedPanel);
-
-        JPanel BluePanel = new JPanel();
-        BluePanel.setBounds(0, 725, 1200, 60);
-        BluePanel.setBackground(new java.awt.Color(0x000044));
-
-        SignInPanel.add(BluePanel);
-
-        SignInPanel.setComponentZOrder(SignInElements, 2);
-        SignInPanel.setComponentZOrder(SignInBackgroundPanel, 3);
-        SignInPanel.setComponentZOrder(BluePanel, 0);
-        SignInPanel.setComponentZOrder(RedPanel, 1);
+        SignInPanel.setComponentZOrder(SignInElements, 0);
+        SignInPanel.setComponentZOrder(SignInBackgroundPanel, 1);
 
 
 
@@ -158,6 +144,16 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
+        BackgroundPanel.setLayout(null);
+        BackgroundPanel.setOpaque(false);
+
+        //Blur panel--------------------------------------------------
+        this.BlurPanel = new TransparentPanel(0.85f);
+        BlurPanel.setBounds(0, 0, 1200, 750);
+        BlurPanel.setLayout(null);
+        BlurPanel.setBackground(new java.awt.Color(0x000000));
+
+        BlurPanel.setVisible(true);
 
         //the background image :
         Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\BackGround.jpg").getImage();
@@ -165,15 +161,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
         Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
         Background.setIcon(new ImageIcon(BackgroundImage));
         BackgroundPanel.setLayout(null);
-        
-
-        //Blur panel--------------------------------------------------
-        BlurPanel = new TransparentPanel(0.85f);
-        BlurPanel.setBounds(0, 0, 1200, 750);
-        BlurPanel.setLayout(null);
-        BlurPanel.setBackground(new java.awt.Color(0x000000));
-
-        BlurPanel.setVisible(true);
 
         JPanel RedPanel = new JPanel();
         RedPanel.setBounds(0, 710, 1200, 60);
@@ -382,7 +369,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         SignInElements.add(AdressInput);
 
-        JButton ChangeTheme = new JButton("Change theme");
+        ChangeTheme = new JButton("Change theme");
         ChangeTheme.setBounds(950, 25, 130, 30);
         ChangeTheme.setBackground(Color.WHITE);
         ChangeTheme.setFont(new Font("Inter", Font.BOLD, 12));
@@ -398,9 +385,10 @@ public class CinemaApp extends JFrame implements ActionListener  {
             }
         });
 
-        ChangeTheme.addActionListener(e-> {
+        ChangeTheme.addActionListener(e->{
+            
             if(Counter%2 == 0){
-                BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
+    
                 ChangeTheme.setBackground(new java.awt.Color(0x000000));
                 ChangeTheme.setForeground(Color.WHITE);
                 WelcomText1.setForeground(new java.awt.Color(0x000000));
@@ -408,31 +396,19 @@ public class CinemaApp extends JFrame implements ActionListener  {
                 DescriptionText.setForeground(new java.awt.Color(0x000000));
                 AdressInput.setBackground(new java.awt.Color(0xBBBBBB));
                 AdressInput.setForeground(Color.BLACK);
-
-                // Revalidate and repaint to ensure the SettingsPanel is displayed
-                this.revalidate();
-                this.repaint();
-
-                Counter++;
+            }else{
                 
+                ChangeTheme.setBackground(new java.awt.Color(0xFFFFFF));
+                ChangeTheme.setForeground(Color.BLACK);
+                WelcomText1.setForeground(new java.awt.Color(0xFFFFFF));
+                WelcomText2.setForeground(new java.awt.Color(0xFFFFFF));
+                DescriptionText.setForeground(new java.awt.Color(0xFFFFFF));
+                AdressInput.setBackground(new java.awt.Color(0x222222));
+                AdressInput.setForeground(Color.WHITE);
             }
-            BlurPanel.setBackground(new java.awt.Color(0x000000));
-            ChangeTheme.setBackground(new java.awt.Color(0xFFFFFF));
-            ChangeTheme.setForeground(Color.BLACK);
-            WelcomText1.setForeground(new java.awt.Color(0xFFFFFF));
-            WelcomText2.setForeground(new java.awt.Color(0xFFFFFF));
-            DescriptionText.setForeground(new java.awt.Color(0xFFFFFF));
-            AdressInput.setBackground(new java.awt.Color(0x222222));
-            AdressInput.setForeground(Color.WHITE);
-
-
-            // Revalidate and repaint to ensure the SettingsPanel is displayed
-            this.revalidate();
-            this.repaint();
-
-            Counter++;
+            this.actionPerformed(e);
         });
-
+        
         SignInElements.add(ChangeTheme);
 
         return SignInElements;
@@ -930,6 +906,19 @@ public class CinemaApp extends JFrame implements ActionListener  {
         });
     }
 
+    public void ChnageTheme(){
+        if(Counter%2 == 0){
+            Counter++;
+            this.BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
+            return;
+            
+        }else{
+            Counter++;
+            this.BlurPanel.setBackground(new java.awt.Color(0x000000));
+            return;
+        }
+    }
+
     public static void main(String[] args) {
         try {
             CinemaApp Frame = new CinemaApp();
@@ -940,8 +929,18 @@ public class CinemaApp extends JFrame implements ActionListener  {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        if(e.getSource() == ChangeTheme){
+            if(Counter%2 == 0){
+                Counter++;
+                this.BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
+                return;
+            }else{
+                Counter++;
+                this.BlurPanel.setBackground(new java.awt.Color(0x000000));
+                return;
+                
+            }
+        }
     }
 
 }
