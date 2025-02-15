@@ -13,7 +13,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
     public Cinema CinemaManager;
 
     //sign in panels --------------------------------------------------
-    public JPanel SignInPanel;
+    public JPanel BackgroundPanel;
     public TransparentPanel BlurPanel;
     public JPanel SignInElements;
 
@@ -25,7 +25,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
     //Finish signing in panel ------------------------------------------------
     public JPanel FinishSignInPanel;
     public TransparentPanel BlurPanel2;
-    public JPanel FinishSignInElements;
 
     //finish sign up elements panels---------------------------------------------------
     public JPanel SignUpPanel;
@@ -143,6 +142,51 @@ public class CinemaApp extends JFrame implements ActionListener  {
         this.add(SignInElements);
         this.setComponentZOrder(SignInElements, 0);
 
+        //Finish signing in panel ------------------------------------------------
+        FinishSignInPanel = new JPanel();
+        FinishSignInPanel.setBounds(0, 0, 1200, 750);
+        FinishSignInPanel.setLayout(null);
+        FinishSignInPanel.setOpaque(false);
+        FinishSignInPanel.setVisible(false);
+
+        FinishSignInPanel.add(PooMovie);
+
+        //signUP panel -----------------------------------------------------------
+        SignUpPanel = new JPanel();
+        SignUpPanel.setBounds(200, 115, 800, 400);
+        SignUpPanel.setLayout(null);
+        SignUpPanel.setBackground(Color.WHITE);
+        SignUpPanel.setVisible(false);
+
+        AdressInput2 = new JTextField();
+        AdressInput2.setBounds(251, 235, 650, 60);
+        AdressInput2.setFont(new Font("Inter", Font.BOLD, 20));
+        AdressInput2.setCaretColor(Color.BLACK);
+        AdressInput2.setBackground(new java.awt.Color(0x777777));
+        AdressInput2.setForeground(Color.BLACK);
+
+        SignUpPanel.add(AdressInput2);
+
+        PassWord = new JTextField();
+        PassWord.setBounds(251, 315, 650, 60);
+        PassWord.setFont(new Font("Inter", Font.BOLD, 20));
+        PassWord.setCaretColor(Color.BLACK);
+        PassWord.setBackground(new java.awt.Color(0x777777));
+        PassWord.setForeground(Color.BLACK);
+
+        SignUpPanel.add(PassWord);
+
+        SignUp = new JButton("Sign up");
+        SignUp.setBounds(390, 410, 370, 60);
+        SignUp.setBackground(Color.RED);
+        SignUp.setForeground(Color.white);
+        SignUp.setFont(new Font("Inter", Font.BOLD, 20));
+        SignUp.setFocusable(false);
+        SignUp.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SignUpPanel.add(SignUp);
+
+        FinishSignInPanel.add(SignUpPanel);
 
         //Blur panel--------------------------------------------------
         BlurPanel = new TransparentPanel(0.85f);
@@ -152,20 +196,29 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         this.add(BlurPanel);
 
-        SignInPanel = new JPanel();
-        SignInPanel.setBounds(0, 0, 1200, 750);
+        //Blur panel--------------------------------------------------
+        BlurPanel2 = new TransparentPanel(0.85f);
+        BlurPanel2.setBounds(0, 0, 1200, 750);
+        BlurPanel2.setLayout(null);
+        BlurPanel2.setBackground(new java.awt.Color(0xCCCCCC));
+        BlurPanel2.setVisible(false);
+
+        this.add(BlurPanel2);
+
+        BackgroundPanel = new JPanel();
+        BackgroundPanel.setBounds(0, 0, 1200, 750);
         Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\BackGround.jpg").getImage();
         JLabel Background = new JLabel();
-        Background.setBounds(-15, -15, SignInPanel.getWidth(), SignInPanel.getHeight());
+        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
         Background.setIcon(new ImageIcon(BackgroundImage));
-        SignInPanel.setLayout(null);
-        SignInPanel.add(Background);
+        BackgroundPanel.setLayout(null);
+        BackgroundPanel.add(Background);
 
-        this.add(SignInPanel);
+        this.add(BackgroundPanel);
 
         // Set the z-order to control which panel is on top
         this.setComponentZOrder(BlurPanel, 1); // BlurPanel on top
-        this.setComponentZOrder(SignInPanel, 2); // SignInPanel below BlurPanel
+        this.setComponentZOrder(BackgroundPanel, 2); // BackgroundPanel below BlurPanel
 
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
