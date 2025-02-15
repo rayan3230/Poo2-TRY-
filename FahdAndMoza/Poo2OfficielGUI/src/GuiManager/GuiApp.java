@@ -1,12 +1,41 @@
 package GuiManager;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-public class GuiApp extends JFrame{
-    public JPanel mainPanel;
-    public CardLayout cardLayout;
-    public Timer timer;
+
+public class GuiApp extends JFrame implements ActionListener  {
+
+    //main panel -----------------------------------------------------
+    public JPanel MainPanel;
+
+    //Action manager--------------------------------------------------
+    public static int Counter = 0;
+
+    //log in elements : 
+    public JPanel LogInPanel;
+    public JPanel LogInElements;
+
+    //sign in elements : 
+    public JPanel SignInPanel;
+    public JPanel SignInElements;
+
+    //Finish signing in panel ------------------------------------------------
+    public JPanel RegisterPanel;
+    public JPanel RegisterElements;
+
+    //forgot password panels---------------------------------------------
+    public JPanel ForgotPasswordPanel;
+    public JPanel ForgotPasswordElements;
+
+
+    //decorative Panels ------------------------------------------------
+    public JPanel SignInBackgroundPanel, LogInBackgroundJPanel, RegisterBackgroundJPanel, ForgotPasswordBackground;
+    public TransparentPanel BlurPanel, BlurPanel2;
+
+    //layout manager -----------------------------------------------------
+    public CardLayout MainCardLayout;
 
     public GuiApp(){
 
@@ -22,35 +51,107 @@ public class GuiApp extends JFrame{
         this.setLayout(null);
         this.getContentPane().setBackground(new java.awt.Color(0xD2D2D2));
 
+        MainCardLayout = new CardLayout();
 
-        //  CardLayout khir
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
+        MainPanel = new JPanel(MainCardLayout);
 
-        JPanel welcomePanel = createWelcomePanel();
-        JPanel loginPanel = createLoginPanel();
-        JPanel registerPanel = createRegisterPanel();
-        JPanel forgotPasswordPanel = createForgotPasswordPanel();
 
-        mainPanel.add(welcomePanel, "welcome");
-        mainPanel.add(loginPanel, "login");
-        mainPanel.add(registerPanel, "register");
-        mainPanel.add(forgotPasswordPanel, "forgotPassword");
+        //openning panel --------------------------------------------------
+        SignInPanel = new JPanel();
+        SignInPanel.setBounds(0, 0, 1200, 750);
+        SignInPanel.setLayout(null);
+        SignInPanel.setOpaque(false);
 
-        setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "welcome");
+        SignInBackgroundPanel = CreatBackGround1Panel();
+        SignInElements = CreatSignInElementsPanel();
+
+        SignInPanel.add(SignInBackgroundPanel);
+        SignInPanel.add(SignInElements);
+
+        
+        JPanel RedPanel = new JPanel();
+        RedPanel.setBounds(0, 710, 1200, 60);
+        RedPanel.setBackground(new java.awt.Color(0x550000));
+
+        SignInPanel.add(RedPanel);
+
+        JPanel BluePanel = new JPanel();
+        BluePanel.setBounds(0, 725, 1200, 60);
+        BluePanel.setBackground(new java.awt.Color(0x000044));
+
+        SignInPanel.add(BluePanel);
+
+        SignInPanel.setComponentZOrder(SignInElements, 2);
+        SignInPanel.setComponentZOrder(SignInBackgroundPanel, 3);
+        SignInPanel.setComponentZOrder(BluePanel, 0);
+        SignInPanel.setComponentZOrder(RedPanel, 1);
+
+
+
+        //sign in panel ---------------------------------------------------
+        RegisterPanel = new JPanel();
+        RegisterPanel.setBounds(0, 0, 1200, 750);
+        RegisterPanel.setLayout(null);
+        RegisterPanel.setOpaque(false);
+
+        RegisterBackgroundJPanel = CreatBackGround2Panel();
+        RegisterElements = CreatRegisterElements();
+
+        RegisterPanel.add(RegisterBackgroundJPanel);
+        RegisterPanel.add(RegisterElements);
+
+        RegisterPanel.setComponentZOrder(RegisterElements, 0);
+        RegisterPanel.setComponentZOrder(RegisterBackgroundJPanel, 1);
+
+
+
+        //log in panel ----------------------------------------------------
+        LogInPanel = new JPanel();
+        LogInPanel.setBounds(0, 0, 1200, 750);
+        LogInPanel.setLayout(null);
+        LogInPanel.setOpaque(false);
+
+        LogInBackgroundJPanel = CreatBackGround1Panel();
+        LogInElements = CreatLogInElementsPanel();
+
+        LogInPanel.add(LogInBackgroundJPanel);
+        LogInPanel.add(LogInElements);
+
+        LogInPanel.setComponentZOrder(LogInElements, 0);
+        LogInPanel.setComponentZOrder(LogInBackgroundJPanel, 1);
+
+
+        //forgot password panel --------------------------------------------
+        ForgotPasswordPanel = new JPanel();
+        ForgotPasswordPanel.setBounds(0, 0, 1200, 750);
+        ForgotPasswordPanel.setLayout(null);
+        ForgotPasswordPanel.setOpaque(false);
+
+        ForgotPasswordBackground = CreatBackGround3Panel();
+        ForgotPasswordElements = createForgotPasswordPanel();
+
+        ForgotPasswordPanel.add(ForgotPasswordBackground);
+        ForgotPasswordPanel.add(ForgotPasswordElements);
+
+        ForgotPasswordPanel.setComponentZOrder(ForgotPasswordElements, 0);
+        ForgotPasswordPanel.setComponentZOrder(ForgotPasswordBackground, 1);
+
+
+        //main panel management-----------------------------------------------
+        MainPanel.add(SignInPanel, "open");
+        MainPanel.add(RegisterPanel, "register");
+        MainPanel.add(LogInPanel, "log in");
+        MainPanel.add(ForgotPasswordPanel, "forgot Password");
+
+        setContentPane(MainPanel);
+        MainCardLayout.show(MainPanel, "open");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
         this.repaint();
     }
 
-    
-    public JPanel createWelcomePanel() {
-
-        JPanel welcomepanel = new JPanel();
-        welcomepanel.setBounds(0, 0, 1200, 750);
-        welcomepanel.setLayout(null);
+    public JPanel CreatBackGround1Panel(){
 
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
@@ -61,41 +162,145 @@ public class GuiApp extends JFrame{
         Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
         Background.setIcon(new ImageIcon(BackgroundImage));
         BackgroundPanel.setLayout(null);
-
-        welcomepanel.add(BackgroundPanel);
         
 
         //Blur panel--------------------------------------------------
-        TransparentPanel BlurPanel = new TransparentPanel(0.85f);
+        BlurPanel = new TransparentPanel(0.85f);
         BlurPanel.setBounds(0, 0, 1200, 750);
         BlurPanel.setLayout(null);
         BlurPanel.setBackground(new java.awt.Color(0x000000));
 
         BlurPanel.setVisible(true);
 
+        JPanel RedPanel = new JPanel();
+        RedPanel.setBounds(0, 710, 1200, 60);
+        RedPanel.setBackground(new java.awt.Color(0x550000));
+
+        BackgroundPanel.add(RedPanel);
+
+        JPanel BluePanel = new JPanel();
+        BluePanel.setBounds(0, 725, 1200, 60);
+        BluePanel.setBackground(new java.awt.Color(0x000044));
+
+        BackgroundPanel.add(BluePanel);
 
         BackgroundPanel.add(Background);
         BackgroundPanel.add(BlurPanel);
 
-        BackgroundPanel.setComponentZOrder(Background, 1);
+        BackgroundPanel.setComponentZOrder(Background, 2);
         BackgroundPanel.setComponentZOrder(BlurPanel, 0);
+        BackgroundPanel.setComponentZOrder(BluePanel, 0);
+        BackgroundPanel.setComponentZOrder(RedPanel, 1);
 
-        
+
+        return BackgroundPanel;
+    }
+
+    public JPanel CreatBackGround2Panel(){
+
+        JPanel BackgroundPanel = new JPanel();
+        BackgroundPanel.setBounds(0, 0, 1200, 750);
+
+        //the background image :
+        Image BackgroundImage = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png").getImage();
+        JLabel Background = new JLabel();
+        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
+        Background.setIcon(new ImageIcon(BackgroundImage));
+        BackgroundPanel.setLayout(null);
+
+        //Blur panel--------------------------------------------------
+        BlurPanel2 = new TransparentPanel(0.85f);
+        BlurPanel2.setBounds(0, 0, 1200, 750);
+        BlurPanel2.setLayout(null);
+        BlurPanel2.setBackground(new java.awt.Color(0x888888));
+
+        BlurPanel2.setVisible(true);
+
+        JPanel RedPanel = new JPanel();
+        RedPanel.setBounds(0, 710, 1200, 60);
+        RedPanel.setBackground(new java.awt.Color(0x550000));
+
+        BackgroundPanel.add(RedPanel);
+
+        JPanel BluePanel = new JPanel();
+        BluePanel.setBounds(0, 725, 1200, 60);
+        BluePanel.setBackground(new java.awt.Color(0x000044));
+
+        BackgroundPanel.add(BluePanel);
+
+        BackgroundPanel.add(Background);
+        BackgroundPanel.add(BlurPanel2);
+
+        BackgroundPanel.setComponentZOrder(Background, 2);
+        BackgroundPanel.setComponentZOrder(BlurPanel2, 0);
+        BackgroundPanel.setComponentZOrder(BluePanel, 0);
+        BackgroundPanel.setComponentZOrder(RedPanel, 1);
+
+        return BackgroundPanel;
+    }
+
+    public JPanel CreatBackGround3Panel(){
+        JPanel BackgroundPanel = new JPanel();
+        BackgroundPanel.setBounds(0, 0, 1200, 750);
+
+        //the background image :
+        Image BackgroundImage = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png").getImage();
+        JLabel Background = new JLabel();
+        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
+        Background.setIcon(new ImageIcon(BackgroundImage));
+        BackgroundPanel.setLayout(null);
+
+        //Blur panel--------------------------------------------------
+        BlurPanel2 = new TransparentPanel(0.85f);
+        BlurPanel2.setBounds(0, 0, 1200, 750);
+        BlurPanel2.setLayout(null);
+        BlurPanel2.setBackground(new java.awt.Color(0x000000));
+
+        BlurPanel2.setVisible(true);
+
+        JPanel RedPanel = new JPanel();
+        RedPanel.setBounds(0, 710, 1200, 60);
+        RedPanel.setBackground(new java.awt.Color(0x550000));
+
+        BackgroundPanel.add(RedPanel);
+
+        JPanel BluePanel = new JPanel();
+        BluePanel.setBounds(0, 725, 1200, 60);
+        BluePanel.setBackground(new java.awt.Color(0x000044));
+
+        BackgroundPanel.add(BluePanel);
+
+        BackgroundPanel.add(Background);
+        BackgroundPanel.add(BlurPanel2);
+
+        BackgroundPanel.setComponentZOrder(Background, 2);
+        BackgroundPanel.setComponentZOrder(BlurPanel2, 0);
+        BackgroundPanel.setComponentZOrder(BluePanel, 0);
+        BackgroundPanel.setComponentZOrder(RedPanel, 1);
+
+        return BackgroundPanel;
+    }
+
+    public JPanel CreatSignInElementsPanel(){
+        // sign in elements panel ------------------------------------
+        SignInElements = new JPanel();
+        SignInElements.setBounds(0, 0, 1200, 750);
+        SignInElements.setLayout(null);
+        SignInElements.setOpaque(false);
+
         JLabel LogoName = new JLabel("POOMovie");
         LogoName.setBounds(70, 24, 192, 52);
-        LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
+        LogoName.setFont(new Font("Inter", Font.BOLD, 35));
         LogoName.setForeground(Color.red);
 
-        welcomepanel.add(LogoName);
-
+        SignInElements.add(LogoName);
 
         ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
         JLabel imageLabel = new JLabel(iconMovie);
         imageLabel.setBounds(10, 20, 64, 64);
 
-        welcomepanel.add(imageLabel);
+        SignInElements.add(imageLabel);
 
-     
         JLabel WelcomText1 = new JLabel("Unlimited films in theaters,");//and more to come
         WelcomText1.setBounds(332, 222, 575, 115);
         WelcomText1.setFont(new Font("Inter", Font.BOLD, 40));
@@ -106,59 +311,64 @@ public class GuiApp extends JFrame{
         WelcomText2.setFont(new Font("Inter", Font.BOLD, 40));
         WelcomText2.setForeground(Color.white);
 
-        welcomepanel.add(WelcomText1);
-        welcomepanel.add(WelcomText2);
+        SignInElements.add(WelcomText1);
+        SignInElements.add(WelcomText2);
 
         JLabel DescriptionText = new JLabel("Experience the magic of PooMovie, where unlimited films await you.");
         DescriptionText.setBounds(340, 310, 1160, 115);
         DescriptionText.setFont(new Font("Inter", Font.BOLD, 15));
         DescriptionText.setForeground(Color.white);
 
-        welcomepanel.add(DescriptionText);
+        SignInElements.add(DescriptionText);
 
-        JButton LoginButton = new JButton("log in");
-        LoginButton.setBounds(1100, 10, 75, 30);
-        LoginButton.setForeground(Color.white);
-        LoginButton.setBackground(new Color(255, 0, 0));
-        LoginButton.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        LoginButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        // Sign in and Log in buttons ------------------------------------
 
-        LoginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        JButton LogIn = new JButton("log In");
+        LogIn.setBounds(1090, 25, 75, 30);
+        LogIn.setBackground(Color.RED);
+        LogIn.setForeground(Color.white);
+        LogIn.setFont(new Font("Inter", Font.BOLD, 15));
+        LogIn.setFocusable(false);
+        LogIn.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        LogIn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                LoginButton.setBackground(Color.gray);
+                LogIn.setBackground(new Color(0x550000));
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                LoginButton.setBackground(new Color(255, 0, 0));
+                LogIn.setBackground(new Color(255, 0, 0));
             }
         });
-        LoginButton.addActionListener(e -> {
-            cardLayout.show(mainPanel, "login");
+
+
+        LogIn.addActionListener(e->{
+            MainCardLayout.show(MainPanel, "log in");
         });
-        welcomepanel.add(LoginButton);
 
-        
-    
-        JButton RegisterButton = new JButton("sign in");
-        RegisterButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        RegisterButton.setBounds(790, 430, 130, 45);
-        RegisterButton.setForeground(Color.white);
-        RegisterButton.setBackground(Color.red);
-        RegisterButton.setFont(new Font("Arial", Font.BOLD, 24));
-        RegisterButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        SignInElements.add(LogIn);
 
-        RegisterButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        JButton SignIn = new JButton("Sign in");
+        SignIn.setBounds(790, 430, 130, 45);
+        SignIn.setBackground(Color.RED);
+        SignIn.setForeground(Color.white);
+        SignIn.setFont(new Font("Inter", Font.BOLD, 15));
+        SignIn.setFocusable(false);
+        SignIn.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SignIn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                RegisterButton.setBackground(new Color(200, 0, 0));
+                SignIn.setBackground(new Color(0x550000));
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                RegisterButton.setBackground(Color.gray);
+                SignIn.setBackground(new Color(255, 0, 0));
             }
         });
-        RegisterButton.setBorder(BorderFactory.createEmptyBorder());
-        RegisterButton.addActionListener(e -> {
-            cardLayout.show(mainPanel, "register");
+
+        SignIn.addActionListener(e -> {
+            MainCardLayout.show(MainPanel, "register");
         });
-        welcomepanel.add(RegisterButton);
+
+        SignInElements.add(SignIn);
 
         JTextField AdressInput = new JTextField();
         AdressInput.setBounds(285, 430, 500, 45);
@@ -167,84 +377,73 @@ public class GuiApp extends JFrame{
         AdressInput.setForeground(Color.WHITE);
         AdressInput.setCaretColor(Color.WHITE);
 
-        welcomepanel.add(AdressInput);
+        SignInElements.add(AdressInput);
 
-        
-        JButton Button = new JButton("Press");
-        Button.setBounds(940, 10, 150, 30);
-        Button.setForeground(Color.white);
-        Button.setBackground(new java.awt.Color(0xAAAAAA));
-        Button.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        Button.setUI(new RoundButtonUI(new Color(0x000000)));
-        Button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                System.exit(0);
-            }
+        JButton ChangeTheme = new JButton("Change theme");
+        ChangeTheme.setBounds(950, 25, 130, 30);
+        ChangeTheme.setBackground(Color.WHITE);
+        ChangeTheme.setFont(new Font("Inter", Font.BOLD, 12));
+        ChangeTheme.setFocusable(false);
+        ChangeTheme.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        ChangeTheme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Button.setBackground(Color.black);
+                ChangeTheme.setBackground(new Color(0x999999));
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                Button.setBackground(new java.awt.Color(0xAAAAAA));
-            }   
+                ChangeTheme.setBackground(Color.WHITE);
+            }
         });
-        welcomepanel.add(Button);
 
-        welcomepanel.setComponentZOrder(BackgroundPanel, 1);
-        welcomepanel.setComponentZOrder(Button, 0);
-        welcomepanel.setComponentZOrder(AdressInput, 0);
-        welcomepanel.setComponentZOrder(LogoName, 0);
-        welcomepanel.setComponentZOrder(RegisterButton, 0);
-        welcomepanel.setComponentZOrder(LoginButton, 0);
-        welcomepanel.setComponentZOrder(WelcomText1, 0);
-        welcomepanel.setComponentZOrder(WelcomText2, 0);
-        welcomepanel.setComponentZOrder(DescriptionText, 0);
-        welcomepanel.setComponentZOrder(imageLabel, 0);
-        
-        return welcomepanel;
+        ChangeTheme.addActionListener(e-> {
+            if(Counter%2 == 0){
+                BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
+                ChangeTheme.setBackground(new java.awt.Color(0x000000));
+                ChangeTheme.setForeground(Color.WHITE);
+                WelcomText1.setForeground(new java.awt.Color(0x000000));
+                WelcomText2.setForeground(new java.awt.Color(0x000000));
+                DescriptionText.setForeground(new java.awt.Color(0x000000));
+                AdressInput.setBackground(new java.awt.Color(0xBBBBBB));
+                AdressInput.setForeground(Color.BLACK);
+
+                // Revalidate and repaint to ensure the SettingsPanel is displayed
+                this.revalidate();
+                this.repaint();
+
+                Counter++;
+                
+            }
+            BlurPanel.setBackground(new java.awt.Color(0x000000));
+            ChangeTheme.setBackground(new java.awt.Color(0xFFFFFF));
+            ChangeTheme.setForeground(Color.BLACK);
+            WelcomText1.setForeground(new java.awt.Color(0xFFFFFF));
+            WelcomText2.setForeground(new java.awt.Color(0xFFFFFF));
+            DescriptionText.setForeground(new java.awt.Color(0xFFFFFF));
+            AdressInput.setBackground(new java.awt.Color(0x222222));
+            AdressInput.setForeground(Color.WHITE);
+
+
+            // Revalidate and repaint to ensure the SettingsPanel is displayed
+            this.revalidate();
+            this.repaint();
+
+            Counter++;
+        });
+
+        SignInElements.add(ChangeTheme);
+
+        return SignInElements;
     }
 
-  
-    public JPanel createLoginPanel(){
+    public JPanel CreatLogInElementsPanel(){
         JPanel loginPanel = new JPanel();
         loginPanel.setBounds(0, 0, 1200, 750);
         loginPanel.setLayout(null);
         loginPanel.setOpaque(false);
 
-        JPanel BackgroundPanel = new JPanel();
-        BackgroundPanel.setBounds(0, 0, 1200, 750);
-
-        //the background image :
-        Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\BackGround.jpg").getImage();
-        JLabel Background = new JLabel();
-        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
-        Background.setIcon(new ImageIcon(BackgroundImage));
-        BackgroundPanel.setLayout(null);
-
-        loginPanel.add(BackgroundPanel);
-        
-
-        //Blur panel--------------------------------------------------
-        TransparentPanel BlurPanel = new TransparentPanel(0.85f);
-        BlurPanel.setBounds(0, 0, 1200, 750);
-        BlurPanel.setLayout(null);
-        BlurPanel.setBackground(new java.awt.Color(0x000000));
-
-        BlurPanel.setVisible(true);
-
-
-        BackgroundPanel.add(Background);
-        BackgroundPanel.add(BlurPanel);
-
-        BackgroundPanel.setComponentZOrder(Background, 1);
-        BackgroundPanel.setComponentZOrder(BlurPanel, 0);
-
-        loginPanel.setLayout(null);
-        loginPanel.setBounds(0, 0, 1200, 750);
-
-
         JLabel LogoName = new JLabel("POOMovie");
         LogoName.setBounds(70, 24, 192, 52);
-        LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
+        LogoName.setFont(new Font("Inter", Font.BOLD, 35));
         LogoName.setForeground(Color.red);
         loginPanel.add(LogoName);
 
@@ -255,30 +454,19 @@ public class GuiApp extends JFrame{
         imageLabel.setBounds(10, 20, 64, 64);
         loginPanel.add(imageLabel);
 
-        JPanel RectangleLogin = new JPanel(){
-
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)); // Opacity value between 0.0f - 1.0f
-                g2d.setColor(new Color(0, 0, 0)); // Black color
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-                g2d.dispose();
-            }
-        };
+        TransparentPanel RectangleLogin = new TransparentPanel(0.9f);
         RectangleLogin.setBounds(400, 100, 440, 620);
         RectangleLogin.setLayout(null);
-        RectangleLogin.setOpaque(false); 
+        RectangleLogin.setBackground(Color.black);
         loginPanel.add(RectangleLogin);
 
      
 
-        JLabel SigninLabel = new JLabel("Sign In");
-        SigninLabel.setBounds(50, 40, 200, 50);
-        SigninLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        SigninLabel.setForeground(Color.white);
-        RectangleLogin.add(SigninLabel);
+        JLabel LogInLabel = new JLabel("Log In");
+        LogInLabel.setBounds(50, 40, 200, 50);
+        LogInLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        LogInLabel.setForeground(Color.white);
+        RectangleLogin.add(LogInLabel);
 
         JTextField EmailField = new JTextField("   Email or phone number"); 
         EmailField.setBounds(50, 120, 340, 40);
@@ -286,7 +474,7 @@ public class GuiApp extends JFrame{
         EmailField.setForeground(Color.gray); 
         EmailField.setCaretColor(Color.white);
         //EmailField.setBackground(new Color(80, 77, 74, 230));
-        EmailField.setBackground(new Color(80, 77, 74));
+        EmailField.setBackground(new Color(0xDDDDDD));
         EmailField.setOpaque(true);
         EmailField.setBorder(null);
 
@@ -316,7 +504,7 @@ public class GuiApp extends JFrame{
         PasswordField.setForeground(Color.gray);
         PasswordField.setCaretColor(Color.white);
         //PasswordField.setBackground(new Color(80, 77, 74, 230));
-        PasswordField.setBackground(new Color(80, 77, 74));
+        PasswordField.setBackground(new Color(0xDDDDDD));
         PasswordField.setOpaque(true);
         PasswordField.setBorder(null);
         PasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -362,7 +550,7 @@ public class GuiApp extends JFrame{
         btnforgetpassword.setBorderPainted(false);
         btnforgetpassword.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnforgetpassword.addActionListener(e -> {
-            cardLayout.show(mainPanel, "forgotPassword");
+            MainCardLayout.show(MainPanel, "forgot Password");
         });
         RectangleLogin.add(btnforgetpassword);
 
@@ -381,7 +569,7 @@ public class GuiApp extends JFrame{
         SignupButton.setBorderPainted(false);
         SignupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         SignupButton.addActionListener(e -> {
-            cardLayout.show(mainPanel, "register");
+            MainCardLayout.show(MainPanel, "register");
         });
       
         RectangleLogin.add(SignupButton);
@@ -395,102 +583,47 @@ public class GuiApp extends JFrame{
         returnbtnWelcomePanel.setBorder(BorderFactory.createEmptyBorder());
         returnbtnWelcomePanel.setUI(new RoundButtonUI(new Color(0x000000)));
         returnbtnWelcomePanel.addActionListener(e ->{
-            cardLayout.show(mainPanel, "welcome");
+            MainCardLayout.show(MainPanel, "open");
         });
         RectangleLogin.add(returnbtnWelcomePanel);
 
-        loginPanel.setComponentZOrder(BackgroundPanel, 1);
-        loginPanel.setComponentZOrder(RectangleLogin, 0);
-
         return loginPanel;
+        
     }
 
 
-    public JPanel createRegisterPanel(){
-
-        JPanel registerPanel = new JPanel();
-
-        JPanel BackgroundPanel = new JPanel();
-        BackgroundPanel.setBounds(0, 0, 1200, 750);
-
-        //the background image :
-        Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\BackGround2.jpg").getImage();
-        JLabel Background = new JLabel();
-        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
-        Background.setIcon(new ImageIcon(BackgroundImage));
-        BackgroundPanel.setLayout(null);
-
-        registerPanel.add(BackgroundPanel);
-        
-
-        //Blur panel--------------------------------------------------
-        TransparentPanel BlurPanel = new TransparentPanel(0.85f);
-        BlurPanel.setBounds(0, 0, 1200, 750);
-        BlurPanel.setLayout(null);
-        BlurPanel.setBackground(new java.awt.Color(0x999999));
-
-        BlurPanel.setVisible(true);
-
-
-        BackgroundPanel.add(Background);
-        BackgroundPanel.add(BlurPanel);
-
-        BackgroundPanel.setComponentZOrder(Background, 1);
-        BackgroundPanel.setComponentZOrder(BlurPanel, 0);
-
-        registerPanel.add(BackgroundPanel);
-
-        registerPanel.setLayout(null);
-        registerPanel.setBounds(0, 0, 1200, 750);
-
+    public JPanel CreatRegisterElements(){
+        //Finish signing in panel ------------------------------------------------
+        RegisterElements = new JPanel();
+        RegisterElements.setBounds(0, 0, 1200, 750);
+        RegisterElements.setLayout(null);
+        RegisterElements.setOpaque(false);
 
         JLabel LogoName = new JLabel("POOMovie");
         LogoName.setBounds(70, 24, 192, 52);
-        LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
+        LogoName.setFont(new Font("Inter", Font.BOLD, 35));
         LogoName.setForeground(Color.red);
-        registerPanel.add(LogoName);
 
-
+        RegisterElements.add(LogoName);
 
         ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
         JLabel imageLabel = new JLabel(iconMovie);
         imageLabel.setBounds(10, 20, 64, 64);
-        registerPanel.add(imageLabel);
 
-        JPanel RectangleRegister = new JPanel(){
+        RegisterElements.add(imageLabel);
 
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)); // Opacity value between 0.0f - 1.0f
-                g2d.setColor(new Color(0, 0, 0)); // Black color
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-                g2d.dispose();
-            }
-        };
-        RectangleRegister.setBounds(400, 100, 440, 620);
-        RectangleRegister.setLayout(null);
-        RectangleRegister.setOpaque(false); 
-        registerPanel.add(RectangleRegister);
-        
-        /*
-        public String username;
-        public String password;
-        public String email;
-        public double cardNumber;
-        public int CCVnbr;
-         */
+        //signUP panel -----------------------------------------------------------
+        TransparentPanel SignUpPanel = new TransparentPanel(0.5f);
+        SignUpPanel.setBounds(400, 100, 440, 620);
+        SignUpPanel.setLayout(null);
+        SignUpPanel.setBackground(Color.LIGHT_GRAY);
 
-        JLabel Registerlbl = new JLabel("Sign Up");
-        Registerlbl.setBounds(50, 30, 200, 50);
-        Registerlbl.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        Registerlbl.setForeground(Color.white);
-        RectangleRegister.add(Registerlbl);
+        JLabel SigninLabel = new JLabel("Sign In");
+        SigninLabel.setBounds(50, 40, 200, 50);
+        SigninLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        SigninLabel.setForeground(Color.white);
 
-
-
-
+        SignUpPanel.add(SigninLabel);
 
         JTextField UserNameField = new JTextField("    Username"); 
         UserNameField.setBounds(50, 120, 340, 40);
@@ -498,7 +631,7 @@ public class GuiApp extends JFrame{
         UserNameField.setForeground(Color.gray); 
         UserNameField.setCaretColor(Color.white);
         //EmailField.setBackground(new Color(80, 77, 74, 230));
-        UserNameField.setBackground(new Color(80, 77, 74));
+        UserNameField.setBackground(new Color(0xDDDDDD));
         UserNameField.setOpaque(true);
         UserNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
         UserNameField.setBorder(null);
@@ -519,14 +652,14 @@ public class GuiApp extends JFrame{
                 }
             }
         });
-        RectangleRegister.add(UserNameField);
+        SignUpPanel.add(UserNameField);
 
         JPasswordField PasswordsField = new JPasswordField("    Password");
-        PasswordsField.setBounds(50, 190, 340, 40);
+        PasswordsField.setBounds(50, 200, 340, 40);
         PasswordsField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         PasswordsField.setForeground(Color.gray);
         PasswordsField.setCaretColor(Color.white);
-        PasswordsField.setBackground(new Color(80, 77, 74));
+        PasswordsField.setBackground(new Color(0xDDDDDD));
         PasswordsField.setOpaque(true);
         //PasswordsField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
         PasswordsField.setBorder(null);
@@ -546,16 +679,16 @@ public class GuiApp extends JFrame{
                 }
             }
         });
-        RectangleRegister.add(PasswordsField);
+        SignUpPanel.add(PasswordsField);
 
 
                
         JTextField EmailField = new JTextField("   email@example.com");
-        EmailField.setBounds(50, 260, 340, 40);
+        EmailField.setBounds(50, 280, 340, 40);
         EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         EmailField.setForeground(Color.gray);
         EmailField.setCaretColor(Color.white);
-        EmailField.setBackground(new Color(80, 77, 74));
+        EmailField.setBackground(new Color(0xDDDDDD));
         EmailField.setOpaque(true);
         EmailField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
         EmailField.setBorder(null);
@@ -575,15 +708,15 @@ public class GuiApp extends JFrame{
                 }
             }
         });
-        RectangleRegister.add(EmailField);
+        SignUpPanel.add(EmailField);
 
    
         JTextField CardNmbrField = new JTextField("   Card Number");
-        CardNmbrField.setBounds(50, 330, 340, 40);
+        CardNmbrField.setBounds(50, 360, 340, 40);
         CardNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         CardNmbrField.setForeground(Color.gray);
         CardNmbrField.setCaretColor(Color.white);
-        CardNmbrField.setBackground(new Color(80, 77, 74));
+        CardNmbrField.setBackground(new Color(0xDDDDDD));
         CardNmbrField.setOpaque(true);
         CardNmbrField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
         CardNmbrField.setBorder(null);
@@ -603,16 +736,16 @@ public class GuiApp extends JFrame{
                 }
             }
         });
-        RectangleRegister.add(CardNmbrField);
+        SignUpPanel.add(CardNmbrField);
 
 
         
         JTextField CCVNmbrField = new JTextField("   CCV Number");
-        CCVNmbrField.setBounds(50, 400, 340, 40);
+        CCVNmbrField.setBounds(50, 440, 340, 40);
         CCVNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         CCVNmbrField.setForeground(Color.gray);
         CCVNmbrField.setCaretColor(Color.white);
-        CCVNmbrField.setBackground(new Color(80, 77, 74));
+        CCVNmbrField.setBackground(new Color(0xDDDDDD));
         CCVNmbrField.setOpaque(true);
         CCVNmbrField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
         CCVNmbrField.setBorder(null);
@@ -632,54 +765,44 @@ public class GuiApp extends JFrame{
                 }
             }
         });
-        RectangleRegister.add(CCVNmbrField);
+        SignUpPanel.add(CCVNmbrField);
 
 
-        RoundedButton ConfirmSignUpButton = new RoundedButton("Confirm",10);
-        ConfirmSignUpButton.setBounds(250, 490, 180, 50);
+        JButton ConfirmSignUpButton = new JButton("sign up");
+        ConfirmSignUpButton.setBounds(250, 520, 180, 50);
         ConfirmSignUpButton.setForeground(Color.white);
         ConfirmSignUpButton.setFocusPainted(false);
         ConfirmSignUpButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         ConfirmSignUpButton.setBackground(Color.red);
         ConfirmSignUpButton.setBorder(null);
-        RectangleRegister.add(ConfirmSignUpButton);
+        ConfirmSignUpButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
-        RoundedButton ReturnBtn = new RoundedButton("Return",10);
-        ReturnBtn.setBounds(20, 490, 180, 50);
+        SignUpPanel.add(ConfirmSignUpButton);
+
+        JButton ReturnBtn = new JButton("return");
+        ReturnBtn.setBounds(20, 520, 180, 50);
         ReturnBtn.setForeground(Color.white);
         ReturnBtn.setFocusPainted(false);
         ReturnBtn.setFont(new Font("Segoe UI", Font.BOLD, 14));
         ReturnBtn.setBackground(Color.red);
         ReturnBtn.setBorder(null);
+        ReturnBtn.setUI(new RoundButtonUI(new Color(0x000000)));
         ReturnBtn.addActionListener(e -> {
-            cardLayout.show(mainPanel, "welcome");
+            MainCardLayout.show(MainPanel, "open");
         });
-        RectangleRegister.add(ReturnBtn);
-        
+        SignUpPanel.add(ReturnBtn);
 
-        return registerPanel;
+        RegisterElements.add(SignUpPanel);
+
+        return RegisterElements;
     }
 
-
-
+    
     public JPanel createForgotPasswordPanel() {
-        JPanel forgotPanel = new JPanel() {
-            ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
-     
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
-                g2d.drawImage(bgIcon.getImage(), 0, 0, getWidth(), getHeight(), this);
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
-                g2d.setColor(Color.black);
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-                g2d.dispose();
-            }
-        };
+        JPanel forgotPanel = new JPanel();
         forgotPanel.setLayout(null);
         forgotPanel.setBounds(0, 0, 1200, 750);
+        forgotPanel.setOpaque(false);
     
         // Logo
         JLabel LogoName = new JLabel("POOMovie");
@@ -744,12 +867,13 @@ public class GuiApp extends JFrame{
         rectangleForgot.add(answerField);
     
         // Submit Button
-        RoundedButton submitButton = new RoundedButton("Submit", 10);
+        JButton submitButton = new JButton("Submit");
         submitButton.setBounds(50, 300, 340, 40);
         submitButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         submitButton.setBackground(Color.red);
         submitButton.setForeground(Color.white);
         submitButton.setFocusPainted(false);
+        submitButton.setUI(new RoundButtonUI(new Color(0x000000)));
         submitButton.addActionListener(e -> {
             if (answerField.getText().equals("22")) {
                 // Show password in a dialog
@@ -757,7 +881,8 @@ public class GuiApp extends JFrame{
                     "Your password is: YourStoredPassword", 
                     "Password Recovery", 
                     JOptionPane.INFORMATION_MESSAGE);
-                cardLayout.show(mainPanel, "login");
+
+                MainCardLayout.show(MainPanel, "login");
             } else {
                 JOptionPane.showMessageDialog(forgotPanel, 
                     "Incorrect answer. Please try again.", 
@@ -768,13 +893,14 @@ public class GuiApp extends JFrame{
         rectangleForgot.add(submitButton);
     
         // Return Button
-        RoundedButton returnButton = new RoundedButton("Return to Login", 10);
+        JButton returnButton = new JButton("Return to log in");
         returnButton.setBounds(50, 360, 340, 40);
         returnButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         returnButton.setBackground(Color.gray);
         returnButton.setForeground(Color.white);
         returnButton.setFocusPainted(false);
-        returnButton.addActionListener(e -> cardLayout.show(mainPanel, "login"));
+        returnButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        returnButton.addActionListener(e -> MainCardLayout.show(MainPanel, "log in"));
         rectangleForgot.add(returnButton);
     
         return forgotPanel;
@@ -803,12 +929,16 @@ public class GuiApp extends JFrame{
 
     public static void main(String[] args) {
         try {
-            GuiApp frame = new GuiApp();
-            frame.setVisible(true);
+            GuiApp Frame = new GuiApp();
+            Frame.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
 
-    
 }
