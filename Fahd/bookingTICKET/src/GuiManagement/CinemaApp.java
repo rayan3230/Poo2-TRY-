@@ -22,6 +22,17 @@ public class CinemaApp extends JFrame implements ActionListener  {
     public JButton SignIn, LogIn, ChangeTheme;
     public JTextField AdressInput;
 
+    //Finish signing in panel ------------------------------------------------
+    public JPanel FinishSignInPanel;
+    public TransparentPanel BlurPanel2;
+    public JPanel FinishSignInElements;
+
+    //finish sign up elements panels---------------------------------------------------
+    public JPanel SignUpPanel;
+    public JButton SignUp;
+    public JTextField AdressInput2, PassWord;
+    public JLabel SignUpText1;
+
     //decorative Panels ------------------------------------------------
     public JPanel RedPanel, BluePanel;
 
