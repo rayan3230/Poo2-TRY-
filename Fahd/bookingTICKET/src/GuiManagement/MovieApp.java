@@ -55,6 +55,8 @@ public class MovieApp extends JFrame implements ActionListener {
         timer = new Timer(15, e -> SlideSettingsPanel());
         timer2 = new Timer(15, e -> ExitSettings());
 
+
+
         SettingsPanel = new JPanel();
         SettingsPanel.setBounds(x, 0, 260, 650);
         SettingsPanel.setBackground(new java.awt.Color(0x00357B));
