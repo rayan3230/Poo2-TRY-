@@ -16,6 +16,12 @@ public class CinemaApp extends JFrame implements ActionListener  {
     public JPanel BackgroundPanel;
     public TransparentPanel BlurPanel;
     public JPanel SignInElements;
+    public JPanel LogInElements;
+
+    //log in elements : 
+    public JPanel LogInPanel;
+    public JLabel LogInText1, LogInText2;
+    public JTextField LogAdressInput, LogPassWord;
 
     //sign in elements : 
     public JLabel PooMovie, WelcomText1, WelcomText2, DescriptionText;
@@ -25,11 +31,12 @@ public class CinemaApp extends JFrame implements ActionListener  {
     //Finish signing in panel ------------------------------------------------
     public JPanel FinishSignInPanel;
     public TransparentPanel BlurPanel2;
+    public JLabel PooMovie2, FinishSignUpText;
 
     //finish sign up elements panels---------------------------------------------------
     public JPanel SignUpPanel;
     public JButton SignUp;
-    public JTextField AdressInput2, PassWord;
+    public JTextField SignAdressInput, SignPassWord;
     public JLabel SignUpText1;
 
     //decorative Panels ------------------------------------------------
@@ -54,7 +61,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
         SignInElements.setBounds(0, 0, 1200, 750);
         SignInElements.setLayout(null);
         SignInElements.setOpaque(false);
-        SignInElements.setVisible(true);
 
         PooMovie = new JLabel("PooMovie");
         PooMovie.setBounds(30, 35, 200, 50);
@@ -139,6 +145,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         SignInElements.setComponentZOrder(BluePanel, 0);
         SignInElements.setComponentZOrder(RedPanel, 1);
 
+        SignInElements.setVisible(true);
+
         this.add(SignInElements);
         this.setComponentZOrder(SignInElements, 0);
 
@@ -147,37 +155,40 @@ public class CinemaApp extends JFrame implements ActionListener  {
         FinishSignInPanel.setBounds(0, 0, 1200, 750);
         FinishSignInPanel.setLayout(null);
         FinishSignInPanel.setOpaque(false);
-        FinishSignInPanel.setVisible(false);
 
-        FinishSignInPanel.add(PooMovie);
+        PooMovie2 = new JLabel("PooMovie");
+        PooMovie2.setBounds(30, 35, 200, 50);
+        PooMovie2.setFont(new Font("Inter", Font.BOLD, 35));
+        PooMovie2.setForeground(new java.awt.Color(0xFF0000));
+
+        FinishSignInPanel.add(PooMovie2);
 
         //signUP panel -----------------------------------------------------------
         SignUpPanel = new JPanel();
-        SignUpPanel.setBounds(200, 115, 800, 400);
+        SignUpPanel.setBounds(200, 130, 800, 400);
         SignUpPanel.setLayout(null);
         SignUpPanel.setBackground(Color.WHITE);
-        SignUpPanel.setVisible(false);
 
-        AdressInput2 = new JTextField();
-        AdressInput2.setBounds(251, 235, 650, 60);
-        AdressInput2.setFont(new Font("Inter", Font.BOLD, 20));
-        AdressInput2.setCaretColor(Color.BLACK);
-        AdressInput2.setBackground(new java.awt.Color(0x777777));
-        AdressInput2.setForeground(Color.BLACK);
+        SignAdressInput = new JTextField();
+        SignAdressInput.setBounds(50, 100, 700, 50);
+        SignAdressInput.setFont(new Font("Inter", Font.BOLD, 25));
+        SignAdressInput.setCaretColor(Color.BLACK);
+        SignAdressInput.setBackground(new java.awt.Color(0xDDDDDD));
+        SignAdressInput.setForeground(Color.BLACK);
 
-        SignUpPanel.add(AdressInput2);
+        SignUpPanel.add(SignAdressInput);
 
-        PassWord = new JTextField();
-        PassWord.setBounds(251, 315, 650, 60);
-        PassWord.setFont(new Font("Inter", Font.BOLD, 20));
-        PassWord.setCaretColor(Color.BLACK);
-        PassWord.setBackground(new java.awt.Color(0x777777));
-        PassWord.setForeground(Color.BLACK);
+        SignPassWord = new JTextField();
+        SignPassWord.setBounds(50, 175, 700, 50);
+        SignPassWord.setFont(new Font("Inter", Font.BOLD, 25));
+        SignPassWord.setCaretColor(Color.BLACK);
+        SignPassWord.setBackground(new java.awt.Color(0xDDDDDD));
+        SignPassWord.setForeground(Color.BLACK);
 
-        SignUpPanel.add(PassWord);
+        SignUpPanel.add(SignPassWord);
 
         SignUp = new JButton("Sign up");
-        SignUp.setBounds(390, 410, 370, 60);
+        SignUp.setBounds(210, 260, 370, 60);
         SignUp.setBackground(Color.RED);
         SignUp.setForeground(Color.white);
         SignUp.setFont(new Font("Inter", Font.BOLD, 20));
@@ -186,7 +197,20 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         SignUpPanel.add(SignUp);
 
+        FinishSignUpText = new JLabel("Finish settings up your account ");
+        FinishSignUpText.setBounds(50, 25, 550, 50);
+        FinishSignUpText.setFont(new Font("Inter", Font.BOLD, 30));
+        FinishSignUpText.setForeground(new java.awt.Color(0x000000));
+
+        SignUpPanel.add(FinishSignUpText);
+        SignUpPanel.setVisible(false);
+
         FinishSignInPanel.add(SignUpPanel);
+        FinishSignInPanel.setVisible(false);
+
+        this.add(FinishSignInPanel);
+        this.setComponentZOrder(FinishSignInPanel, 0);
+
 
         //Blur panel--------------------------------------------------
         BlurPanel = new TransparentPanel(0.85f);
@@ -194,16 +218,21 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BlurPanel.setLayout(null);
         BlurPanel.setBackground(new java.awt.Color(0x000000));
 
+        BlurPanel.setVisible(true);
+
         this.add(BlurPanel);
+        this.setComponentZOrder(BlurPanel, 1); // BlurPanel on top
 
         //Blur panel--------------------------------------------------
         BlurPanel2 = new TransparentPanel(0.85f);
         BlurPanel2.setBounds(0, 0, 1200, 750);
         BlurPanel2.setLayout(null);
         BlurPanel2.setBackground(new java.awt.Color(0xCCCCCC));
+
         BlurPanel2.setVisible(false);
 
         this.add(BlurPanel2);
+        this.setComponentZOrder(BlurPanel2, 1); // SignInElements on top
 
         BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
@@ -215,11 +244,16 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BackgroundPanel.add(Background);
 
         this.add(BackgroundPanel);
-
-        // Set the z-order to control which panel is on top
-        this.setComponentZOrder(BlurPanel, 1); // BlurPanel on top
         this.setComponentZOrder(BackgroundPanel, 2); // BackgroundPanel below BlurPanel
 
+        //set up the visibility of each panel as wanted 
+        BlurPanel.setVisible(true);
+        SignInElements.setVisible(true);
+
+        //setting up the z order of the components 
+        this.setComponentZOrder(BackgroundPanel, 2);
+        this.setComponentZOrder(BlurPanel, 1);
+        this.setComponentZOrder(SignInElements, 0);
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -235,7 +269,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
             WelcomText1.setForeground(new java.awt.Color(0x000000));
             WelcomText2.setForeground(new java.awt.Color(0x000000));
             DescriptionText.setForeground(new java.awt.Color(0x000000));
-            AdressInput.setBackground(new java.awt.Color(0x777777));
+            AdressInput.setBackground(new java.awt.Color(0xBBBBBB));
+            AdressInput.setForeground(Color.BLACK);
 
             // Revalidate and repaint to ensure the SettingsPanel is displayed
             this.revalidate();
@@ -253,6 +288,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         WelcomText2.setForeground(new java.awt.Color(0xFFFFFF));
         DescriptionText.setForeground(new java.awt.Color(0xFFFFFF));
         AdressInput.setBackground(new java.awt.Color(0x222222));
+        AdressInput.setForeground(Color.WHITE);
+
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -260,6 +297,26 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         Counter++;
         return;
+    }
+
+    public void SignInAction(){
+
+    }
+
+    public void FinishSignInAction(){
+
+    }
+
+    public void LogInAction(){
+
+    }
+
+    public void FinishLogInAction(){
+
+    }
+
+    public void SignInSecond(){
+
     }
 
     public static void main(String[] args) {
