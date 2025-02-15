@@ -14,12 +14,14 @@ public class Cinema {
 
     public ArrayList<Admin> admins;
     public ArrayList<Client> clients;
-
+    
     public Filters filter;
 
     public String[] Genres = { "Action", "Comedy", "Drama", "Horoor", "Science_Fiction", "Thriller",
             "Adventure", "Fantasy", "Mystery", "Romance", "Crime", "Animation", "Music", "Documentary",
             "Family", "Sport", "News", "Travel", "Game", "History" };
+
+            
     public String[] AgeRestrictions = { "G", "PG6", "PG8", "PG13", "PG16", "PG18" };
     public String[] TicketType = { "VIP", "Normal" };
 
