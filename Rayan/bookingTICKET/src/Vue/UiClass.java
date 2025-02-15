@@ -22,8 +22,12 @@ public class UiClass extends JFrame {
 
         JPanel welcomePanel = createWelcomePanel();
         JPanel loginPanel = createLoginPanel();
+        JPanel registerPanel = createRegisterPanel();
+
+
         mainPanel.add(welcomePanel, "welcome");
         mainPanel.add(loginPanel, "login");
+        mainPanel.add(registerPanel, "register");
 
         setContentPane(mainPanel);
         cardLayout.show(mainPanel, "welcome");
@@ -311,6 +315,9 @@ public class UiClass extends JFrame {
         SignupButton.setContentAreaFilled(false);
         SignupButton.setBorderPainted(false);
         SignupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SignupButton.addActionListener(e -> {
+            cardLayout.show(mainPanel, "register");
+        });
       
         RectangleLogin.add(SignupButton);
 
@@ -318,6 +325,22 @@ public class UiClass extends JFrame {
         return loginPanel;
     }
 
+
+
+
+
+
+    public JPanel createRegisterPanel(){
+
+        JPanel registerPanel = new JPanel();
+        registerPanel.setBounds(0, 0, 800, 600);
+        registerPanel.setLayout(null);
+        registerPanel.setOpaque(false);
+
+
+
+        return registerPanel;
+    }
     public static void main(String[] args) {
         try {
             UiClass frame = new UiClass();
