@@ -12,15 +12,15 @@ public class GestionAccounts {
                 return;
             }else{
                 accounts.add(new Accounts(username, password, email ,cardNumber, CCVnbr));
+                System.out.println("Account created successfully");
                 return;
-
             }
         }
 
    }
-   public Boolean CheckAccountIfCreated(String username , String password){
+   public Boolean CheckAccountIfCreated(String Email , String password){
     for (Accounts account : accounts){
-            if (account.username.equals(username) && account.password.equals(password)) {
+            if (account.email.equals(Email) && account.password.equals(password)) {
                 return true;
             }
         }

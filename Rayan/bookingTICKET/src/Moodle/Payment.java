@@ -6,16 +6,28 @@ public class Payment {
     public int id;
     public Booking booking;
     public double amount;
-    public String paymentMethod;
+    public PaymentType paymentMethod;
     public LocalDateTime paymentTime;
-    public String status;
+    public TypeStatus status;
 
-    public Payment(int id, Booking booking, String paymentMethod) {
+    
+    public enum PaymentType {
+        CREDIT_CARD,
+        Cash,
+    }
+
+    public enum TypeStatus{
+        PENDING,
+        PAID,
+        CANCELLED
+    }
+
+    public Payment(int id, Booking booking, PaymentType paymentMethod ,TypeStatus status ) {
         this.id = id;
         this.booking = booking;
         this.amount = booking.totalPrice;
         this.paymentMethod = paymentMethod;
         this.paymentTime = LocalDateTime.now();
-        this.status = "PENDING";
+        this.status = status;
     }
 } 

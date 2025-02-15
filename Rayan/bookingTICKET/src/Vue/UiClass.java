@@ -1,12 +1,14 @@
 package Vue;
 
 import Controller.GestionAccounts;
+import Moodle.Accounts;
 import java.awt.*;
 import javax.swing.*;
 public class UiClass extends JFrame {
     public JPanel mainPanel;
     public CardLayout cardLayout;
     public GestionAccounts Accounts;  // Field declaration
+    public Accounts currentuser ;
     
     public UiClass(){
         // Initialize Accounts in the constructor
@@ -29,7 +31,7 @@ public class UiClass extends JFrame {
         JPanel loginPanel = createLoginPanel();
         JPanel registerPanel = createRegisterPanel();
         JPanel forgotPasswordPanel = createForgotPasswordPanel();
-        JPanel homeUserPanel = createHomeUserPanel();
+        JPanel homeUserPanel = createHomeUserPanel(currentuser);
 
         mainPanel.add(welcomePanel, "welcome");
         mainPanel.add(loginPanel, "login");
@@ -311,6 +313,21 @@ public class UiClass extends JFrame {
         SignInButton.setBackground(Color.red);
         SignInButton.setForeground(Color.white);
         SignInButton.setBorder(BorderFactory.createEmptyBorder());
+        SignInButton.addActionListener(e -> {
+            
+            String txtEmail = EmailField.getText();
+            String txtPassword = String.valueOf(PasswordField.getPassword());
+            
+            if (EmailField.getText().equals("   Email or phone number") || 
+                String.valueOf(PasswordField.getPassword()).equals("Password")) {
+                JOptionPane.showMessageDialog(null, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }else{
+                HandleLogin(txtEmail, txtPassword);
+            }
+
+
+        });
         RectangleLogin.add(SignInButton);
 
         JLabel Or = new JLabel("OR");
@@ -435,6 +452,7 @@ public class UiClass extends JFrame {
         Registerlbl.setFont(new Font("Segoe UI", Font.BOLD, 24));
         Registerlbl.setForeground(Color.white);
         RectangleRegister.add(Registerlbl);
+
 
 
 
@@ -602,19 +620,13 @@ public class UiClass extends JFrame {
                 if (username.equals("    Username") || password.equals("    Password") || 
                 email.equals("   email@example.com") || cardNumber.equals("   Card Number") || 
                 ccvNumber.equals("   CCV Number")) {
-                JOptionPane.showMessageDialog(registerPanel, 
-                    "Please fill in all fields", 
-                    "Registration Error", 
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(registerPanel, "Please fill in all fields", "Registration Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
                 if (username.isEmpty() || password.isEmpty() || email.isEmpty() || 
                 cardNumber.isEmpty() || ccvNumber.isEmpty()) {
-                JOptionPane.showMessageDialog(registerPanel, 
-                    "All fields are required", 
-                    "Registration Error", 
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(registerPanel,  "All fields are required", "Registration Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -762,7 +774,7 @@ public class UiClass extends JFrame {
     }
     
 
-    public JPanel createHomeUserPanel(){
+    public JPanel createHomeUserPanel(Accounts account){
 
         JPanel homePanel = new JPanel();
         homePanel.setLayout(null);
@@ -776,50 +788,65 @@ public class UiClass extends JFrame {
 
    
 
-    public void HandleLogin(String username, String password){
-        
-
-
-
+    public void HandleLogin(String user, String password){
+        if(Accounts.CheckAccountIfCreated(user, password)){
+            JOptionPane.showMessageDialog(null, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            // Updated panel name to match the one added in the constructor:
+            cardLayout.show(mainPanel, "homeUser");
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-    public void HandleSignIn(JTextField username, JPasswordField password , JTextField email , JTextField cardNumber ,JTextField ccvnbr){
-        try {
-            if(!Accounts.CheckAccountIfCreated(username.getText(), password.getText())){
 
+
+    public void HandleSignIn(JTextField username, JPasswordField password, JTextField email, JTextField cardNumber, JTextField ccvnbr) {
+        try {
+            if (!Accounts.CheckAccountIfCreated(username.getText(), new String(password.getPassword()))) {
                 String cardNumberText = cardNumber.getText().replaceAll("[^0-9.]", "");
+                String ccvnbrText = ccvnbr.getText().replaceAll("[^0-9]", "");
+
+                if (cardNumberText.isEmpty() || ccvnbrText.isEmpty()) {
+                    throw new NumberFormatException("Card number or CCV cannot be empty");
+                }
+
                 double cardNum = Double.parseDouble(cardNumberText);
-        
-                String ccvnbrText = ccvnbr.getText().replaceAll("[^0-9.]", "");
                 int CCVnbr = Integer.parseInt(ccvnbrText);
-        
-                Accounts.AddAccount(username.getText(), password.getText(), email.getText(), cardNum, CCVnbr);
+
+                if (!email.getText().contains("@")) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Accounts.AddAccount(username.getText(), new String(password.getPassword()), email.getText(), cardNum, CCVnbr);
+
                 JOptionPane.showMessageDialog(null, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            
             } else {
                 JOptionPane.showMessageDialog(null, "Account already exists.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid card number or CCV format.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public void addPlaceholderBehavior(JTextField field, String placeholder) {
-        field.addFocusListener(new java.awt.event.FocusAdapter() {
+    private void addPlaceholderBehavior(JTextField textField, String placeholder) {
+        textField.setText(placeholder);
+        textField.setForeground(Color.GRAY);
+
+        textField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (field.getText().equals(placeholder)) {
-                    field.setText("");
-                    field.setForeground(Color.WHITE);
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("");
+                    textField.setForeground(Color.WHITE);
                 }
             }
-    
+
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
-                if (field.getText().isEmpty()) {
-                    field.setText(placeholder);
-                    field.setForeground(Color.gray);
+                if (textField.getText().isEmpty()) {
+                    textField.setText(placeholder);
+                    textField.setForeground(Color.GRAY);
                 }
             }
         });
