@@ -7,21 +7,30 @@ import javax.swing.*;
 
 public class CinemaApp extends JFrame implements ActionListener  {
 
+    //main panel -----------------------------------------------------
+    public JPanel MainPanel;
+    public JPanel OpenPanel;
+    public JPanel LogPanel;
+    public JPanel SignPanel;
+
     //Action manager--------------------------------------------------
     public static int Counter = 0;
     //cinema manager---------------------------------------------------
     public Cinema CinemaManager;
 
     //sign in panels --------------------------------------------------
-    public JPanel BackgroundPanel;
+    public JPanel SignInBackgroundPanel;
+    public JPanel FinishSignInBackgroundPanel;
+    public JPanel LogInBackgroundPanel;
     public TransparentPanel BlurPanel;
     public JPanel SignInElements;
     public JPanel LogInElements;
 
     //log in elements : 
     public JPanel LogInPanel;
-    public JLabel LogInText1, LogInText2;
+    public JLabel LogInText1, LogInText2, LogInText3;
     public JTextField LogAdressInput, LogPassWord;
+    public JButton LogInButton, SignInReturn;
 
     //sign in elements : 
     public JLabel PooMovie, WelcomText1, WelcomText2, DescriptionText;
@@ -31,7 +40,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
     //Finish signing in panel ------------------------------------------------
     public JPanel FinishSignInPanel;
     public TransparentPanel BlurPanel2;
-    public JLabel PooMovie2, FinishSignUpText;
+    public JLabel PooMovie2;
 
     //finish sign up elements panels---------------------------------------------------
     public JPanel SignUpPanel;
@@ -41,6 +50,9 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
     //decorative Panels ------------------------------------------------
     public JPanel RedPanel, BluePanel;
+
+    //layout manager -----------------------------------------------------
+    public CardLayout MainCardLayout;
 
     public CinemaApp(){
 
@@ -56,6 +68,119 @@ public class CinemaApp extends JFrame implements ActionListener  {
         this.setLayout(null);
         this.getContentPane().setBackground(new java.awt.Color(0xD2D2D2));
 
+        MainCardLayout = new CardLayout();
+
+        MainPanel = new JPanel(MainCardLayout);
+
+        //openning panel --------------------------------------------------
+        OpenPanel = new JPanel();
+        OpenPanel.setBounds(0, 0, 1200, 750);
+        OpenPanel.setLayout(null);
+        OpenPanel.setOpaque(false);
+
+        SignInBackgroundPanel = CreatBackGround1Panel();
+        SignInElements = CreatSignInElementsPanel();
+
+        OpenPanel.add(SignInBackgroundPanel);
+        OpenPanel.add(SignInElements);
+
+        OpenPanel.setComponentZOrder(SignInElements, 0);
+        OpenPanel.setComponentZOrder(SignInBackgroundPanel, 1);
+
+        //sign in panel ---------------------------------------------------
+        SignPanel = new JPanel(MainCardLayout);
+        SignPanel.setBounds(0, 0, 1200, 750);
+        SignPanel.setLayout(null);
+        SignPanel.setOpaque(false);
+
+        FinishSignInBackgroundPanel = CreatBackGround2Panel();
+        FinishSignInPanel = CreatFinishSignInPanel();
+
+        SignPanel.add(FinishSignInBackgroundPanel);
+        SignPanel.add(FinishSignInPanel);
+
+        SignPanel.setComponentZOrder(FinishSignInPanel, 0);
+        SignPanel.setComponentZOrder(FinishSignInBackgroundPanel, 1);
+
+        //log in panel ----------------------------------------------------
+        LogPanel = new JPanel(MainCardLayout);
+        LogPanel.setBounds(0, 0, 1200, 750);
+        LogPanel.setLayout(null);
+        LogPanel.setOpaque(false);
+
+        MainPanel.add(OpenPanel, "open");
+        MainPanel.add(SignPanel, "sign in");
+
+        setContentPane(MainPanel);
+        MainCardLayout.show(MainPanel, "open");
+
+        // Revalidate and repaint to ensure the SettingsPanel is displayed
+        this.revalidate();
+        this.repaint();
+    }
+
+    public JPanel CreatBackGround1Panel(){
+
+        JPanel BackgroundPanel = new JPanel();
+        BackgroundPanel.setBounds(0, 0, 1200, 750);
+
+        //the background image :
+        Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\BackGround.jpg").getImage();
+        JLabel Background = new JLabel();
+        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
+        Background.setIcon(new ImageIcon(BackgroundImage));
+        BackgroundPanel.setLayout(null);
+        
+
+        //Blur panel--------------------------------------------------
+        BlurPanel = new TransparentPanel(0.85f);
+        BlurPanel.setBounds(0, 0, 1200, 750);
+        BlurPanel.setLayout(null);
+        BlurPanel.setBackground(new java.awt.Color(0x000000));
+
+        BlurPanel.setVisible(true);
+
+
+        BackgroundPanel.add(Background);
+        BackgroundPanel.add(BlurPanel);
+
+        BackgroundPanel.setComponentZOrder(Background, 1);
+        BackgroundPanel.setComponentZOrder(BlurPanel, 0);
+
+        return BackgroundPanel;
+    }
+
+    public JPanel CreatBackGround2Panel(){
+
+        JPanel BackgroundPanel = new JPanel();
+        BackgroundPanel.setBounds(0, 0, 1200, 750);
+
+        //the background image :
+        Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\BackGround.jpg").getImage();
+        JLabel Background = new JLabel();
+        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
+        Background.setIcon(new ImageIcon(BackgroundImage));
+        BackgroundPanel.setLayout(null);
+
+        //Blur panel--------------------------------------------------
+        BlurPanel2 = new TransparentPanel(0.85f);
+        BlurPanel2.setBounds(0, 0, 1200, 750);
+        BlurPanel2.setLayout(null);
+        BlurPanel2.setBackground(new java.awt.Color(0xCCCCCC));
+
+        BlurPanel2.setVisible(true);
+
+
+        BackgroundPanel.add(Background);
+        BackgroundPanel.add(BlurPanel2);
+
+        BackgroundPanel.setComponentZOrder(Background, 1);
+        BackgroundPanel.setComponentZOrder(BlurPanel2, 0);
+
+        return BackgroundPanel;
+    }
+
+    public JPanel CreatSignInElementsPanel(){
         // sign in elements panel ------------------------------------
         SignInElements = new JPanel();
         SignInElements.setBounds(0, 0, 1200, 750);
@@ -73,6 +198,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         WelcomText1.setBounds(332, 222, 575, 115);
         WelcomText1.setFont(new Font("Inter", Font.BOLD, 40));
         WelcomText1.setForeground(Color.white);
+
         WelcomText2 = new JLabel("and more to come");
         WelcomText2.setBounds(400, 270, 575, 115);
         WelcomText2.setFont(new Font("Inter", Font.BOLD, 40));
@@ -145,11 +271,23 @@ public class CinemaApp extends JFrame implements ActionListener  {
         SignInElements.setComponentZOrder(BluePanel, 0);
         SignInElements.setComponentZOrder(RedPanel, 1);
 
-        SignInElements.setVisible(true);
+        return SignInElements;
+    }
 
-        this.add(SignInElements);
-        this.setComponentZOrder(SignInElements, 0);
+    public JPanel CreatLogInElementsPanel(){
+        LogInElements = new JPanel();
+        LogInElements.setBounds(360, 115, 470, 690);
+        LogInElements.setBackground(Color.BLACK);
+        LogInElements.setLayout(null);
+        LogInElements.setOpaque(true);
 
+        LogInButton = new JButton();
+
+        return LogInElements;
+    }
+
+
+    public JPanel CreatFinishSignInPanel(){
         //Finish signing in panel ------------------------------------------------
         FinishSignInPanel = new JPanel();
         FinishSignInPanel.setBounds(0, 0, 1200, 750);
@@ -163,6 +301,28 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         FinishSignInPanel.add(PooMovie2);
 
+        SignUpPanel = CreatSignUpPanel();
+        FinishSignInPanel.add(SignUpPanel);
+
+        RedPanel = new JPanel();
+        RedPanel.setBounds(0, 710, 1200, 60);
+        RedPanel.setBackground(new java.awt.Color(0x550000));
+
+        FinishSignInPanel.add(RedPanel);
+
+        BluePanel = new JPanel();
+        BluePanel.setBounds(0, 725, 1200, 60);
+        BluePanel.setBackground(new java.awt.Color(0x000044));
+
+        FinishSignInPanel.add(BluePanel);
+
+        FinishSignInPanel.setComponentZOrder(BluePanel, 0);
+        FinishSignInPanel.setComponentZOrder(RedPanel, 1);
+
+        return FinishSignInPanel;
+    }
+
+    public JPanel CreatSignUpPanel(){
         //signUP panel -----------------------------------------------------------
         SignUpPanel = new JPanel();
         SignUpPanel.setBounds(200, 130, 800, 400);
@@ -197,67 +357,14 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         SignUpPanel.add(SignUp);
 
-        FinishSignUpText = new JLabel("Finish settings up your account ");
+        JLabel FinishSignUpText = new JLabel("Finish settings up your account ");
         FinishSignUpText.setBounds(50, 25, 550, 50);
         FinishSignUpText.setFont(new Font("Inter", Font.BOLD, 30));
         FinishSignUpText.setForeground(new java.awt.Color(0x000000));
 
         SignUpPanel.add(FinishSignUpText);
-        SignUpPanel.setVisible(false);
-
-        FinishSignInPanel.add(SignUpPanel);
-        FinishSignInPanel.setVisible(false);
-
-        this.add(FinishSignInPanel);
-        this.setComponentZOrder(FinishSignInPanel, 0);
-
-
-        //Blur panel--------------------------------------------------
-        BlurPanel = new TransparentPanel(0.85f);
-        BlurPanel.setBounds(0, 0, 1200, 750);
-        BlurPanel.setLayout(null);
-        BlurPanel.setBackground(new java.awt.Color(0x000000));
-
-        BlurPanel.setVisible(true);
-
-        this.add(BlurPanel);
-        this.setComponentZOrder(BlurPanel, 1); // BlurPanel on top
-
-        //Blur panel--------------------------------------------------
-        BlurPanel2 = new TransparentPanel(0.85f);
-        BlurPanel2.setBounds(0, 0, 1200, 750);
-        BlurPanel2.setLayout(null);
-        BlurPanel2.setBackground(new java.awt.Color(0xCCCCCC));
-
-        BlurPanel2.setVisible(false);
-
-        this.add(BlurPanel2);
-        this.setComponentZOrder(BlurPanel2, 1); // SignInElements on top
-
-        BackgroundPanel = new JPanel();
-        BackgroundPanel.setBounds(0, 0, 1200, 750);
-        Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\BackGround.jpg").getImage();
-        JLabel Background = new JLabel();
-        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
-        Background.setIcon(new ImageIcon(BackgroundImage));
-        BackgroundPanel.setLayout(null);
-        BackgroundPanel.add(Background);
-
-        this.add(BackgroundPanel);
-        this.setComponentZOrder(BackgroundPanel, 2); // BackgroundPanel below BlurPanel
-
-        //set up the visibility of each panel as wanted 
-        BlurPanel.setVisible(true);
-        SignInElements.setVisible(true);
-
-        //setting up the z order of the components 
-        this.setComponentZOrder(BackgroundPanel, 2);
-        this.setComponentZOrder(BlurPanel, 1);
-        this.setComponentZOrder(SignInElements, 0);
-
-        // Revalidate and repaint to ensure the SettingsPanel is displayed
-        this.revalidate();
-        this.repaint();
+        
+        return SignUpPanel;
     }
 
     public void ChnageThemeAction(){
