@@ -3,10 +3,11 @@ package Vue;
 import java.awt.*;
 import javax.swing.*;
 
+
 public class UiClass extends JFrame {
     private JPanel mainPanel;
     private CardLayout cardLayout;
-    public int GapHeight = 40;
+    
 
     public UiClass(){
         setTitle("POO_Movies");
@@ -270,7 +271,8 @@ public class UiClass extends JFrame {
         });
         RectangleLogin.add(PasswordField);
 
-        JButton SignInButton = new JButton("Sign In");
+        //JButton SignInButton = new JButton("Sign In");
+        RoundedButton SignInButton = new RoundedButton("Sign In", 13);
         SignInButton.setBounds(50, 270, 340, 40);
         SignInButton.setFont(new Font("Segoe UI", Font.BOLD, 20));
         SignInButton.setFocusPainted(false);
@@ -303,12 +305,13 @@ public class UiClass extends JFrame {
         RectangleLogin.add(SignupLabel);
 
         JButton SignupButton = new JButton("Sign Up Now...");
-        SignupButton.setBounds(120, 460, 200, 30);
+        SignupButton.setBounds(126, 460, 200, 30);
         SignupButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
         SignupButton.setForeground(Color.white);
         SignupButton.setContentAreaFilled(false);
         SignupButton.setBorderPainted(false);
         SignupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      
         RectangleLogin.add(SignupButton);
 
 
@@ -323,4 +326,7 @@ public class UiClass extends JFrame {
             e.printStackTrace();
         }
     }
+
+    
+
 }
