@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 public class CinemaApp extends JFrame implements ActionListener  {
 
     //main panel -----------------------------------------------------
@@ -456,30 +457,19 @@ public class CinemaApp extends JFrame implements ActionListener  {
         imageLabel.setBounds(10, 20, 64, 64);
         loginPanel.add(imageLabel);
 
-        JPanel RectangleLogin = new JPanel(){
-
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)); // Opacity value between 0.0f - 1.0f
-                g2d.setColor(new Color(0, 0, 0)); // Black color
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-                g2d.dispose();
-            }
-        };
+        TransparentPanel RectangleLogin = new TransparentPanel(0.9f);
         RectangleLogin.setBounds(400, 100, 440, 620);
         RectangleLogin.setLayout(null);
-        RectangleLogin.setOpaque(false); 
+        RectangleLogin.setBackground(Color.black);
         loginPanel.add(RectangleLogin);
 
      
 
-        JLabel SigninLabel = new JLabel("Sign In");
-        SigninLabel.setBounds(50, 40, 200, 50);
-        SigninLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        SigninLabel.setForeground(Color.white);
-        RectangleLogin.add(SigninLabel);
+        JLabel LogInLabel = new JLabel("Log In");
+        LogInLabel.setBounds(50, 40, 200, 50);
+        LogInLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        LogInLabel.setForeground(Color.white);
+        RectangleLogin.add(LogInLabel);
 
         JTextField EmailField = new JTextField("   Email or phone number"); 
         EmailField.setBounds(50, 120, 340, 40);
@@ -487,7 +477,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         EmailField.setForeground(Color.gray); 
         EmailField.setCaretColor(Color.white);
         //EmailField.setBackground(new Color(80, 77, 74, 230));
-        EmailField.setBackground(new Color(80, 77, 74));
+        EmailField.setBackground(new Color(0xDDDDDD));
         EmailField.setOpaque(true);
         EmailField.setBorder(null);
 
@@ -517,7 +507,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         PasswordField.setForeground(Color.gray);
         PasswordField.setCaretColor(Color.white);
         //PasswordField.setBackground(new Color(80, 77, 74, 230));
-        PasswordField.setBackground(new Color(80, 77, 74));
+        PasswordField.setBackground(new Color(0xDDDDDD));
         PasswordField.setOpaque(true);
         PasswordField.setBorder(null);
         PasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -612,37 +602,200 @@ public class CinemaApp extends JFrame implements ActionListener  {
         RegisterElements.setLayout(null);
         RegisterElements.setOpaque(false);
 
-        JLabel PooMovie2 = new JLabel("PooMovie");
-        PooMovie2.setBounds(30, 35, 200, 50);
-        PooMovie2.setFont(new Font("Inter", Font.BOLD, 35));
-        PooMovie2.setForeground(new java.awt.Color(0xFF0000));
+        JLabel LogoName = new JLabel("POOMovie");
+        LogoName.setBounds(70, 24, 192, 52);
+        LogoName.setFont(new Font("Inter", Font.BOLD, 35));
+        LogoName.setForeground(Color.red);
 
-        RegisterElements.add(PooMovie2);
+        RegisterElements.add(LogoName);
+
+        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        JLabel imageLabel = new JLabel(iconMovie);
+        imageLabel.setBounds(10, 20, 64, 64);
+
+        RegisterElements.add(imageLabel);
 
         //signUP panel -----------------------------------------------------------
         TransparentPanel SignUpPanel = new TransparentPanel(0.5f);
-        SignUpPanel.setBounds(330, 130, 500, 800);
+        SignUpPanel.setBounds(400, 100, 440, 620);
         SignUpPanel.setLayout(null);
         SignUpPanel.setBackground(Color.LIGHT_GRAY);
-        
 
+        JLabel SigninLabel = new JLabel("Sign In");
+        SigninLabel.setBounds(50, 40, 200, 50);
+        SigninLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        SigninLabel.setForeground(Color.white);
+
+        SignUpPanel.add(SigninLabel);
+
+        JTextField UserNameField = new JTextField("    Username"); 
+        UserNameField.setBounds(50, 120, 340, 40);
+        UserNameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        UserNameField.setForeground(Color.gray); 
+        UserNameField.setCaretColor(Color.white);
+        //EmailField.setBackground(new Color(80, 77, 74, 230));
+        UserNameField.setBackground(new Color(0xDDDDDD));
+        UserNameField.setOpaque(true);
+        UserNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+        UserNameField.setBorder(null);
+        UserNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (UserNameField.getText().equals("    Username")) {
+                    UserNameField.setText("");
+                    UserNameField.setForeground(Color.WHITE);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (UserNameField.getText().isEmpty() || UserNameField.getText().trim().isEmpty()) {
+                    UserNameField.setText("    Username");
+                    UserNameField.setForeground(Color.gray);
+                }
+            }
+        });
+        SignUpPanel.add(UserNameField);
+
+        JPasswordField PasswordsField = new JPasswordField("    Password");
+        PasswordsField.setBounds(50, 200, 340, 40);
+        PasswordsField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        PasswordsField.setForeground(Color.gray);
+        PasswordsField.setCaretColor(Color.white);
+        PasswordsField.setBackground(new Color(0xDDDDDD));
+        PasswordsField.setOpaque(true);
+        //PasswordsField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+        PasswordsField.setBorder(null);
+        PasswordsField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (PasswordsField.getText().equals("    Password")) {
+                    PasswordsField.setText("");
+                    PasswordsField.setForeground(Color.WHITE);
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (PasswordsField.getText().isEmpty() || PasswordsField.getPassword().length == 0) {
+                    PasswordsField.setText("    Password");
+                    PasswordsField.setForeground(Color.gray);
+                }
+            }
+        });
+        SignUpPanel.add(PasswordsField);
+
+
+               
+        JTextField EmailField = new JTextField("   email@example.com");
+        EmailField.setBounds(50, 280, 340, 40);
+        EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        EmailField.setForeground(Color.gray);
+        EmailField.setCaretColor(Color.white);
+        EmailField.setBackground(new Color(0xDDDDDD));
+        EmailField.setOpaque(true);
+        EmailField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+        EmailField.setBorder(null);
+        EmailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (EmailField.getText().equals("   email@example.com")) {
+                    EmailField.setText("");
+                    EmailField.setForeground(Color.white);
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (EmailField.getText().isEmpty() || EmailField.getText().trim().isEmpty()) {
+                    EmailField.setText("   email@example.com");
+                    EmailField.setForeground(Color.gray);
+                }
+            }
+        });
+        SignUpPanel.add(EmailField);
+
+   
+        JTextField CardNmbrField = new JTextField("   Card Number");
+        CardNmbrField.setBounds(50, 360, 340, 40);
+        CardNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        CardNmbrField.setForeground(Color.gray);
+        CardNmbrField.setCaretColor(Color.white);
+        CardNmbrField.setBackground(new Color(0xDDDDDD));
+        CardNmbrField.setOpaque(true);
+        CardNmbrField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+        CardNmbrField.setBorder(null);
+        CardNmbrField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (CardNmbrField.getText().equals("   Card Number")) {
+                    CardNmbrField.setText("");
+                    CardNmbrField.setForeground(Color.white);
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (CardNmbrField.getText().isEmpty() || CardNmbrField.getText().trim().isEmpty()) {
+                    CardNmbrField.setText("   Card Number");
+                    CardNmbrField.setForeground(Color.gray);
+                }
+            }
+        });
+        SignUpPanel.add(CardNmbrField);
+
+
+        
+        JTextField CCVNmbrField = new JTextField("   CCV Number");
+        CCVNmbrField.setBounds(50, 440, 340, 40);
+        CCVNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        CCVNmbrField.setForeground(Color.gray);
+        CCVNmbrField.setCaretColor(Color.white);
+        CCVNmbrField.setBackground(new Color(0xDDDDDD));
+        CCVNmbrField.setOpaque(true);
+        CCVNmbrField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+        CCVNmbrField.setBorder(null);
+        CCVNmbrField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (CCVNmbrField.getText().equals("   CCV Number")) {
+                    CCVNmbrField.setText("");
+                    CCVNmbrField.setForeground(Color.white);
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (CCVNmbrField.getText().isEmpty() || CCVNmbrField.getText().trim().isEmpty()) {
+                    CCVNmbrField.setText("   CCV Number");
+                    CCVNmbrField.setForeground(Color.gray);
+                }
+            }
+        });
+        SignUpPanel.add(CCVNmbrField);
+
+
+        JButton ConfirmSignUpButton = new JButton("sign up");
+        ConfirmSignUpButton.setBounds(250, 520, 180, 50);
+        ConfirmSignUpButton.setForeground(Color.white);
+        ConfirmSignUpButton.setFocusPainted(false);
+        ConfirmSignUpButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        ConfirmSignUpButton.setBackground(Color.red);
+        ConfirmSignUpButton.setBorder(null);
+        ConfirmSignUpButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SignUpPanel.add(ConfirmSignUpButton);
+
+        JButton ReturnBtn = new JButton("return");
+        ReturnBtn.setBounds(20, 520, 180, 50);
+        ReturnBtn.setForeground(Color.white);
+        ReturnBtn.setFocusPainted(false);
+        ReturnBtn.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        ReturnBtn.setBackground(Color.red);
+        ReturnBtn.setBorder(null);
+        ReturnBtn.setUI(new RoundButtonUI(new Color(0x000000)));
+        ReturnBtn.addActionListener(e -> {
+            MainCardLayout.show(MainPanel, "open");
+        });
+        SignUpPanel.add(ReturnBtn);
 
         RegisterElements.add(SignUpPanel);
-
-        JPanel RedPanel = new JPanel();
-        RedPanel.setBounds(0, 710, 1200, 60);
-        RedPanel.setBackground(new java.awt.Color(0x550000));
-
-        RegisterElements.add(RedPanel);
-
-        JPanel BluePanel = new JPanel();
-        BluePanel.setBounds(0, 725, 1200, 60);
-        BluePanel.setBackground(new java.awt.Color(0x000044));
-
-        RegisterElements.add(BluePanel);
-
-        RegisterElements.setComponentZOrder(BluePanel, 0);
-        RegisterElements.setComponentZOrder(RedPanel, 1);
 
         return RegisterElements;
     }
