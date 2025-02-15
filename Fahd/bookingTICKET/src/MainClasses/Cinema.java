@@ -14,7 +14,7 @@ public class Cinema {
 
     public ArrayList<Admin> admins;
     public ArrayList<Client> clients;
-
+    
     public Filters filter;
 
     public String[] Genres = { "Action", "Comedy", "Drama", "Horoor", "Science_Fiction", "Thriller",
