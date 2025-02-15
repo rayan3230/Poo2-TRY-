@@ -3,13 +3,16 @@ package Vue;
 import java.awt.*;
 import javax.swing.*;
 public class UiClass extends JFrame {
-    private JPanel mainPanel;
-    private CardLayout cardLayout;
+    public JPanel mainPanel;
+    public CardLayout cardLayout;
     
 
     public UiClass(){
+        setUndecorated(true); 
         setTitle("POO_Movies");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon AppLogo = new ImageIcon("Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Logo.png");
+        this.setIconImage(AppLogo.getImage());
         setBounds(100, 100, 1200, 750);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -33,7 +36,7 @@ public class UiClass extends JFrame {
     }
 
     
-    private JPanel createWelcomePanel() {
+    public JPanel createWelcomePanel() {
         JPanel welcomepanel = new JPanel() {
             ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
 
@@ -55,11 +58,20 @@ public class UiClass extends JFrame {
         welcomepanel.setBounds(0, 0, 1200, 750);
 
         
-        JLabel LogoName = new JLabel("LaLaLand");
-        LogoName.setBounds(20, 0, 192, 52);
+        JLabel LogoName = new JLabel("POOMovie");
+        LogoName.setBounds(70, 24, 192, 52);
         LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
         LogoName.setForeground(Color.red);
         welcomepanel.add(LogoName);
+
+
+
+        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        JLabel imageLabel = new JLabel(iconMovie);
+        imageLabel.setBounds(10, 20, 64, 64);
+        welcomepanel.add(imageLabel);
+
+
 
      
         JLabel WelcomingMessage1 = new JLabel("Films et séries en ");
@@ -189,11 +201,18 @@ public class UiClass extends JFrame {
         loginPanel.setBounds(0, 0, 1200, 750);
 
 
-        JLabel LogoName = new JLabel("LaLaLand");
-        LogoName.setBounds(20, 0, 192, 52);
+        JLabel LogoName = new JLabel("POOMovie");
+        LogoName.setBounds(70, 24, 192, 52);
         LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
         LogoName.setForeground(Color.red);
         loginPanel.add(LogoName);
+
+
+
+        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        JLabel imageLabel = new JLabel(iconMovie);
+        imageLabel.setBounds(10, 20, 64, 64);
+        loginPanel.add(imageLabel);
 
         JPanel RectangleLogin = new JPanel(){
 
@@ -220,7 +239,7 @@ public class UiClass extends JFrame {
         SigninLabel.setForeground(Color.white);
         RectangleLogin.add(SigninLabel);
 
-        JTextField EmailField = new JTextField("Email or phone number"); 
+        JTextField EmailField = new JTextField("   Email or phone number"); 
         EmailField.setBounds(50, 120, 340, 40);
         EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         EmailField.setForeground(Color.gray); 
@@ -228,12 +247,12 @@ public class UiClass extends JFrame {
         //EmailField.setBackground(new Color(80, 77, 74, 230));
         EmailField.setBackground(new Color(80, 77, 74));
         EmailField.setOpaque(true);
-        EmailField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+        EmailField.setBorder(null);
 
         EmailField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (EmailField.getText().equals("Email or phone number")) {
+                if (EmailField.getText().equals("   Email or phone number")) {
                     EmailField.setText("");
                     EmailField.setForeground(Color.WHITE);
                 }
@@ -242,7 +261,7 @@ public class UiClass extends JFrame {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (EmailField.getText().isEmpty() || EmailField.getText().trim().isEmpty()) {
-                    EmailField.setText("Email or phone number");
+                    EmailField.setText("   Email or phone number");
                     EmailField.setForeground(Color.gray);
                 }
             }
@@ -258,7 +277,7 @@ public class UiClass extends JFrame {
         //PasswordField.setBackground(new Color(80, 77, 74, 230));
         PasswordField.setBackground(new Color(80, 77, 74));
         PasswordField.setOpaque(true);
-        PasswordField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+        PasswordField.setBorder(null);
         PasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -307,14 +326,14 @@ public class UiClass extends JFrame {
         RectangleLogin.add(btnforgetpassword);
 
 
-        JLabel SignupLabel = new JLabel("New to Lalaland? ");
+        JLabel SignupLabel = new JLabel("New to POOMovie? ");
         SignupLabel.setBounds(40, 450, 300, 50);
         SignupLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         SignupLabel.setForeground(Color.white);
         RectangleLogin.add(SignupLabel);
 
         JButton SignupButton = new JButton("Sign Up Now...");
-        SignupButton.setBounds(126, 460, 200, 30);
+        SignupButton.setBounds(140, 461, 200, 30);
         SignupButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
         SignupButton.setForeground(Color.white);
         SignupButton.setContentAreaFilled(false);
@@ -326,13 +345,23 @@ public class UiClass extends JFrame {
       
         RectangleLogin.add(SignupButton);
 
+        RoundedButton returnbtnWelcomePanel = new RoundedButton("Return" , 13);
+        returnbtnWelcomePanel.setBounds(50, 530, 340, 40);
+        returnbtnWelcomePanel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        returnbtnWelcomePanel.setFocusPainted(false);
+        returnbtnWelcomePanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        returnbtnWelcomePanel.setBackground(Color.red);
+        returnbtnWelcomePanel.setForeground(Color.white);
+        returnbtnWelcomePanel.setBorder(BorderFactory.createEmptyBorder());
+        returnbtnWelcomePanel.addActionListener(e ->{
+            cardLayout.show(mainPanel, "welcome");
+        });
+        RectangleLogin.add(returnbtnWelcomePanel);
+
+
 
         return loginPanel;
     }
-
-
-
-
 
 
     public JPanel createRegisterPanel(){
@@ -358,11 +387,18 @@ public class UiClass extends JFrame {
         registerPanel.setBounds(0, 0, 1200, 750);
 
 
-        JLabel LogoName = new JLabel("LaLaLand");
-        LogoName.setBounds(20, 0, 192, 52);
+        JLabel LogoName = new JLabel("POOMovie");
+        LogoName.setBounds(70, 24, 192, 52);
         LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
         LogoName.setForeground(Color.red);
         registerPanel.add(LogoName);
+
+
+
+        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        JLabel imageLabel = new JLabel(iconMovie);
+        imageLabel.setBounds(10, 20, 64, 64);
+        registerPanel.add(imageLabel);
 
         JPanel RectangleRegister = new JPanel(){
 
@@ -568,7 +604,7 @@ public class UiClass extends JFrame {
 
 
 
-    private JPanel createForgotPasswordPanel() {
+    public JPanel createForgotPasswordPanel() {
         JPanel forgotPanel = new JPanel() {
             ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
      
@@ -588,7 +624,7 @@ public class UiClass extends JFrame {
         forgotPanel.setBounds(0, 0, 1200, 750);
     
         // Logo
-        JLabel LogoName = new JLabel("LaLaLand");
+        JLabel LogoName = new JLabel("POOMovie");
         LogoName.setBounds(20, 0, 192, 52);
         LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
         LogoName.setForeground(Color.red);
@@ -687,7 +723,7 @@ public class UiClass extends JFrame {
     }
     
     // Helper method for placeholder text behavior
-    private void addPlaceholderBehavior(JTextField field, String placeholder) {
+    public void addPlaceholderBehavior(JTextField field, String placeholder) {
         field.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
