@@ -6,6 +6,7 @@ import javax.swing.*;
 public class UiClass extends JFrame {
     private JPanel mainPanel;
     private CardLayout cardLayout;
+    public int GapHeight = 40;
 
     public UiClass(){
         setTitle("POO_Movies");
@@ -187,15 +188,128 @@ public class UiClass extends JFrame {
         LogoName.setForeground(Color.red);
         loginPanel.add(LogoName);
 
-        JPanel RectangleLogin = new JPanel();
+        JPanel RectangleLogin = new JPanel(){
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f)); // Opacity value between 0.0f - 1.0f
+                g2d.setColor(new Color(0, 0, 0)); // Black color
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                g2d.dispose();
+            }
+        };
         RectangleLogin.setBounds(400, 100, 440, 620);
         RectangleLogin.setLayout(null);
-        
-        RectangleLogin.setBackground(Color.black);
+        RectangleLogin.setOpaque(false); 
         loginPanel.add(RectangleLogin);
 
+     
 
-       
+        JLabel SigninLabel = new JLabel("Sign In");
+        SigninLabel.setBounds(50, 40, 200, 50);
+        SigninLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        SigninLabel.setForeground(Color.white);
+        RectangleLogin.add(SigninLabel);
+
+        JTextField EmailField = new JTextField("Email or phone number"); 
+        EmailField.setBounds(50, 120, 340, 40);
+        EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        EmailField.setForeground(Color.gray); 
+        EmailField.setCaretColor(Color.white);
+        //EmailField.setBackground(new Color(80, 77, 74, 230));
+        EmailField.setBackground(new Color(80, 77, 74));
+        EmailField.setOpaque(true);
+        EmailField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+
+        EmailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (EmailField.getText().equals("Email or phone number")) {
+                    EmailField.setText("");
+                    EmailField.setForeground(Color.WHITE);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (EmailField.getText().isEmpty() || EmailField.getText().trim().isEmpty()) {
+                    EmailField.setText("Email or phone number");
+                    EmailField.setForeground(Color.gray);
+                }
+            }
+        });
+
+        RectangleLogin.add(EmailField);
+
+        JPasswordField PasswordField = new JPasswordField("Password");
+        PasswordField.setBounds(50, 200, 340, 40);
+        PasswordField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        PasswordField.setForeground(Color.gray);
+        PasswordField.setCaretColor(Color.white);
+        //PasswordField.setBackground(new Color(80, 77, 74, 230));
+        PasswordField.setBackground(new Color(80, 77, 74));
+        PasswordField.setOpaque(true);
+        PasswordField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+        PasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (PasswordField.getText().equals("Password")) {
+                    PasswordField.setText("");
+                    PasswordField.setForeground(Color.WHITE);
+                }
+            }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (PasswordField.getText().isEmpty() || PasswordField.getPassword().length == 0) {
+                    PasswordField.setText("Password");
+                    PasswordField.setForeground(Color.gray);
+                }
+            }
+        });
+        RectangleLogin.add(PasswordField);
+
+        JButton SignInButton = new JButton("Sign In");
+        SignInButton.setBounds(50, 270, 340, 40);
+        SignInButton.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        SignInButton.setFocusPainted(false);
+        SignInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SignInButton.setBackground(Color.red);
+        SignInButton.setForeground(Color.white);
+        SignInButton.setBorder(BorderFactory.createEmptyBorder());
+        RectangleLogin.add(SignInButton);
+
+        JLabel Or = new JLabel("OR");
+        Or.setBounds(106 + 100, 320, 30, 40); // :- )
+        Or.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        Or.setForeground(Color.white);
+        RectangleLogin.add(Or);
+
+        JButton btnforgetpassword = new JButton("Forgot password ?");
+        btnforgetpassword.setBounds(125, 370, 200, 30);
+        btnforgetpassword.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        btnforgetpassword.setForeground(Color.white);
+        btnforgetpassword.setContentAreaFilled(false);
+        btnforgetpassword.setBorderPainted(false);
+        btnforgetpassword.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        RectangleLogin.add(btnforgetpassword);
+
+
+        JLabel SignupLabel = new JLabel("New to Lalaland? ");
+        SignupLabel.setBounds(40, 450, 300, 50);
+        SignupLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        SignupLabel.setForeground(Color.white);
+        RectangleLogin.add(SignupLabel);
+
+        JButton SignupButton = new JButton("Sign Up Now...");
+        SignupButton.setBounds(120, 460, 200, 30);
+        SignupButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        SignupButton.setForeground(Color.white);
+        SignupButton.setContentAreaFilled(false);
+        SignupButton.setBorderPainted(false);
+        SignupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        RectangleLogin.add(SignupButton);
 
 
         return loginPanel;
