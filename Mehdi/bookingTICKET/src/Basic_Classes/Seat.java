@@ -4,6 +4,15 @@ public class Seat {
 
     private int seatID;
     private boolean isAvaible = true;
+    private Salle itsSalle;
+
+    public Salle getItsSalle() {
+        return itsSalle;
+    }
+
+    public void setItsSalle(Salle itsSalle) {
+        this.itsSalle = itsSalle;
+    }
 
     public Seat(int seatID, boolean isAvaible) {
         this.seatID = seatID;
