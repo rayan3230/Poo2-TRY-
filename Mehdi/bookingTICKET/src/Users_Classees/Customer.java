@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Basic_Classes.Diffusion;
 import Basic_Classes.Film;
 import Basic_Classes.Ticket;
+import Basic_Classes.Caisse;
 
 public class Customer extends User {
 
@@ -43,6 +44,23 @@ public class Customer extends User {
             System.out.println(film.toString());
         }
 
+    }
+
+    public void SellTicket(Ticket ticket, Caisse caisse) {
+        if (ticket.isAvailable()) {
+            ticket.setAvailable(false);
+            caisse.IncrementCurrentamount((int) ticket.getPrice());
+        }
+    }
+
+    public void CancelTicket(Ticket ticket, Caisse caisse) {
+        if (ticket.getDiffusion().getDate().isBefore(new java.util.Date().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate())) {
+            throw new IllegalArgumentException("You can't cancel a ticket for a diffusion that has already happened.");
+        }else
+            if (!ticket.isAvailable()) {
+                ticket.setAvailable(true);
+                caisse.DecrementCurrentamount((int) ticket.getPrice());
+            }
     }
 
     public void SortMovieList(List<Film> movies, String Genre, int maxDuration, String Director, String AgeRestriction){
