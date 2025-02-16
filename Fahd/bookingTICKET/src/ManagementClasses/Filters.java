@@ -13,11 +13,12 @@ public class Filters {
     public String Name = "NULL";
 
     enum Genre {
-        Action, Adventure, Comedy, Drama, Fantasy, Horror, Mystery, Romance, Thriller, NULL
+        Action, Comedy, Drama, Horoor, Science_Fiction, Thriller, Adventure, Fantasy, Mystery, Romance, Crime,
+        Animation, Music, Documentary, Family, Sport, News, Travel, Game, History
     }
 
     enum AgeRestriction {
-        G, PG13, PG16, PG18, NULL
+        G, PG6, PG8, PG13, PG16, PG18
     }
 
     enum TicketType {

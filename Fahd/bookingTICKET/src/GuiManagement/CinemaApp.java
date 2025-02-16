@@ -13,6 +13,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
     //Action manager--------------------------------------------------
     public static int Counter = 0;
+    
     //cinema manager---------------------------------------------------
     public Cinema CinemaManager;
 

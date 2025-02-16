@@ -18,11 +18,11 @@ public class Client extends Account{
     public Client(String firstName, String lastName, int age, String email, String phoneNumber, String username, String password) {
 
         super(username, password);
-        FirstName = firstName;
-        LastName = lastName;
-        Age = age;
-        Email = email;
-        PhoneNumber = phoneNumber;
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.Age = age;
+        this.Email = email;
+        this.PhoneNumber = phoneNumber;
     }
 
     public void UpdateClient(Account client, String newFirstName, String newLastName, int newAge, String newEmail,
