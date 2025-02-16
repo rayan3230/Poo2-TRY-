@@ -33,9 +33,13 @@ public class CinemaApp extends JFrame implements ActionListener  {
     public JPanel ForgotPasswordPanel;
     public JPanel ForgotPasswordElements;
 
+    //Client Panel ----------------------------------------------------
+    public JPanel ClientPanel;
+    public JPanel ClientInterface;
+
 
     //decorative Panels ------------------------------------------------
-    public JPanel SignInBackgroundPanel, LogInBackgroundJPanel, RegisterBackgroundJPanel, ForgotPasswordBackground;
+    public JPanel SignInBackgroundPanel, LogInBackgroundJPanel, RegisterBackgroundJPanel, ForgotPasswordBackground, ClientBackground;
     public TransparentPanel BlurPanel, BlurPanel2;
 
     //layout manager -----------------------------------------------------
@@ -59,15 +63,15 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         MainPanel = new JPanel(MainCardLayout);
 
-        
+
         //openning panel --------------------------------------------------
         SignInPanel = new JPanel();
         SignInPanel.setBounds(0, 0, 1200, 750);
         SignInPanel.setLayout(null);
         SignInPanel.setOpaque(false);
 
-        SignInBackgroundPanel = CreatBackGround1Panel();
-        SignInElements = CreatSignInElementsPanel();
+        SignInBackgroundPanel = CreateBackGround1Panel();
+        SignInElements = CreateSignInElementsPanel();
 
         SignInPanel.add(SignInBackgroundPanel);
         SignInPanel.add(SignInElements);
@@ -83,8 +87,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         RegisterPanel.setLayout(null);
         RegisterPanel.setOpaque(false);
 
-        RegisterBackgroundJPanel = CreatBackGround2Panel();
-        RegisterElements = CreatRegisterElements();
+        RegisterBackgroundJPanel = CreateBackGround2Panel();
+        RegisterElements = CreateRegisterElements();
 
         RegisterPanel.add(RegisterBackgroundJPanel);
         RegisterPanel.add(RegisterElements);
@@ -100,8 +104,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         LogInPanel.setLayout(null);
         LogInPanel.setOpaque(false);
 
-        LogInBackgroundJPanel = CreatBackGround1Panel();
-        LogInElements = CreatLogInElementsPanel();
+        LogInBackgroundJPanel = CreateBackGround1Panel();
+        LogInElements = CreateLogInElementsPanel();
 
         LogInPanel.add(LogInBackgroundJPanel);
         LogInPanel.add(LogInElements);
@@ -116,8 +120,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         ForgotPasswordPanel.setLayout(null);
         ForgotPasswordPanel.setOpaque(false);
 
-        ForgotPasswordBackground = CreatBackGround3Panel();
-        ForgotPasswordElements = createForgotPasswordPanel();
+        ForgotPasswordBackground = CreateBackGround3Panel();
+        ForgotPasswordElements = CreateForgotPasswordPanel();
 
         ForgotPasswordPanel.add(ForgotPasswordBackground);
         ForgotPasswordPanel.add(ForgotPasswordElements);
@@ -140,7 +144,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         this.repaint();
     }
 
-    public JPanel CreatBackGround1Panel(){
+    public JPanel CreateBackGround1Panel(){
 
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
@@ -186,7 +190,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         return BackgroundPanel;
     }
 
-    public JPanel CreatBackGround2Panel(){
+    public JPanel CreateBackGround2Panel(){
 
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
@@ -229,7 +233,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         return BackgroundPanel;
     }
 
-    public JPanel CreatBackGround3Panel(){
+    public JPanel CreateBackGround3Panel(){
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
 
@@ -271,7 +275,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         return BackgroundPanel;
     }
 
-    public JPanel CreatSignInElementsPanel(){
+    public JPanel CreateSignInElementsPanel(){
         // sign in elements panel ------------------------------------
         SignInElements = new JPanel();
         SignInElements.setBounds(0, 0, 1200, 750);
@@ -414,7 +418,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         return SignInElements;
     }
 
-    public JPanel CreatLogInElementsPanel(){
+    public JPanel CreateLogInElementsPanel(){
         JPanel loginPanel = new JPanel();
         loginPanel.setBounds(0, 0, 1200, 750);
         loginPanel.setLayout(null);
@@ -571,7 +575,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
     }
 
 
-    public JPanel CreatRegisterElements(){
+    public JPanel CreateRegisterElements(){
         //Finish signing in panel ------------------------------------------------
         RegisterElements = new JPanel();
         RegisterElements.setBounds(0, 0, 1200, 750);
@@ -640,7 +644,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         PasswordsField.setCaretColor(Color.white);
         PasswordsField.setBackground(new Color(0xDDDDDD));
         PasswordsField.setOpaque(true);
-        //PasswordsField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
+        //PasswordsField.setBorder(BorderFactory.CreateeMatteBorder(1, 1, 1, 1, Color.gray));
         PasswordsField.setBorder(null);
         PasswordsField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
@@ -777,7 +781,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
     }
 
     
-    public JPanel createForgotPasswordPanel() {
+    public JPanel CreateForgotPasswordPanel() {
         JPanel forgotPanel = new JPanel();
         forgotPanel.setLayout(null);
         forgotPanel.setBounds(0, 0, 1200, 750);
@@ -919,6 +923,19 @@ public class CinemaApp extends JFrame implements ActionListener  {
         }
     }
 
+    public void HandleLogIn(){
+
+    }
+
+    public JPanel CreateClientInterface(){
+        ClientInterface = new JPanel();
+        ClientInterface.setLayout(null);
+        ClientInterface.setBounds(0, 0, 1200, 750);
+
+
+
+        return ClientInterface;
+    }
     public static void main(String[] args) {
         try {
             CinemaApp Frame = new CinemaApp();
