@@ -5,6 +5,7 @@ public class Film {
     private String title;
     private String director;
     private String genre;
+    private String language;
     protected int duration;
     private String synopsis;
     private String AgeRestriction;
@@ -18,33 +19,41 @@ public class Film {
 
     } 
 
+    enum language{
+        VOSTFR,
+        VF,
+        VOSTEN,
+        VO,
+    }
+
     enum genre {
-        Comédie,
+        Comedy,
         Drama,
         Thriller,
         Aventure,
         Action, 
-        Horreur,
+        Horror,
         ScienceFiction,
-        Fantastique,
+        Fantastic,
         Animation,
         Musical,
-        Documentaire,
-        Guerre,
+        Documentary,
+        War,
         Western,
         Biopic,
-        Romantique,
-        Historique,
+        Romantic,
+        Historic,
 
     }
 
-    public Film(String title, String director, String genre, int duration, String synopsis, String AgeRestriction) {
+    public Film(String title, String director, String genre, int duration, String synopsis, String AgeRestriction, String language) {
         this.title = title;
         this.director = director;
         this.genre = genre;
         this.duration = duration;
         this.synopsis = synopsis;
         this.AgeRestriction = AgeRestriction;
+        this.language = language;
         }
 
     public String getTitle() {
@@ -71,6 +80,10 @@ public class Film {
         return AgeRestriction;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -94,6 +107,10 @@ public class Film {
 
     public void setAgeRestriction(String AgeRestriction) {
         this.AgeRestriction = AgeRestriction;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     

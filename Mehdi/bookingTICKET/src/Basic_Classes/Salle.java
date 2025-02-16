@@ -7,11 +7,13 @@ public class Salle {
 
     private int ID;
     private int capacite;
+    private boolean isAvaible = true;
     ArrayList<Seat> seats;
-
-    public Salle(int ID, int capacite) {
+    
+    public Salle(int ID, int capacite, boolean isAvaible) {
         this.ID = ID;
         this.capacite = capacite;
+        this.isAvaible = isAvaible;
         this.seats = new ArrayList<>(capacite);
         for (int i = 0; i < capacite; i++) {
             seats.add(new Seat(i, true));
@@ -33,6 +35,8 @@ public class Salle {
         }
     }
 
+    
+
     public ArrayList<Seat> getSeats() {
         return seats;
     }
@@ -45,12 +49,20 @@ public class Salle {
         return capacite;
     }
 
+    public boolean isAvaible() {
+        return isAvaible;
+    }
+
     public void setID(int ID) {
         this.ID = ID;
     }
 
     public void setCapacite(int capacite) {
         this.capacite = capacite;
+    }
+
+    public void ReserveSalle() {
+        this.isAvaible = false;
     }
 
     public void getAvaibleSeats() {

@@ -3,7 +3,9 @@ package Users_Classees;
 import java.util.List;
 import java.util.Scanner;
 
+import Basic_Classes.Diffusion;
 import Basic_Classes.Film;
+import Basic_Classes.Salle;
 
 public class Admin extends User {
 
@@ -103,4 +105,87 @@ public class Admin extends User {
 
     }
 
+    public void AddSalle(List<Salle> salles, Salle salle){
+        if (salle != null) {
+            salles.add(salle);
+            System.out.println("Salle added: " + salle.getID());
+        } else {
+            System.out.println("Invalid salle.");
+        }
+
+    }
+
+    public void RemoveSalle(List<Salle> salles, int ID){
+        for (Salle salle : salles) {
+            if (salle.getID() == ID) {
+                salles.remove(salle);
+                System.out.println("Salle deleted: " + salle.getID());
+                return;
+            }
+        }
+        System.out.println("Salle not found.");
+
+    }
+
+    public void ModifySalle(List<Salle> salles, Salle salle){
+        System.out.println("What do you want to modify in the salle? :" + salle.getID());
+        System.out.println("1. ID");
+        System.out.println("2. Capacite");
+        int choice;
+        Scanner sc = new Scanner(System.in);
+        choice = sc.nextInt();
+        switch (choice) {
+            case 1:
+                while (true) {
+                    System.out.println("Enter the new ID: ");
+                    int newID = sc.nextInt();
+                    boolean found = false;
+                    for (Salle s : salles) {
+                        if (s.getID() == newID) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        salle.setID(newID);
+                        System.out.println("ID modified. The new ID is: " + salle.getID());
+                        break;
+                    } else {
+                        System.out.println("ID already exists. Please enter a different ID.");
+                    }
+                }
+                int newID = sc.nextInt();
+                salle.setID(newID);
+                System.out.println("ID modified. The new ID is: " + salle.getID());
+                break;
+        
+            case 2:
+                System.out.println("Enter the new capacite: ");
+                int newcapacite = sc.nextInt();
+                salle.setCapacite(newcapacite);
+                System.out.println("Capacite modified. The new capacite is: " + salle.getCapacite());
+                break;
+        }
+        sc.close();
+
+    }
+
+    public void ReserveSalle(List<Salle> salles, Salle salle, Diffusion diffusion, Film film){
+        for (Salle s : salles) {
+            if (s.getID() == salle.getID()) {
+                if (!s.isAvaible()) {
+                    System.out.println("Salle already reserved.");
+                    return;
+                }else{
+                    s.ReserveSalle();
+                    System.out.println("Salle reserved: " + s.getID() + " for the movie: " + film.getTitle());
+                    diffusion.setSalle(s);
+                    diffusion.setFilm(film);
+                    return;
+                }
+            }
+        }
+        System.out.println("Salle not found.");
+
+    }
 }
