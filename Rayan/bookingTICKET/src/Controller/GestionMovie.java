@@ -12,9 +12,9 @@ public class GestionMovie {
 
 
     public void addMovie(String Title,String Description, int duration, String genre, String rating,
-        double regularSeatPrice, double vipSeatPrice){
+        double regularSeatPrice, double vipSeatPrice , String imagepath , String status){
             movieCount++;
-            Movie movie = new Movie(Title, Description, duration, genre,rating, regularSeatPrice, vipSeatPrice);
+            Movie movie = new Movie(Title, Description, duration, genre,rating, regularSeatPrice, vipSeatPrice , imagepath, status);
         
         Movies.add(movie);
 

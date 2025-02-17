@@ -43,7 +43,7 @@ public class UiClass extends JFrame {
         mainPanel.add(homeAdminPanel, "homeAdmin");
 
         setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "welcome");
+        cardLayout.show(mainPanel, "homeUser");
         
    
     }
@@ -328,7 +328,7 @@ public class UiClass extends JFrame {
                 JOptionPane.showMessageDialog(null, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }else{
-                HandleLogin(txtEmail, txtPassword);
+                HandleLogin(txtEmail, txtPassword  );
             }
 
 
@@ -783,14 +783,136 @@ public class UiClass extends JFrame {
     }
     
 
-    public JPanel createHomeUserPanel(Accounts UserAccount){
-
+    public JPanel createHomeUserPanel(Accounts UserAccount) {
         JPanel homePanel = new JPanel();
         homePanel.setLayout(null);
         homePanel.setBounds(0, 0, 1200, 750);
+    
+        // Only add welcome label if UserAccount is not null
+        // if (UserAccount != null) {
+        //     JLabel usernamelbl = new JLabel("Welcome, " + UserAccount.username + "!");
+        //     usernamelbl.setBounds(50, 120, 300, 50);
+        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        //     usernamelbl.setForeground(Color.red);
+        //     homePanel.add(usernamelbl);
+        // } else {
+        //     JLabel usernamelbl = new JLabel("Welcome, nkmk!");
+        //     usernamelbl.setBounds(50, 120, 300, 50);
+        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        //     usernamelbl.setForeground(Color.red);
+        //     homePanel.add(usernamelbl);
+        // }
+
+
+        JPanel BackgroundPanel = new JPanel();
+        BackgroundPanel.setBounds(0, 0, 1200, 750);
+        BackgroundPanel.setBackground(new Color(18, 18, 18));
+        BackgroundPanel.setLayout(null);
+        homePanel.add(BackgroundPanel);
+
+        JPanel LeftBlackPanel = new JPanel();
+        LeftBlackPanel.setBounds(0, 0, 300, 750);
+        LeftBlackPanel.setBackground(new Color(24, 24, 24));
+        LeftBlackPanel.setLayout(null);
+        BackgroundPanel.add(LeftBlackPanel);
+
+        JLabel LogoName = new JLabel("CINEMACITY");
+        LogoName.setBounds(17, -124, 300, 300);
+        LogoName.setForeground(new Color(183, 255, 0));
+        LogoName.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        LeftBlackPanel.add(LogoName);
+
+        JPanel BalancePanel = new JPanel();
+        BalancePanel.setBounds(20, 70, 260, 120);
+        BalancePanel.setLayout(null);
+        BalancePanel.setBackground(new Color(30, 30, 30));
+        LeftBlackPanel.add(BalancePanel);
+
+        JLabel BalanceLabel = new JLabel(" Balance");
+        BalanceLabel.setBounds(10, 10, 100, 30);
+        BalanceLabel.setForeground(Color.white);
+        BalanceLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        BalancePanel.add(BalanceLabel);
+
+        JLabel BalanceValue = new JLabel("$56,00 " );
+        BalanceValue.setFont(new Font("Arial", Font.BOLD, 24));
+        BalanceValue.setForeground(new Color(183, 255, 0));
+        BalanceValue.setBounds(10, 55, 100, 30);
+        BalancePanel.add(BalanceValue);
+
+        RoundedButton Dipostebalance = new RoundedButton("",10);
+        Dipostebalance.setBounds(190, 30, 50, 50);
+        Dipostebalance.setBackground(new Color(183, 255, 0));
+        Dipostebalance.addActionListener(e -> {
+            JOptionPane.showMessageDialog(homePanel, "Deposit functionality is not available yet.");
+        });
+        BalancePanel.add(Dipostebalance);
+
+        RoundedButton FavoriteButton = new RoundedButton("Favorite",10);
+        FavoriteButton.setBounds(20, 250, 270, 40);
+        FavoriteButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        FavoriteButton.setBackground(Color.gray);
+        FavoriteButton.setForeground(Color.white);
+        LeftBlackPanel.add(FavoriteButton);
+
+        RoundedButton BonusesButton = new RoundedButton("Bonuses",10);
+        BonusesButton.setBounds(20, 350, 270, 40);
+        BonusesButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        BonusesButton.setBackground(Color.gray);
+        BonusesButton.setForeground(Color.white);
+        LeftBlackPanel.add(BonusesButton);
+
+        RoundedButton BookedButton = new RoundedButton("Booked",10);
+        BookedButton.setBounds(20, 450, 270, 40);
+        BookedButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        BookedButton.setBackground(Color.gray);
+        BookedButton.setForeground(Color.white);
+        LeftBlackPanel.add(BookedButton);
+
+        RoundedButton LogoutButton = new RoundedButton("Log out",10);
+        LogoutButton.setBounds(20, 550, 270, 40);
+        LogoutButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        LogoutButton.setBackground(Color.gray);
+        LogoutButton.setForeground(Color.white);
+        LeftBlackPanel.add(LogoutButton);
+
+        JPanel SearchPanel = new JPanel();
+        SearchPanel.setBounds(330, 20, 600, 40);
+        SearchPanel.setLayout(null);
+        SearchPanel.setBackground(new Color(30, 30, 30));
+        BackgroundPanel.add(SearchPanel);
+
+        JTextField searchField = new JTextField("Type to Search...");
+        searchField.setBounds(10, 5, 380, 30);
+        searchField.setBackground(new Color(30, 30, 30));
+        searchField.setForeground(Color.GRAY);
+        searchField.setBorder(null);
+
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().equals("Type to Search...")) {
+                    searchField.setText("");
+                    searchField.setForeground(Color.WHITE);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().isEmpty() || searchField.getText().trim().isEmpty()) {
+                    searchField.setText("Type to Search...");
+                    searchField.setForeground(Color.gray);
+                }
+            }
+
+        });
+        SearchPanel.add(searchField);
+
+        
 
 
 
+    
         return homePanel;
     }
 
@@ -809,17 +931,19 @@ public class UiClass extends JFrame {
     }
    
 
-    public void HandleLogin(String email, String password){
-        if (email.equals("admin")  && password.equals("admin")) {
-            JOptionPane.showMessageDialog(null, "Login successful to the admin Panel!", "Success", JOptionPane.INFORMATION_MESSAGE);
+    public void HandleLogin(String email, String password ){
+        if (Accounts.isAdmin(email, password)) {
+            JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            currentadmin = Accounts.getAccountadmin(email, password);
             cardLayout.show(mainPanel, "homeAdmin");
             return;
-            
         }
         if(Accounts.CheckAccountIfCreated(email, password)){
 
             JOptionPane.showMessageDialog(null, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            currentuser = Accounts.getAccountuser(email, password);
             cardLayout.show(mainPanel, "homeUser");
+            return;
 
         } else {
             JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
