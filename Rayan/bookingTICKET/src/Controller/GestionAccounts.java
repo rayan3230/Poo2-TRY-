@@ -10,14 +10,12 @@ public class GestionAccounts {
             if (account.username.equals(username)) {
                 System.out.println("Account already exists");
                 return;
-            }else{
-                accounts.add(new Accounts(username, password, email ,cardNumber, CCVnbr));
-                System.out.println("Account created successfully");
-                return;
             }
         }
+        accounts.add(new Accounts(username, password, email ,cardNumber, CCVnbr));
+        System.out.println("Account created successfully");
 
-   }
+   }        
    public Boolean CheckAccountIfCreated(String Email , String password){
     for (Accounts account : accounts){
             if (account.email.equals(Email) && account.password.equals(password)) {

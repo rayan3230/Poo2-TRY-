@@ -7,8 +7,9 @@ import javax.swing.*;
 public class UiClass extends JFrame {
     public JPanel mainPanel;
     public CardLayout cardLayout;
-    public GestionAccounts Accounts;  // Field declaration
+    public GestionAccounts Accounts;  
     public Accounts currentuser ;
+    public Accounts currentadmin;  
     
     public UiClass(){
         // Initialize Accounts in the constructor
@@ -32,15 +33,19 @@ public class UiClass extends JFrame {
         JPanel registerPanel = createRegisterPanel();
         JPanel forgotPasswordPanel = createForgotPasswordPanel();
         JPanel homeUserPanel = createHomeUserPanel(currentuser);
+        JPanel homeAdminPanel = createHomeAdminPanel(currentadmin);
 
         mainPanel.add(welcomePanel, "welcome");
         mainPanel.add(loginPanel, "login");
         mainPanel.add(registerPanel, "register");
         mainPanel.add(forgotPasswordPanel, "forgotPassword");
         mainPanel.add(homeUserPanel, "homeUser");
+        mainPanel.add(homeAdminPanel, "homeAdmin");
 
         setContentPane(mainPanel);
         cardLayout.show(mainPanel, "welcome");
+        
+   
     }
 
     
@@ -630,8 +635,12 @@ public class UiClass extends JFrame {
                 return;
             }
 
-           HandleSignIn(UserNameField, PasswordsField, EmailField, CardNmbrField, CCVNmbrField);
-            cardLayout.show(mainPanel, "login");
+           if(HandleSignIn(UserNameField, PasswordsField, EmailField, CardNmbrField, CCVNmbrField)){
+                 cardLayout.show(mainPanel, "login");
+           }else{
+            JOptionPane.showMessageDialog(registerPanel, "Registration failed, please try again", "Registration Error", JOptionPane.ERROR_MESSAGE);
+ 
+           }
 
         });
 
@@ -774,7 +783,7 @@ public class UiClass extends JFrame {
     }
     
 
-    public JPanel createHomeUserPanel(Accounts account){
+    public JPanel createHomeUserPanel(Accounts UserAccount){
 
         JPanel homePanel = new JPanel();
         homePanel.setLayout(null);
@@ -785,51 +794,79 @@ public class UiClass extends JFrame {
         return homePanel;
     }
 
+    public JPanel createHomeAdminPanel(Accounts AdminAccounts){
+        JPanel homeAdminPanel = new JPanel();
+        homeAdminPanel.setLayout(null);
+        homeAdminPanel.setBounds(0, 0, 1200, 750);
+        homeAdminPanel.setBackground(Color.BLUE);
+        JLabel welcomeLabel = new JLabel("Welcome, Admin!");
+        welcomeLabel.setBounds(50, 50, 300, 50);
+        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        welcomeLabel.setForeground(Color.red);
+        homeAdminPanel.add(welcomeLabel);
 
+        return homeAdminPanel;
+    }
    
 
-    public void HandleLogin(String user, String password){
-        if(Accounts.CheckAccountIfCreated(user, password)){
+    public void HandleLogin(String email, String password){
+        if (email.equals("admin")  && password.equals("admin")) {
+            JOptionPane.showMessageDialog(null, "Login successful to the admin Panel!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            cardLayout.show(mainPanel, "homeAdmin");
+            return;
+            
+        }
+        if(Accounts.CheckAccountIfCreated(email, password)){
+
             JOptionPane.showMessageDialog(null, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            // Updated panel name to match the one added in the constructor:
             cardLayout.show(mainPanel, "homeUser");
+
         } else {
             JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
 
-    public void HandleSignIn(JTextField username, JPasswordField password, JTextField email, JTextField cardNumber, JTextField ccvnbr) {
+    public Boolean HandleSignIn(JTextField username, JPasswordField password, JTextField email, JTextField cardNumber, JTextField ccvnbr) {
         try {
+         
             if (!Accounts.CheckAccountIfCreated(username.getText(), new String(password.getPassword()))) {
+           
                 String cardNumberText = cardNumber.getText().replaceAll("[^0-9.]", "");
                 String ccvnbrText = ccvnbr.getText().replaceAll("[^0-9]", "");
-
+    
                 if (cardNumberText.isEmpty() || ccvnbrText.isEmpty()) {
                     throw new NumberFormatException("Card number or CCV cannot be empty");
                 }
-
+    
                 double cardNum = Double.parseDouble(cardNumberText);
                 int CCVnbr = Integer.parseInt(ccvnbrText);
-
-                if (!email.getText().contains("@")) {
+    
+                if (!email.getText().contains("@gmail.com")) {
                     JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
+                    return false;
                 }
 
                 Accounts.AddAccount(username.getText(), new String(password.getPassword()), email.getText(), cardNum, CCVnbr);
-
+    
                 JOptionPane.showMessageDialog(null, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Account already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid card number or CCV format.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
-    private void addPlaceholderBehavior(JTextField textField, String placeholder) {
+
+
+
+    public void addPlaceholderBehavior(JTextField textField, String placeholder) {
         textField.setText(placeholder);
         textField.setForeground(Color.GRAY);
 
@@ -851,6 +888,8 @@ public class UiClass extends JFrame {
             }
         });
     }
+
+
 
     public static void main(String[] args) {
         try {
