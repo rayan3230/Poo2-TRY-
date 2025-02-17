@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -11,7 +9,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class userinterface extends JFrame {
+public class booked extends JFrame {
 
     private JPanel mainPanel;
     private JComboBox<String> movieComboBox;
@@ -21,7 +19,7 @@ public class userinterface extends JFrame {
     private List<String> movies;
     private String userName;
 
-    public userinterface() {
+    public booked() {
         this.userName = userName;
 
         setTitle("Movie Booking System");
@@ -47,7 +45,7 @@ public class userinterface extends JFrame {
         homeButton.setBounds(0, 50, 200, 30);
         homeButton.setForeground(Color.WHITE);
         homeButton.setBackground(new Color(0x161414));
-        homeButton.setBorder(new MatteBorder(0, 0, 0, 2, new Color(0xFF0000))); // White right border
+        homeButton.setBorder(new MatteBorder(0, 0, 0, 2, Color.WHITE)); // White right border
         homeButton.setFocusable(false);
         navPanel.add(homeButton);
 
@@ -63,15 +61,8 @@ public class userinterface extends JFrame {
         bookingsButton.setBounds(0, 150, 200, 30);
         bookingsButton.setForeground(Color.WHITE);
         bookingsButton.setBackground(new Color(0x161414));
-        bookingsButton.setBorder(new MatteBorder(0, 0, 0, 2, new Color(0xFFFFFF))); // Red right border
+        bookingsButton.setBorder(new MatteBorder(0, 0, 0, 2, new Color(0xFF0000))); // Red right border
         bookingsButton.setFocusable(false);
-        bookingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new booked();
-                dispose();
-            }
-        });
         navPanel.add(bookingsButton);
 
         mainPanel.add(navPanel);
@@ -104,30 +95,29 @@ public class userinterface extends JFrame {
         contentPanel.setBounds(200, 50, 900, 750);
         contentPanel.setBackground(Color.black);
 
-        // Cards panel
-        JPanel cardsPanel = new JPanel(null);
-        cardsPanel.setBounds((900-200*3-50*2)/2, 0, 900, 500); // Adjusted bounds
-        cardsPanel.setBackground(Color.BLACK);
-        cardsPanel.setForeground(Color.WHITE);
-        int cardWidth = 230;
-        int cardHeight = 130;
-        int gap = 50;
-        for (int i = 0; i < 6; i++) {
-            JButton cardButton = new JButton();
-            cardButton.setBounds((i % 3) * (cardWidth + gap), (i / 3) * (cardHeight + gap), cardWidth, cardHeight);
-            Border lineBorder = BorderFactory.createLineBorder(Color.WHITE);
-            cardButton.setBackground(Color.DARK_GRAY);
+        // Remove cards panel
+        // JPanel cardsPanel = new JPanel(null);
+        // cardsPanel.setBounds((900-200*3-50*2)/2, 0, 900, 500); // Adjusted bounds
+        // cardsPanel.setBackground(Color.BLACK);
+        // cardsPanel.setForeground(Color.WHITE);
+        // int cardWidth = 230;
+        // int cardHeight = 130;
+        // int gap = 50;
+        // for (int i = 0; i < 6; i++) {
+        //     JButton cardButton = new JButton();
+        //     cardButton.setBounds((i % 3) * (cardWidth + gap), (i / 3) * (cardHeight + gap), cardWidth, cardHeight);
+        //     Border lineBorder = BorderFactory.createLineBorder(Color.WHITE);
+        //     cardButton.setBackground(Color.DARK_GRAY);
 
-            // Customize the picture for each button
-            // Assuming you have an ImageIcon named movieIcon
-            ImageIcon movieIcon = new ImageIcon("path/to/your/image.png");
-            cardButton.setIcon(movieIcon);
-            cardButton.setHorizontalAlignment(SwingConstants.CENTER);
-            cardButton.setVerticalAlignment(SwingConstants.CENTER);
+        //     // Customize the picture for each button
+        //     ImageIcon movieIcon = new ImageIcon("Poo2-TRY-\\\\\\\\Wassim\\\\\\\\bookingTICKET\\\\\\\\images\\\\\\\\movie" + (i + 1) + ".png");
+        //     cardButton.setIcon(movieIcon);
+        //     cardButton.setHorizontalAlignment(SwingConstants.CENTER);
+        //     cardButton.setVerticalAlignment(SwingConstants.CENTER);
 
-            cardsPanel.add(cardButton);
-        }
-        contentPanel.add(cardsPanel);
+        //     cardsPanel.add(cardButton);
+        // }
+        // contentPanel.add(cardsPanel);
 
         mainPanel.add(contentPanel);
 
@@ -165,7 +155,7 @@ public class userinterface extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new userinterface();
+                new booked();
             }
         });
     }
