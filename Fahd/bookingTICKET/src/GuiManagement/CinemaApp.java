@@ -6,35 +6,34 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+public class CinemaApp extends JFrame implements ActionListener {
 
-public class CinemaApp extends JFrame implements ActionListener  {
-
-    //main panel -----------------------------------------------------
+    // main panel -----------------------------------------------------
     public JPanel MainPanel;
 
-    //Action manager--------------------------------------------------
+    // Action manager--------------------------------------------------
     public static int Counter = 0;
-    
-    //cinema manager---------------------------------------------------
+
+    // cinema manager---------------------------------------------------
     public Cinema CinemaManager;
 
-    //log in elements : 
+    // log in elements :
     public JPanel LogInPanel;
     public JPanel SignInPanel;
     public JPanel RegisterPanel;
     public JPanel ForgotPasswordPanel;
     public JPanel ClientPanel;
     public JPanel AdminPanel;
-    
+
     public JButton ChangeTheme;
 
-    //decorative Panels ------------------------------------------------
+    // decorative Panels ------------------------------------------------
     public TransparentPanel BlurPanel, BlurPanel2, BlurPanel3;
 
-    //layout manager -----------------------------------------------------
+    // layout manager -----------------------------------------------------
     public CardLayout MainCardLayout;
 
-    public CinemaApp(){
+    public CinemaApp() {
 
         // Initialize components
         this.setTitle("MovieBooking App");
@@ -52,8 +51,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         MainPanel = new JPanel(MainCardLayout);
 
-
-        //openning panel --------------------------------------------------
+        // openning panel --------------------------------------------------
         SignInPanel = new JPanel();
         SignInPanel.setBounds(0, 0, 1200, 750);
         SignInPanel.setLayout(null);
@@ -68,9 +66,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         SignInPanel.setComponentZOrder(SignInElements, 0);
         SignInPanel.setComponentZOrder(SignInBackgroundPanel, 1);
 
-
-
-        //sign in panel ---------------------------------------------------
+        // sign in panel ---------------------------------------------------
         RegisterPanel = new JPanel();
         RegisterPanel.setBounds(0, 0, 1200, 750);
         RegisterPanel.setLayout(null);
@@ -85,9 +81,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         RegisterPanel.setComponentZOrder(RegisterElements, 0);
         RegisterPanel.setComponentZOrder(RegisterBackgroundJPanel, 1);
 
-
-
-        //log in panel ----------------------------------------------------
+        // log in panel ----------------------------------------------------
         LogInPanel = new JPanel();
         LogInPanel.setBounds(0, 0, 1200, 750);
         LogInPanel.setLayout(null);
@@ -102,9 +96,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         LogInPanel.setComponentZOrder(LogInElements, 0);
         LogInPanel.setComponentZOrder(LogInBackgroundJPanel, 1);
 
-
-
-        //forgot password panel --------------------------------------------
+        // forgot password panel --------------------------------------------
         ForgotPasswordPanel = new JPanel();
         ForgotPasswordPanel.setBounds(0, 0, 1200, 750);
         ForgotPasswordPanel.setLayout(null);
@@ -119,8 +111,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         ForgotPasswordPanel.setComponentZOrder(ForgotPasswordElements, 0);
         ForgotPasswordPanel.setComponentZOrder(ForgotPasswordBackground, 1);
 
-
-        //Client / User Interface --------------------------------------------
+        // Client / User Interface --------------------------------------------
         ClientPanel = new JPanel();
         ClientPanel.setBounds(0, 0, 1200, 750);
         ClientPanel.setLayout(null);
@@ -130,29 +121,40 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         ClientPanel.add(ClientElements);
 
-        //main panel management-----------------------------------------------
+        // admin interface -----------------------------------------------------
+        AdminPanel = new JPanel();
+        AdminPanel.setBounds(0, 0, 1200, 750);
+        AdminPanel.setLayout(null);
+        AdminPanel.setOpaque(false);
+
+        JPanel AdminElements = CreateAdminInterface();
+
+        AdminPanel.add(AdminElements);
+
+        // main panel management-----------------------------------------------
         MainPanel.add(SignInPanel, "open");
         MainPanel.add(RegisterPanel, "register");
         MainPanel.add(LogInPanel, "log in");
         MainPanel.add(ForgotPasswordPanel, "forgot Password");
         MainPanel.add(ClientPanel, "user");
+        MainPanel.add(AdminPanel, "admin");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "open");
+        MainCardLayout.show(MainPanel, "admin");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
         this.repaint();
     }
 
-    public JPanel CreateBackGround1Panel(){
+    public JPanel CreateBackGround1Panel() {
 
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
         BackgroundPanel.setLayout(null);
         BackgroundPanel.setOpaque(false);
 
-        //Blur panel--------------------------------------------------
+        // Blur panel--------------------------------------------------
         this.BlurPanel = new TransparentPanel(0.75f);
         BlurPanel.setBounds(0, 0, 1200, 750);
         BlurPanel.setLayout(null);
@@ -161,9 +163,11 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BlurPanel.setVisible(true);
 
         // The background image:
-        ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-rebirth-of-7680x4320-20257.jpg");
+        ImageIcon originalIcon = new ImageIcon(
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-rebirth-of-7680x4320-20257.jpg");
         Image originalImage = originalIcon.getImage();
-        Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(), Image.SCALE_SMOOTH);
+        Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(),
+                Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel Background = new JLabel(scaledIcon);
         Background.setBounds(0, 0, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
@@ -188,18 +192,17 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BackgroundPanel.setComponentZOrder(BluePanel, 0);
         BackgroundPanel.setComponentZOrder(RedPanel, 1);
 
-
         return BackgroundPanel;
     }
 
-    public JPanel CreateBackGround2Panel(){
+    public JPanel CreateBackGround2Panel() {
 
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
         BackgroundPanel.setLayout(null);
         BackgroundPanel.setOpaque(false);
 
-        //Blur panel--------------------------------------------------
+        // Blur panel--------------------------------------------------
         this.BlurPanel2 = new TransparentPanel(0.5f);
         BlurPanel2.setBounds(0, 0, 1200, 750);
         BlurPanel2.setLayout(null);
@@ -208,9 +211,11 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BlurPanel2.setVisible(true);
 
         // The background image:
-        ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19704.png");
+        ImageIcon originalIcon = new ImageIcon(
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19704.png");
         Image originalImage = originalIcon.getImage();
-        Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(), Image.SCALE_SMOOTH);
+        Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(),
+                Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel Background = new JLabel(scaledIcon);
         Background.setBounds(0, 0, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
@@ -235,17 +240,16 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BackgroundPanel.setComponentZOrder(BluePanel, 0);
         BackgroundPanel.setComponentZOrder(RedPanel, 1);
 
-
         return BackgroundPanel;
     }
 
-    public JPanel CreateBackGround3Panel(){
+    public JPanel CreateBackGround3Panel() {
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
         BackgroundPanel.setLayout(null);
         BackgroundPanel.setOpaque(false);
 
-        //Blur panel--------------------------------------------------
+        // Blur panel--------------------------------------------------
         this.BlurPanel3 = new TransparentPanel(0.4f);
         BlurPanel3.setBounds(0, 0, 1200, 750);
         BlurPanel3.setLayout(null);
@@ -256,7 +260,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         // The background image:
         ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\IntoTheSpiderVerse.jpg");
         Image originalImage = originalIcon.getImage();
-        Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(), Image.SCALE_SMOOTH);
+        Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(),
+                Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel Background = new JLabel(scaledIcon);
         Background.setBounds(0, 0, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
@@ -281,11 +286,10 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BackgroundPanel.setComponentZOrder(BluePanel, 0);
         BackgroundPanel.setComponentZOrder(RedPanel, 1);
 
-
         return BackgroundPanel;
     }
 
-    public JPanel CreateSignInElementsPanel(){
+    public JPanel CreateSignInElementsPanel() {
         // sign in elements panel ------------------------------------
         JPanel SignInElements = new JPanel();
         SignInElements.setBounds(0, 0, 1200, 750);
@@ -305,7 +309,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         SignInElements.add(imageLabel);
 
-        JLabel WelcomText1 = new JLabel("Unlimited films in theaters,");//and more to come
+        JLabel WelcomText1 = new JLabel("Unlimited films in theaters,");// and more to come
         WelcomText1.setBounds(332, 222, 575, 115);
         WelcomText1.setFont(new Font("Inter", Font.BOLD, 40));
         WelcomText1.setForeground(Color.white);
@@ -339,13 +343,13 @@ public class CinemaApp extends JFrame implements ActionListener  {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LogIn.setBackground(new Color(0x550000));
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 LogIn.setBackground(new Color(255, 0, 0));
             }
         });
 
-
-        LogIn.addActionListener(e->{
+        LogIn.addActionListener(e -> {
             MainCardLayout.show(MainPanel, "log in");
         });
 
@@ -363,6 +367,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 SignIn.setBackground(new Color(0x550000));
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 SignIn.setBackground(new Color(255, 0, 0));
             }
@@ -394,15 +399,16 @@ public class CinemaApp extends JFrame implements ActionListener  {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ChangeTheme.setBackground(new Color(0x999999));
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 ChangeTheme.setBackground(Color.WHITE);
             }
         });
 
-        ChangeTheme.addActionListener(e->{
-            
-            if(Counter%2 == 0){
-    
+        ChangeTheme.addActionListener(e -> {
+
+            if (Counter % 2 == 0) {
+
                 ChangeTheme.setBackground(new java.awt.Color(0x000000));
                 ChangeTheme.setForeground(Color.WHITE);
                 WelcomText1.setForeground(new java.awt.Color(0x000000));
@@ -410,8 +416,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
                 DescriptionText.setForeground(new java.awt.Color(0x000000));
                 AdressInput.setBackground(new java.awt.Color(0xBBBBBB));
                 AdressInput.setForeground(Color.BLACK);
-            }else{
-                
+            } else {
+
                 ChangeTheme.setBackground(new java.awt.Color(0xFFFFFF));
                 ChangeTheme.setForeground(Color.BLACK);
                 WelcomText1.setForeground(new java.awt.Color(0xFFFFFF));
@@ -422,13 +428,13 @@ public class CinemaApp extends JFrame implements ActionListener  {
             }
             this.actionPerformed(e);
         });
-        
+
         SignInElements.add(ChangeTheme);
 
         return SignInElements;
     }
 
-    public JPanel CreateLogInElementsPanel(){
+    public JPanel CreateLogInElementsPanel() {
         JPanel loginPanel = new JPanel();
         loginPanel.setBounds(0, 0, 1200, 750);
         loginPanel.setLayout(null);
@@ -439,8 +445,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
         LogoName.setFont(new Font("Inter", Font.BOLD, 35));
         LogoName.setForeground(Color.red);
         loginPanel.add(LogoName);
-
-
 
         ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
         JLabel imageLabel = new JLabel(iconMovie);
@@ -453,20 +457,18 @@ public class CinemaApp extends JFrame implements ActionListener  {
         RectangleLogin.setBackground(Color.black);
         loginPanel.add(RectangleLogin);
 
-     
-
         JLabel LogInLabel = new JLabel("Log In");
         LogInLabel.setBounds(50, 40, 200, 50);
         LogInLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
         LogInLabel.setForeground(Color.white);
         RectangleLogin.add(LogInLabel);
 
-        JTextField EmailField = new JTextField("   Email or phone number"); 
+        JTextField EmailField = new JTextField("   Email or phone number");
         EmailField.setBounds(50, 120, 340, 40);
         EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        EmailField.setForeground(Color.gray); 
+        EmailField.setForeground(Color.gray);
         EmailField.setCaretColor(Color.white);
-        //EmailField.setBackground(new Color(80, 77, 74, 230));
+        // EmailField.setBackground(new Color(80, 77, 74, 230));
         EmailField.setBackground(new Color(0xDDDDDD));
         EmailField.setOpaque(true);
         EmailField.setBorder(null);
@@ -496,7 +498,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         PasswordField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         PasswordField.setForeground(Color.gray);
         PasswordField.setCaretColor(Color.white);
-        //PasswordField.setBackground(new Color(80, 77, 74, 230));
+        // PasswordField.setBackground(new Color(80, 77, 74, 230));
         PasswordField.setBackground(new Color(0xDDDDDD));
         PasswordField.setOpaque(true);
         PasswordField.setBorder(null);
@@ -508,6 +510,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
                     PasswordField.setForeground(Color.WHITE);
                 }
             }
+
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (PasswordField.getText().isEmpty() || PasswordField.getPassword().length == 0) {
@@ -518,7 +521,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         });
         RectangleLogin.add(PasswordField);
 
-        //JButton SignInButton = new JButton("Sign In");
+        // JButton SignInButton = new JButton("Sign In");
         JButton SignInButton = new JButton("log in");
         SignInButton.setBounds(50, 270, 340, 40);
         SignInButton.setFont(new Font("Segoe UI", Font.BOLD, 20));
@@ -547,7 +550,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
         });
         RectangleLogin.add(btnforgetpassword);
 
-
         JLabel SignupLabel = new JLabel("New to POOMovie? ");
         SignupLabel.setBounds(40, 450, 300, 50);
         SignupLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -564,7 +566,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         SignupButton.addActionListener(e -> {
             MainCardLayout.show(MainPanel, "register");
         });
-      
+
         RectangleLogin.add(SignupButton);
 
         JButton returnbtnWelcomePanel = new JButton("return");
@@ -575,18 +577,17 @@ public class CinemaApp extends JFrame implements ActionListener  {
         returnbtnWelcomePanel.setForeground(Color.white);
         returnbtnWelcomePanel.setBorder(BorderFactory.createEmptyBorder());
         returnbtnWelcomePanel.setUI(new RoundButtonUI(new Color(0x000000)));
-        returnbtnWelcomePanel.addActionListener(e ->{
+        returnbtnWelcomePanel.addActionListener(e -> {
             MainCardLayout.show(MainPanel, "open");
         });
         RectangleLogin.add(returnbtnWelcomePanel);
 
         return loginPanel;
-        
+
     }
 
-
-    public JPanel CreateRegisterElements(){
-        //Finish signing in panel ------------------------------------------------
+    public JPanel CreateRegisterElements() {
+        // Finish signing in panel ------------------------------------------------
         JPanel RegisterElements = new JPanel();
         RegisterElements.setBounds(0, 0, 1200, 750);
         RegisterElements.setLayout(null);
@@ -605,7 +606,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         RegisterElements.add(imageLabel);
 
-        //signUP panel -----------------------------------------------------------
+        // signUP panel -----------------------------------------------------------
         TransparentPanel SignUpPanel = new TransparentPanel(0.5f);
         SignUpPanel.setBounds(400, 100, 440, 620);
         SignUpPanel.setLayout(null);
@@ -618,12 +619,12 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         SignUpPanel.add(SigninLabel);
 
-        JTextField UserNameField = new JTextField("    Username"); 
+        JTextField UserNameField = new JTextField("    Username");
         UserNameField.setBounds(50, 120, 340, 40);
         UserNameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        UserNameField.setForeground(Color.gray); 
+        UserNameField.setForeground(Color.gray);
         UserNameField.setCaretColor(Color.white);
-        //EmailField.setBackground(new Color(80, 77, 74, 230));
+        // EmailField.setBackground(new Color(80, 77, 74, 230));
         UserNameField.setBackground(new Color(0xDDDDDD));
         UserNameField.setOpaque(true);
         UserNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
@@ -654,7 +655,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         PasswordsField.setCaretColor(Color.white);
         PasswordsField.setBackground(new Color(0xDDDDDD));
         PasswordsField.setOpaque(true);
-        //PasswordsField.setBorder(BorderFactory.CreateeMatteBorder(1, 1, 1, 1, Color.gray));
+        // PasswordsField.setBorder(BorderFactory.CreateeMatteBorder(1, 1, 1, 1,
+        // Color.gray));
         PasswordsField.setBorder(null);
         PasswordsField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
@@ -664,6 +666,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
                     PasswordsField.setForeground(Color.WHITE);
                 }
             }
+
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (PasswordsField.getText().isEmpty() || PasswordsField.getPassword().length == 0) {
@@ -674,8 +677,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
         });
         SignUpPanel.add(PasswordsField);
 
-
-               
         JTextField EmailField = new JTextField("   email@example.com");
         EmailField.setBounds(50, 280, 340, 40);
         EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -693,6 +694,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
                     EmailField.setForeground(Color.white);
                 }
             }
+
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (EmailField.getText().isEmpty() || EmailField.getText().trim().isEmpty()) {
@@ -703,7 +705,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
         });
         SignUpPanel.add(EmailField);
 
-   
         JTextField CardNmbrField = new JTextField("   Card Number");
         CardNmbrField.setBounds(50, 360, 340, 40);
         CardNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -721,6 +722,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
                     CardNmbrField.setForeground(Color.white);
                 }
             }
+
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (CardNmbrField.getText().isEmpty() || CardNmbrField.getText().trim().isEmpty()) {
@@ -731,8 +733,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
         });
         SignUpPanel.add(CardNmbrField);
 
-
-        
         JTextField CCVNmbrField = new JTextField("   CCV Number");
         CCVNmbrField.setBounds(50, 440, 340, 40);
         CCVNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -750,6 +750,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
                     CCVNmbrField.setForeground(Color.white);
                 }
             }
+
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (CCVNmbrField.getText().isEmpty() || CCVNmbrField.getText().trim().isEmpty()) {
@@ -759,7 +760,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
             }
         });
         SignUpPanel.add(CCVNmbrField);
-
 
         JButton ConfirmSignUpButton = new JButton("sign up");
         ConfirmSignUpButton.setBounds(250, 520, 180, 50);
@@ -790,20 +790,19 @@ public class CinemaApp extends JFrame implements ActionListener  {
         return RegisterElements;
     }
 
-    
     public JPanel CreateForgotPasswordPanel() {
         JPanel forgotPanel = new JPanel();
         forgotPanel.setLayout(null);
         forgotPanel.setBounds(0, 0, 1200, 750);
         forgotPanel.setOpaque(false);
-    
+
         // Logo
         JLabel LogoName = new JLabel("POOMovie");
         LogoName.setBounds(20, 0, 192, 52);
         LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
         LogoName.setForeground(Color.red);
         forgotPanel.add(LogoName);
-    
+
         // Center Rectangle Panel
         JPanel rectangleForgot = new JPanel() {
             @Override
@@ -820,14 +819,14 @@ public class CinemaApp extends JFrame implements ActionListener  {
         rectangleForgot.setLayout(null);
         rectangleForgot.setOpaque(false);
         forgotPanel.add(rectangleForgot);
-    
+
         // Title
         JLabel titleLabel = new JLabel("Password Recovery");
         titleLabel.setBounds(50, 40, 300, 50);
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
         titleLabel.setForeground(Color.white);
         rectangleForgot.add(titleLabel);
-    
+
         // Username field
         JTextField usernameField = new JTextField("Enter your username");
         usernameField.setBounds(50, 120, 340, 40);
@@ -839,14 +838,14 @@ public class CinemaApp extends JFrame implements ActionListener  {
         usernameField.setBorder(null);
         addPlaceholderBehavior(usernameField, "Enter your username");
         rectangleForgot.add(usernameField);
-    
+
         // Security Question
         JLabel questionLabel = new JLabel("Security Question: What is 15 + 7 ?");
         questionLabel.setBounds(50, 190, 340, 30);
         questionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         questionLabel.setForeground(Color.white);
         rectangleForgot.add(questionLabel);
-    
+
         // Answer field
         JTextField answerField = new JTextField("Enter your answer");
         answerField.setBounds(50, 230, 340, 40);
@@ -858,7 +857,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         answerField.setBorder(null);
         addPlaceholderBehavior(answerField, "Enter your answer");
         rectangleForgot.add(answerField);
-    
+
         // Submit Button
         JButton submitButton = new JButton("Submit");
         submitButton.setBounds(50, 300, 340, 40);
@@ -870,21 +869,21 @@ public class CinemaApp extends JFrame implements ActionListener  {
         submitButton.addActionListener(e -> {
             if (answerField.getText().equals("22")) {
                 // Show password in a dialog
-                JOptionPane.showMessageDialog(forgotPanel, 
-                    "Your password is: YourStoredPassword", 
-                    "Password Recovery", 
-                    JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(forgotPanel,
+                        "Your password is: YourStoredPassword",
+                        "Password Recovery",
+                        JOptionPane.INFORMATION_MESSAGE);
 
                 MainCardLayout.show(MainPanel, "login");
             } else {
-                JOptionPane.showMessageDialog(forgotPanel, 
-                    "Incorrect answer. Please try again.", 
-                    "Error", 
-                    JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(forgotPanel,
+                        "Incorrect answer. Please try again.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
         rectangleForgot.add(submitButton);
-    
+
         // Return Button
         JButton returnButton = new JButton("Return to log in");
         returnButton.setBounds(50, 360, 340, 40);
@@ -895,105 +894,117 @@ public class CinemaApp extends JFrame implements ActionListener  {
         returnButton.setUI(new RoundButtonUI(new Color(0x000000)));
         returnButton.addActionListener(e -> MainCardLayout.show(MainPanel, "log in"));
         rectangleForgot.add(returnButton);
-    
+
         return forgotPanel;
     }
-    
-    public void ChnageTheme(){
-        if(Counter%2 == 0){
+
+    public void ChnageTheme() {
+        if (Counter % 2 == 0) {
             Counter++;
             this.BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
             return;
-            
-        }else{
+
+        } else {
             Counter++;
             this.BlurPanel.setBackground(new java.awt.Color(0x000000));
             return;
         }
     }
 
-    public void HandleLogIn(){
-        if (Accounts.isAdmin(email, password)) {
-            JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            currentadmin = Accounts.getAccountadmin(email, password);
-            cardLayout.show(mainPanel, "homeAdmin");
-            return;
-        }
-        if(Accounts.CheckAccountIfCreated(email, password)){
+    /*
+     * public void HandleLogIn(){
+     * if (Accounts.isAdmin(email, password)) {
+     * JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success",
+     * JOptionPane.INFORMATION_MESSAGE);
+     * currentadmin = Accounts.getAccountadmin(email, password);
+     * cardLayout.show(mainPanel, "homeAdmin");
+     * return;
+     * }
+     * if(Accounts.CheckAccountIfCreated(email, password)){
+     * 
+     * JOptionPane.showMessageDialog(null, "Login successful!", "Success",
+     * JOptionPane.INFORMATION_MESSAGE);
+     * currentuser = Accounts.getAccountuser(email, password);
+     * cardLayout.show(mainPanel, "homeUser");
+     * return;
+     * 
+     * } else {
+     * JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error",
+     * JOptionPane.ERROR_MESSAGE);
+     * }
+     * }
+     * 
+     * public void HandleSignIn(){
+     * try {
+     * 
+     * if (!Accounts.CheckAccountIfCreated(username.getText(), new
+     * String(password.getPassword()))) {
+     * 
+     * String cardNumberText = cardNumber.getText().replaceAll("[^0-9.]", "");
+     * String ccvnbrText = ccvnbr.getText().replaceAll("[^0-9]", "");
+     * 
+     * if (cardNumberText.isEmpty() || ccvnbrText.isEmpty()) {
+     * throw new NumberFormatException("Card number or CCV cannot be empty");
+     * }
+     * 
+     * double cardNum = Double.parseDouble(cardNumberText);
+     * int CCVnbr = Integer.parseInt(ccvnbrText);
+     * 
+     * if (!email.getText().contains("@gmail.com")) {
+     * JOptionPane.showMessageDialog(null, "Please enter a valid email address",
+     * "Error", JOptionPane.ERROR_MESSAGE);
+     * return false;
+     * }
+     * 
+     * Accounts.AddAccount(username.getText(), new String(password.getPassword()),
+     * email.getText(), cardNum, CCVnbr);
+     * 
+     * JOptionPane.showMessageDialog(null, "Account created successfully!",
+     * "Success", JOptionPane.INFORMATION_MESSAGE);
+     * return true;
+     * } else {
+     * JOptionPane.showMessageDialog(null, "Account already exists.", "Error",
+     * JOptionPane.ERROR_MESSAGE);
+     * return false;
+     * }
+     * } catch (NumberFormatException e) {
+     * JOptionPane.showMessageDialog(null, "Invalid card number or CCV format.",
+     * "Error", JOptionPane.ERROR_MESSAGE);
+     * return false;
+     * } catch (Exception e) {
+     * JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(),
+     * "Error", JOptionPane.ERROR_MESSAGE);
+     * return false;
+     * }
+     * }
+     */
 
-            JOptionPane.showMessageDialog(null, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            currentuser = Accounts.getAccountuser(email, password);
-            cardLayout.show(mainPanel, "homeUser");
-            return;
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public void HandleSignIn(){
-        try {
-         
-            if (!Accounts.CheckAccountIfCreated(username.getText(), new String(password.getPassword()))) {
-           
-                String cardNumberText = cardNumber.getText().replaceAll("[^0-9.]", "");
-                String ccvnbrText = ccvnbr.getText().replaceAll("[^0-9]", "");
-    
-                if (cardNumberText.isEmpty() || ccvnbrText.isEmpty()) {
-                    throw new NumberFormatException("Card number or CCV cannot be empty");
-                }
-    
-                double cardNum = Double.parseDouble(cardNumberText);
-                int CCVnbr = Integer.parseInt(ccvnbrText);
-    
-                if (!email.getText().contains("@gmail.com")) {
-                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
-                    return false;
-                }
-
-                Accounts.AddAccount(username.getText(), new String(password.getPassword()), email.getText(), cardNum, CCVnbr);
-    
-                JOptionPane.showMessageDialog(null, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Account already exists.", "Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Invalid card number or CCV format.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-    }
-
-    public JPanel CreateClientInterface(){
+    public JPanel CreateClientInterface() {
         JPanel HomePanel = new JPanel();
         HomePanel.setLayout(null);
         HomePanel.setBounds(0, 0, 1200, 750);
         HomePanel.setOpaque(true);
         HomePanel.setBackground(new Color(30, 30, 30));
-    
+
         // Only add welcome label if UserAccount is not null
         // if (UserAccount != null) {
-        //     JLabel usernamelbl = new JLabel("Welcome, " + UserAccount.username + "!");
-        //     usernamelbl.setBounds(50, 120, 300, 50);
-        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        //     usernamelbl.setForeground(Color.red);
-        //     HomePanel.add(usernamelbl);
+        // JLabel usernamelbl = new JLabel("Welcome, " + UserAccount.username + "!");
+        // usernamelbl.setBounds(50, 120, 300, 50);
+        // usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        // usernamelbl.setForeground(Color.red);
+        // HomePanel.add(usernamelbl);
         // } else {
-        //     JLabel usernamelbl = new JLabel("Welcome, nkmk!");
-        //     usernamelbl.setBounds(50, 120, 300, 50);
-        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        //     usernamelbl.setForeground(Color.red);
-        //     HomePanel.add(usernamelbl);
+        // JLabel usernamelbl = new JLabel("Welcome, nkmk!");
+        // usernamelbl.setBounds(50, 120, 300, 50);
+        // usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        // usernamelbl.setForeground(Color.red);
+        // HomePanel.add(usernamelbl);
 
         JPanel LeftBlackPanel = new JPanel();
         LeftBlackPanel.setBounds(0, 0, 300, 750);
         LeftBlackPanel.setBackground(Color.black);
         LeftBlackPanel.setLayout(null);
-        
+
         HomePanel.add(LeftBlackPanel);
 
         JLabel LogoName = new JLabel("PooMovie");
@@ -1017,7 +1028,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         BalancePanel.add(BalanceLabel);
 
-        JLabel BalanceValue = new JLabel("$56,00 " );
+        JLabel BalanceValue = new JLabel("$56,00 ");
         BalanceValue.setFont(new Font("Arial", Font.BOLD, 24));
         BalanceValue.setForeground(Color.white);
         BalanceValue.setBounds(10, 55, 100, 30);
@@ -1061,6 +1072,15 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         LeftBlackPanel.add(BookedButton);
 
+        JButton FilterButton = new JButton("aplly filter");
+        FilterButton.setBounds(20, 395, 270, 40);
+        FilterButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        FilterButton.setBackground(Color.gray);
+        FilterButton.setForeground(Color.white);
+        FilterButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        LeftBlackPanel.add(FilterButton);
+
         JButton ChangeAccButton = new JButton("Change accounts");
         ChangeAccButton.setBounds(20, 590, 270, 40);
         ChangeAccButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
@@ -1068,12 +1088,11 @@ public class CinemaApp extends JFrame implements ActionListener  {
         ChangeAccButton.setForeground(Color.white);
         ChangeAccButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
-        ChangeAccButton.addActionListener(e->{
+        ChangeAccButton.addActionListener(e -> {
             MainCardLayout.show(MainPanel, "log in");
         });
 
         LeftBlackPanel.add(ChangeAccButton);
-
 
         JButton LogoutButton = new JButton("Log out");
         LogoutButton.setBounds(20, 650, 270, 40);
@@ -1111,9 +1130,9 @@ public class CinemaApp extends JFrame implements ActionListener  {
         });
 
         HomePanel.add(searchField);
-        
-        //----------Slide Panel--------------------------------
-        
+
+        // ----------Slide Panel--------------------------------
+
         JPanel slidePanel = new JPanel();
         slidePanel.setBounds(330, 78, 840, 350);
         slidePanel.setLayout(null);
@@ -1124,10 +1143,10 @@ public class CinemaApp extends JFrame implements ActionListener  {
         JLabel Img = new JLabel() {
             @Override
             protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            ImageIcon icon = new ImageIcon("");
-            Image img = icon.getImage();
-            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+                super.paintComponent(g);
+                ImageIcon icon = new ImageIcon("");
+                Image img = icon.getImage();
+                g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
             }
         };
         Img.setBounds(0, 0, 840, 350);
@@ -1135,75 +1154,97 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         // Films Grid Section
         JPanel filmsGridPanel = new JPanel();
-        filmsGridPanel.setLayout(new GridLayout(0, 5, 15, 10));  // Unlimited rows, 4 columns
+        filmsGridPanel.setLayout(new GridLayout(0, 5, 15, 10)); // Unlimited rows, 4 columns
         filmsGridPanel.setBackground(new Color(30, 30, 30));
         filmsGridPanel.setBorder(BorderFactory.createLineBorder(new Color(75, 75, 75), 5, true));
 
-        
         JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
         scrollPane.setBounds(330, 450, 840, 280);
         scrollPane.setBorder(null);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getViewport().setBackground(new Color(18, 18, 18));
-        
-        
-        
+
         filmsGridPanel.addMouseWheelListener(e -> {
-            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();//had scroll pa rapport l y
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();// had scroll pa rapport l y
             int notches = e.getWheelRotation();
             int currentValue = verticalScrollBar.getValue();
             int scrollAmount = 30; // Adjust scroll speed
             verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
         });
 
-        
-        for (int i = 0; i < 20; i++) { //hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom 
+        for (int i = 0; i < 20; i++) { // hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom
             final int index = i;
             JPanel filmPanel = new JPanel();
             filmPanel.setLayout(null);
             filmPanel.setPreferredSize(new Dimension(150, 210));
             filmPanel.setBackground(new Color(15, 15, 15));
             filmPanel.setLayout(null);
-            
-            // Hayla hadi :-) 
+
+            // Hayla hadi :-)
             filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));//ta3 ki t intiracti m3a l panel
+                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));// ta3 ki t intiracti m3a l panel
                 }
+
                 public void mouseExited(java.awt.event.MouseEvent evt) {
                     filmPanel.setBorder(null);
                 }
+
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
 
                     JOptionPane.showMessageDialog(null, "Opening film details...");
                 }
             });
-            
+
             filmsGridPanel.add(filmPanel);
         }
 
         HomePanel.add(scrollPane);
-
 
         JLabel nowShowingLabel = new JLabel("Our Movies");
         nowShowingLabel.setBounds(330, 430, 200, 20);
         nowShowingLabel.setForeground(Color.WHITE);
         nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
         HomePanel.add(nowShowingLabel);
-        
+
         return HomePanel;
     }
 
-    public JPanel CreateAdminInterface(){
+    public JPanel CreateAdminInterface() {
         JPanel AdminElements = new JPanel();
         AdminPanel.setBounds(0, 0, 1200, 720);
         AdminPanel.setLayout(null);
         AdminPanel.setBackground(new Color(30, 30, 30));
 
+        JLabel welcomeLabel = new JLabel("Welcome, Admin!");
+        welcomeLabel.setBounds(50, 50, 300, 50);
+        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        welcomeLabel.setForeground(Color.red);
+
+        AdminElements.add(welcomeLabel);
+
+        JButton SettingsButton = new JButton();
+        SettingsButton.setBounds(15, 10, 50, 50);
+        SettingsButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        SettingsButton.setBackground(Color.red);
+        SettingsButton.setForeground(Color.white);
+        SettingsButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        AdminElements.add(SettingsButton);
+
+        JTextField searchField = new JTextField("Type to Search...");
+        searchField.setBounds(75, 15, 1000, 30);
+        searchField.setFont(new Font("Arial", Font.BOLD, 15));
+        searchField.setBackground(new java.awt.Color(0x555555));
+        searchField.setForeground(Color.WHITE);
+        searchField.setCaretColor(Color.WHITE);
+
+        AdminElements.add(searchField);
+
         return AdminElements;
     }
-    
+
     public static void main(String[] args) {
         try {
             CinemaApp Frame = new CinemaApp();
@@ -1223,7 +1264,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
                     field.setForeground(Color.WHITE);
                 }
             }
-    
+
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (field.getText().isEmpty()) {
@@ -1236,16 +1277,16 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == ChangeTheme){
-            if(Counter%2 == 0){
+        if (e.getSource() == ChangeTheme) {
+            if (Counter % 2 == 0) {
                 Counter++;
                 this.BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
                 return;
-            }else{
+            } else {
                 Counter++;
                 this.BlurPanel.setBackground(new java.awt.Color(0x000000));
                 return;
-                
+
             }
         }
     }
