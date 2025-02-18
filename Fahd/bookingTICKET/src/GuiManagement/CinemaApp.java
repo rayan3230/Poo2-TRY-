@@ -136,7 +136,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         MainPanel.add(ClientPanel, "user");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "user");
+        MainCardLayout.show(MainPanel, "open");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -158,12 +158,13 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         BlurPanel.setVisible(true);
 
-        //the background image :
-        Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\BackGround.jpg").getImage();
-        JLabel Background = new JLabel();
-        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
-        Background.setIcon(new ImageIcon(BackgroundImage));
-        BackgroundPanel.setLayout(null);
+        // The background image:
+        ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19704.png");
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel Background = new JLabel(scaledIcon);
+        Background.setBounds(0, 0, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
 
         JPanel RedPanel = new JPanel();
         RedPanel.setBounds(0, 710, 1200, 60);
@@ -194,12 +195,13 @@ public class CinemaApp extends JFrame implements ActionListener  {
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
 
-        //the background image :
-        Image BackgroundImage = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png").getImage();
-        JLabel Background = new JLabel();
-        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
-        Background.setIcon(new ImageIcon(BackgroundImage));
-        BackgroundPanel.setLayout(null);
+        // The background image:
+        ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19257.jpg");
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel Background = new JLabel(scaledIcon);
+        Background.setBounds(0, 0, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
 
         //Blur panel--------------------------------------------------
         BlurPanel2 = new TransparentPanel(0.85f);
@@ -237,7 +239,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BackgroundPanel.setBounds(0, 0, 1200, 750);
 
         //the background image :
-        Image BackgroundImage = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png").getImage();
+        Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19257.jpg").getImage();
         JLabel Background = new JLabel();
         Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
         Background.setIcon(new ImageIcon(BackgroundImage));
@@ -1008,7 +1010,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         ChangeAccButton.addActionListener(e->{
             MainCardLayout.show(MainPanel, "log in");
         });
-        
+
         LeftBlackPanel.add(ChangeAccButton);
 
 
