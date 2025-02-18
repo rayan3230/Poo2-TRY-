@@ -1,18 +1,44 @@
 package Basic_Classes;
 
+import java.util.ArrayList;
+
 
 public class Salle {
 
     private int ID;
     private int capacite;
-    private String type;
-    private int seatID = 0;
-
-    public Salle(int ID, int capacite, String type) {
+    private boolean isAvaible = true;
+    ArrayList<Seat> seats;
+    
+    public Salle(int ID, int capacite, boolean isAvaible) {
         this.ID = ID;
         this.capacite = capacite;
-        this.type = type;
-        this.seatID ++;
+        this.isAvaible = isAvaible;
+        this.seats = new ArrayList<>(capacite);
+        for (int i = 0; i < capacite; i++) {
+            seats.add(new Seat(i, true));
+        }
+    }
+
+    public void addSeat(Seat seat) {
+        seats.add(seat);
+        capacite++;
+        seats.add(new Seat(capacite, true));
+    }
+
+    public void removeSeat(Seat seat) {
+        int removedseat = seat.getSeatID();
+        seats.remove(seat);
+        capacite--;
+        for (int i = removedseat; i < capacite; i++) {
+            seats.get(i).setSeatID(i);
+        }
+    }
+
+    
+
+    public ArrayList<Seat> getSeats() {
+        return seats;
     }
 
     public int getID() {
@@ -23,8 +49,8 @@ public class Salle {
         return capacite;
     }
 
-    public String getType() {
-        return type;
+    public boolean isAvaible() {
+        return isAvaible;
     }
 
     public void setID(int ID) {
@@ -35,19 +61,34 @@ public class Salle {
         this.capacite = capacite;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void ReserveSalle() {
+        this.isAvaible = false;
     }
 
+    public void getAvaibleSeats() {
+        for (Seat seat : seats) {
+            if (seat.isAvaible()) {
+                System.out.println(seat.getSeatID());
+            }
+        }
+    }
+
+    public int getnbrAvaibleSeats() {
+        int nbr = 0;
+        for (Seat seat : seats) {
+            if (seat.isAvaible()) {
+                nbr++;
+            }
+        }
+        return nbr;
+    }
 
     @Override
     public String toString() {
         return "Salle{" +
                 "ID=" + ID +
                 ", capacite=" + capacite +
-                ", type='" + type + '\'' +
-                ", seatID='" + seatID + '\'' +
-                '}';
+                ", seats=" + seats +'}';
     }
 
 }

@@ -12,6 +12,8 @@ public class Movie {
     public LocalTime showeTime;
     public double regularSeatPrice;
     public double vipSeatPrice;
+    public String imagePath;
+    public String status;
    
     // Added field for genre
     public genre genreEnum;
@@ -24,7 +26,7 @@ public class Movie {
     }
 
     public Movie(String Title,String Description, int duration, String genre, String rating,
-            double regularSeatPrice, double vipSeatPrice) {
+            double regularSeatPrice, double vipSeatPrice , String imagePath, String status) {
 
             this.id = id;
             this.Title = Title;
@@ -34,6 +36,8 @@ public class Movie {
             this.rating = rating;
             this.regularSeatPrice = regularSeatPrice;
             this.vipSeatPrice = vipSeatPrice;
+            this.imagePath = imagePath;
+            this.status = status;
      }
 
     // public void printDuration() {

@@ -11,9 +11,9 @@ public class Admin extends Account{
     public String Email;
     public String PhoneNumber;
 
-    public Admin(String FirstName, String LastName, int ID, int Age, String username, String password, String role, String status) {
+    public Admin(String FirstName, String LastName, int ID, int Age, String username, String password, String status) {
 
-        super(username, password, role, status);
+        super(username, password, "Admin", status);
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.ID = ID;

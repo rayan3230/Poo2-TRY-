@@ -12,7 +12,7 @@ public class Hall {
     public boolean HallAvailable;
     
     public Hall(int id , String NameHall, int totalRegularSeats , int totalVipSeats ) {
-        this.id = id;
+        this.id = 1 +id;
         this.NameHall = NameHall;
         this.totalRegularSeats = totalRegularSeats;
         this.totalVipSeats = totalVipSeats;
@@ -25,12 +25,12 @@ public class Hall {
     public void initisSeats(int regularSeats, int vipSeats) {
         seats = new ArrayList<>();
         
-        for (int i = 1; i <= regularSeats; i++) {
-            seats.add(new Seat(i, Seat.SeatType.REGULAR));
+        for (int i = 1; i <= vipSeats; i++) {
+            seats.add(new Seat(i, Seat.SeatType.VIP));
         }
 
-        for (int i = regularSeats + 1; i <= regularSeats + vipSeats; i++) {
-            seats.add(new Seat(i, Seat.SeatType.VIP));
+        for (int i = vipSeats + 1; i <= regularSeats + vipSeats; i++) {
+            seats.add(new Seat(i, Seat.SeatType.REGULAR));
         }
     }
     public boolean cancelReservation(int seatNumber) {
