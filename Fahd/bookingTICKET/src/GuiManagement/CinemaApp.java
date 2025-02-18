@@ -1231,7 +1231,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         AdminElements.add(welcomeLabel);
 
         JPanel SettingsPanel = new JPanel();
-        SettingsPanel.setBounds(0, 0, 300, 750);
+        SettingsPanel.setBounds(-300, 0, 300, 750);
         SettingsPanel.setLayout(null);
         SettingsPanel.setOpaque(true);
         SettingsPanel.setBackground(new Color(0x270000));
@@ -1321,7 +1321,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             }else{
                 searchField.setVisible(false);
                 x+= xVelocity;
-                SettingsPanel.setBounds(x, 78, 840, 350);
+                SettingsPanel.setBounds(x, 0, 300, 750);
                 return;
             }
         });
