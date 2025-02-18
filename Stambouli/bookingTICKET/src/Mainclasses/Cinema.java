@@ -57,7 +57,6 @@ public class Cinema {
         AddTheater(Room6);
         AddTheater(Room7);
 
-       // Initialize movies
 Movie Movie1 = new Movie("Interstellar", Genre.SCIENCE_FICTION, 1.75f,
 "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
 "Christopher Nolan", "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
@@ -239,7 +238,6 @@ public void DisplayMovie() {
         }
     }
     
-    // Removed duplicate method
     
     public void DisplayMoviesByDuration(String duration) {
         for (Movie movie : movies) {
