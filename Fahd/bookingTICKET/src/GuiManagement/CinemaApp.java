@@ -1,6 +1,7 @@
 package GuiManagement;
 
 import MainClasses.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -23,6 +24,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
     public JPanel RegisterPanel;
     public JPanel ForgotPasswordPanel;
     public JPanel ClientPanel;
+    public JPanel AdminPanel;
     
     public JButton ChangeTheme;
 
@@ -911,7 +913,59 @@ public class CinemaApp extends JFrame implements ActionListener  {
     }
 
     public void HandleLogIn(){
+        if (Accounts.isAdmin(email, password)) {
+            JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            currentadmin = Accounts.getAccountadmin(email, password);
+            cardLayout.show(mainPanel, "homeAdmin");
+            return;
+        }
+        if(Accounts.CheckAccountIfCreated(email, password)){
 
+            JOptionPane.showMessageDialog(null, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            currentuser = Accounts.getAccountuser(email, password);
+            cardLayout.show(mainPanel, "homeUser");
+            return;
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void HandleSignIn(){
+        try {
+         
+            if (!Accounts.CheckAccountIfCreated(username.getText(), new String(password.getPassword()))) {
+           
+                String cardNumberText = cardNumber.getText().replaceAll("[^0-9.]", "");
+                String ccvnbrText = ccvnbr.getText().replaceAll("[^0-9]", "");
+    
+                if (cardNumberText.isEmpty() || ccvnbrText.isEmpty()) {
+                    throw new NumberFormatException("Card number or CCV cannot be empty");
+                }
+    
+                double cardNum = Double.parseDouble(cardNumberText);
+                int CCVnbr = Integer.parseInt(ccvnbrText);
+    
+                if (!email.getText().contains("@gmail.com")) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+
+                Accounts.AddAccount(username.getText(), new String(password.getPassword()), email.getText(), cardNum, CCVnbr);
+    
+                JOptionPane.showMessageDialog(null, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Account already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid card number or CCV format.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 
     public JPanel CreateClientInterface(){
@@ -1141,6 +1195,15 @@ public class CinemaApp extends JFrame implements ActionListener  {
         return HomePanel;
     }
 
+    public JPanel CreateAdminInterface(){
+        JPanel AdminElements = new JPanel();
+        AdminPanel.setBounds(0, 0, 1200, 720);
+        AdminPanel.setLayout(null);
+        AdminPanel.setBackground(new Color(30, 30, 30));
+
+        return AdminElements;
+    }
+    
     public static void main(String[] args) {
         try {
             CinemaApp Frame = new CinemaApp();
