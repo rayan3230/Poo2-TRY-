@@ -29,7 +29,7 @@ public class CinemaApp extends JFrame implements ActionListener {
     public Timer timer2;
     public JButton ChangeTheme;
     public int x = -300;
-    public int xVelocity = 15;
+    public int xVelocity = 30;
 
     // decorative Panels ------------------------------------------------
     public TransparentPanel BlurPanel, BlurPanel2, BlurPanel3;
@@ -144,7 +144,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(AdminPanel, "admin");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "open");
+        MainCardLayout.show(MainPanel, "admin");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -1221,7 +1221,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         AdminElements.setBounds(0, 0, 1200, 720);
         AdminElements.setLayout(null);
         AdminElements.setOpaque(true);
-        AdminElements.setBackground(new Color(30, 30, 30));
+        AdminElements.setBackground(new Color(100, 100, 100));
 
         JLabel welcomeLabel = new JLabel("Welcome, Admin!");
         welcomeLabel.setBounds(50, 50, 300, 50);
@@ -1307,17 +1307,63 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         AdminElements.add(searchField);
 
-        JLabel SettingText = new JLabel("Setting");
-        SettingText.setBounds(15, 10, 300, 50);
+        JPanel SearchPanel = new JPanel();
+        SearchPanel.setBounds(75, 15, 1000, 30);
+        SearchPanel.setFont(new Font("Arial", Font.BOLD, 15));
+        SearchPanel.setBackground(new java.awt.Color(0x555555));
+
+        AdminElements.add(SearchPanel);
+
+        JLabel SettingText = new JLabel("Settings");
+        SettingText.setBounds(15, 10, 300, 55);
         SettingText.setForeground(Color.white);
         SettingText.setFont(new Font("Inter", Font.BOLD, 48));
 
         SettingsPanel.add(SettingText);
 
 
+        JPanel EmptyPanel = new JPanel();
+        EmptyPanel.setBounds(300, 0, 900, 750);
+        EmptyPanel.setLayout(null);
+        EmptyPanel.setOpaque(false);
+        EmptyPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                timer2.start();
+            }
+        });
+        EmptyPanel.setVisible(false);
+
+        AdminElements.add(EmptyPanel);
+        
+        JButton ExitSettings = new JButton();
+        ExitSettings.setBounds(270, 10, 20, 20);
+        ExitSettings.setFont(new Font("Inter", Font.BOLD, 2));
+        ExitSettings.setBackground(Color.red);
+        ExitSettings.setForeground(Color.white);
+        ExitSettings.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        timer2 = new Timer(10, e->{
+            if(x == -300){
+                timer2.stop();
+            }else{
+                x-= xVelocity;
+                SettingsPanel.setBounds(x, 0, 300, 750);
+            }
+        });
+
+        ExitSettings.addActionListener(e->{
+            timer2.start();
+            EmptyPanel.setVisible(false);
+            searchField.setVisible(true);
+        });
+
+        SettingsPanel.add(ExitSettings);
+
+
+
         JButton SettingsButton = new JButton();
         SettingsButton.setBounds(15, 10, 40, 40);
-        SettingsButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        SettingsButton.setFont(new Font("Inter", Font.BOLD, 18));
         SettingsButton.setBackground(Color.red);
         SettingsButton.setForeground(Color.white);
         SettingsButton.setUI(new RoundButtonUI(new Color(0x000000)));
@@ -1326,15 +1372,15 @@ public class CinemaApp extends JFrame implements ActionListener {
             if(x == 0){
                 timer.stop();
             }else{
-                searchField.setVisible(false);
                 x+= xVelocity;
                 SettingsPanel.setBounds(x, 0, 300, 750);
             }
         });
 
         SettingsButton.addActionListener(e->{
-            searchField.setVisible(false);
             timer.start();
+            EmptyPanel.setVisible(true);
+            searchField.setVisible(false);
         });
 
         AdminElements.add(SettingsButton);
