@@ -144,7 +144,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(AdminPanel, "admin");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "admin");
+        MainCardLayout.show(MainPanel, "open");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -1238,8 +1238,8 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         AdminElements.add(SettingsPanel);
 
-        JButton AddFilm = new JButton("Favorite");
-        AddFilm.setBounds(20, 215, 270, 40);
+        JButton AddFilm = new JButton("add film");
+        AddFilm.setBounds(20, 75, 270, 40);
         AddFilm.setFont(new Font("Segoe UI", Font.BOLD, 18));
         AddFilm.setBackground(Color.gray);
         AddFilm.setForeground(Color.white);
@@ -1248,7 +1248,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         SettingsPanel.add(AddFilm);
 
         JButton BonusesButton = new JButton("Bonuses");
-        BonusesButton.setBounds(20, 275, 270, 40);
+        BonusesButton.setBounds(20, 135, 270, 40);
         BonusesButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         BonusesButton.setBackground(Color.gray);
         BonusesButton.setForeground(Color.white);
@@ -1257,7 +1257,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         SettingsPanel.add(BonusesButton);
 
         JButton BookedButton = new JButton("Booked");
-        BookedButton.setBounds(20, 335, 270, 40);
+        BookedButton.setBounds(20, 195, 270, 40);
         BookedButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         BookedButton.setBackground(Color.gray);
         BookedButton.setForeground(Color.white);
@@ -1266,13 +1266,14 @@ public class CinemaApp extends JFrame implements ActionListener {
         SettingsPanel.add(BookedButton);
 
         JButton FilterButton = new JButton("aplly filter");
-        FilterButton.setBounds(20, 395, 270, 40);
+        FilterButton.setBounds(20, 255, 270, 40);
         FilterButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         FilterButton.setBackground(Color.gray);
         FilterButton.setForeground(Color.white);
         FilterButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
         SettingsPanel.add(FilterButton);
+
 
         JButton ChangeAccButton = new JButton("Change accounts");
         ChangeAccButton.setBounds(20, 590, 270, 40);
@@ -1306,9 +1307,16 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         AdminElements.add(searchField);
 
+        JLabel SettingText = new JLabel("Setting");
+        SettingText.setBounds(15, 10, 300, 50);
+        SettingText.setForeground(Color.white);
+        SettingText.setFont(new Font("Inter", Font.BOLD, 48));
+
+        SettingsPanel.add(SettingText);
+
 
         JButton SettingsButton = new JButton();
-        SettingsButton.setBounds(15, 10, 50, 50);
+        SettingsButton.setBounds(15, 10, 40, 40);
         SettingsButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         SettingsButton.setBackground(Color.red);
         SettingsButton.setForeground(Color.white);
@@ -1317,21 +1325,25 @@ public class CinemaApp extends JFrame implements ActionListener {
         timer = new Timer(10, e->{
             if(x == 0){
                 timer.stop();
-                return;
             }else{
                 searchField.setVisible(false);
                 x+= xVelocity;
                 SettingsPanel.setBounds(x, 0, 300, 750);
-                return;
             }
         });
 
         SettingsButton.addActionListener(e->{
+            searchField.setVisible(false);
             timer.start();
         });
 
         AdminElements.add(SettingsButton);
-        
+
+        AdminElements.setComponentZOrder(SettingsPanel, 0);
+        AdminElements.setComponentZOrder(SettingsButton, 1);
+        AdminElements.setComponentZOrder(searchField, 1);
+        AdminElements.setComponentZOrder(welcomeLabel, 1);
+
 
         return AdminElements;
     }
