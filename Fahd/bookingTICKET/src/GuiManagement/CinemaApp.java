@@ -136,7 +136,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         MainPanel.add(ClientPanel, "user");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "open");
+        MainCardLayout.show(MainPanel, "user");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -910,7 +910,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         HomePanel.setLayout(null);
         HomePanel.setBounds(0, 0, 1200, 750);
         HomePanel.setOpaque(true);
-        HomePanel.setBackground(new Color(18, 18, 18));
+        HomePanel.setBackground(new Color(30, 30, 30));
     
         // Only add welcome label if UserAccount is not null
         // if (UserAccount != null) {
@@ -928,7 +928,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         JPanel LeftBlackPanel = new JPanel();
         LeftBlackPanel.setBounds(0, 0, 300, 750);
-        LeftBlackPanel.setBackground(new Color(24, 24, 24));
+        LeftBlackPanel.setBackground(Color.black);
         LeftBlackPanel.setLayout(null);
         
         HomePanel.add(LeftBlackPanel);
@@ -972,7 +972,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BalancePanel.add(Dipostebalance);
 
         JButton FavoriteButton = new JButton("Favorite");
-        FavoriteButton.setBounds(20, 250, 270, 40);
+        FavoriteButton.setBounds(20, 215, 270, 40);
         FavoriteButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         FavoriteButton.setBackground(Color.gray);
         FavoriteButton.setForeground(Color.white);
@@ -981,7 +981,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         LeftBlackPanel.add(FavoriteButton);
 
         JButton BonusesButton = new JButton("Bonuses");
-        BonusesButton.setBounds(20, 350, 270, 40);
+        BonusesButton.setBounds(20, 275, 270, 40);
         BonusesButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         BonusesButton.setBackground(Color.gray);
         BonusesButton.setForeground(Color.white);
@@ -990,7 +990,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         LeftBlackPanel.add(BonusesButton);
 
         JButton BookedButton = new JButton("Booked");
-        BookedButton.setBounds(20, 450, 270, 40);
+        BookedButton.setBounds(20, 335, 270, 40);
         BookedButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
         BookedButton.setBackground(Color.gray);
         BookedButton.setForeground(Color.white);
@@ -998,28 +998,35 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         LeftBlackPanel.add(BookedButton);
 
+        JButton ChangeAccButton = new JButton("Change accounts");
+        ChangeAccButton.setBounds(20, 590, 270, 40);
+        ChangeAccButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        ChangeAccButton.setBackground(Color.gray);
+        ChangeAccButton.setForeground(Color.white);
+        ChangeAccButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        ChangeAccButton.addActionListener(e->{
+            MainCardLayout.show(MainPanel, "log in");
+        });
+        
+        LeftBlackPanel.add(ChangeAccButton);
+
+
         JButton LogoutButton = new JButton("Log out");
-        LogoutButton.setBounds(20, 550, 270, 40);
+        LogoutButton.setBounds(20, 650, 270, 40);
         LogoutButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        LogoutButton.setBackground(Color.gray);
+        LogoutButton.setBackground(Color.red);
         LogoutButton.setForeground(Color.white);
         LogoutButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
         LeftBlackPanel.add(LogoutButton);
 
-        JPanel SearchPanel = new JPanel();
-        SearchPanel.setBounds(330, 20, 600, 40);
-        SearchPanel.setLayout(null);
-        SearchPanel.setBackground(new Color(30, 30, 30));
-
-        HomePanel.add(SearchPanel);
-
         JTextField searchField = new JTextField("Type to Search...");
-        searchField.setBounds(10, 5, 380, 30);
-        searchField.setBackground(new Color(30, 30, 30));
-        searchField.setForeground(Color.GRAY);
-
-        searchField.setBorder(null);
+        searchField.setBounds(330, 20, 700, 40);
+        searchField.setFont(new Font("Arial", Font.BOLD, 15));
+        searchField.setBackground(new java.awt.Color(0x222222));
+        searchField.setForeground(Color.WHITE);
+        searchField.setCaretColor(Color.WHITE);
 
         searchField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
@@ -1040,8 +1047,88 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         });
 
-        SearchPanel.add(searchField);
-    
+        HomePanel.add(searchField);
+        
+        //----------Slide Panel--------------------------------
+        
+        JPanel slidePanel = new JPanel();
+        slidePanel.setBounds(330, 78, 840, 350);
+        slidePanel.setLayout(null);
+        slidePanel.setBackground(new Color(0, 0, 0));
+
+        HomePanel.add(slidePanel);
+
+        JLabel Img = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            ImageIcon icon = new ImageIcon("");
+            Image img = icon.getImage();
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        Img.setBounds(0, 0, 840, 350);
+        slidePanel.add(Img);
+
+        // Films Grid Section
+        JPanel filmsGridPanel = new JPanel();
+        filmsGridPanel.setLayout(new GridLayout(0, 5, 15, 10));  // Unlimited rows, 4 columns
+        filmsGridPanel.setBackground(new Color(30, 30, 30));
+        filmsGridPanel.setBorder(BorderFactory.createLineBorder(new Color(75, 75, 75), 5, true));
+
+        
+        JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
+        scrollPane.setBounds(330, 450, 840, 280);
+        scrollPane.setBorder(null);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getViewport().setBackground(new Color(18, 18, 18));
+        
+        
+        
+        filmsGridPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();//had scroll pa rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        
+        for (int i = 0; i < 20; i++) { //hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom 
+            final int index = i;
+            JPanel filmPanel = new JPanel();
+            filmPanel.setLayout(null);
+            filmPanel.setPreferredSize(new Dimension(150, 210));
+            filmPanel.setBackground(new Color(15, 15, 15));
+            filmPanel.setLayout(null);
+            
+            // Hayla hadi :-) 
+            filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));//ta3 ki t intiracti m3a l panel
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(null);
+                }
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                    JOptionPane.showMessageDialog(null, "Opening film details...");
+                }
+            });
+            
+            filmsGridPanel.add(filmPanel);
+        }
+
+        HomePanel.add(scrollPane);
+
+
+        JLabel nowShowingLabel = new JLabel("Our Movies");
+        nowShowingLabel.setBounds(330, 430, 200, 20);
+        nowShowingLabel.setForeground(Color.WHITE);
+        nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        HomePanel.add(nowShowingLabel);
+        
         return HomePanel;
     }
 
