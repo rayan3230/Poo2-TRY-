@@ -7,8 +7,9 @@ import javax.swing.*;
 public class UiClass extends JFrame {
     public JPanel mainPanel;
     public CardLayout cardLayout;
-    public GestionAccounts Accounts;  // Field declaration
+    public GestionAccounts Accounts;  
     public Accounts currentuser ;
+    public Accounts currentadmin;  
     
     public UiClass(){
         // Initialize Accounts in the constructor
@@ -32,15 +33,19 @@ public class UiClass extends JFrame {
         JPanel registerPanel = createRegisterPanel();
         JPanel forgotPasswordPanel = createForgotPasswordPanel();
         JPanel homeUserPanel = createHomeUserPanel(currentuser);
+        JPanel homeAdminPanel = createHomeAdminPanel(currentadmin);
 
         mainPanel.add(welcomePanel, "welcome");
         mainPanel.add(loginPanel, "login");
         mainPanel.add(registerPanel, "register");
         mainPanel.add(forgotPasswordPanel, "forgotPassword");
         mainPanel.add(homeUserPanel, "homeUser");
+        mainPanel.add(homeAdminPanel, "homeAdmin");
 
         setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "welcome");
+        cardLayout.show(mainPanel, "homeUser");
+        
+   
     }
 
     
@@ -323,7 +328,7 @@ public class UiClass extends JFrame {
                 JOptionPane.showMessageDialog(null, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }else{
-                HandleLogin(txtEmail, txtPassword);
+                HandleLogin(txtEmail, txtPassword  );
             }
 
 
@@ -630,8 +635,12 @@ public class UiClass extends JFrame {
                 return;
             }
 
-           HandleSignIn(UserNameField, PasswordsField, EmailField, CardNmbrField, CCVNmbrField);
-            cardLayout.show(mainPanel, "login");
+           if(HandleSignIn(UserNameField, PasswordsField, EmailField, CardNmbrField, CCVNmbrField)){
+                 cardLayout.show(mainPanel, "login");
+           }else{
+            JOptionPane.showMessageDialog(registerPanel, "Registration failed, please try again", "Registration Error", JOptionPane.ERROR_MESSAGE);
+ 
+           }
 
         });
 
@@ -774,62 +783,317 @@ public class UiClass extends JFrame {
     }
     
 
-    public JPanel createHomeUserPanel(Accounts account){
-
+    public JPanel createHomeUserPanel(Accounts UserAccount) {
         JPanel homePanel = new JPanel();
         homePanel.setLayout(null);
         homePanel.setBounds(0, 0, 1200, 750);
+    
+        // Only add welcome label if UserAccount is not null
+        // if (UserAccount != null) {
+        //     JLabel usernamelbl = new JLabel("Welcome, " + UserAccount.username + "!");
+        //     usernamelbl.setBounds(50, 120, 300, 50);
+        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        //     usernamelbl.setForeground(Color.red);
+        //     homePanel.add(usernamelbl);
+        // } else {
+        //     JLabel usernamelbl = new JLabel("Welcome, nkmk!");
+        //     usernamelbl.setBounds(50, 120, 300, 50);
+        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        //     usernamelbl.setForeground(Color.red);
+        //     homePanel.add(usernamelbl);
+        // }
+
+//--------------Background panel(main)
+        JPanel BackgroundPanel = new JPanel();
+        BackgroundPanel.setBounds(0, 0, 1200, 750);
+        BackgroundPanel.setBackground(new Color(18, 18, 18));
+        BackgroundPanel.setLayout(null);
+        homePanel.add(BackgroundPanel);
+
+        //--------------Left black panel
+        JPanel LeftBlackPanel = new JPanel();
+        LeftBlackPanel.setBounds(0, 0, 300, 750);
+        LeftBlackPanel.setBackground(new Color(24, 24, 24));
+        LeftBlackPanel.setLayout(null);
+        BackgroundPanel.add(LeftBlackPanel);
+
+        JLabel LogoName = new JLabel("CINEMACITY");
+        LogoName.setBounds(17, -124, 300, 300);
+        LogoName.setForeground(Color.RED);
+        LogoName.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        LeftBlackPanel.add(LogoName);
+
+        JPanel BalancePanel = new JPanel();
+        BalancePanel.setBounds(20, 70, 260, 120);
+        BalancePanel.setLayout(null);
+        BalancePanel.setBackground(new Color(30, 30, 30));
+        LeftBlackPanel.add(BalancePanel);
+
+        JLabel BalanceLabel = new JLabel(" Balance");
+        BalanceLabel.setBounds(10, 10, 100, 30);
+        BalanceLabel.setForeground(Color.white);
+        BalanceLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        BalancePanel.add(BalanceLabel);
+
+        JLabel BalanceValue = new JLabel("$56,00 " );
+        BalanceValue.setFont(new Font("Arial", Font.BOLD, 24));
+        BalanceValue.setForeground(Color.RED);//new Color(183, 255, 0)
+        BalanceValue.setBounds(10, 55, 100, 30);
+        BalancePanel.add(BalanceValue);
+
+        RoundedButton Dipostebalance = new RoundedButton("",10);
+        Dipostebalance.setBounds(190, 30, 50, 50);
+        Dipostebalance.setBackground(Color.RED);//new Color(183, 255, 0)
+        Dipostebalance.addActionListener(e -> {
+            JOptionPane.showMessageDialog(homePanel, "Deposit functionality is not available yet.");
+        });
+        BalancePanel.add(Dipostebalance);
 
 
 
+//-----------------------Left side buttons-----------------------
+        JButton FavoriteButton = new JButton("Favorite");
+        FavoriteButton.setBounds(20, 250, 210, 40);
+        FavoriteButton.setBackground(new Color(30, 30, 30));
+        FavoriteButton.setForeground(Color.WHITE);
+        FavoriteButton.setHorizontalAlignment(SwingConstants.LEFT);
+        FavoriteButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+        LeftBlackPanel.add(FavoriteButton);
+
+        
+        JButton BonusesButton = new JButton("Bonuses");
+        BonusesButton.setBounds(20, 350, 210, 40);
+        BonusesButton.setBackground(new Color(30, 30, 30));
+        BonusesButton.setForeground(Color.WHITE);
+        BonusesButton.setHorizontalAlignment(SwingConstants.LEFT);
+        BonusesButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+        LeftBlackPanel.add(BonusesButton);
+
+        JButton BookedButton = new JButton("Booked");
+        BookedButton.setBounds(20, 450, 210, 40);
+        BookedButton.setBackground(new Color(30, 30, 30));
+        BookedButton.setForeground(Color.WHITE);
+        BookedButton.setHorizontalAlignment(SwingConstants.LEFT);
+        BookedButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+        LeftBlackPanel.add(BookedButton);
+        
+        JButton LogoutButton = new JButton("Log out...");
+        LogoutButton.setBounds(20, 550, 210, 40);
+        LogoutButton.setBackground(new Color(30, 30, 30));
+        LogoutButton.setForeground(Color.WHITE);
+        LogoutButton.setHorizontalAlignment(SwingConstants.LEFT);
+        LogoutButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+        LeftBlackPanel.add(LogoutButton);
+
+
+        //----------Main Panels things----------
+
+        JPanel SearchPanel = new JPanel();
+        SearchPanel.setBounds(330, 20, 600, 40);
+        SearchPanel.setLayout(null);
+        SearchPanel.setBackground(new Color(30, 30, 30));
+        BackgroundPanel.add(SearchPanel);
+
+        JTextField searchField = new JTextField("Type to Search...");
+        searchField.setBounds(10, 5, 380, 30);
+        searchField.setBackground(new Color(30, 30, 30));
+        searchField.setForeground(Color.GRAY);
+        searchField.setBorder(null);
+
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().equals("Type to Search...")) {
+                    searchField.setText("");
+                    searchField.setForeground(Color.WHITE);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().isEmpty() || searchField.getText().trim().isEmpty()) {
+                    searchField.setText("Type to Search...");
+                    searchField.setForeground(Color.gray);
+                }
+            }
+
+        });
+        SearchPanel.add(searchField);
+
+    //----------Slide Panel--------------------------------
+    
+        JPanel slidePanel = new JPanel();
+        slidePanel.setBounds(330, 78, 840, 350);
+        slidePanel.setLayout(null);
+        slidePanel.setBackground(new Color(30, 30, 30));
+        BackgroundPanel.add(slidePanel);
+
+        JLabel Img = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            ImageIcon icon = new ImageIcon("Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Avatar.jpg");
+            Image img = icon.getImage();
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        Img.setBounds(0, 0, 840, 350);
+        slidePanel.add(Img);
+
+        // Films Grid Section
+        JPanel filmsGridPanel = new JPanel();
+        filmsGridPanel.setLayout(new GridLayout(0, 4, 10, 10));  // Unlimited rows, 4 columns
+        filmsGridPanel.setBackground(new Color(18, 18, 18));
+
+        
+        JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
+        scrollPane.setBounds(330, 450, 840, 280);
+        scrollPane.setBorder(null);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getViewport().setBackground(new Color(18, 18, 18));
+        
+        
+        filmsGridPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();//had scroll pa rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        
+        for (int i = 0; i < 20; i++) { //hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom 
+            final int index = i;
+            JPanel filmPanel = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    ImageIcon icon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/film" + (index + 1) + ".jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
+                    Image img = icon.getImage();
+                    g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+                }
+            };
+            filmPanel.setLayout(null);
+            filmPanel.setPreferredSize(new Dimension(200, 130));
+            filmPanel.setBackground(new Color(24, 24, 24));
+            filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            
+            // Hayla hadi :-) 
+            filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));//ta3 ki t intiracti m3a l panel
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(null);
+                }
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                    JOptionPane.showMessageDialog(null, "Opening film details...");
+                }
+            });
+            
+            filmsGridPanel.add(filmPanel);
+        }
+
+        BackgroundPanel.add(scrollPane);
+
+
+        JLabel nowShowingLabel = new JLabel("Our Movies");
+        nowShowingLabel.setBounds(330, 430, 200, 20);
+        nowShowingLabel.setForeground(Color.WHITE);
+        nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        BackgroundPanel.add(nowShowingLabel);
+
+        
+
+
+
+
+        
+
+
+
+
+    
         return homePanel;
     }
 
+    public JPanel createHomeAdminPanel(Accounts AdminAccounts){
+        JPanel homeAdminPanel = new JPanel();
+        homeAdminPanel.setLayout(null);
+        homeAdminPanel.setBounds(0, 0, 1200, 750);
+        homeAdminPanel.setBackground(Color.BLUE);
+        JLabel welcomeLabel = new JLabel("Welcome, Admin!");
+        welcomeLabel.setBounds(50, 50, 300, 50);
+        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        welcomeLabel.setForeground(Color.red);
+        homeAdminPanel.add(welcomeLabel);
 
+        return homeAdminPanel;
+    }
    
 
-    public void HandleLogin(String user, String password){
-        if(Accounts.CheckAccountIfCreated(user, password)){
+    public void HandleLogin(String email, String password ){
+        if (Accounts.isAdmin(email, password)) {
+            JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            currentadmin = Accounts.getAccountadmin(email, password);
+            cardLayout.show(mainPanel, "homeAdmin");
+            return;
+        }
+        if(Accounts.CheckAccountIfCreated(email, password)){
+
             JOptionPane.showMessageDialog(null, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            // Updated panel name to match the one added in the constructor:
+            currentuser = Accounts.getAccountuser(email, password);
             cardLayout.show(mainPanel, "homeUser");
+            return;
+
         } else {
             JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
 
-    public void HandleSignIn(JTextField username, JPasswordField password, JTextField email, JTextField cardNumber, JTextField ccvnbr) {
+    public Boolean HandleSignIn(JTextField username, JPasswordField password, JTextField email, JTextField cardNumber, JTextField ccvnbr) {
         try {
+         
             if (!Accounts.CheckAccountIfCreated(username.getText(), new String(password.getPassword()))) {
+           
                 String cardNumberText = cardNumber.getText().replaceAll("[^0-9.]", "");
                 String ccvnbrText = ccvnbr.getText().replaceAll("[^0-9]", "");
-
+    
                 if (cardNumberText.isEmpty() || ccvnbrText.isEmpty()) {
                     throw new NumberFormatException("Card number or CCV cannot be empty");
                 }
-
+    
                 double cardNum = Double.parseDouble(cardNumberText);
                 int CCVnbr = Integer.parseInt(ccvnbrText);
-
-                if (!email.getText().contains("@")) {
+    
+                if (!email.getText().contains("@gmail.com")) {
                     JOptionPane.showMessageDialog(null, "Please enter a valid email address", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
+                    return false;
                 }
 
                 Accounts.AddAccount(username.getText(), new String(password.getPassword()), email.getText(), cardNum, CCVnbr);
-
+    
                 JOptionPane.showMessageDialog(null, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Account already exists.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid card number or CCV format.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
-    private void addPlaceholderBehavior(JTextField textField, String placeholder) {
+
+
+
+    public void addPlaceholderBehavior(JTextField textField, String placeholder) {
         textField.setText(placeholder);
         textField.setForeground(Color.GRAY);
 
@@ -851,6 +1115,8 @@ public class UiClass extends JFrame {
             }
         });
     }
+
+
 
     public static void main(String[] args) {
         try {

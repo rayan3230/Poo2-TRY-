@@ -13,33 +13,20 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
     //Action manager--------------------------------------------------
     public static int Counter = 0;
+    
     //cinema manager---------------------------------------------------
     public Cinema CinemaManager;
 
     //log in elements : 
     public JPanel LogInPanel;
-    public JPanel LogInElements;
-
-    //sign in elements : 
     public JPanel SignInPanel;
-    public JPanel SignInElements;
+    public JPanel RegisterPanel;
+    public JPanel ForgotPasswordPanel;
+    public JPanel ClientPanel;
+    
     public JButton ChangeTheme;
 
-    //Finish signing in panel ------------------------------------------------
-    public JPanel RegisterPanel;
-    public JPanel RegisterElements;
-
-    //forgot password panels---------------------------------------------
-    public JPanel ForgotPasswordPanel;
-    public JPanel ForgotPasswordElements;
-
-    //Client Panel ----------------------------------------------------
-    public JPanel ClientPanel;
-    public JPanel ClientInterface;
-
-
     //decorative Panels ------------------------------------------------
-    public JPanel SignInBackgroundPanel, LogInBackgroundJPanel, RegisterBackgroundJPanel, ForgotPasswordBackground, ClientBackground;
     public TransparentPanel BlurPanel, BlurPanel2;
 
     //layout manager -----------------------------------------------------
@@ -70,8 +57,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         SignInPanel.setLayout(null);
         SignInPanel.setOpaque(false);
 
-        SignInBackgroundPanel = CreateBackGround1Panel();
-        SignInElements = CreateSignInElementsPanel();
+        JPanel SignInBackgroundPanel = CreateBackGround1Panel();
+        JPanel SignInElements = CreateSignInElementsPanel();
 
         SignInPanel.add(SignInBackgroundPanel);
         SignInPanel.add(SignInElements);
@@ -87,8 +74,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         RegisterPanel.setLayout(null);
         RegisterPanel.setOpaque(false);
 
-        RegisterBackgroundJPanel = CreateBackGround2Panel();
-        RegisterElements = CreateRegisterElements();
+        JPanel RegisterBackgroundJPanel = CreateBackGround2Panel();
+        JPanel RegisterElements = CreateRegisterElements();
 
         RegisterPanel.add(RegisterBackgroundJPanel);
         RegisterPanel.add(RegisterElements);
@@ -104,8 +91,8 @@ public class CinemaApp extends JFrame implements ActionListener  {
         LogInPanel.setLayout(null);
         LogInPanel.setOpaque(false);
 
-        LogInBackgroundJPanel = CreateBackGround1Panel();
-        LogInElements = CreateLogInElementsPanel();
+        JPanel LogInBackgroundJPanel = CreateBackGround1Panel();
+        JPanel LogInElements = CreateLogInElementsPanel();
 
         LogInPanel.add(LogInBackgroundJPanel);
         LogInPanel.add(LogInElements);
@@ -114,14 +101,15 @@ public class CinemaApp extends JFrame implements ActionListener  {
         LogInPanel.setComponentZOrder(LogInBackgroundJPanel, 1);
 
 
+
         //forgot password panel --------------------------------------------
         ForgotPasswordPanel = new JPanel();
         ForgotPasswordPanel.setBounds(0, 0, 1200, 750);
         ForgotPasswordPanel.setLayout(null);
         ForgotPasswordPanel.setOpaque(false);
 
-        ForgotPasswordBackground = CreateBackGround3Panel();
-        ForgotPasswordElements = CreateForgotPasswordPanel();
+        JPanel ForgotPasswordBackground = CreateBackGround3Panel();
+        JPanel ForgotPasswordElements = CreateForgotPasswordPanel();
 
         ForgotPasswordPanel.add(ForgotPasswordBackground);
         ForgotPasswordPanel.add(ForgotPasswordElements);
@@ -130,14 +118,25 @@ public class CinemaApp extends JFrame implements ActionListener  {
         ForgotPasswordPanel.setComponentZOrder(ForgotPasswordBackground, 1);
 
 
+        //Client / User Interface --------------------------------------------
+        ClientPanel = new JPanel();
+        ClientPanel.setBounds(0, 0, 1200, 750);
+        ClientPanel.setLayout(null);
+        ClientPanel.setOpaque(false);
+
+        JPanel ClientElements = CreateClientInterface();
+
+        ClientPanel.add(ClientElements);
+
         //main panel management-----------------------------------------------
         MainPanel.add(SignInPanel, "open");
         MainPanel.add(RegisterPanel, "register");
         MainPanel.add(LogInPanel, "log in");
         MainPanel.add(ForgotPasswordPanel, "forgot Password");
+        MainPanel.add(ClientPanel, "user");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "open");
+        MainCardLayout.show(MainPanel, "user");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -277,7 +276,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
     public JPanel CreateSignInElementsPanel(){
         // sign in elements panel ------------------------------------
-        SignInElements = new JPanel();
+        JPanel SignInElements = new JPanel();
         SignInElements.setBounds(0, 0, 1200, 750);
         SignInElements.setLayout(null);
         SignInElements.setOpaque(false);
@@ -577,7 +576,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
     public JPanel CreateRegisterElements(){
         //Finish signing in panel ------------------------------------------------
-        RegisterElements = new JPanel();
+        JPanel RegisterElements = new JPanel();
         RegisterElements.setBounds(0, 0, 1200, 750);
         RegisterElements.setLayout(null);
         RegisterElements.setOpaque(false);
@@ -889,6 +888,259 @@ public class CinemaApp extends JFrame implements ActionListener  {
         return forgotPanel;
     }
     
+    public void ChnageTheme(){
+        if(Counter%2 == 0){
+            Counter++;
+            this.BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
+            return;
+            
+        }else{
+            Counter++;
+            this.BlurPanel.setBackground(new java.awt.Color(0x000000));
+            return;
+        }
+    }
+
+    public void HandleLogIn(){
+
+    }
+
+    public JPanel CreateClientInterface(){
+        JPanel HomePanel = new JPanel();
+        HomePanel.setLayout(null);
+        HomePanel.setBounds(0, 0, 1200, 750);
+        HomePanel.setOpaque(true);
+        HomePanel.setBackground(new Color(30, 30, 30));
+    
+        // Only add welcome label if UserAccount is not null
+        // if (UserAccount != null) {
+        //     JLabel usernamelbl = new JLabel("Welcome, " + UserAccount.username + "!");
+        //     usernamelbl.setBounds(50, 120, 300, 50);
+        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        //     usernamelbl.setForeground(Color.red);
+        //     HomePanel.add(usernamelbl);
+        // } else {
+        //     JLabel usernamelbl = new JLabel("Welcome, nkmk!");
+        //     usernamelbl.setBounds(50, 120, 300, 50);
+        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        //     usernamelbl.setForeground(Color.red);
+        //     HomePanel.add(usernamelbl);
+
+        JPanel LeftBlackPanel = new JPanel();
+        LeftBlackPanel.setBounds(0, 0, 300, 750);
+        LeftBlackPanel.setBackground(Color.black);
+        LeftBlackPanel.setLayout(null);
+        
+        HomePanel.add(LeftBlackPanel);
+
+        JLabel LogoName = new JLabel("PooMovie");
+        LogoName.setBounds(17, -124, 300, 300);
+        LogoName.setForeground(Color.red);
+        LogoName.setFont(new Font("Segoe UI", Font.BOLD, 25));
+
+        LeftBlackPanel.add(LogoName);
+
+        JPanel BalancePanel = new JPanel();
+        BalancePanel.setBounds(20, 70, 260, 120);
+        BalancePanel.setLayout(null);
+        BalancePanel.setBackground(new Color(30, 30, 30));
+
+        LeftBlackPanel.add(BalancePanel);
+
+        JLabel BalanceLabel = new JLabel(" Balance");
+        BalanceLabel.setBounds(10, 10, 100, 30);
+        BalanceLabel.setForeground(Color.white);
+        BalanceLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+
+        BalancePanel.add(BalanceLabel);
+
+        JLabel BalanceValue = new JLabel("$56,00 " );
+        BalanceValue.setFont(new Font("Arial", Font.BOLD, 24));
+        BalanceValue.setForeground(Color.white);
+        BalanceValue.setBounds(10, 55, 100, 30);
+
+        BalancePanel.add(BalanceValue);
+
+        JButton Dipostebalance = new JButton("");
+        Dipostebalance.setBounds(190, 30, 50, 50);
+        Dipostebalance.setBackground(Color.red);
+        Dipostebalance.addActionListener(e -> {
+            JOptionPane.showMessageDialog(HomePanel, "Deposit functionality is not available yet.");
+        });
+        Dipostebalance.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        BalancePanel.add(Dipostebalance);
+
+        JButton FavoriteButton = new JButton("Favorite");
+        FavoriteButton.setBounds(20, 215, 270, 40);
+        FavoriteButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        FavoriteButton.setBackground(Color.gray);
+        FavoriteButton.setForeground(Color.white);
+        FavoriteButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        LeftBlackPanel.add(FavoriteButton);
+
+        JButton BonusesButton = new JButton("Bonuses");
+        BonusesButton.setBounds(20, 275, 270, 40);
+        BonusesButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        BonusesButton.setBackground(Color.gray);
+        BonusesButton.setForeground(Color.white);
+        BonusesButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        LeftBlackPanel.add(BonusesButton);
+
+        JButton BookedButton = new JButton("Booked");
+        BookedButton.setBounds(20, 335, 270, 40);
+        BookedButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        BookedButton.setBackground(Color.gray);
+        BookedButton.setForeground(Color.white);
+        BookedButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        LeftBlackPanel.add(BookedButton);
+
+        JButton ChangeAccButton = new JButton("Change accounts");
+        ChangeAccButton.setBounds(20, 590, 270, 40);
+        ChangeAccButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        ChangeAccButton.setBackground(Color.gray);
+        ChangeAccButton.setForeground(Color.white);
+        ChangeAccButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        ChangeAccButton.addActionListener(e->{
+            MainCardLayout.show(MainPanel, "log in");
+        });
+        
+        LeftBlackPanel.add(ChangeAccButton);
+
+
+        JButton LogoutButton = new JButton("Log out");
+        LogoutButton.setBounds(20, 650, 270, 40);
+        LogoutButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        LogoutButton.setBackground(Color.red);
+        LogoutButton.setForeground(Color.white);
+        LogoutButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        LeftBlackPanel.add(LogoutButton);
+
+        JTextField searchField = new JTextField("Type to Search...");
+        searchField.setBounds(330, 20, 700, 40);
+        searchField.setFont(new Font("Arial", Font.BOLD, 15));
+        searchField.setBackground(new java.awt.Color(0x222222));
+        searchField.setForeground(Color.WHITE);
+        searchField.setCaretColor(Color.WHITE);
+
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().equals("Type to Search...")) {
+                    searchField.setText("");
+                    searchField.setForeground(Color.WHITE);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().isEmpty() || searchField.getText().trim().isEmpty()) {
+                    searchField.setText("Type to Search...");
+                    searchField.setForeground(Color.gray);
+                }
+            }
+
+        });
+
+        HomePanel.add(searchField);
+        
+        //----------Slide Panel--------------------------------
+        
+        JPanel slidePanel = new JPanel();
+        slidePanel.setBounds(330, 78, 840, 350);
+        slidePanel.setLayout(null);
+        slidePanel.setBackground(new Color(0, 0, 0));
+
+        HomePanel.add(slidePanel);
+
+        JLabel Img = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            ImageIcon icon = new ImageIcon("");
+            Image img = icon.getImage();
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        Img.setBounds(0, 0, 840, 350);
+        slidePanel.add(Img);
+
+        // Films Grid Section
+        JPanel filmsGridPanel = new JPanel();
+        filmsGridPanel.setLayout(new GridLayout(0, 5, 15, 10));  // Unlimited rows, 4 columns
+        filmsGridPanel.setBackground(new Color(30, 30, 30));
+        filmsGridPanel.setBorder(BorderFactory.createLineBorder(new Color(75, 75, 75), 5, true));
+
+        
+        JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
+        scrollPane.setBounds(330, 450, 840, 280);
+        scrollPane.setBorder(null);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getViewport().setBackground(new Color(18, 18, 18));
+        
+        
+        
+        filmsGridPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();//had scroll pa rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        
+        for (int i = 0; i < 20; i++) { //hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom 
+            final int index = i;
+            JPanel filmPanel = new JPanel();
+            filmPanel.setLayout(null);
+            filmPanel.setPreferredSize(new Dimension(150, 210));
+            filmPanel.setBackground(new Color(15, 15, 15));
+            filmPanel.setLayout(null);
+            
+            // Hayla hadi :-) 
+            filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));//ta3 ki t intiracti m3a l panel
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(null);
+                }
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                    JOptionPane.showMessageDialog(null, "Opening film details...");
+                }
+            });
+            
+            filmsGridPanel.add(filmPanel);
+        }
+
+        HomePanel.add(scrollPane);
+
+
+        JLabel nowShowingLabel = new JLabel("Our Movies");
+        nowShowingLabel.setBounds(330, 430, 200, 20);
+        nowShowingLabel.setForeground(Color.WHITE);
+        nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        HomePanel.add(nowShowingLabel);
+        
+        return HomePanel;
+    }
+
+    public static void main(String[] args) {
+        try {
+            CinemaApp Frame = new CinemaApp();
+            Frame.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // Helper method for placeholder text behavior
     public void addPlaceholderBehavior(JTextField field, String placeholder) {
         field.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -910,40 +1162,6 @@ public class CinemaApp extends JFrame implements ActionListener  {
         });
     }
 
-    public void ChnageTheme(){
-        if(Counter%2 == 0){
-            Counter++;
-            this.BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
-            return;
-            
-        }else{
-            Counter++;
-            this.BlurPanel.setBackground(new java.awt.Color(0x000000));
-            return;
-        }
-    }
-
-    public void HandleLogIn(){
-
-    }
-
-    public JPanel CreateClientInterface(){
-        ClientInterface = new JPanel();
-        ClientInterface.setLayout(null);
-        ClientInterface.setBounds(0, 0, 1200, 750);
-
-
-
-        return ClientInterface;
-    }
-    public static void main(String[] args) {
-        try {
-            CinemaApp Frame = new CinemaApp();
-            Frame.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == ChangeTheme){

@@ -4,20 +4,25 @@ import java.util.ArrayList;
 
 public class GestionAccounts {
     public ArrayList<Accounts> accounts = new ArrayList<>();
+    public ArrayList<Accounts> AdminAccounts = new ArrayList<>();
+
+    public GestionAccounts(){
+        accounts.add(new Accounts("q", "q", "q@gmail.com", 1234567890, 123));
+        // Add admin account
+        AdminAccounts.add(new Accounts("admin", "admin", "admin@gmail.com", 0, 0));
+    }
     
     public void AddAccount(String username, String password ,String email,double cardNumber , int CCVnbr) {
         for (Accounts account : accounts){
             if (account.username.equals(username)) {
                 System.out.println("Account already exists");
                 return;
-            }else{
-                accounts.add(new Accounts(username, password, email ,cardNumber, CCVnbr));
-                System.out.println("Account created successfully");
-                return;
             }
         }
+        accounts.add(new Accounts(username, password, email ,cardNumber, CCVnbr));
+        System.out.println("Account created successfully");
 
-   }
+   }        
    public Boolean CheckAccountIfCreated(String Email , String password){
     for (Accounts account : accounts){
             if (account.email.equals(Email) && account.password.equals(password)) {
@@ -55,7 +60,40 @@ public class GestionAccounts {
         }
         System.out.println("Account not found");
     }
-   }
+    public boolean isAdmin(String email, String password) {
+        for (Accounts admin : AdminAccounts) {
+            if (admin.email.equals(email) && admin.password.equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public Accounts getAccountuser(String email, String password) {
+        for (Accounts account : accounts) {
+            if (account.email.equals(email)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public Accounts getAccountadmin(String email, String password) {
+        for (Accounts account : AdminAccounts) {
+            if (account.email.equals(email)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+
+    public void addBalance(Accounts account , double amount){
+        account.balance += amount;
+        System.out.println("Your new balance is: " + account.cardNumber);
+
+    }
+}
+
 
   
 
