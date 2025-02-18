@@ -27,7 +27,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
     public JButton ChangeTheme;
 
     //decorative Panels ------------------------------------------------
-    public TransparentPanel BlurPanel, BlurPanel2;
+    public TransparentPanel BlurPanel, BlurPanel2, BlurPanel3;
 
     //layout manager -----------------------------------------------------
     public CardLayout MainCardLayout;
@@ -108,7 +108,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         ForgotPasswordPanel.setLayout(null);
         ForgotPasswordPanel.setOpaque(false);
 
-        JPanel ForgotPasswordBackground = CreateBackGround3Panel();
+        JPanel ForgotPasswordBackground = CreateBackGround2Panel();
         JPanel ForgotPasswordElements = CreateForgotPasswordPanel();
 
         ForgotPasswordPanel.add(ForgotPasswordBackground);
@@ -151,7 +151,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BackgroundPanel.setOpaque(false);
 
         //Blur panel--------------------------------------------------
-        this.BlurPanel = new TransparentPanel(0.85f);
+        this.BlurPanel = new TransparentPanel(0.75f);
         BlurPanel.setBounds(0, 0, 1200, 750);
         BlurPanel.setLayout(null);
         BlurPanel.setBackground(new java.awt.Color(0x000000));
@@ -159,7 +159,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BlurPanel.setVisible(true);
 
         // The background image:
-        ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19704.png");
+        ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-rebirth-of-7680x4320-20257.jpg");
         Image originalImage = originalIcon.getImage();
         Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
@@ -194,22 +194,24 @@ public class CinemaApp extends JFrame implements ActionListener  {
 
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
+        BackgroundPanel.setLayout(null);
+        BackgroundPanel.setOpaque(false);
+
+        //Blur panel--------------------------------------------------
+        this.BlurPanel2 = new TransparentPanel(0.5f);
+        BlurPanel2.setBounds(0, 0, 1200, 750);
+        BlurPanel2.setLayout(null);
+        BlurPanel2.setBackground(new java.awt.Color(0x000000));
+
+        BlurPanel2.setVisible(true);
 
         // The background image:
-        ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19257.jpg");
+        ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19704.png");
         Image originalImage = originalIcon.getImage();
         Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel Background = new JLabel(scaledIcon);
         Background.setBounds(0, 0, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
-
-        //Blur panel--------------------------------------------------
-        BlurPanel2 = new TransparentPanel(0.85f);
-        BlurPanel2.setBounds(0, 0, 1200, 750);
-        BlurPanel2.setLayout(null);
-        BlurPanel2.setBackground(new java.awt.Color(0x888888));
-
-        BlurPanel2.setVisible(true);
 
         JPanel RedPanel = new JPanel();
         RedPanel.setBounds(0, 710, 1200, 60);
@@ -230,6 +232,7 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BackgroundPanel.setComponentZOrder(BlurPanel2, 0);
         BackgroundPanel.setComponentZOrder(BluePanel, 0);
         BackgroundPanel.setComponentZOrder(RedPanel, 1);
+
 
         return BackgroundPanel;
     }
@@ -237,21 +240,24 @@ public class CinemaApp extends JFrame implements ActionListener  {
     public JPanel CreateBackGround3Panel(){
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
-
-        //the background image :
-        Image BackgroundImage = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19257.jpg").getImage();
-        JLabel Background = new JLabel();
-        Background.setBounds(-15, -15, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
-        Background.setIcon(new ImageIcon(BackgroundImage));
         BackgroundPanel.setLayout(null);
+        BackgroundPanel.setOpaque(false);
 
         //Blur panel--------------------------------------------------
-        BlurPanel2 = new TransparentPanel(0.85f);
-        BlurPanel2.setBounds(0, 0, 1200, 750);
-        BlurPanel2.setLayout(null);
-        BlurPanel2.setBackground(new java.awt.Color(0x000000));
+        this.BlurPanel3 = new TransparentPanel(0.4f);
+        BlurPanel3.setBounds(0, 0, 1200, 750);
+        BlurPanel3.setLayout(null);
+        BlurPanel3.setBackground(new java.awt.Color(0x000000));
 
-        BlurPanel2.setVisible(true);
+        BlurPanel3.setVisible(true);
+
+        // The background image:
+        ImageIcon originalIcon = new ImageIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\IntoTheSpiderVerse.jpg");
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        JLabel Background = new JLabel(scaledIcon);
+        Background.setBounds(0, 0, BackgroundPanel.getWidth(), BackgroundPanel.getHeight());
 
         JPanel RedPanel = new JPanel();
         RedPanel.setBounds(0, 710, 1200, 60);
@@ -266,12 +272,13 @@ public class CinemaApp extends JFrame implements ActionListener  {
         BackgroundPanel.add(BluePanel);
 
         BackgroundPanel.add(Background);
-        BackgroundPanel.add(BlurPanel2);
+        BackgroundPanel.add(BlurPanel3);
 
         BackgroundPanel.setComponentZOrder(Background, 2);
-        BackgroundPanel.setComponentZOrder(BlurPanel2, 0);
+        BackgroundPanel.setComponentZOrder(BlurPanel3, 0);
         BackgroundPanel.setComponentZOrder(BluePanel, 0);
         BackgroundPanel.setComponentZOrder(RedPanel, 1);
+
 
         return BackgroundPanel;
     }
