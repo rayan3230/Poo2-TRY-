@@ -1,9 +1,10 @@
 package Manageclasses;
+
 public class Movie {
 
     public enum Genre {
-        Action, Comedy, Drama, Horror, Science_Fiction, Thriller, Adventure, Fantasy, Mystery, Romance, Crime,
-        Animation, Music, Documentary, Family, Sport, News, Travel, Game, History
+        ACTION, COMEDY, DRAMA, HORROR, SCIENCE_FICTION, THRILLER, ADVENTURE, FANTASY, MYSTERY, ROMANCE, CRIME,
+ANIMATION, MUSIC, DOCUMENTARY, FAMILY, SPORT, NEWS, TRAVEL, GAME, HISTORY
     }
 
     public enum AgeRating {
