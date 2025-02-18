@@ -819,7 +819,7 @@ public class UiClass extends JFrame {
 
         JLabel LogoName = new JLabel("CINEMACITY");
         LogoName.setBounds(17, -124, 300, 300);
-        LogoName.setForeground(new Color(183, 255, 0));
+        LogoName.setForeground(Color.RED);
         LogoName.setFont(new Font("Segoe UI", Font.BOLD, 25));
         LeftBlackPanel.add(LogoName);
 
@@ -837,13 +837,13 @@ public class UiClass extends JFrame {
 
         JLabel BalanceValue = new JLabel("$56,00 " );
         BalanceValue.setFont(new Font("Arial", Font.BOLD, 24));
-        BalanceValue.setForeground(new Color(183, 255, 0));
+        BalanceValue.setForeground(Color.RED);//new Color(183, 255, 0)
         BalanceValue.setBounds(10, 55, 100, 30);
         BalancePanel.add(BalanceValue);
 
         RoundedButton Dipostebalance = new RoundedButton("",10);
         Dipostebalance.setBounds(190, 30, 50, 50);
-        Dipostebalance.setBackground(new Color(183, 255, 0));
+        Dipostebalance.setBackground(Color.RED);//new Color(183, 255, 0)
         Dipostebalance.addActionListener(e -> {
             JOptionPane.showMessageDialog(homePanel, "Deposit functionality is not available yet.");
         });
@@ -962,14 +962,14 @@ public class UiClass extends JFrame {
             verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
         });
 
-        // Add more film panels (e.g., 12 instead of 8)
-        for (int i = 0; i < 20; i++) {
+        
+        for (int i = 0; i < 20; i++) { //hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom 
             final int index = i;
             JPanel filmPanel = new JPanel() {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
-                    ImageIcon icon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/film" + (index + 1) + ".jpg");
+                    ImageIcon icon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/film" + (index + 1) + ".jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
                     Image img = icon.getImage();
                     g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
                 }
@@ -979,16 +979,16 @@ public class UiClass extends JFrame {
             filmPanel.setBackground(new Color(24, 24, 24));
             filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
             
-            // Add mouse listener for hover effect
+            // Hayla hadi :-) 
             filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    filmPanel.setBorder(BorderFactory.createLineBorder(new Color(183, 255, 0), 2));//ta3 ki t intiracti m3a l panel
+                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));//ta3 ki t intiracti m3a l panel
                 }
                 public void mouseExited(java.awt.event.MouseEvent evt) {
                     filmPanel.setBorder(null);
                 }
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    // TODO: Add action when film is clicked
+
                     JOptionPane.showMessageDialog(null, "Opening film details...");
                 }
             });
@@ -998,11 +998,11 @@ public class UiClass extends JFrame {
 
         BackgroundPanel.add(scrollPane);
 
-        // Add title above the grid
-        JLabel nowShowingLabel = new JLabel("Now Showing");
+
+        JLabel nowShowingLabel = new JLabel("Our Movies");
         nowShowingLabel.setBounds(330, 430, 200, 20);
         nowShowingLabel.setForeground(Color.WHITE);
-        nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
         BackgroundPanel.add(nowShowingLabel);
 
         
