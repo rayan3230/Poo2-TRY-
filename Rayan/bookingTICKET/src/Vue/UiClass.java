@@ -803,13 +803,14 @@ public class UiClass extends JFrame {
         //     homePanel.add(usernamelbl);
         // }
 
-
+//--------------Background panel(main)
         JPanel BackgroundPanel = new JPanel();
         BackgroundPanel.setBounds(0, 0, 1200, 750);
         BackgroundPanel.setBackground(new Color(18, 18, 18));
         BackgroundPanel.setLayout(null);
         homePanel.add(BackgroundPanel);
 
+        //--------------Left black panel
         JPanel LeftBlackPanel = new JPanel();
         LeftBlackPanel.setBounds(0, 0, 300, 750);
         LeftBlackPanel.setBackground(new Color(24, 24, 24));
@@ -848,33 +849,44 @@ public class UiClass extends JFrame {
         });
         BalancePanel.add(Dipostebalance);
 
-        RoundedButton FavoriteButton = new RoundedButton("Favorite",10);
-        FavoriteButton.setBounds(20, 250, 270, 40);
-        FavoriteButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        FavoriteButton.setBackground(Color.gray);
-        FavoriteButton.setForeground(Color.white);
+
+
+//-----------------------Left side buttons-----------------------
+        JButton FavoriteButton = new JButton("Favorite");
+        FavoriteButton.setBounds(20, 250, 210, 40);
+        FavoriteButton.setBackground(new Color(30, 30, 30));
+        FavoriteButton.setForeground(Color.WHITE);
+        FavoriteButton.setHorizontalAlignment(SwingConstants.LEFT);
+        FavoriteButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
         LeftBlackPanel.add(FavoriteButton);
 
-        RoundedButton BonusesButton = new RoundedButton("Bonuses",10);
-        BonusesButton.setBounds(20, 350, 270, 40);
-        BonusesButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        BonusesButton.setBackground(Color.gray);
-        BonusesButton.setForeground(Color.white);
+        
+        JButton BonusesButton = new JButton("Bonuses");
+        BonusesButton.setBounds(20, 350, 210, 40);
+        BonusesButton.setBackground(new Color(30, 30, 30));
+        BonusesButton.setForeground(Color.WHITE);
+        BonusesButton.setHorizontalAlignment(SwingConstants.LEFT);
+        BonusesButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
         LeftBlackPanel.add(BonusesButton);
 
-        RoundedButton BookedButton = new RoundedButton("Booked",10);
-        BookedButton.setBounds(20, 450, 270, 40);
-        BookedButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        BookedButton.setBackground(Color.gray);
-        BookedButton.setForeground(Color.white);
+        JButton BookedButton = new JButton("Booked");
+        BookedButton.setBounds(20, 450, 210, 40);
+        BookedButton.setBackground(new Color(30, 30, 30));
+        BookedButton.setForeground(Color.WHITE);
+        BookedButton.setHorizontalAlignment(SwingConstants.LEFT);
+        BookedButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
         LeftBlackPanel.add(BookedButton);
-
-        RoundedButton LogoutButton = new RoundedButton("Log out",10);
-        LogoutButton.setBounds(20, 550, 270, 40);
-        LogoutButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        LogoutButton.setBackground(Color.gray);
-        LogoutButton.setForeground(Color.white);
+        
+        JButton LogoutButton = new JButton("Log out...");
+        LogoutButton.setBounds(20, 550, 210, 40);
+        LogoutButton.setBackground(new Color(30, 30, 30));
+        LogoutButton.setForeground(Color.WHITE);
+        LogoutButton.setHorizontalAlignment(SwingConstants.LEFT);
+        LogoutButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
         LeftBlackPanel.add(LogoutButton);
+
+
+        //----------Main Panels things----------
 
         JPanel SearchPanel = new JPanel();
         SearchPanel.setBounds(330, 20, 600, 40);
@@ -908,7 +920,98 @@ public class UiClass extends JFrame {
         });
         SearchPanel.add(searchField);
 
+    //----------Slide Panel--------------------------------
+    
+        JPanel slidePanel = new JPanel();
+        slidePanel.setBounds(330, 78, 840, 350);
+        slidePanel.setLayout(null);
+        slidePanel.setBackground(new Color(30, 30, 30));
+        BackgroundPanel.add(slidePanel);
+
+        JLabel Img = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            ImageIcon icon = new ImageIcon("Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Avatar.jpg");
+            Image img = icon.getImage();
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        Img.setBounds(0, 0, 840, 350);
+        slidePanel.add(Img);
+
+        // Films Grid Section
+        JPanel filmsGridPanel = new JPanel();
+        filmsGridPanel.setLayout(new GridLayout(0, 4, 10, 10));  // Unlimited rows, 4 columns
+        filmsGridPanel.setBackground(new Color(18, 18, 18));
+
         
+        JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
+        scrollPane.setBounds(330, 450, 840, 280);
+        scrollPane.setBorder(null);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getViewport().setBackground(new Color(18, 18, 18));
+        
+        
+        filmsGridPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();//had scroll pa rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        // Add more film panels (e.g., 12 instead of 8)
+        for (int i = 0; i < 20; i++) {
+            final int index = i;
+            JPanel filmPanel = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    ImageIcon icon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/film" + (index + 1) + ".jpg");
+                    Image img = icon.getImage();
+                    g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+                }
+            };
+            filmPanel.setLayout(null);
+            filmPanel.setPreferredSize(new Dimension(200, 130));
+            filmPanel.setBackground(new Color(24, 24, 24));
+            filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            
+            // Add mouse listener for hover effect
+            filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(BorderFactory.createLineBorder(new Color(183, 255, 0), 2));//ta3 ki t intiracti m3a l panel
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(null);
+                }
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    // TODO: Add action when film is clicked
+                    JOptionPane.showMessageDialog(null, "Opening film details...");
+                }
+            });
+            
+            filmsGridPanel.add(filmPanel);
+        }
+
+        BackgroundPanel.add(scrollPane);
+
+        // Add title above the grid
+        JLabel nowShowingLabel = new JLabel("Now Showing");
+        nowShowingLabel.setBounds(330, 430, 200, 20);
+        nowShowingLabel.setForeground(Color.WHITE);
+        nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        BackgroundPanel.add(nowShowingLabel);
+
+        
+
+
+
+
+        
+
 
 
 
