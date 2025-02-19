@@ -6,6 +6,7 @@ import java.util.Scanner;
 import Basic_Classes.Diffusion;
 import Basic_Classes.Film;
 import Basic_Classes.Salle;
+import Basic_Classes.Caisse;
 
 public class Admin extends User {
 
@@ -24,14 +25,19 @@ public class Admin extends User {
         this.email = email;
     }
 
-    public void addmovie(List<Film> movies, Film film){
+    public void addmovie(List<Film> movies, Film film, Caisse caisse) {
+        Scanner sc = new Scanner (System.in);
         if (film != null) {
             movies.add(film);
+            int price;
+            System.out.println("How much did the movie cost? Enter the price :");
+            price = sc.nextInt();
+            caisse.DecrementCurrentamount(price);
             System.out.println("Movie added: " + film.getTitle());
         } else {
             System.out.println("Invalid movie.");
         }
-
+        sc.close();
     }
 
     public void deletemovie(List<Film> movies, String title){
@@ -105,29 +111,40 @@ public class Admin extends User {
 
     }
 
-    public void AddSalle(List<Salle> salles, Salle salle){
+    public void AddSalle(List<Salle> salles, Salle salle, Caisse caisse) {
+        Scanner sc = new Scanner (System.in);
+        int price;
         if (salle != null) {
             salles.add(salle);
+            System.out.println("How much did the Theater cost to open? Please enter the amount :");
+            price = sc.nextInt();
+            caisse.DecrementCurrentamount(price);
             System.out.println("Salle added: " + salle.getID());
         } else {
             System.out.println("Invalid salle.");
         }
-
+        sc.close();
     }
 
-    public void RemoveSalle(List<Salle> salles, int ID){
+    public void RemoveSalle(List<Salle> salles, int ID, Caisse caisse) {
+        Scanner sc = new Scanner (System.in);
+        int price;
         for (Salle salle : salles) {
             if (salle.getID() == ID) {
                 salles.remove(salle);
+                System.out.println("How much did the Theater cost to close? Please enter the amount :");
+                price = sc.nextInt();
+                caisse.DecrementCurrentamount(price);
                 System.out.println("Salle deleted: " + salle.getID());
+                sc.close();
                 return;
             }
         }
         System.out.println("Salle not found.");
-
+        sc.close();
     }
 
-    public void ModifySalle(List<Salle> salles, Salle salle){
+    public void ModifySalle(List<Salle> salles, Salle salle, Caisse caisse) {
         System.out.println("What do you want to modify in the salle? :" + salle.getID());
         System.out.println("1. ID");
         System.out.println("2. Capacite");
@@ -162,7 +179,11 @@ public class Admin extends User {
             case 2:
                 System.out.println("Enter the new capacite: ");
                 int newcapacite = sc.nextInt();
+                int price;
                 salle.setCapacite(newcapacite);
+                System.out.println("How much did it cost to modify the theater? Please enter the amount :");
+                price = sc.nextInt();
+                caisse.DecrementCurrentamount(price);
                 System.out.println("Capacite modified. The new capacite is: " + salle.getCapacite());
                 break;
         }
