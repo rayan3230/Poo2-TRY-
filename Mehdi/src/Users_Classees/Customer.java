@@ -234,8 +234,8 @@ public class Customer extends User {
         nbrTickets = sc.nextInt();
         for (Film film : movies) {
             if (film.getTitle().equals(choice)) {
-                if ((film.getAgeRestriction() = "Under_10" && customer.getAge() < 10) || (film.getAgeRestriction() = "Under_12" && customer.getAge() < 12) || (film.getAgeRestriction() = "Under_16" && customer.getAge() < 16) || (film.getAgeRestriction() = "Under_18" && customer.getAge() < 18)) {
-                    System.out.println("Sorry, but you aren't old enough to watch this movie");
+                if ((film.getAgeRestriction() == "Under_10" && customer.getAge() < 10) || (film.getAgeRestriction() == "Under_12" && customer.getAge() < 12) || (film.getAgeRestriction() == "Under_16" && customer.getAge() < 16) || (film.getAgeRestriction() == "Under_18" && customer.getAge() < 18)) {
+                    System.out.println("Sorry, but you aren't old enough to watch this movie :" + film.getTitle());
                 } else {
                     for (Diffusion diffusion : diffusions) {
                         if (diffusion.getFilm().getTitle().equals(choice)) {
