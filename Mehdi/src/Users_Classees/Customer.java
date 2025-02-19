@@ -9,18 +9,24 @@ import Basic_Classes.Ticket;
 import Basic_Classes.Caisse;
 
 public class Customer extends User {
-
+    
     public String getUsername() {
         return super.getusername();
     }
 
     private String email;
     private String phone;
+    private int age;
+    private int cardnumber;
+    private int cardpass;
 
-    public Customer(String username, String password, String role, String email, String phone) {
+    public Customer(String username, String password, String role, String email, String phone, int age, int cardnumber, int cardpass) {
         super(username, password, role);
         this.email = email;
         this.phone = phone;
+        this.age = age;
+        this.cardnumber = cardnumber;
+        this.cardpass = cardpass;
     }
 
     public String getEmail() {
@@ -31,12 +37,36 @@ public class Customer extends User {
         return phone;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public int getCardnumber() {
+        return cardnumber;
+    }
+
+    public int getCardpass() {
+        return cardpass;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setAge(int age){
+        this.age = age;
+    }
+
+    public void setCardnumber(int cardnumber) {
+        this.cardnumber = cardnumber;
+    }
+
+    public void setCardpass(int cardpass) {
+        this.cardpass = cardpass;
     }
 
     public void WatchMovieList(List<Film> movies){
@@ -204,12 +234,16 @@ public class Customer extends User {
         nbrTickets = sc.nextInt();
         for (Film film : movies) {
             if (film.getTitle().equals(choice)) {
-                for (Diffusion diffusion : diffusions) {
-                    if (diffusion.getFilm().getTitle().equals(choice)) {
-                        if (diffusion.getSalle().getnbrAvaibleSeats() > nbrTickets) {
-                            j++;
-                            System.out.println(j +"- Available seats for " + diffusion.toString());
-                        }    
+                if ((film.getAgeRestriction() = "Under_10" && customer.getAge() < 10) || (film.getAgeRestriction() = "Under_12" && customer.getAge() < 12) || (film.getAgeRestriction() = "Under_16" && customer.getAge() < 16) || (film.getAgeRestriction() = "Under_18" && customer.getAge() < 18)) {
+                    System.out.println("Sorry, but you aren't old enough to watch this movie");
+                } else {
+                    for (Diffusion diffusion : diffusions) {
+                        if (diffusion.getFilm().getTitle().equals(choice)) {
+                            if (diffusion.getSalle().getnbrAvaibleSeats() > nbrTickets) {
+                                j++;
+                                System.out.println(j +"- Available seats for " + diffusion.toString());
+                            }    
+                        }
                     }
                 }
             }
