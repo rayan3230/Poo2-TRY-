@@ -144,7 +144,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(AdminPanel, "admin");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "admin");
+        MainCardLayout.show(MainPanel, "user");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -1162,10 +1162,17 @@ public class CinemaApp extends JFrame implements ActionListener {
         filmsGridPanel.setBackground(new Color(30, 30, 30));
         filmsGridPanel.setBorder(BorderFactory.createLineBorder(new Color(75, 75, 75), 5, true));
 
+        JPanel EmptyPanel = new JPanel();
+        EmptyPanel.setLayout(null);
+        EmptyPanel.setBounds(0, 0, 1200, 750);
+        EmptyPanel.setOpaque(false);
+
+        EmptyPanel.add(filmsGridPanel);
+        EmptyPanel.add(slidePanel);
+
         JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
         scrollPane.setBounds(330, 450, 840, 280);
         scrollPane.setBorder(null);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getViewport().setBackground(new Color(18, 18, 18));
 
@@ -1178,7 +1185,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
 
         for (int i = 0; i < 20; i++) { // hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom
-            final int index = i;
+
             JPanel filmPanel = new JPanel();
             filmPanel.setLayout(null);
             filmPanel.setPreferredSize(new Dimension(150, 210));
