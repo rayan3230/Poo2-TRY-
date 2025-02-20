@@ -43,7 +43,7 @@ public class UiClass extends JFrame {
         mainPanel.add(homeAdminPanel, "homeAdmin");
 
         setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "homeAdmin");
+        cardLayout.show(mainPanel, "homeUser");
         
    
     }

@@ -13,14 +13,15 @@ public class Client extends Account{
     public int Age;
     public String Email;
     public String PhoneNumber;
+    public double cardNum;
+    public int CCVnbr;
     public List<String> Intrests = new ArrayList<String>();
 
-    public Client(String firstName, String lastName, int age, String email, String phoneNumber, String username, String password) {
+    public Client(String firstName, String lastName, String email, String phoneNumber, String username, String password) {
 
         super(username, password);
         this.FirstName = firstName;
         this.LastName = lastName;
-        this.Age = age;
         this.Email = email;
         this.PhoneNumber = phoneNumber;
     }

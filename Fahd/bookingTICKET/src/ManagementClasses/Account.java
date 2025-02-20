@@ -8,6 +8,10 @@ public class Account {
     public String role;
     public String status;
 
+    enum Status{
+        admin, manager
+    }
+
     // Admin Account
     public Account(String username, String password, String role, String status) {
 

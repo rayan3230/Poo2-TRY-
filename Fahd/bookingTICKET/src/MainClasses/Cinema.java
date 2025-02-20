@@ -2,7 +2,6 @@ package MainClasses;
 
 import ManagementClasses.*;
 import Personnel.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,6 +30,15 @@ public class Cinema {
             "Seats" };
 
     public Cinema() {
+
+        Client client1 = new Client("fahd", "djedi", "djedifahd0@gmail.com", 
+                "0000", "fahd", "yuji");
+
+        addClient(client1);
+
+        Admin admin1 = new Admin("fahd", "djedi", "djedifahd0@gmail.com", "yuji", "manager");
+
+        addAdmin(admin1);
 
         this.movies = new ArrayList<Movie>();
         this.theaters = new ArrayList<Theater>();
@@ -121,6 +129,66 @@ public class Cinema {
         AddMovie(Movie9);
 
     }
+
+    public boolean isAdmin(String email, String password ){
+        //Check if the admin credentials match with the stored admin credentials
+        for(Admin admin : admins){
+            if((admin.username.equals(email) || admin.Email.equals(email))
+                && (admin.password.equals(password))){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    public boolean isClient(String email, String password ){
+        //Check if the client credentials match with the stored client credentials
+        for(Client client : clients){
+            if((client.username.equals(email) || client.Email.equals(email))
+                && (client.password.equals(password))){
+                return true;
+            }
+        }
+        
+        //If client credentials don't match, add the client to the clients list
+        return false;
+    }
+
+    public Client getClient(String username, String password){
+        //Check if the client credentials match with the stored client credentials
+        for(Client client : clients){
+            if((client.username.equals(username) || client.Email.equals(username) || client.PhoneNumber.equals(username))
+                && (client.password.equals(password))){
+                return client;
+            }
+        }
+        
+        //If client credentials don't match, return null
+        return null;
+    }
+
+    public Admin getAdmin(String username, String password){
+        //Check if the client credentials match with the stored client credentials
+        for(Admin admin : admins){
+            if((admin.username.equals(username) || admin.Email.equals(username) || admin.PhoneNumber.equals(username))
+                && (admin.password.equals(password))){
+                return admin;
+            }
+        }
+        
+        //If client credentials don't match, return null
+        return null;
+    }
+
+    public void addClient(Client client) {
+        clients.add(client);
+    }
+
+    public void addAdmin(Admin admin) {
+        admins.add(admin);
+    }
+
 
     public void AddMovie(Movie movie) {
         movies.add(movie);
