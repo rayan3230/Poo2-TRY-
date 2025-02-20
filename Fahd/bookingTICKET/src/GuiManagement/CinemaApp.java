@@ -985,6 +985,8 @@ public class CinemaApp extends JFrame implements ActionListener {
                 CinemaManager.addClient(ClientUser);
     
                 JOptionPane.showMessageDialog(null, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                
+                MainCardLayout.show(MainPanel, "log in");
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Account already exists.", "Error", JOptionPane.ERROR_MESSAGE);
