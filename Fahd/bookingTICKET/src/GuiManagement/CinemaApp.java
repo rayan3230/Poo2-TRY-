@@ -475,29 +475,29 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField EmailField = new JTextField("   Email or username or phone number");
         EmailField.setBounds(50, 120, 340, 40);
         EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        EmailField.setForeground(Color.black);
-        EmailField.setCaretColor(Color.black);
+        EmailField.setForeground(Color.white);
+        EmailField.setCaretColor(Color.white);
         // EmailField.setBackground(new Color(80, 77, 74, 230));
-        EmailField.setBackground(new Color(0xDDDDDD));
+        EmailField.setBackground(new Color(0x444444));
         EmailField.setOpaque(true);
-        EmailField.setBorder(null);
 
         EmailField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (EmailField.getText().equals("   Email or phone number")) {
+                if (EmailField.getText().equals("   Email or username or phone number")) {
                     EmailField.setText("");
-                    EmailField.setForeground(Color.WHITE);
+                    EmailField.setForeground(Color.white);
                 }
             }
 
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (EmailField.getText().isEmpty() || EmailField.getText().trim().isEmpty()) {
-                    EmailField.setText("   Email or phone number");
-                    EmailField.setForeground(Color.gray);
+                    EmailField.setText("Type to Search...");
+                    EmailField.setForeground(Color.white);
                 }
             }
+
         });
 
         RectangleLogin.add(EmailField);
@@ -505,18 +505,17 @@ public class CinemaApp extends JFrame implements ActionListener {
         JPasswordField PasswordField = new JPasswordField("Password");
         PasswordField.setBounds(50, 200, 340, 40);
         PasswordField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        PasswordField.setForeground(Color.black);
-        PasswordField.setCaretColor(Color.black);
+        PasswordField.setForeground(Color.white);
+        PasswordField.setCaretColor(Color.white);
         // PasswordField.setBackground(new Color(80, 77, 74, 230));
-        PasswordField.setBackground(new Color(0xDDDDDD));
+        PasswordField.setBackground(new Color(0x444444));
         PasswordField.setOpaque(true);
-        PasswordField.setBorder(null);
         PasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (PasswordField.getText().equals("Password")) {
                     PasswordField.setText("");
-                    PasswordField.setForeground(Color.black);
+                    PasswordField.setForeground(Color.white);
                 }
             }
 
@@ -524,7 +523,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (PasswordField.getText().isEmpty() || PasswordField.getPassword().length == 0) {
                     PasswordField.setText("Password");
-                    PasswordField.setForeground(Color.black);
+                    PasswordField.setForeground(Color.white);
                 }
             }
         });
@@ -588,7 +587,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         returnbtnWelcomePanel.setBounds(50, 350, 340, 40);
         returnbtnWelcomePanel.setFont(new Font("Segoe UI", Font.BOLD, 20));
         returnbtnWelcomePanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        returnbtnWelcomePanel.setBackground(new java.awt.Color(0xAAAAAA));
+        returnbtnWelcomePanel.setBackground(new java.awt.Color(0x777777));
         returnbtnWelcomePanel.setForeground(Color.white);
         returnbtnWelcomePanel.setBorder(BorderFactory.createEmptyBorder());
         returnbtnWelcomePanel.setUI(new RoundButtonUI(new Color(0x000000)));
@@ -622,10 +621,10 @@ public class CinemaApp extends JFrame implements ActionListener {
         RegisterElements.add(imageLabel);
 
         // signUP panel -----------------------------------------------------------
-        TransparentPanel SignUpPanel = new TransparentPanel(0.5f);
+        TransparentPanel SignUpPanel = new TransparentPanel(0.9f);
         SignUpPanel.setBounds(400, 100, 440, 620);
         SignUpPanel.setLayout(null);
-        SignUpPanel.setBackground(Color.LIGHT_GRAY);
+        SignUpPanel.setBackground(Color.black);
 
         JLabel SigninLabel = new JLabel("Sign In");
         SigninLabel.setBounds(50, 40, 200, 50);
@@ -640,7 +639,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         UserNameField.setForeground(Color.gray);
         UserNameField.setCaretColor(Color.white);
         // EmailField.setBackground(new Color(80, 77, 74, 230));
-        UserNameField.setBackground(new Color(0xDDDDDD));
+        UserNameField.setBackground(new Color(0x444444));
         UserNameField.setOpaque(true);
         UserNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
         UserNameField.setBorder(null);
@@ -668,7 +667,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         PasswordsField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         PasswordsField.setForeground(Color.gray);
         PasswordsField.setCaretColor(Color.white);
-        PasswordsField.setBackground(new Color(0xDDDDDD));
+        PasswordsField.setBackground(new Color(0x444444));
         PasswordsField.setOpaque(true);
         // PasswordsField.setBorder(BorderFactory.CreateeMatteBorder(1, 1, 1, 1,
         // Color.gray));
@@ -697,7 +696,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         EmailField.setForeground(Color.gray);
         EmailField.setCaretColor(Color.white);
-        EmailField.setBackground(new Color(0xDDDDDD));
+        EmailField.setBackground(new Color(0x444444));
         EmailField.setOpaque(true);
         EmailField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
         EmailField.setBorder(null);
@@ -725,7 +724,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         CardNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         CardNmbrField.setForeground(Color.gray);
         CardNmbrField.setCaretColor(Color.white);
-        CardNmbrField.setBackground(new Color(0xDDDDDD));
+        CardNmbrField.setBackground(new Color(0x444444));
         CardNmbrField.setOpaque(true);
         CardNmbrField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
         CardNmbrField.setBorder(null);
@@ -753,7 +752,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         CCVNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         CCVNmbrField.setForeground(Color.gray);
         CCVNmbrField.setCaretColor(Color.white);
-        CCVNmbrField.setBackground(new Color(0xDDDDDD));
+        CCVNmbrField.setBackground(new Color(0x444444));
         CCVNmbrField.setOpaque(true);
         CCVNmbrField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
         CCVNmbrField.setBorder(null);
@@ -936,7 +935,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         if (CinemaManager.isAdmin(email, password)) {
             JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success",
             JOptionPane.INFORMATION_MESSAGE);
-            AdminUser = CinemaManager.getAdmin(AdminUser.username, AdminUser.password);
+            AdminUser = CinemaManager.getAdmin(email, password);
             MainCardLayout.show(MainPanel, "admin");
             return true;
         }
@@ -944,7 +943,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         if (CinemaManager.isClient(email, password)) {
             JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success",
             JOptionPane.INFORMATION_MESSAGE);
-            ClientUser = CinemaManager.getClient(ClientUser.username, ClientUser.password);
+            ClientUser = CinemaManager.getClient(email, password);
             MainCardLayout.show(MainPanel, "user");
             return true;
 

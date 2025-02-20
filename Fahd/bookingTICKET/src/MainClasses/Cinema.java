@@ -39,12 +39,12 @@ public class Cinema {
 
         this.filter = new Filters();
 
-        Client client1 = new Client("fahd", "djedi", "djedifahd0@gmail.com", 
-                "0000", "fahd", "yuji");
+        Client client1 = new Client("rayan", "mozali", "rayanmozali@gmail.com", 
+                "0000", "rayan", "momo");
 
         addClient(client1);
 
-        Admin admin1 = new Admin("fahd", "djedi", "djedifahd0@gmail.com", "yuji", "manager");
+        Admin admin1 = new Admin("fahd", "djedi", "fahd", "yuji", "manager");
 
         addAdmin(admin1);
 
