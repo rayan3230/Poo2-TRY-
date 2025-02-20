@@ -31,6 +31,14 @@ public class Cinema {
 
     public Cinema() {
 
+        this.movies = new ArrayList<Movie>();
+        this.theaters = new ArrayList<Theater>();
+        this.tickets = new ArrayList<Ticket>();
+        this.admins = new ArrayList<Admin>();
+        this.clients = new ArrayList<Client>();
+
+        this.filter = new Filters();
+
         Client client1 = new Client("fahd", "djedi", "djedifahd0@gmail.com", 
                 "0000", "fahd", "yuji");
 
@@ -40,13 +48,6 @@ public class Cinema {
 
         addAdmin(admin1);
 
-        this.movies = new ArrayList<Movie>();
-        this.theaters = new ArrayList<Theater>();
-        this.tickets = new ArrayList<Ticket>();
-        this.admins = new ArrayList<Admin>();
-        this.clients = new ArrayList<Client>();
-
-        this.filter = new Filters();
 
         Theater Room1 = new Theater(200, 40, 1, true);
         Theater Room2 = new Theater(300, 60, 2, true);
@@ -133,8 +134,7 @@ public class Cinema {
     public boolean isAdmin(String email, String password ){
         //Check if the admin credentials match with the stored admin credentials
         for(Admin admin : admins){
-            if((admin.username.equals(email) || admin.Email.equals(email))
-                && (admin.password.equals(password))){
+            if(admin.username.equals(email) && admin.password.equals(password)){
                 return true;
             }
         }

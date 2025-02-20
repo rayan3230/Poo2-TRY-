@@ -58,6 +58,8 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         MainPanel = new JPanel(MainCardLayout);
 
+        CinemaManager = new Cinema();
+
         // openning panel --------------------------------------------------
         SignInPanel = new JPanel();
         SignInPanel.setBounds(0, 0, 1200, 750);
@@ -147,7 +149,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(AdminPanel, "admin");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "user");
+        MainCardLayout.show(MainPanel, "open");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -473,8 +475,8 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField EmailField = new JTextField("   Email or username or phone number");
         EmailField.setBounds(50, 120, 340, 40);
         EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        EmailField.setForeground(Color.gray);
-        EmailField.setCaretColor(Color.white);
+        EmailField.setForeground(Color.black);
+        EmailField.setCaretColor(Color.black);
         // EmailField.setBackground(new Color(80, 77, 74, 230));
         EmailField.setBackground(new Color(0xDDDDDD));
         EmailField.setOpaque(true);
@@ -503,8 +505,8 @@ public class CinemaApp extends JFrame implements ActionListener {
         JPasswordField PasswordField = new JPasswordField("Password");
         PasswordField.setBounds(50, 200, 340, 40);
         PasswordField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        PasswordField.setForeground(Color.gray);
-        PasswordField.setCaretColor(Color.white);
+        PasswordField.setForeground(Color.black);
+        PasswordField.setCaretColor(Color.black);
         // PasswordField.setBackground(new Color(80, 77, 74, 230));
         PasswordField.setBackground(new Color(0xDDDDDD));
         PasswordField.setOpaque(true);
@@ -514,7 +516,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (PasswordField.getText().equals("Password")) {
                     PasswordField.setText("");
-                    PasswordField.setForeground(Color.WHITE);
+                    PasswordField.setForeground(Color.black);
                 }
             }
 
@@ -522,7 +524,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (PasswordField.getText().isEmpty() || PasswordField.getPassword().length == 0) {
                     PasswordField.setText("Password");
-                    PasswordField.setForeground(Color.gray);
+                    PasswordField.setForeground(Color.black);
                 }
             }
         });
@@ -930,13 +932,13 @@ public class CinemaApp extends JFrame implements ActionListener {
     }
 
     
-    public void HandleLogIn(String email, String password ){
+    public boolean HandleLogIn(String email, String password ){
         if (CinemaManager.isAdmin(email, password)) {
             JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success",
             JOptionPane.INFORMATION_MESSAGE);
             AdminUser = CinemaManager.getAdmin(AdminUser.username, AdminUser.password);
             MainCardLayout.show(MainPanel, "admin");
-            return;
+            return true;
         }
         
         if (CinemaManager.isClient(email, password)) {
@@ -944,12 +946,13 @@ public class CinemaApp extends JFrame implements ActionListener {
             JOptionPane.INFORMATION_MESSAGE);
             ClientUser = CinemaManager.getClient(ClientUser.username, ClientUser.password);
             MainCardLayout.show(MainPanel, "user");
-            return;
+            return true;
 
         }
 
         JOptionPane.showMessageDialog(null, "Invalid username or password!", "Error",
         JOptionPane.ERROR_MESSAGE);
+        return false;
     }
     
     public boolean HandleSignIn(JTextField username, JPasswordField password, JTextField email, JTextField cardNumber, 
