@@ -601,6 +601,7 @@ public class CinemaApp extends JFrame implements ActionListener {
     }
 
     public JPanel CreateRegisterElements() {
+        
         // Finish signing in panel ------------------------------------------------
         JPanel RegisterElements = new JPanel();
         RegisterElements.setBounds(0, 0, 1200, 750);
@@ -638,7 +639,6 @@ public class CinemaApp extends JFrame implements ActionListener {
         UserNameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         UserNameField.setForeground(Color.gray);
         UserNameField.setCaretColor(Color.white);
-        // EmailField.setBackground(new Color(80, 77, 74, 230));
         UserNameField.setBackground(new Color(0x444444));
         UserNameField.setOpaque(true);
         UserNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
@@ -669,8 +669,6 @@ public class CinemaApp extends JFrame implements ActionListener {
         PasswordsField.setCaretColor(Color.white);
         PasswordsField.setBackground(new Color(0x444444));
         PasswordsField.setOpaque(true);
-        // PasswordsField.setBorder(BorderFactory.CreateeMatteBorder(1, 1, 1, 1,
-        // Color.gray));
         PasswordsField.setBorder(null);
         PasswordsField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
