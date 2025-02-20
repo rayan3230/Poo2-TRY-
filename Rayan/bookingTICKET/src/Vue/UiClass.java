@@ -18,7 +18,7 @@ public class UiClass extends JFrame {
         setUndecorated(true); 
         setTitle("POO_Movies");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon AppLogo = new ImageIcon("Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Logo.png");
+        ImageIcon AppLogo = new ImageIcon("Rayan\\bookingTICKET\\img\\Logo.png");
         this.setIconImage(AppLogo.getImage());
         setBounds(100, 100, 1200, 750);
         setLocationRelativeTo(null);
@@ -43,7 +43,7 @@ public class UiClass extends JFrame {
         mainPanel.add(homeAdminPanel, "homeAdmin");
 
         setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "homeUser");
+        cardLayout.show(mainPanel, "homeAdmin");
         
    
     }
@@ -51,7 +51,7 @@ public class UiClass extends JFrame {
     
     public JPanel createWelcomePanel() {
         JPanel welcomepanel = new JPanel() {
-            ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
+            ImageIcon bgIcon = new ImageIcon("Rayan/bookingTICKET/img/BackGround 4.png");
 
             @Override
             protected void paintComponent(Graphics g) {
@@ -194,7 +194,7 @@ public class UiClass extends JFrame {
   
     public JPanel createLoginPanel(){
         JPanel loginPanel = new JPanel() {
-            ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
+            ImageIcon bgIcon = new ImageIcon("Rayan/bookingTICKET/img/BackGround 4.png");
  
             @Override
             protected void paintComponent(Graphics g) {
@@ -395,7 +395,7 @@ public class UiClass extends JFrame {
     public JPanel createRegisterPanel(){
 
         JPanel registerPanel = new JPanel() {
-            ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
+            ImageIcon bgIcon = new ImageIcon("Rayan/bookingTICKET/img/BackGround 4.png");
  
             @Override
             protected void paintComponent(Graphics g) {
@@ -666,7 +666,7 @@ public class UiClass extends JFrame {
 
     public JPanel createForgotPasswordPanel() {
         JPanel forgotPanel = new JPanel() {
-            ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
+            ImageIcon bgIcon = new ImageIcon("Rayan/bookingTICKET/img/BackGround 4.png");
      
             @Override
             protected void paintComponent(Graphics g) {
@@ -787,6 +787,16 @@ public class UiClass extends JFrame {
         JPanel homePanel = new JPanel();
         homePanel.setLayout(null);
         homePanel.setBounds(0, 0, 1200, 750);
+        homePanel.setBackground(Color.green);
+
+
+        //--------------Background panel(main)
+        JPanel MainUserPanel = new JPanel();
+        MainUserPanel.setBounds(300, 0, 1200, 750);
+        MainUserPanel.setBackground(new Color(18, 18, 18));
+        MainUserPanel.setLayout(null);
+        homePanel.add(MainUserPanel);
+        MainUserPanel.setVisible(true);
     
         // Only add welcome label if UserAccount is not null
         // if (UserAccount != null) {
@@ -803,19 +813,13 @@ public class UiClass extends JFrame {
         //     homePanel.add(usernamelbl);
         // }
 
-//--------------Background panel(main)
-        JPanel BackgroundPanel = new JPanel();
-        BackgroundPanel.setBounds(0, 0, 1200, 750);
-        BackgroundPanel.setBackground(new Color(18, 18, 18));
-        BackgroundPanel.setLayout(null);
-        homePanel.add(BackgroundPanel);
 
         //--------------Left black panel
         JPanel LeftBlackPanel = new JPanel();
         LeftBlackPanel.setBounds(0, 0, 300, 750);
         LeftBlackPanel.setBackground(new Color(24, 24, 24));
         LeftBlackPanel.setLayout(null);
-        BackgroundPanel.add(LeftBlackPanel);
+        homePanel.add(LeftBlackPanel);
 
         JLabel LogoName = new JLabel("CINEMACITY");
         LogoName.setBounds(17, -124, 300, 300);
@@ -883,16 +887,20 @@ public class UiClass extends JFrame {
         LogoutButton.setForeground(Color.WHITE);
         LogoutButton.setHorizontalAlignment(SwingConstants.LEFT);
         LogoutButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+        LogoutButton.addActionListener(e->{
+            JOptionPane.showMessageDialog(homePanel, "You are logged out.");
+            cardLayout.show(mainPanel, "login");
+        });
         LeftBlackPanel.add(LogoutButton);
 
 
         //----------Main Panels things----------
 
         JPanel SearchPanel = new JPanel();
-        SearchPanel.setBounds(330, 20, 600, 40);
+        SearchPanel.setBounds(30, 20, 600, 40);
         SearchPanel.setLayout(null);
         SearchPanel.setBackground(new Color(30, 30, 30));
-        BackgroundPanel.add(SearchPanel);
+        MainUserPanel.add(SearchPanel);
 
         JTextField searchField = new JTextField("Type to Search...");
         searchField.setBounds(10, 5, 380, 30);
@@ -922,32 +930,28 @@ public class UiClass extends JFrame {
 
     //----------Slide Panel--------------------------------
     
-        JPanel slidePanel = new JPanel();
-        slidePanel.setBounds(330, 78, 840, 350);
-        slidePanel.setLayout(null);
-        slidePanel.setBackground(new Color(30, 30, 30));
-        BackgroundPanel.add(slidePanel);
-
-        JLabel Img = new JLabel() {
-            @Override
-            protected void paintComponent(Graphics g) {
+        JPanel slidePanel = new JPanel(){
+        @Override
+        protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            ImageIcon icon = new ImageIcon("Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Avatar.jpg");
+            ImageIcon icon = new ImageIcon("Rayan/bookingTICKET/img/Avatar.jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
             Image img = icon.getImage();
             g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-            }
+        }
         };
-        Img.setBounds(0, 0, 840, 350);
-        slidePanel.add(Img);
+        slidePanel.setBounds(30, 78, 840, 350);
+        slidePanel.setLayout(null);
+        slidePanel.setBackground(new Color(30, 30, 30));
+        MainUserPanel.add(slidePanel);
 
-        // Films Grid Section
+
         JPanel filmsGridPanel = new JPanel();
         filmsGridPanel.setLayout(new GridLayout(0, 4, 10, 10));  // Unlimited rows, 4 columns
         filmsGridPanel.setBackground(new Color(18, 18, 18));
 
         
         JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
-        scrollPane.setBounds(330, 450, 840, 280);
+        scrollPane.setBounds(30, 450, 840, 280);
         scrollPane.setBorder(null);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -969,13 +973,14 @@ public class UiClass extends JFrame {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
-                    ImageIcon icon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/film" + (index + 1) + ".jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
+                    ImageIcon icon = new ImageIcon("Rayan/bookingTICKET/img/film" + (index + 1) + ".jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
                     Image img = icon.getImage();
                     g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
                 }
             };
+           
             filmPanel.setLayout(null);
-            filmPanel.setPreferredSize(new Dimension(200, 130));
+            filmPanel.setPreferredSize(new Dimension(200, 230));
             filmPanel.setBackground(new Color(24, 24, 24));
             filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
             
@@ -996,16 +1001,16 @@ public class UiClass extends JFrame {
             filmsGridPanel.add(filmPanel);
         }
 
-        BackgroundPanel.add(scrollPane);
+        MainUserPanel.add(scrollPane);
 
 
         JLabel nowShowingLabel = new JLabel("Our Movies");
-        nowShowingLabel.setBounds(330, 430, 200, 20);
+        nowShowingLabel.setBounds(30, 430, 200, 20);
         nowShowingLabel.setForeground(Color.WHITE);
         nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        BackgroundPanel.add(nowShowingLabel);
+        MainUserPanel.add(nowShowingLabel);
 
-        
+        //MainUserPanel.setVisible(false);
 
 
 
@@ -1024,11 +1029,16 @@ public class UiClass extends JFrame {
         homeAdminPanel.setLayout(null);
         homeAdminPanel.setBounds(0, 0, 1200, 750);
         homeAdminPanel.setBackground(Color.BLUE);
+
         JLabel welcomeLabel = new JLabel("Welcome, Admin!");
         welcomeLabel.setBounds(50, 50, 300, 50);
         welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
         welcomeLabel.setForeground(Color.red);
         homeAdminPanel.add(welcomeLabel);
+
+        
+
+        
 
         return homeAdminPanel;
     }
