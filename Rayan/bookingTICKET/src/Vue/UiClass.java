@@ -787,6 +787,15 @@ public class UiClass extends JFrame {
         JPanel homePanel = new JPanel();
         homePanel.setLayout(null);
         homePanel.setBounds(0, 0, 1200, 750);
+        homePanel.setBackground(Color.green);
+
+
+        //--------------Background panel(main)
+        JPanel MainUserPanel = new JPanel();
+        MainUserPanel.setBounds(300, 0, 1200, 750);
+        MainUserPanel.setBackground(new Color(18, 18, 18));
+        MainUserPanel.setLayout(null);
+        homePanel.add(MainUserPanel);
     
         // Only add welcome label if UserAccount is not null
         // if (UserAccount != null) {
@@ -803,19 +812,13 @@ public class UiClass extends JFrame {
         //     homePanel.add(usernamelbl);
         // }
 
-//--------------Background panel(main)
-        JPanel BackgroundPanel = new JPanel();
-        BackgroundPanel.setBounds(0, 0, 1200, 750);
-        BackgroundPanel.setBackground(new Color(18, 18, 18));
-        BackgroundPanel.setLayout(null);
-        homePanel.add(BackgroundPanel);
 
         //--------------Left black panel
         JPanel LeftBlackPanel = new JPanel();
         LeftBlackPanel.setBounds(0, 0, 300, 750);
         LeftBlackPanel.setBackground(new Color(24, 24, 24));
         LeftBlackPanel.setLayout(null);
-        BackgroundPanel.add(LeftBlackPanel);
+        homePanel.add(LeftBlackPanel);
 
         JLabel LogoName = new JLabel("CINEMACITY");
         LogoName.setBounds(17, -124, 300, 300);
@@ -889,10 +892,10 @@ public class UiClass extends JFrame {
         //----------Main Panels things----------
 
         JPanel SearchPanel = new JPanel();
-        SearchPanel.setBounds(330, 20, 600, 40);
+        SearchPanel.setBounds(30, 20, 600, 40);
         SearchPanel.setLayout(null);
         SearchPanel.setBackground(new Color(30, 30, 30));
-        BackgroundPanel.add(SearchPanel);
+        MainUserPanel.add(SearchPanel);
 
         JTextField searchField = new JTextField("Type to Search...");
         searchField.setBounds(10, 5, 380, 30);
@@ -923,10 +926,10 @@ public class UiClass extends JFrame {
     //----------Slide Panel--------------------------------
     
         JPanel slidePanel = new JPanel();
-        slidePanel.setBounds(330, 78, 840, 350);
+        slidePanel.setBounds(30, 78, 840, 350);
         slidePanel.setLayout(null);
         slidePanel.setBackground(new Color(30, 30, 30));
-        BackgroundPanel.add(slidePanel);
+        MainUserPanel.add(slidePanel);
 
         JLabel Img = new JLabel() {
             @Override
@@ -947,7 +950,7 @@ public class UiClass extends JFrame {
 
         
         JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
-        scrollPane.setBounds(330, 450, 840, 280);
+        scrollPane.setBounds(30, 450, 840, 280);
         scrollPane.setBorder(null);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -969,13 +972,14 @@ public class UiClass extends JFrame {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
-                    ImageIcon icon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/film" + (index + 1) + ".jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
+                    ImageIcon icon = new ImageIcon("Rayan/bookingTICKET/img/film" + (index + 1) + ".jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
                     Image img = icon.getImage();
                     g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
                 }
             };
+           
             filmPanel.setLayout(null);
-            filmPanel.setPreferredSize(new Dimension(200, 130));
+            filmPanel.setPreferredSize(new Dimension(200, 230));
             filmPanel.setBackground(new Color(24, 24, 24));
             filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
             
@@ -996,16 +1000,16 @@ public class UiClass extends JFrame {
             filmsGridPanel.add(filmPanel);
         }
 
-        BackgroundPanel.add(scrollPane);
+        MainUserPanel.add(scrollPane);
 
 
         JLabel nowShowingLabel = new JLabel("Our Movies");
-        nowShowingLabel.setBounds(330, 430, 200, 20);
+        nowShowingLabel.setBounds(30, 430, 200, 20);
         nowShowingLabel.setForeground(Color.WHITE);
         nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        BackgroundPanel.add(nowShowingLabel);
+        MainUserPanel.add(nowShowingLabel);
 
-        
+        //MainUserPanel.setVisible(false);
 
 
 
