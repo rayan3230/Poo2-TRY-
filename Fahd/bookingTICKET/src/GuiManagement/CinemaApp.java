@@ -81,7 +81,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         RegisterPanel.setLayout(null);
         RegisterPanel.setOpaque(false);
 
-        JPanel RegisterBackgroundJPanel = CreateBackGround2Panel();
+        JPanel RegisterBackgroundJPanel = CreateBackGround1Panel();
         JPanel RegisterElements = CreateRegisterElements();
 
         RegisterPanel.add(RegisterBackgroundJPanel);
@@ -111,7 +111,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         ForgotPasswordPanel.setLayout(null);
         ForgotPasswordPanel.setOpaque(false);
 
-        JPanel ForgotPasswordBackground = CreateBackGround2Panel();
+        JPanel ForgotPasswordBackground = CreateBackGround1Panel();
         JPanel ForgotPasswordElements = CreateForgotPasswordPanel();
 
         ForgotPasswordPanel.add(ForgotPasswordBackground);
@@ -164,16 +164,16 @@ public class CinemaApp extends JFrame implements ActionListener {
         BackgroundPanel.setOpaque(false);
 
         // Blur panel--------------------------------------------------
-        this.BlurPanel = new TransparentPanel(0.75f);
+        this.BlurPanel = new TransparentPanel(0.5f);
         BlurPanel.setBounds(0, 0, 1200, 750);
         BlurPanel.setLayout(null);
-        BlurPanel.setBackground(new java.awt.Color(0x000000));
+        BlurPanel.setBackground(new java.awt.Color(0x2D3142));
 
         BlurPanel.setVisible(true);
 
         // The background image:
         ImageIcon originalIcon = new ImageIcon(
-                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-rebirth-of-7680x4320-20257.jpg");
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\MilesBackground.png");
         Image originalImage = originalIcon.getImage();
         Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(),
                 Image.SCALE_SMOOTH);
@@ -221,7 +221,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         // The background image:
         ImageIcon originalIcon = new ImageIcon(
-                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\bleach-thousand-5120x2880-19704.png");
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\MilesBackground2.png");
         Image originalImage = originalIcon.getImage();
         Image scaledImage = originalImage.getScaledInstance(BackgroundPanel.getWidth(), BackgroundPanel.getHeight(),
                 Image.SCALE_SMOOTH);
@@ -308,7 +308,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         JLabel LogoName = new JLabel("POOMovie");
         LogoName.setBounds(70, 24, 192, 52);
         LogoName.setFont(new Font("Inter", Font.BOLD, 35));
-        LogoName.setForeground(Color.red);
+        LogoName.setForeground(new Color(0xFF6700));
 
         SignInElements.add(LogoName);
 
@@ -601,7 +601,7 @@ public class CinemaApp extends JFrame implements ActionListener {
     }
 
     public JPanel CreateRegisterElements() {
-        
+
         // Finish signing in panel ------------------------------------------------
         JPanel RegisterElements = new JPanel();
         RegisterElements.setBounds(0, 0, 1200, 750);
@@ -1022,8 +1022,10 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         JPanel LeftBlackPanel = new JPanel();
         LeftBlackPanel.setBounds(0, 0, 300, 750);
-        LeftBlackPanel.setBackground(new Color(24, 24, 24));
+        LeftBlackPanel.setBackground(new Color(0xCCCCCC));
         LeftBlackPanel.setLayout(null);
+        LeftBlackPanel.setBorder(BorderFactory.createLineBorder(Color.white, 2));
+
 
         HomePanel.add(LeftBlackPanel);
 
@@ -1188,7 +1190,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         scrollPane.setBounds(0, 0, 1200, 2000);
         scrollPane.setBorder(null);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getViewport().setBackground(new Color(10, 10, 10));
+        scrollPane.getViewport().setBackground(new Color(0x888888));
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.yellow));
 
         EmptyPanel.addMouseWheelListener(e -> {
