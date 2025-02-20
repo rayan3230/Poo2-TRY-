@@ -35,4 +35,8 @@ public class Seat {
         this.isAvaible = false;
     }
 
+    public void Liberateseat(int seatID) {
+        this.isAvaible = true;
+    }
+
 }

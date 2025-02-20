@@ -11,6 +11,7 @@ import Basic_Classes.Caisse;
 public class Admin extends User {
 
     public String email;
+    Scanner sc = new Scanner(System.in);
 
     public Admin(String username, String password, String role, String email) {
         super(username, password, role);
@@ -26,7 +27,6 @@ public class Admin extends User {
     }
 
     public void addmovie(List<Film> movies, Film film, Caisse caisse) {
-        Scanner sc = new Scanner (System.in);
         if (film != null) {
             movies.add(film);
             int price;
@@ -37,7 +37,6 @@ public class Admin extends User {
         } else {
             System.out.println("Invalid movie.");
         }
-        sc.close();
     }
 
     public void deletemovie(List<Film> movies, String title){
@@ -62,7 +61,6 @@ public class Admin extends User {
         System.out.println("5. Synopsis");
         System.out.println("6. Age Restriction");
         int choice;
-        Scanner sc = new Scanner(System.in);
         choice = sc.nextInt();
         switch (choice) {
             case 1:
@@ -107,12 +105,9 @@ public class Admin extends User {
                 System.out.println("Age restriction modified. The new age restriction is: " + film.getAgeRestriction());
                 break;
         }
-        sc.close();
-
     }
 
     public void AddSalle(List<Salle> salles, Salle salle, Caisse caisse) {
-        Scanner sc = new Scanner (System.in);
         int price;
         if (salle != null) {
             salles.add(salle);
@@ -123,11 +118,9 @@ public class Admin extends User {
         } else {
             System.out.println("Invalid salle.");
         }
-        sc.close();
     }
 
     public void RemoveSalle(List<Salle> salles, int ID, Caisse caisse) {
-        Scanner sc = new Scanner (System.in);
         int price;
         for (Salle salle : salles) {
             if (salle.getID() == ID) {
@@ -141,7 +134,6 @@ public class Admin extends User {
             }
         }
         System.out.println("Salle not found.");
-        sc.close();
     }
 
     public void ModifySalle(List<Salle> salles, Salle salle, Caisse caisse) {
@@ -149,7 +141,6 @@ public class Admin extends User {
         System.out.println("1. ID");
         System.out.println("2. Capacite");
         int choice;
-        Scanner sc = new Scanner(System.in);
         choice = sc.nextInt();
         switch (choice) {
             case 1:
@@ -187,8 +178,6 @@ public class Admin extends User {
                 System.out.println("Capacite modified. The new capacite is: " + salle.getCapacite());
                 break;
         }
-        sc.close();
-
     }
 
     public void ReserveSalle(List<Salle> salles, Salle salle, Diffusion diffusion, Film film){
@@ -209,4 +198,5 @@ public class Admin extends User {
         System.out.println("Salle not found.");
 
     }
+    
 }

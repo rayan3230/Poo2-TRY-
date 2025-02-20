@@ -1,5 +1,7 @@
 package Basic_Classes;
 
+import java.time.LocalDate;
+
 public class Ticket {
 
     private static int ticketcounter = 0;
@@ -63,6 +65,10 @@ public class Ticket {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    public boolean isValid() {
+        return isAvailable && diffusion.getDate().isAfter(LocalDate.now());
     }
 
     @Override

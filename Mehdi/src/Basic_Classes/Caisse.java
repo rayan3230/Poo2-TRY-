@@ -22,7 +22,12 @@ public class Caisse {
     }
 
     public void DecrementCurrentamount(int amount) {
-        this.currentamount -= amount;
+        if (this.currentamount < amount) {
+            System.out.println("The amount is not enough.");
+            return;
+        }else {
+            this.currentamount -= amount;
+        }
     }
 
      
