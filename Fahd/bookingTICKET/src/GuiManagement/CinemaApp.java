@@ -1013,12 +1013,117 @@ public class CinemaApp extends JFrame implements ActionListener {
         HomePanel.setOpaque(true);
         HomePanel.setBackground(new Color(0x0D1116));
 
+        //Left panel ----------------------------------------------------------------
         JPanel LeftPanel = new JPanel();
         LeftPanel.setBounds(0,0, 100, 750);
         LeftPanel.setBackground(new Color(0x191D22));
         LeftPanel.setLayout(null);
 
-        HomePanel.add(LeftPanel);
+        //content panel---------------------------------------------------------------
+        JPanel ContentPanel = CreateContentPanel();
+
+        JScrollPane scrollPane = new JScrollPane(ContentPanel);
+        scrollPane.setBounds(99, 0, 1125, 750);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setBackground(new Color(0x0D1116));
+
+        ContentPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        //movie panel----------------------------------------------------------------------
+        JPanel moviePanel = CreateMoviePanel();
+
+        JScrollPane scrollPane2 = new JScrollPane(moviePanel);
+        scrollPane2.setBounds(99, 0, 1125, 750);
+        scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane2.setOpaque(false);
+        scrollPane2.getViewport().setBackground(new Color(0x0D1116));
+
+        moviePanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane2.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        //Account Panel--------------------------------------------------------
+        JPanel AccountPanel = CreateAccountPanel();
+
+        JScrollPane scrollPane3 = new JScrollPane(AccountPanel);
+        scrollPane3.setBounds(-1, -1, 1205, 755);
+        scrollPane3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane3.setOpaque(false);
+        scrollPane3.getViewport().setBackground(new Color(0x0D1116));
+
+        AccountPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane3.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+
+        //Balance panel---------------------------------------------------------
+        JPanel BalancePanel = CreateBalancePanel();
+
+        JScrollPane scrollPane4 = new JScrollPane(BalancePanel);
+        scrollPane4.setBounds(99, 0, 1125, 750);
+        scrollPane4.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane4.setOpaque(false);
+        scrollPane4.getViewport().setBackground(new Color(0x0D1116));
+
+        BalancePanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane4.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        //History Panel---------------------------------------------------------    
+        JPanel TicketPanel = CreateTicketPanel();
+
+        JScrollPane scrollPane5 = new JScrollPane(TicketPanel);
+        scrollPane5.setBounds(99, 0, 1125, 750);
+        scrollPane5.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane5.setOpaque(false);
+        scrollPane5.getViewport().setBackground(new Color(0x0D1116));
+
+        TicketPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane5.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        //Settings Panel---------------------------------------------------------
+
+        
+        HomePanel.add(scrollPane, "home");
+        scrollPane.setVisible(true);
+        HomePanel.add(scrollPane2, "movies");
+        scrollPane2.setVisible(false);
+        HomePanel.add(LeftPanel, "left panel");
+        LeftPanel.setVisible(true);
+        HomePanel.add(scrollPane3, "account");
+        scrollPane3.setVisible(false);
+        HomePanel.add(scrollPane4, "balance");
+        scrollPane4.setVisible(false);
+        HomePanel.add(scrollPane5, "ticket");
+        scrollPane5.setVisible(false);
+
+
+        //-------------------------------------------------------------------------------------------------
+
 
         JButton HomeButton = new JButton();
         HomeButton.setBounds(30, 20, 40, 40);
@@ -1036,9 +1141,6 @@ public class CinemaApp extends JFrame implements ActionListener {
         HomeButton.setFont(new Font("Inter", Font.BOLD, 15));
         HomeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         HomeButton.setUI(new RoundButtonUI(new Color(0x000000)));
-        HomeButton.addActionListener(e->{
-
-        });
 
         TransparentPanel HoverHome = new TransparentPanel(0.5f);
         HoverHome.setBounds(0, 25, 7, 25);
@@ -1084,9 +1186,6 @@ public class CinemaApp extends JFrame implements ActionListener {
         AllButton.setContentAreaFilled(false); // Make the button background transparent
         AllButton.setBorderPainted(false); // Remove the button border
         AllButton.setFocusPainted(false); // Remove the focus border
-        AllButton.addActionListener(e->{
-
-        });
 
         TransparentPanel HoverAll = new TransparentPanel(0.5f);
         HoverAll.setBounds(0, 215, 7, 25);
@@ -1234,6 +1333,7 @@ public class CinemaApp extends JFrame implements ActionListener {
                 HoverFilter.setVisible(false);
             }
         });
+        FilterButton.setVisible(false);
 
         LeftPanel.add(FilterButton);
 
@@ -1280,12 +1380,12 @@ public class CinemaApp extends JFrame implements ActionListener {
         LeftPanel.add(ChangeTheme);
 
 
-        TransparentPanel AccountPanel = new TransparentPanel(0.2f);
-        AccountPanel.setBounds(1050, 15, 125, 50);
-        AccountPanel.setBackground(Color.white);
-        AccountPanel.setLayout(null);
+        TransparentPanel AccountButtonHolder = new TransparentPanel(0.2f);
+        AccountButtonHolder.setBounds(1050, 15, 125, 50);
+        AccountButtonHolder.setBackground(Color.white);
+        AccountButtonHolder.setLayout(null);
 
-        HomePanel.add(AccountPanel);
+        HomePanel.add(AccountButtonHolder);
 
 
         JButton AccountButton = new JButton();
@@ -1304,8 +1404,25 @@ public class CinemaApp extends JFrame implements ActionListener {
         AccountButton.setFont(new Font("Inter", Font.BOLD, 15));
         AccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AccountButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        AccountButton.addActionListener(e->{
 
-        AccountPanel.add(AccountButton);
+            ContentPanel.setVisible(false);
+            moviePanel.setVisible(false);
+            AccountPanel.setVisible(true);
+
+        });
+        AccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AccountButton.setBackground(new Color(0x878787));
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AccountButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        AccountButtonHolder.add(AccountButton);
 
 
 
@@ -1325,62 +1442,125 @@ public class CinemaApp extends JFrame implements ActionListener {
         LogOutButton.setFont(new Font("Inter", Font.BOLD, 15));
         LogOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         LogOutButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        AccountPanel.add(LogOutButton);
-
-
-
-        //content panel---------------------------------------------------------------
-        JPanel ContentPanel = CreateContentPanel();
-
-        JScrollPane scrollPane = new JScrollPane(ContentPanel);
-        scrollPane.setBounds(99, 0, 1125, 750);
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setOpaque(false);
-        scrollPane.getViewport().setBackground(new Color(0x0D1116));
-
-        ContentPanel.addMouseWheelListener(e -> {
-            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();// had scroll par rapport l y
-            int notches = e.getWheelRotation();
-            int currentValue = verticalScrollBar.getValue();
-            int scrollAmount = 30; // Adjust scroll speed
-            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        LogOutButton.addActionListener(e->{
+            MainCardLayout.show(MainPanel, "open");
         });
 
-        //movie panel----------------------------------------------------------------------
-        JPanel moviePanel = CreateMoviePanel();
+        LogOutButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LogOutButton.setBackground(new Color(0x550000));
 
-        JScrollPane scrollPane2 = new JScrollPane(moviePanel);
-        scrollPane2.setBounds(99, 0, 1125, 750);
-        scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane2.setOpaque(false);
-        scrollPane2.getViewport().setBackground(new Color(0x0D1116));
+            }
 
-        moviePanel.addMouseWheelListener(e -> {
-            JScrollBar verticalScrollBar = scrollPane2.getVerticalScrollBar();// had scroll par rapport l y
-            int notches = e.getWheelRotation();
-            int currentValue = verticalScrollBar.getValue();
-            int scrollAmount = 30; // Adjust scroll speed
-            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LogOutButton.setBackground(new Color(0xAD2500));
+            }
         });
+
+        AccountButtonHolder.add(LogOutButton);
 
         
-        HomePanel.add(scrollPane, "home");
-        scrollPane.setVisible(true);
-        HomePanel.add(scrollPane2, "movies");
-        scrollPane2.setVisible(false);
 
-        if(scrollPane2.isVisible() == true){
-            FilterButton.setVisible(true);
-        }else{
+        HomeButton.addActionListener(e->{
+
+            scrollPane.setVisible(true);
+            scrollPane2.setVisible(false);
+            scrollPane3.setVisible(false);
             FilterButton.setVisible(false);
-        }
+            scrollPane4.setVisible(false);
+            scrollPane5.setVisible(false);
 
-        HomePanel.setComponentZOrder(scrollPane, 1);
-        HomePanel.setComponentZOrder(scrollPane2, 1);
-        HomePanel.setComponentZOrder(LeftPanel, 0);
-        HomePanel.setComponentZOrder(AccountPanel, 0);
+        });
 
+        AllButton.addActionListener(e->{
+
+            scrollPane.setVisible(false);
+            scrollPane2.setVisible(true);
+            scrollPane3.setVisible(false);
+            FilterButton.setVisible(true);
+            scrollPane4.setVisible(false);
+            scrollPane5.setVisible(false);
+
+        });
+
+        AccountButton.addActionListener(e->{
+            if(scrollPane3.isVisible() == false){
+                scrollPane.setVisible(false);
+                scrollPane2.setVisible(false);
+                scrollPane3.setVisible(true);
+                FilterButton.setVisible(false);
+                scrollPane4.setVisible(false);
+                scrollPane5.setVisible(false);
+                LeftPanel.setVisible(false);
+            }else{
+                scrollPane.setVisible(true);
+                scrollPane2.setVisible(false);
+                scrollPane3.setVisible(false);
+                FilterButton.setVisible(false);
+                scrollPane4.setVisible(false);
+                scrollPane5.setVisible(false);
+                LeftPanel.setVisible(true);
+            }
+            
+
+        });
+
+        BalanceButton.addActionListener(e->{
+
+            scrollPane.setVisible(false);
+            scrollPane2.setVisible(false);
+            scrollPane3.setVisible(false);
+            FilterButton.setVisible(false);
+            scrollPane4.setVisible(true);
+            scrollPane5.setVisible(false);
+
+        });
+
+        MyTicketButton.addActionListener(e->{
+
+            scrollPane.setVisible(false);
+            scrollPane2.setVisible(false);
+            scrollPane3.setVisible(false);
+            FilterButton.setVisible(false);
+            scrollPane4.setVisible(false);
+            scrollPane5.setVisible(true);
+
+        });
+
+        ChangeTheme.addActionListener(e->{
+            if(Counter%2 == 0){
+                scrollPane.setBackground(new Color(0xCBCBCB));
+                scrollPane2.setBackground(new Color(0xCBCBCB));
+                scrollPane3.setBackground(new Color(0xCBCBCB));
+                scrollPane4.setBackground(new Color(0xCBCBCB));
+                scrollPane5.setBackground(new Color(0xCBCBCB));
+                ContentPanel.setBackground(new Color(0xCBCBCB));
+                moviePanel.setBackground(new Color(0xCBCBCB));
+                AccountPanel.setBackground(new Color(0xCBCBCB));
+                BalancePanel.setBackground(new Color(0xCBCBCB));
+                TicketPanel.setBackground(new Color(0xCBCBCB));
+            }else{
+                scrollPane.setBackground(new Color(0x0D1116));
+                scrollPane2.setBackground(new Color(0x0D1116));
+                scrollPane3.setBackground(new Color(0x0D1116));
+                scrollPane4.setBackground(new Color(0x0D1116));
+                scrollPane5.setBackground(new Color(0x0D1116));
+                ContentPanel.setBackground(new Color(0x0D1116));
+                moviePanel.setBackground(new Color(0x0D1116));
+                AccountPanel.setBackground(new Color(0x0D1116));
+                BalancePanel.setBackground(new Color(0x0D1116));
+                TicketPanel.setBackground(new Color(0x0D1116));
+            }
+
+        });
+
+        HomePanel.setComponentZOrder(scrollPane, 2);
+        HomePanel.setComponentZOrder(scrollPane2, 2);
+        HomePanel.setComponentZOrder(scrollPane3, 0);
+        HomePanel.setComponentZOrder(scrollPane4, 2);
+        HomePanel.setComponentZOrder(scrollPane5, 2);
+        HomePanel.setComponentZOrder(LeftPanel, 1);
+        HomePanel.setComponentZOrder(AccountButtonHolder, 1);
 
         return HomePanel;
     }
@@ -1566,8 +1746,365 @@ public class CinemaApp extends JFrame implements ActionListener {
     public JPanel CreateAccountPanel(){
 
         JPanel AccountPanel = new JPanel();
+        AccountPanel.setOpaque(false);
+        AccountPanel.setLayout(null);
+        AccountPanel.setPreferredSize(new Dimension(1200, 3500));
+
+        JPanel OptionPanel = new JPanel();
+        OptionPanel.setBounds(0, 0, 350, 750);
+        OptionPanel.setLayout(null);
+        OptionPanel.setBackground(new Color(0x121212));
+
+        AccountPanel.add(OptionPanel);
+
+        JLabel AccountTitle = new JLabel("Account");
+        AccountTitle.setBounds(50, 100, 250, 50);
+        AccountTitle.setFont(new Font("Segoe UI", Font.BOLD, 35));
+        AccountTitle.setForeground(Color.white);
+
+        OptionPanel.add(AccountTitle);
+
+        JLabel AccountTitle2 = new JLabel("Management");
+        AccountTitle2.setBounds(50, 150, 350, 50);
+        AccountTitle2.setFont(new Font("Segoe UI", Font.BOLD, 35));
+        AccountTitle2.setForeground(Color.white);
+
+        OptionPanel.add(AccountTitle2);
+
+        JButton IdSettings = new JButton("Account ID");
+        IdSettings.setBounds(25, 275, 250, 30);
+        IdSettings.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        IdSettings.setForeground(new Color(0xCBCBCB));
+        IdSettings.setContentAreaFilled(false);
+        IdSettings.setBorderPainted(false);
+        IdSettings.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        IdSettings.addActionListener(e -> {
+            
+        });
+        JButton IdButton = new JButton();
+        IdButton.setBounds(50, 280, 25, 25);
+        IdButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        IdButton.setBackground(new Color(0xCBCBCB));
+        IdButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        IdButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        IdButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xD42E00));
+                IdButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xCBCBCB));
+                IdButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        IdSettings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xD42E00));
+                IdButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xCBCBCB));
+                IdButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(IdSettings);
+        OptionPanel.add(IdButton);
+        
+        JButton PersonalInfo = new JButton("Personnal information");
+        PersonalInfo.setBounds(70, 320, 250, 30);
+        PersonalInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PersonalInfo.setForeground(new Color(0xCBCBCB));
+        PersonalInfo.setContentAreaFilled(false);
+        PersonalInfo.setBorderPainted(false);
+        PersonalInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PersonalInfo.addActionListener(e -> {
+            
+        });
+        JButton PersonalButton = new JButton();
+        PersonalButton.setBounds(50, 325, 25, 25);
+        PersonalButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PersonalButton.setBackground(new Color(0xCBCBCB));
+        PersonalButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PersonalButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        PersonalButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xD42E00));
+                PersonalButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xCBCBCB));
+                PersonalButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        PersonalInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xD42E00));
+                PersonalButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xCBCBCB));
+                PersonalButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(PersonalInfo);
+        OptionPanel.add(PersonalButton);
+
+
+        JButton PaymentInfo = new JButton("Payement information");
+        PaymentInfo.setBounds(70, 365, 250, 30);
+        PaymentInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PaymentInfo.setForeground(new Color(0xCBCBCB));
+        PaymentInfo.setContentAreaFilled(false);
+        PaymentInfo.setBorderPainted(false);
+        PaymentInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PaymentInfo.addActionListener(e -> {
+            
+        });
+        JButton PayementButton = new JButton();
+        PayementButton.setBounds(50, 370, 25, 25);
+        PayementButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PayementButton.setBackground(new Color(0xCBCBCB));
+        PayementButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PayementButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        PayementButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xD42E00));
+                PayementButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xCBCBCB));
+                PayementButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        PaymentInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xD42E00));
+                PayementButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xCBCBCB));
+                PayementButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(PaymentInfo);
+        OptionPanel.add(PayementButton);
+
+
+        JButton SignInInfo = new JButton("Account sign in management");
+        SignInInfo.setBounds(47, 410, 350, 30);
+        SignInInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        SignInInfo.setForeground(new Color(0xCBCBCB));
+        SignInInfo.setContentAreaFilled(false);
+        SignInInfo.setBorderPainted(false);
+        SignInInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SignInInfo.addActionListener(e -> {
+            
+        });
+        JButton SignInButton = new JButton();
+        SignInButton.setBounds(50, 415, 25, 25);
+        SignInButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        SignInButton.setBackground(new Color(0xCBCBCB));
+        SignInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SignInButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SignInButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xD42E00));
+                SignInButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xCBCBCB));
+                SignInButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        SignInInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xD42E00));
+                SignInButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xCBCBCB));
+                SignInButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(SignInInfo);
+        OptionPanel.add(SignInButton);
+
+        JPanel ElementsPanel = new JPanel();
+        ElementsPanel.setOpaque(false);
+        ElementsPanel.setLayout(null);
+        ElementsPanel.setPreferredSize(new Dimension(850, 2500));
+
+        JScrollPane scrollPane = new JScrollPane(ElementsPanel);
+        scrollPane.setBounds(349, -1, 855, 755);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setBackground(new Color(0x121212));
+
+        ElementsPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        AccountPanel.add(scrollPane);
+
+        JPanel IdPanel = new JPanel();
+        IdPanel.setBounds(50, 75, 750, 250);
+        IdPanel.setBackground(new Color(0x2B2B2B));
+        IdPanel.setLayout(null);
+
+        JPanel IdHolderPanel = new JPanel();
+        IdHolderPanel.setBounds(0, 0, 325, 250);
+        IdHolderPanel.setLayout(null);
+        IdHolderPanel.setBackground(new Color(0x1C2837));
+
+        JLabel IdText = new JLabel("Account ID");
+        IdText.setBounds(50, 25, 200, 30);
+        IdText.setForeground(Color.white);
+        IdText.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+        JLabel IdTextDescription = new JLabel("This Id information are used to log in ,but ");
+        IdTextDescription.setBounds(50, 75, 250, 30);
+        IdTextDescription.setForeground(Color.white);
+        IdTextDescription.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        JLabel IdTextDescription2 = new JLabel("also to allow a better service provider");
+        IdTextDescription2.setBounds(50, 95, 250, 30);
+        IdTextDescription2.setForeground(Color.white);
+        IdTextDescription2.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        IdHolderPanel.add(IdTextDescription2);
+        IdHolderPanel.add(IdTextDescription);
+        IdHolderPanel.add(IdText);
+
+
+        IdPanel.add(IdHolderPanel);
+
+        ElementsPanel.add(IdPanel);
+
+        JPanel PersoPanel = new JPanel();
+        PersoPanel.setBounds(50, 365, 750, 500);
+        PersoPanel.setBackground(new Color(0x2B2B2B));
+        PersoPanel.setLayout(null);
+
+        JPanel PersoHolder = new JPanel();
+        PersoHolder.setBounds(0, 0, 325, 500);
+        PersoHolder.setLayout(null);
+        PersoHolder.setBackground(new Color(0x1C2837));
+
+        JLabel PersoText = new JLabel("Personnal informations");
+        PersoText.setBounds(50, 25, 350, 30);
+        PersoText.setForeground(Color.white);
+        PersoText.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+        JLabel PersoTextDescription = new JLabel("This informations are private and will ");
+        PersoTextDescription.setBounds(50, 75, 250, 30);
+        PersoTextDescription.setForeground(Color.white);
+        PersoTextDescription.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        JLabel PersoTextDescription2 = new JLabel("not be shared with others");
+        PersoTextDescription2.setBounds(50, 95, 250, 30);
+        PersoTextDescription2.setForeground(Color.white);
+        PersoTextDescription2.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        PersoHolder.add(PersoTextDescription2);
+        PersoHolder.add(PersoTextDescription);
+        PersoHolder.add(PersoText);
+
+        PersoPanel.add(PersoHolder);
+
+        ElementsPanel.add(PersoPanel);
+
+        JPanel PayPanel = new JPanel();
+        PayPanel.setBounds(50, 905, 750, 200);
+        PayPanel.setBackground(new Color(0x2B2B2B));
+        PayPanel.setLayout(null);
+
+        JPanel PayHolder = new JPanel();
+        PayHolder.setBounds(0, 0, 325, 200);
+        PayHolder.setLayout(null);
+        PayHolder.setBackground(new Color(0x1C2837));
+
+        JLabel PayText = new JLabel("Payment informations");
+        PayText.setBounds(50, 25, 350, 30);
+        PayText.setForeground(Color.white);
+        PayText.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+        JLabel PayTextDescription = new JLabel("your credit and payement information");
+        PayTextDescription.setBounds(50, 75, 250, 30);
+        PayTextDescription.setForeground(Color.white);
+        PayTextDescription.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        PayHolder.add(PayTextDescription);
+        PayHolder.add(PayText);
+
+        PayPanel.add(PayHolder);
+
+        ElementsPanel.add(PayPanel);
+
+        JPanel SignPanel = new JPanel();
+        SignPanel.setBounds(50, 1145, 750, 400);
+        SignPanel.setBackground(new Color(0x2B2B2B));
+        SignPanel.setLayout(null);
+
+        JPanel SignHolder = new JPanel();
+        SignHolder.setBounds(0, 0, 325, 400);
+        SignHolder.setLayout(null);
+        SignHolder.setBackground(new Color(0x1C2837));
+
+        JLabel SignText = new JLabel("Sign in Management");
+        SignText.setBounds(50, 25, 350, 30);
+        SignText.setForeground(Color.white);
+        SignText.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+        JLabel SignTextDescription = new JLabel("change your sign and log in infos ");
+        SignTextDescription.setBounds(50, 75, 250, 30);
+        SignTextDescription.setForeground(Color.white);
+        SignTextDescription.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        SignHolder.add(SignTextDescription);
+        SignHolder.add(SignText);
+
+        SignPanel.add(SignHolder);
+
+        ElementsPanel.add(SignPanel);
+
 
         return AccountPanel;
+    }
+
+    public JPanel CreateTicketPanel(){
+        JPanel TicketPanel = new JPanel();
+
+        return TicketPanel;
+    }
+
+    public JPanel CreateBalancePanel(){
+        JPanel BalancePanel = new JPanel();
+
+        return BalancePanel;
     }
 
     public JPanel CreateMoviePanel(){
@@ -1577,9 +2114,9 @@ public class CinemaApp extends JFrame implements ActionListener {
         MoviePanel.setLayout(null);
         MoviePanel.setPreferredSize(new Dimension(1125, 3500));
 
-        JLabel ExploreMore = new JLabel("Explore more films ");
-        ExploreMore.setBounds(75, 25, 750, 30);
-        ExploreMore.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        JLabel ExploreMore = new JLabel("Explore more films... ");
+        ExploreMore.setBounds(75, 45, 750, 30);
+        ExploreMore.setFont(new Font("Segoe UI", Font.BOLD, 32));
         ExploreMore.setForeground(Color.white);
 
         MoviePanel.add(ExploreMore);
@@ -1587,7 +2124,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         JPanel ExploreMorePanel = new JPanel();
         ExploreMorePanel.setLayout(new GridLayout(0, 4, 20, 20));  // Unlimited rows, 4 columns
         ExploreMorePanel.setBackground(new Color(0x0D1116));
-        ExploreMorePanel.setBounds(75, 65, 950, 600);
+        ExploreMorePanel.setBounds(75, 95, 950,(CinemaManager.movies.size()*50 +(CinemaManager.movies.size()-1)*20));
 
         for (int i = 0; i <CinemaManager.movies.size(); i++) { // hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom
 
