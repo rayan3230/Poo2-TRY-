@@ -1003,9 +1003,6 @@ public class CinemaApp extends JFrame implements ActionListener {
      
 
     public JPanel CreateClientInterface() {
-
-        CardLayout HomeCardLayout = new CardLayout();
-
         JPanel HomePanel = new JPanel();
         HomePanel.setLayout(null);
         HomePanel.setBounds(0, 0, 1200, 750);
