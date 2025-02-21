@@ -1084,6 +1084,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         //ContentPanel.setLayout(new ScrollPaneLayout());
         ContentPanel.setOpaque(false);
         ContentPanel.setLayout(null);
+        ContentPanel.setPreferredSize(new Dimension(1125, 3500));
 
         JLabel Home = new JLabel("Home ");
         Home.setBounds(75, 10, 750, 30);
@@ -1166,6 +1167,8 @@ public class CinemaApp extends JFrame implements ActionListener {
         ExploreMore.setBounds(75, 950, 750, 30);
         ExploreMore.setFont(new Font("Segoe UI", Font.BOLD, 20));
         ExploreMore.setForeground(Color.white);
+
+        ContentPanel.add(ExploreMore);
 
         JPanel ExploreMorePanel = new JPanel();
         ExploreMorePanel.setLayout(new GridLayout(0, 4, 20, 20));  // Unlimited rows, 4 columns
