@@ -1554,13 +1554,13 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         });
 
-        HomePanel.setComponentZOrder(scrollPane, 2);
-        HomePanel.setComponentZOrder(scrollPane2, 2);
-        HomePanel.setComponentZOrder(scrollPane3, 0);
-        HomePanel.setComponentZOrder(scrollPane4, 2);
-        HomePanel.setComponentZOrder(scrollPane5, 2);
-        HomePanel.setComponentZOrder(LeftPanel, 1);
-        HomePanel.setComponentZOrder(AccountButtonHolder, 1);
+        HomePanel.setComponentZOrder(scrollPane, 1);
+        HomePanel.setComponentZOrder(scrollPane2, 1);
+        HomePanel.setComponentZOrder(scrollPane3, 1);
+        HomePanel.setComponentZOrder(scrollPane4, 1);
+        HomePanel.setComponentZOrder(scrollPane5, 1);
+        HomePanel.setComponentZOrder(LeftPanel, 0);
+        HomePanel.setComponentZOrder(AccountButtonHolder, 0);
 
         return HomePanel;
     }
@@ -1749,6 +1749,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         AccountPanel.setOpaque(false);
         AccountPanel.setLayout(null);
         AccountPanel.setPreferredSize(new Dimension(1200, 3500));
+        
 
         JPanel OptionPanel = new JPanel();
         OptionPanel.setBounds(0, 0, 350, 750);
