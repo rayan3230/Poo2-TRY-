@@ -1,17 +1,19 @@
 package Vue;
 
+
 import Controller.GestionAccounts;
 import Moodle.Accounts;
 import java.awt.*;
 import javax.swing.*;
-public class UiClass extends JFrame {
+
+public class AdvanceU extends JFrame {
     public JPanel mainPanel;
     public CardLayout cardLayout;
     public GestionAccounts Accounts;  
     public Accounts currentuser ;
-    public Accounts currentadmin;  
+    public Accounts currentadmin ;  
     
-    public UiClass(){
+   
         // Initialize Accounts in the constructor
         Accounts = new GestionAccounts();
         
@@ -51,7 +53,7 @@ public class UiClass extends JFrame {
     
     public JPanel createWelcomePanel() {
         JPanel welcomepanel = new JPanel() {
-            ImageIcon bgIcon = new ImageIcon("Rayan/bookingTICKET/img/BackGround 4.png");
+            ImageIcon bgIcon = new ImageIcon("Rayan\\bookingTICKET\\img\\BackGround 4.png");
 
             @Override
             protected void paintComponent(Graphics g) {
@@ -79,7 +81,7 @@ public class UiClass extends JFrame {
 
 
 
-        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        ImageIcon iconMovie = new ImageIcon("Rayan/bookingTICKET/img/movie.png");
         JLabel imageLabel = new JLabel(iconMovie);
         imageLabel.setBounds(10, 20, 64, 64);
         welcomepanel.add(imageLabel);
@@ -194,7 +196,7 @@ public class UiClass extends JFrame {
   
     public JPanel createLoginPanel(){
         JPanel loginPanel = new JPanel() {
-            ImageIcon bgIcon = new ImageIcon("Rayan/bookingTICKET/img/BackGround 4.png");
+            ImageIcon bgIcon = new ImageIcon("Rayan\\bookingTICKET\\img\\BackGround 4.png");
  
             @Override
             protected void paintComponent(Graphics g) {
@@ -222,7 +224,7 @@ public class UiClass extends JFrame {
 
 
 
-        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        ImageIcon iconMovie = new ImageIcon("Rayan/bookingTICKET/img/movie.png");
         JLabel imageLabel = new JLabel(iconMovie);
         imageLabel.setBounds(10, 20, 64, 64);
         loginPanel.add(imageLabel);
@@ -423,7 +425,7 @@ public class UiClass extends JFrame {
 
 
 
-        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        ImageIcon iconMovie = new ImageIcon("Rayan/bookingTICKET/img/movie.png");
         JLabel imageLabel = new JLabel(iconMovie);
         imageLabel.setBounds(10, 20, 64, 64);
         registerPanel.add(imageLabel);
@@ -666,7 +668,7 @@ public class UiClass extends JFrame {
 
     public JPanel createForgotPasswordPanel() {
         JPanel forgotPanel = new JPanel() {
-            ImageIcon bgIcon = new ImageIcon("Rayan/bookingTICKET/img/BackGround 4.png");
+            ImageIcon bgIcon = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/BackGround 4.png");
      
             @Override
             protected void paintComponent(Graphics g) {
@@ -723,7 +725,7 @@ public class UiClass extends JFrame {
         usernameField.setCaretColor(Color.white);
         usernameField.setOpaque(true);
         usernameField.setBorder(null);
-        TextfieldBehave(usernameField, "Enter your username");
+        textfieldbehave(usernameField, "Enter your username");
         rectangleForgot.add(usernameField);
     
         // Security Question
@@ -742,7 +744,7 @@ public class UiClass extends JFrame {
         answerField.setCaretColor(Color.white);
         answerField.setOpaque(true);
         answerField.setBorder(null);
-        TextfieldBehave(answerField, "Enter your answer");
+        textfieldbehave(answerField, "Enter your answer");
         rectangleForgot.add(answerField);
     
         // Submit Button
@@ -788,74 +790,68 @@ public class UiClass extends JFrame {
         homePanel.setLayout(null);
         homePanel.setBounds(0, 0, 1200, 750);
         homePanel.setBackground(Color.green);
-
-
-        //--------------Background panel(main)
-        JPanel MainUserPanel = new JPanel();
-        MainUserPanel.setBounds(300, 0, 1200, 750);
-        MainUserPanel.setBackground(new Color(18, 18, 18));
-        MainUserPanel.setLayout(null);
-        homePanel.add(MainUserPanel);
-        MainUserPanel.setVisible(true);
     
-        // Only add welcome label if UserAccount is not null
-        // if (UserAccount != null) {
-        //     JLabel usernamelbl = new JLabel("Welcome, " + UserAccount.username + "!");
-        //     usernamelbl.setBounds(50, 120, 300, 50);
-        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        //     usernamelbl.setForeground(Color.red);
-        //     homePanel.add(usernamelbl);
-        // } else {
-        //     JLabel usernamelbl = new JLabel("Welcome, nkmk!");
-        //     usernamelbl.setBounds(50, 120, 300, 50);
-        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        //     usernamelbl.setForeground(Color.red);
-        //     homePanel.add(usernamelbl);
-        // }
-
-
+        //--------------Background panel(main)
+        JPanel MainuserPanel = new JPanel();
+        MainuserPanel.setPreferredSize(new Dimension(900, 3500)); // Set preferred size to allow scrolling
+        MainuserPanel.setBackground(new Color(18, 18, 18)); // new Color(18, 18, 18)
+        MainuserPanel.setLayout(null);
+    
+        JScrollPane mainScrollPane = new JScrollPane(MainuserPanel);
+        mainScrollPane.setBounds(300, 0, 900, 750);
+        mainScrollPane.setBorder(null);
+        mainScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        mainScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        homePanel.add(mainScrollPane);
+    
+        MainuserPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = mainScrollPane.getVerticalScrollBar();
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 50; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+    
         //--------------Left black panel
         JPanel LeftBlackPanel = new JPanel();
         LeftBlackPanel.setBounds(0, 0, 300, 750);
         LeftBlackPanel.setBackground(new Color(24, 24, 24));
         LeftBlackPanel.setLayout(null);
         homePanel.add(LeftBlackPanel);
-
+    
         JLabel LogoName = new JLabel("CINEMACITY");
         LogoName.setBounds(17, -124, 300, 300);
         LogoName.setForeground(Color.RED);
         LogoName.setFont(new Font("Segoe UI", Font.BOLD, 25));
         LeftBlackPanel.add(LogoName);
-
+    
         JPanel BalancePanel = new JPanel();
         BalancePanel.setBounds(20, 70, 260, 120);
         BalancePanel.setLayout(null);
         BalancePanel.setBackground(new Color(30, 30, 30));
         LeftBlackPanel.add(BalancePanel);
-
+    
         JLabel BalanceLabel = new JLabel(" Balance");
         BalanceLabel.setBounds(10, 10, 100, 30);
         BalanceLabel.setForeground(Color.white);
         BalanceLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         BalancePanel.add(BalanceLabel);
-
-        JLabel BalanceValue = new JLabel("$56,00 " );
+    
+        JLabel BalanceValue = new JLabel("$56,00 ");
         BalanceValue.setFont(new Font("Arial", Font.BOLD, 24));
-        BalanceValue.setForeground(Color.RED);//new Color(183, 255, 0)
+        BalanceValue.setForeground(Color.RED); // new Color(183, 255, 0)
         BalanceValue.setBounds(10, 55, 100, 30);
         BalancePanel.add(BalanceValue);
-
-        RoundedButton Dipostebalance = new RoundedButton("",10);
+    
+        RoundedButton Dipostebalance = new RoundedButton("", 10);
         Dipostebalance.setBounds(190, 30, 50, 50);
-        Dipostebalance.setBackground(Color.RED);//new Color(183, 255, 0)
+        Dipostebalance.setBackground(Color.RED); // new Color(183, 255, 0)
         Dipostebalance.addActionListener(e -> {
             JOptionPane.showMessageDialog(homePanel, "Deposit functionality is not available yet.");
         });
         BalancePanel.add(Dipostebalance);
-
-
-
-//-----------------------Left side buttons-----------------------
+    
+        //-----------------------Left side buttons-----------------------
         JButton FavoriteButton = new JButton("Favorite");
         FavoriteButton.setBounds(20, 250, 210, 40);
         FavoriteButton.setBackground(new Color(30, 30, 30));
@@ -863,8 +859,7 @@ public class UiClass extends JFrame {
         FavoriteButton.setHorizontalAlignment(SwingConstants.LEFT);
         FavoriteButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
         LeftBlackPanel.add(FavoriteButton);
-
-        
+    
         JButton BonusesButton = new JButton("Bonuses");
         BonusesButton.setBounds(20, 350, 210, 40);
         BonusesButton.setBackground(new Color(30, 30, 30));
@@ -872,7 +867,7 @@ public class UiClass extends JFrame {
         BonusesButton.setHorizontalAlignment(SwingConstants.LEFT);
         BonusesButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
         LeftBlackPanel.add(BonusesButton);
-
+    
         JButton BookedButton = new JButton("Booked");
         BookedButton.setBounds(20, 450, 210, 40);
         BookedButton.setBackground(new Color(30, 30, 30));
@@ -880,34 +875,29 @@ public class UiClass extends JFrame {
         BookedButton.setHorizontalAlignment(SwingConstants.LEFT);
         BookedButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
         LeftBlackPanel.add(BookedButton);
-        
+    
         JButton LogoutButton = new JButton("Log out...");
         LogoutButton.setBounds(20, 550, 210, 40);
         LogoutButton.setBackground(new Color(30, 30, 30));
         LogoutButton.setForeground(Color.WHITE);
         LogoutButton.setHorizontalAlignment(SwingConstants.LEFT);
         LogoutButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-        LogoutButton.addActionListener(e->{
-            JOptionPane.showMessageDialog(homePanel, "You are logged out.");
-            cardLayout.show(mainPanel, "login");
-        });
         LeftBlackPanel.add(LogoutButton);
-
-
+    
         //----------Main Panels things----------
-
+    
         JPanel SearchPanel = new JPanel();
         SearchPanel.setBounds(30, 20, 600, 40);
         SearchPanel.setLayout(null);
         SearchPanel.setBackground(new Color(30, 30, 30));
-        MainUserPanel.add(SearchPanel);
-
+        MainuserPanel.add(SearchPanel);
+    
         JTextField searchField = new JTextField("Type to Search...");
         searchField.setBounds(10, 5, 380, 30);
         searchField.setBackground(new Color(30, 30, 30));
         searchField.setForeground(Color.GRAY);
         searchField.setBorder(null);
-
+    
         searchField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -916,7 +906,7 @@ public class UiClass extends JFrame {
                     searchField.setForeground(Color.WHITE);
                 }
             }
-
+    
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (searchField.getText().isEmpty() || searchField.getText().trim().isEmpty()) {
@@ -924,50 +914,58 @@ public class UiClass extends JFrame {
                     searchField.setForeground(Color.gray);
                 }
             }
-
+    
         });
         SearchPanel.add(searchField);
-
-    //----------Slide Panel--------------------------------
     
-        JPanel slidePanel = new JPanel(){
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            ImageIcon icon = new ImageIcon("Rayan/bookingTICKET/img/Avatar.jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
-            Image img = icon.getImage();
-            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-        }
-        };
+        //----------Slide Panel--------------------------------
+    
+        JPanel slidePanel = new JPanel();
         slidePanel.setBounds(30, 78, 840, 350);
         slidePanel.setLayout(null);
         slidePanel.setBackground(new Color(30, 30, 30));
-        MainUserPanel.add(slidePanel);
-
-
+        MainuserPanel.add(slidePanel);
+    
+        JLabel Img = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon icon = new ImageIcon("POO2\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Avatar.jpg");
+                Image img = icon.getImage();
+                g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        Img.setBounds(0, 0, 840, 350);
+        slidePanel.add(Img);
+    
+        // Films Grid Section
         JPanel filmsGridPanel = new JPanel();
-        filmsGridPanel.setLayout(new GridLayout(0, 4, 10, 10));  // Unlimited rows, 4 columns
+        filmsGridPanel.setLayout(new GridLayout(0, 4, 15, 15));  // Unlimited rows, 4 columns
         filmsGridPanel.setBackground(new Color(18, 18, 18));
+        filmsGridPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        // Number of films
+        int numberOfFilms = 40; // Replace this with the actual number of films (e.g., from a list or array)
+        
+        // Calculate the number of rows
+        int numberOfColumns = 4; // Number of columns in the grid
+        int numberOfRows = (int) Math.ceil((double) numberOfFilms / numberOfColumns);
+        
+        // Height of each film panel
+        int filmPanelHeight = 230; // Adjust this based on your design
+        
+        // Vertical spacing between film panels
+        int verticalSpacing = 15; // Matches the vertical gap in GridLayout
+        
+        // Calculate the total height of filmsGridPanel
+        int totalHeight = (numberOfRows * filmPanelHeight) + (verticalSpacing * (numberOfRows - 1));
+        filmsGridPanel.setBounds(30, 450, 840, totalHeight);
 
-        
-        JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
-        scrollPane.setBounds(30, 450, 840, 280);
-        scrollPane.setBorder(null);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getViewport().setBackground(new Color(18, 18, 18));
-        
-        
-        filmsGridPanel.addMouseWheelListener(e -> {
-            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();//had scroll pa rapport l y
-            int notches = e.getWheelRotation();
-            int currentValue = verticalScrollBar.getValue();
-            int scrollAmount = 30; // Adjust scroll speed
-            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
-        });
+        // Set the preferred size of filmsGridPanel
+        filmsGridPanel.setPreferredSize(new Dimension(840, totalHeight));
+        System.out.println(totalHeight );
 
-        
-        for (int i = 0; i < 20; i++) { //hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom 
+    
+        for (int i = 0; i < numberOfFilms; i++) { // hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom
             final int index = i;
             JPanel filmPanel = new JPanel() {
                 @Override
@@ -978,100 +976,100 @@ public class UiClass extends JFrame {
                     g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
                 }
             };
-           
             filmPanel.setLayout(null);
-            filmPanel.setPreferredSize(new Dimension(200, 230));
+            filmPanel.setPreferredSize(new Dimension(100, filmPanelHeight)); // 200 ta3 kifah njib l 200 pixel la width ta3 panel
             filmPanel.setBackground(new Color(24, 24, 24));
             filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            
-            // Hayla hadi :-) 
+    
+            // Hayla hadi :-)
             filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));//ta3 ki t intiracti m3a l panel
+                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1)); // ta3 ki t intiracti m3a l panel
                 }
+    
                 public void mouseExited(java.awt.event.MouseEvent evt) {
                     filmPanel.setBorder(null);
                 }
+    
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-
                     JOptionPane.showMessageDialog(null, "Opening film details...");
                 }
             });
-            
+    
             filmsGridPanel.add(filmPanel);
         }
-
-        MainUserPanel.add(scrollPane);
-
-
+    
+        MainuserPanel.add(filmsGridPanel);
+    
         JLabel nowShowingLabel = new JLabel("Our Movies");
         nowShowingLabel.setBounds(30, 430, 200, 20);
         nowShowingLabel.setForeground(Color.WHITE);
         nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        MainUserPanel.add(nowShowingLabel);
-
-        //MainUserPanel.setVisible(false);
-
-
-
-
-        
-
-
-
-
+        MainuserPanel.add(nowShowingLabel);
     
         return homePanel;
     }
+    
 
     public JPanel createHomeAdminPanel(Accounts AdminAccounts){
         JPanel homeAdminPanel = new JPanel();
         homeAdminPanel.setLayout(null);
         homeAdminPanel.setBounds(0, 0, 1200, 750);
-        homeAdminPanel.setBackground(Color.BLUE);
+        homeAdminPanel.setBackground(Color.green);
 
-        JPanel MainPanel = new JPanel();
-        MainPanel.setBackground(new Color(80,77,74));
-        MainPanel.setBounds(300, 0, 900, 750);
-        homeAdminPanel.add(MainPanel);
+        JPanel MainAdminPanel = new JPanel();
+        MainAdminPanel.setBounds(300, 0, 900, 750);
+        MainAdminPanel.setLayout(null);
+        MainAdminPanel.setBackground(new Color(80,77,74));
+        homeAdminPanel.add(MainAdminPanel);
 
         JPanel LeftPanel = new JPanel();
         LeftPanel.setBounds(0, 0, 300, 750);
-        LeftPanel.setBackground(new Color( 44, 44, 44));
         LeftPanel.setLayout(null);
+        LeftPanel.setBackground(new Color( 44, 44, 44));
         homeAdminPanel.add(LeftPanel);
 
-        JLabel AdminLabel = new JLabel(" Admin Dashboard");
-        AdminLabel.setBounds(45, 40, 200, 20);
-        AdminLabel.setForeground(Color.WHITE);
-        AdminLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-        LeftPanel.add(AdminLabel);
+        // Title Label
+        JLabel titleLabel = new JLabel("Admin Dashboard");
+        titleLabel.setBounds(50, 20, 300, 30);
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        titleLabel.setForeground(Color.white);
+        MainAdminPanel.add(titleLabel);
 
-        JPanel WelcomeAdmin = new JPanel();
-        WelcomeAdmin.setBounds(10, 130, 280, 150);
-        WelcomeAdmin.setLayout(null);
-        WelcomeAdmin.setBackground(new Color(66, 66, 66));
-        LeftPanel.add(WelcomeAdmin);
-        
-        int height = 300;
-        
-        for(int i=0 ; i<4 ; i++){
-            String[] words={"About Movies","About Users","About Halls" , "log out" };
+        // User Accounts Table
+        String[] columnNames = {"Username", "Email", "Role", "Actions"};
+        Object[][] data = {}; // This should be populated with actual user data
+        JTable userTable = new JTable(data, columnNames);
+        JScrollPane scrollPane = new JScrollPane(userTable);
+        scrollPane.setBounds(50, 70, 800, 400);
+        MainAdminPanel.add(scrollPane);
 
-            RoundedButton Button = new RoundedButton(words[i] , 10);
-            Button.setBounds(70, height +40, 160, 40);
-            Button.setBackground(new Color(255, 87, 34));
-            Button.setFocusPainted(false);
-            Button.setForeground(Color.WHITE);
-            LeftPanel.add(Button);
+        // Add User Button
+        JButton addUserButton = new JButton("Add User");
+        addUserButton.setBounds(50, 500, 120, 30);
+        addUserButton.addActionListener(e -> {
+            // Logic to add a new user
+            JOptionPane.showMessageDialog(homeAdminPanel, "Add User functionality to be implemented.");
+        });
+        MainAdminPanel.add(addUserButton);
 
-            height += 100;
+        // Edit User Button
+        JButton editUserButton = new JButton("Edit User");
+        editUserButton.setBounds(200, 500, 120, 30);
+        editUserButton.addActionListener(e -> {
+            // Logic to edit selected user
+            JOptionPane.showMessageDialog(homeAdminPanel, "Edit User functionality to be implemented.");
+        });
+        MainAdminPanel.add(editUserButton);
 
-        }
-
-        
-
-        
+        // Delete User Button
+        JButton deleteUserButton = new JButton("Delete User");
+        deleteUserButton.setBounds(350, 500, 120, 30);
+        deleteUserButton.addActionListener(e -> {
+            // Logic to delete selected user
+            JOptionPane.showMessageDialog(homeAdminPanel, "Delete User functionality to be implemented.");
+        });
+        MainAdminPanel.add(deleteUserButton);
 
         return homeAdminPanel;
     }
@@ -1136,14 +1134,14 @@ public class UiClass extends JFrame {
 
 
 
-    public void TextfieldBehave(JTextField textField, String placeholder) {
-        textField.setText(placeholder);
+    public void textfieldbehave(JTextField textField, String text) {
+        textField.setText(text);
         textField.setForeground(Color.GRAY);
 
         textField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (textField.getText().equals(placeholder)) {
+                if (textField.getText().equals(text)) {
                     textField.setText("");
                     textField.setForeground(Color.WHITE);
                 }
@@ -1152,7 +1150,7 @@ public class UiClass extends JFrame {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (textField.getText().isEmpty()) {
-                    textField.setText(placeholder);
+                    textField.setText(text);
                     textField.setForeground(Color.GRAY);
                 }
             }
