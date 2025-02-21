@@ -1173,7 +1173,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         JPanel ExploreMorePanel = new JPanel();
         ExploreMorePanel.setLayout(new GridLayout(0, 4, 20, 20));  // Unlimited rows, 4 columns
         ExploreMorePanel.setBackground(new Color(0x0D1116));
-        ExploreMorePanel.setBounds(75, 940, 750, 100);
+        ExploreMorePanel.setBounds(75, 990, 950, 1000);
 
         for (int i = 0; i <22; i++) { // hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom
 
