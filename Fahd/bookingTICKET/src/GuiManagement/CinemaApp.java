@@ -142,6 +142,27 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         AdminPanel.add(AdminElements);
 
+        
+        //Account Panel--------------------------------------------------------
+        JPanel AccountPanel = CreateAccountPanel();
+
+        scrollPane3 = new JScrollPane(AccountPanel);
+        scrollPane3.setBounds(-1, -1, 1210, 760);
+        scrollPane3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane3.setOpaque(false);
+        scrollPane3.getViewport().setBorder(null);
+        scrollPane3.getViewport().setBackground(new Color(0x0D1116));
+
+        AccountPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane3.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+
         // main panel management-----------------------------------------------
         MainPanel.add(SignInPanel, "open");
         MainPanel.add(RegisterPanel, "register");
@@ -149,6 +170,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(ForgotPasswordPanel, "forgot Password");
         MainPanel.add(ClientPanel, "user");
         MainPanel.add(AdminPanel, "admin");
+        MainPanel.add(scrollPane3, "account");
 
         setContentPane(MainPanel);
         MainCardLayout.show(MainPanel, "user");
@@ -1054,22 +1076,6 @@ public class CinemaApp extends JFrame implements ActionListener {
             verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
         });
 
-        //Account Panel--------------------------------------------------------
-        JPanel AccountPanel = CreateAccountPanel();
-
-        scrollPane3 = new JScrollPane(AccountPanel);
-        scrollPane3.setBounds(-1, -1, 1205, 755);
-        scrollPane3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane3.setOpaque(false);
-        scrollPane3.getViewport().setBackground(new Color(0x0D1116));
-
-        AccountPanel.addMouseWheelListener(e -> {
-            JScrollBar verticalScrollBar = scrollPane3.getVerticalScrollBar();// had scroll par rapport l y
-            int notches = e.getWheelRotation();
-            int currentValue = verticalScrollBar.getValue();
-            int scrollAmount = 30; // Adjust scroll speed
-            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
-        });
 
 
         //Balance panel---------------------------------------------------------
@@ -1115,8 +1121,6 @@ public class CinemaApp extends JFrame implements ActionListener {
         scrollPane2.setVisible(false);
         HomePanel.add(LeftPanel, "left panel");
         LeftPanel.setVisible(true);
-        HomePanel.add(scrollPane3, "account");
-        scrollPane3.setVisible(false);
         HomePanel.add(scrollPane4, "balance");
         scrollPane4.setVisible(false);
         HomePanel.add(scrollPane5, "ticket");
@@ -1405,13 +1409,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         AccountButton.setFont(new Font("Inter", Font.BOLD, 15));
         AccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         AccountButton.setUI(new RoundButtonUI(new Color(0x000000)));
-        AccountButton.addActionListener(e->{
 
-            ContentPanel.setVisible(false);
-            moviePanel.setVisible(false);
-            AccountPanel.setVisible(true);
-
-        });
         AccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 AccountButton.setBackground(new Color(0x878787));
@@ -1485,14 +1483,8 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
 
         AccountButton.addActionListener(e->{
-            
-            scrollPane.setVisible(true);
-            scrollPane2.setVisible(false);
-            scrollPane3.setVisible(true);
-            FilterButton.setVisible(false);
-            scrollPane4.setVisible(false);
-            scrollPane5.setVisible(false);
-            LeftPanel.setVisible(true);
+
+            MainCardLayout.show(MainPanel, "account");
 
         });
 
@@ -1527,7 +1519,6 @@ public class CinemaApp extends JFrame implements ActionListener {
                 scrollPane5.setBackground(new Color(0xCBCBCB));
                 ContentPanel.setBackground(new Color(0xCBCBCB));
                 moviePanel.setBackground(new Color(0xCBCBCB));
-                AccountPanel.setBackground(new Color(0xCBCBCB));
                 BalancePanel.setBackground(new Color(0xCBCBCB));
                 TicketPanel.setBackground(new Color(0xCBCBCB));
             }else{
@@ -1538,20 +1529,18 @@ public class CinemaApp extends JFrame implements ActionListener {
                 scrollPane5.setBackground(new Color(0x0D1116));
                 ContentPanel.setBackground(new Color(0x0D1116));
                 moviePanel.setBackground(new Color(0x0D1116));
-                AccountPanel.setBackground(new Color(0x0D1116));
                 BalancePanel.setBackground(new Color(0x0D1116));
                 TicketPanel.setBackground(new Color(0x0D1116));
             }
 
         });
 
-        HomePanel.setComponentZOrder(scrollPane, 2);
-        HomePanel.setComponentZOrder(scrollPane2, 2);
-        HomePanel.setComponentZOrder(scrollPane3, 0);
-        HomePanel.setComponentZOrder(scrollPane4, 2);
-        HomePanel.setComponentZOrder(scrollPane5, 2);
-        HomePanel.setComponentZOrder(LeftPanel, 1);
-        HomePanel.setComponentZOrder(AccountButtonHolder, 1);
+        HomePanel.setComponentZOrder(scrollPane, 1);
+        HomePanel.setComponentZOrder(scrollPane2, 1);
+        HomePanel.setComponentZOrder(scrollPane4, 1);
+        HomePanel.setComponentZOrder(scrollPane5, 1);
+        HomePanel.setComponentZOrder(LeftPanel, 0);
+        HomePanel.setComponentZOrder(AccountButtonHolder, 0);
 
         return HomePanel;
     }
@@ -2615,15 +2604,11 @@ public class CinemaApp extends JFrame implements ActionListener {
 
 
         Exit.addActionListener(e -> {
-            scrollPane3.setVisible(false);
-            OptionPanel.setVisible(false);
-            ElementsPanel.setVisible(false);
+            MainCardLayout.show(MainPanel, "user");
         });
 
         ExitButton.addActionListener(e -> {
-            scrollPane3.setVisible(false);
-            OptionPanel.setVisible(false);
-            ElementsPanel.setVisible(false);
+            MainCardLayout.show(MainPanel, "user");
         });
 
         return AccountPanel;
