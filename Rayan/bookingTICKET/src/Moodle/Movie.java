@@ -3,7 +3,7 @@ package Moodle;
 import java.time.LocalTime;
 
 public class Movie {
-    public int id;
+    public int id =0;
     public String Title;
     public String description;
     public int duration; // in minutes
@@ -28,7 +28,7 @@ public class Movie {
     public Movie(String Title,String Description, int duration, String genre, String rating,
             double regularSeatPrice, double vipSeatPrice , String imagePath, String status) {
 
-            this.id = id;
+            this.id=id+1;
             this.Title = Title;
             this.description = description;
             this.duration = duration;

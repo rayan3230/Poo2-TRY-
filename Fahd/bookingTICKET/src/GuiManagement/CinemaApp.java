@@ -1032,6 +1032,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         HomeButton.setForeground(new Color(0x191D22));
         HomeButton.setFont(new Font("Inter", Font.BOLD, 15));
         HomeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         HomeButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
         LeftPanel.add(HomeButton);
@@ -1170,7 +1171,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         JPanel ExploreMorePanel = new JPanel();
         ExploreMorePanel.setLayout(new GridLayout(0, 4, 20, 20));  // Unlimited rows, 4 columns
         ExploreMorePanel.setBackground(new Color(0x0D1116));
-        ExploreMorePanel.setBounds(75, 990, 950, 1000);
+        ExploreMorePanel.setBounds(75, 940, 950, 1000);
 
         for (int i = 0; i <22; i++) { // hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom
 
@@ -1205,7 +1206,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         scrollPane.setBounds(99, 0, 1125, 750);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setOpaque(false);
-        scrollPane.getViewport().setBackground(new Color(0x0D1116));
+        scrollPane.getViewport().setBackground(Color.white);
 
         ContentPanel.addMouseWheelListener(e -> {
             JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();// had scroll par rapport l y
@@ -1216,6 +1217,23 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
 
         HomePanel.add(scrollPane);
+
+        ImageIcon icon = new ImageIcon("C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\home.png");
+        Image image = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(image);
+
+        // Create JButton with resized icon
+        JButton HomeButton2 = new JButton(resizedIcon);
+        HomeButton2.setBounds(20, 10, 100, 100); // Set button size
+        HomeButton2.setContentAreaFilled(false);
+        //HomeButton2.setOpaque(false);
+        HomeButton2.setBorderPainted(false);
+        HomeButton2.setFocusPainted(false);
+        HomeButton2.addActionListener(e->{
+            ContentPanel.setVisible(false);
+        });
+        ContentPanel.add(HomeButton2);
+
         
         
         
