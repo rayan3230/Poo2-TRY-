@@ -2869,6 +2869,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
     }
 
 
