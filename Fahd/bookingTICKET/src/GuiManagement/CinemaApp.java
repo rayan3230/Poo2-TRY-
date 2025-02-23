@@ -34,6 +34,7 @@ public class CinemaApp extends JFrame implements ActionListener {
     public int xVelocity = 30;
     public int x2 = -300;
     public int x2Velocity = 30;
+    public JScrollPane scrollPane3;
 
     // decorative Panels ------------------------------------------------
     public TransparentPanel BlurPanel, BlurPanel2, BlurPanel3;
@@ -141,6 +142,27 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         AdminPanel.add(AdminElements);
 
+        
+        //Account Panel--------------------------------------------------------
+        JPanel AccountPanel = CreateAccountPanel();
+
+        scrollPane3 = new JScrollPane(AccountPanel);
+        scrollPane3.setBounds(-1, -1, 1210, 760);
+        scrollPane3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane3.setOpaque(false);
+        scrollPane3.getViewport().setBorder(null);
+        scrollPane3.getViewport().setBackground(new Color(0x0D1116));
+
+        AccountPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane3.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+
         // main panel management-----------------------------------------------
         MainPanel.add(SignInPanel, "open");
         MainPanel.add(RegisterPanel, "register");
@@ -148,6 +170,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(ForgotPasswordPanel, "forgot Password");
         MainPanel.add(ClientPanel, "user");
         MainPanel.add(AdminPanel, "admin");
+        MainPanel.add(scrollPane3, "account");
 
         setContentPane(MainPanel);
         MainCardLayout.show(MainPanel, "user");
@@ -1003,31 +1026,121 @@ public class CinemaApp extends JFrame implements ActionListener {
      
 
     public JPanel CreateClientInterface() {
-        JPanel HomePanel = new JPanel();
+
+        CardLayout layout = new CardLayout();
+
+
+        JPanel HomePanel = new JPanel(layout);
         HomePanel.setLayout(null);
         HomePanel.setBounds(0, 0, 1200, 750);
         HomePanel.setOpaque(true);
         HomePanel.setBackground(new Color(0x0D1116));
 
+        //Left panel ----------------------------------------------------------------
         JPanel LeftPanel = new JPanel();
         LeftPanel.setBounds(0,0, 100, 750);
         LeftPanel.setBackground(new Color(0x191D22));
         LeftPanel.setLayout(null);
 
-        HomePanel.add(LeftPanel);
+        //content panel---------------------------------------------------------------
+        JPanel ContentPanel = CreateContentPanel();
 
-        JButton MainButton = new JButton("P");
-        MainButton.setBounds(30, 20, 40, 40);
-        MainButton.setBackground(new Color(0xCBCBCB));
-        MainButton.setForeground(new Color(0x191D22));
-        MainButton.setFont(new Font("Inter", Font.BOLD, 15));
-        MainButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        MainButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        JScrollPane scrollPane = new JScrollPane(ContentPanel);
+        scrollPane.setBounds(99, 0, 1125, 750);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setBackground(new Color(0x0D1116));
 
-        LeftPanel.add(MainButton);
+        ContentPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
 
-        JButton HomeButton = new JButton("H");
-        HomeButton.setBounds(30, 210, 40, 40);
+        //movie panel----------------------------------------------------------------------
+        JPanel moviePanel = CreateMoviePanel();
+
+        JScrollPane scrollPane2 = new JScrollPane(moviePanel);
+        scrollPane2.setBounds(99, 0, 1125, 750);
+        scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane2.setOpaque(false);
+        scrollPane2.getViewport().setBackground(new Color(0x0D1116));
+
+        moviePanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane2.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+
+
+        //Balance panel---------------------------------------------------------
+        JPanel BalancePanel = CreateBalancePanel();
+
+        JScrollPane scrollPane4 = new JScrollPane(BalancePanel);
+        scrollPane4.setBounds(99, 0, 1125, 750);
+        scrollPane4.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane4.setOpaque(false);
+        scrollPane4.getViewport().setBackground(new Color(0x0D1116));
+
+        BalancePanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane4.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        //History Panel---------------------------------------------------------    
+        JPanel TicketPanel = CreateTicketPanel();
+
+        JScrollPane scrollPane5 = new JScrollPane(TicketPanel);
+        scrollPane5.setBounds(99, 0, 1125, 750);
+        scrollPane5.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane5.setOpaque(false);
+        scrollPane5.getViewport().setBackground(new Color(0x0D1116));
+
+        TicketPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane5.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        //Settings Panel---------------------------------------------------------
+
+        
+        HomePanel.add(scrollPane, "home");
+        scrollPane.setVisible(true);
+        HomePanel.add(scrollPane2, "movies");
+        scrollPane2.setVisible(false);
+        HomePanel.add(LeftPanel, "left panel");
+        LeftPanel.setVisible(true);
+        HomePanel.add(scrollPane4, "balance");
+        scrollPane4.setVisible(false);
+        HomePanel.add(scrollPane5, "ticket");
+        scrollPane5.setVisible(false);
+
+
+        //-------------------------------------------------------------------------------------------------
+
+
+        JButton HomeButton = new JButton();
+        HomeButton.setBounds(30, 20, 40, 40);
+
+        ImageIcon originalIcon6 = new ImageIcon(
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\home (1).png");
+        Image originalImage6 = originalIcon6.getImage();
+        Image scaledImage6 = originalImage6.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon6 = new ImageIcon(scaledImage6);
+
+        HomeButton.setIcon(scaledIcon6);
         HomeButton.setBackground(new Color(0xCBCBCB));
         HomeButton.setForeground(new Color(0x191D22));
         HomeButton.setFont(new Font("Inter", Font.BOLD, 15));
@@ -1035,48 +1148,405 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         HomeButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
-        LeftPanel.add(HomeButton);
+        TransparentPanel HoverHome = new TransparentPanel(0.5f);
+        HoverHome.setBounds(0, 25, 7, 25);
+        HoverHome.setVisible(false);
+        HoverHome.setBackground(new Color(0x878787));
 
-        JButton MyTicketButton = new JButton("T");
+        LeftPanel.add(HoverHome);
+
+
+        HomeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                HomeButton.setBackground(new Color(0x878787));
+                HoverHome.setVisible(true);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                HomeButton.setBackground(new Color(0xCBCBCB));
+                HoverHome.setVisible(false);
+            }
+        });
+
+        LeftPanel.add(HomeButton);
+        
+
+
+        JButton AllButton = new JButton();
+        AllButton.setBounds(30, 210, 40, 40);
+
+        ImageIcon originalIcon = new ImageIcon(
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\all.png");
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+        AllButton.setIcon(scaledIcon);
+        AllButton.setBackground(new Color(0xCBCBCB));
+        AllButton.setForeground(new Color(0x191D22));
+        AllButton.setFont(new Font("Inter", Font.BOLD, 15));
+        AllButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        AllButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        AllButton.setContentAreaFilled(false); // Make the button background transparent
+        AllButton.setBorderPainted(false); // Remove the button border
+        AllButton.setFocusPainted(false); // Remove the focus border
+
+        TransparentPanel HoverAll = new TransparentPanel(0.5f);
+        HoverAll.setBounds(0, 215, 7, 25);
+        HoverAll.setVisible(false);
+        HoverAll.setBackground(new Color(0x878787));
+
+        LeftPanel.add(HoverAll);
+
+
+        AllButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AllButton.setBackground(new Color(0x878787));
+                HoverAll.setVisible(true);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AllButton.setBackground(new Color(0xCBCBCB));
+                HoverAll.setVisible(false);
+            }
+        });
+
+        LeftPanel.add(AllButton);
+
+
+
+        JButton MyTicketButton = new JButton();
+
         MyTicketButton.setBounds(30, 280, 40, 40);
+        ImageIcon originalIcon2 = new ImageIcon(
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\ticket.png");
+        Image originalImage2 = originalIcon2.getImage();
+        Image scaledImage2 = originalImage2.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon2 = new ImageIcon(scaledImage2);
+
+        MyTicketButton.setIcon(scaledIcon2);
         MyTicketButton.setBackground(new Color(0xCBCBCB));
         MyTicketButton.setForeground(new Color(0x191D22));
         MyTicketButton.setFont(new Font("Inter", Font.BOLD, 15));
         MyTicketButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         MyTicketButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
+        TransparentPanel HoverTicket = new TransparentPanel(0.5f);
+        HoverTicket.setBounds(0, 285, 7, 25);
+        HoverTicket.setVisible(false);
+        HoverTicket.setBackground(new Color(0x878787));
+
+        LeftPanel.add(HoverTicket);
+
+
+        MyTicketButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MyTicketButton.setBackground(new Color(0x878787));
+                HoverTicket.setVisible(true);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MyTicketButton.setBackground(new Color(0xCBCBCB));
+                HoverTicket.setVisible(false);
+            }
+        });
+
         LeftPanel.add(MyTicketButton);
 
-        JButton BalanceButton = new JButton("B");
+
+
+        JButton BalanceButton = new JButton();
         BalanceButton.setBounds(30, 350, 40, 40);
+
+        ImageIcon originalIcon3 = new ImageIcon(
+            "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\dollar.png");
+        Image originalImage3 = originalIcon3.getImage();
+        Image scaledImage3 = originalImage3.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon3 = new ImageIcon(scaledImage3);
+
+        BalanceButton.setIcon(scaledIcon3);
         BalanceButton.setBackground(new Color(0xAD3000));
         BalanceButton.setForeground(new Color(0x191D22));
         BalanceButton.setFont(new Font("Inter", Font.BOLD, 14));
         BalanceButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         BalanceButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
+        TransparentPanel HoverBalance = new TransparentPanel(0.5f);
+        HoverBalance.setBounds(0, 355, 7, 25);
+        HoverBalance.setVisible(false);
+        HoverBalance.setBackground(new Color(0xFF0000));
+
+        LeftPanel.add(HoverBalance);
+
+
+        BalanceButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BalanceButton.setBackground(new Color(0x550000));
+                HoverBalance.setVisible(true);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BalanceButton.setBackground(new Color(0xAD3000));
+                HoverBalance.setVisible(false);
+            }
+        });
+
         LeftPanel.add(BalanceButton);
 
-        JButton FilterButton = new JButton("F");
-        FilterButton.setBounds(30, 420, 40, 40);
+
+
+        JButton FilterButton = new JButton();
+        FilterButton.setBounds(30, 490, 40, 40);
+
+        ImageIcon originalIcon4 = new ImageIcon(
+            "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\filter.png");
+        Image originalImage4 = originalIcon4.getImage();
+        Image scaledImage4 = originalImage4.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon4 = new ImageIcon(scaledImage4);
+
+        FilterButton.setIcon(scaledIcon4);
         FilterButton.setBackground(new Color(0xA96E00));
         FilterButton.setForeground(new Color(0x191D22));
         FilterButton.setFont(new Font("Inter", Font.BOLD, 15));
         FilterButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         FilterButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
+        TransparentPanel HoverFilter = new TransparentPanel(0.5f);
+        HoverFilter.setBounds(0, 495, 7, 25);
+        HoverFilter.setVisible(false);
+        HoverFilter.setBackground(new Color(0xFFFF00));
+
+        LeftPanel.add(HoverFilter);
+
+
+        FilterButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                FilterButton.setBackground(new Color(0x652B00));
+                HoverFilter.setVisible(true);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                FilterButton.setBackground(new Color(0xA96E00));
+                HoverFilter.setVisible(false);
+            }
+        });
+        FilterButton.setVisible(false);
+
         LeftPanel.add(FilterButton);
 
-        JButton LogOutButton = new JButton("L");
-        LogOutButton.setBounds(30, 490, 40, 40);
-        LogOutButton.setBackground(new Color(0xA96E00));
+
+
+        JButton ChangeTheme = new JButton();
+        ChangeTheme.setBounds(30, 420, 40, 40);
+
+        ImageIcon originalIcon5 = new ImageIcon(
+            "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\themes.png");
+        Image originalImage5 = originalIcon5.getImage();
+        Image scaledImage5 = originalImage5.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon5 = new ImageIcon(scaledImage5);
+
+        ChangeTheme.setIcon(scaledIcon5);
+        ChangeTheme.setBackground(new Color(0xA96E00));
+        ChangeTheme.setForeground(new Color(0x191D22));
+        ChangeTheme.setFont(new Font("Inter", Font.BOLD, 15));
+        ChangeTheme.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        ChangeTheme.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        TransparentPanel HoverTheme = new TransparentPanel(0.5f);
+        HoverTheme.setBounds(0, 425, 7, 25);
+        HoverTheme.setVisible(false);
+        HoverTheme.setBackground(new Color(0xFFFF00));
+
+        LeftPanel.add(HoverTheme);
+
+
+        ChangeTheme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ChangeTheme.setBackground(new Color(0x652B00));
+                HoverTheme.setVisible(true);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ChangeTheme.setBackground(new Color(0xA96E00));
+                HoverTheme.setVisible(false);
+            }
+        });
+
+        LeftPanel.add(ChangeTheme);
+
+
+        TransparentPanel AccountButtonHolder = new TransparentPanel(0.2f);
+        AccountButtonHolder.setBounds(1050, 15, 125, 50);
+        AccountButtonHolder.setBackground(Color.white);
+        AccountButtonHolder.setLayout(null);
+
+        HomePanel.add(AccountButtonHolder);
+
+
+        JButton AccountButton = new JButton();
+        AccountButton.setBounds(75, 5, 40, 40);
+
+        ImageIcon originalIcon7 = new ImageIcon(
+            "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\profile-user.png");
+        Image originalImage7 = originalIcon7.getImage();
+        Image scaledImage7 = originalImage7.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon7 = new ImageIcon(scaledImage7);
+
+        AccountButton.setIcon(scaledIcon7);
+        AccountButton.setBackground(new Color(0xCBCBCB));
+        AccountButton.setForeground(new Color(0x191D22));
+        AccountButton.setFont(new Font("Inter", Font.BOLD, 15));
+        AccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        AccountButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        AccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AccountButton.setBackground(new Color(0x878787));
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AccountButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        AccountButtonHolder.add(AccountButton);
+
+
+
+        JButton LogOutButton = new JButton();
+        LogOutButton.setBounds(10, 5, 40, 40);
+
+        ImageIcon originalIcon8 = new ImageIcon(
+            "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\exit.png");
+        Image originalImage8 = originalIcon8.getImage();
+        Image scaledImage8 = originalImage8.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon8 = new ImageIcon(scaledImage8);
+
+        LogOutButton.setIcon(scaledIcon8);
+        LogOutButton.setBackground(new Color(0xAD2500));
         LogOutButton.setForeground(new Color(0x191D22));
         LogOutButton.setFont(new Font("Inter", Font.BOLD, 15));
         LogOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         LogOutButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        LogOutButton.addActionListener(e->{
+            MainCardLayout.show(MainPanel, "open");
+        });
 
-        LeftPanel.add(LogOutButton);
+        LogOutButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LogOutButton.setBackground(new Color(0x550000));
 
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LogOutButton.setBackground(new Color(0xAD2500));
+            }
+        });
+
+        AccountButtonHolder.add(LogOutButton);
+
+        
+
+        HomeButton.addActionListener(e->{
+
+            scrollPane.setVisible(true);
+            scrollPane2.setVisible(false);
+            scrollPane3.setVisible(false);
+            FilterButton.setVisible(false);
+            scrollPane4.setVisible(false);
+            scrollPane5.setVisible(false);
+
+        });
+
+        AllButton.addActionListener(e->{
+
+            scrollPane.setVisible(false);
+            scrollPane2.setVisible(true);
+            scrollPane3.setVisible(false);
+            FilterButton.setVisible(true);
+            scrollPane4.setVisible(false);
+            scrollPane5.setVisible(false);
+
+        });
+
+        AccountButton.addActionListener(e->{
+
+            MainCardLayout.show(MainPanel, "account");
+
+        });
+
+        BalanceButton.addActionListener(e->{
+
+            scrollPane.setVisible(false);
+            scrollPane2.setVisible(false);
+            scrollPane3.setVisible(false);
+            FilterButton.setVisible(false);
+            scrollPane4.setVisible(true);
+            scrollPane5.setVisible(false);
+
+        });
+
+        MyTicketButton.addActionListener(e->{
+
+            scrollPane.setVisible(false);
+            scrollPane2.setVisible(false);
+            scrollPane3.setVisible(false);
+            FilterButton.setVisible(false);
+            scrollPane4.setVisible(false);
+            scrollPane5.setVisible(true);
+
+        });
+
+        ChangeTheme.addActionListener(e->{
+            if(Counter%2 == 0){
+                scrollPane.setBackground(new Color(0xCBCBCB));
+                scrollPane2.setBackground(new Color(0xCBCBCB));
+                scrollPane3.setBackground(new Color(0xCBCBCB));
+                scrollPane4.setBackground(new Color(0xCBCBCB));
+                scrollPane5.setBackground(new Color(0xCBCBCB));
+                ContentPanel.setBackground(new Color(0xCBCBCB));
+                moviePanel.setBackground(new Color(0xCBCBCB));
+                BalancePanel.setBackground(new Color(0xCBCBCB));
+                TicketPanel.setBackground(new Color(0xCBCBCB));
+            }else{
+                scrollPane.setBackground(new Color(0x0D1116));
+                scrollPane2.setBackground(new Color(0x0D1116));
+                scrollPane3.setBackground(new Color(0x0D1116));
+                scrollPane4.setBackground(new Color(0x0D1116));
+                scrollPane5.setBackground(new Color(0x0D1116));
+                ContentPanel.setBackground(new Color(0x0D1116));
+                moviePanel.setBackground(new Color(0x0D1116));
+                BalancePanel.setBackground(new Color(0x0D1116));
+                TicketPanel.setBackground(new Color(0x0D1116));
+            }
+
+        });
+
+        HomePanel.setComponentZOrder(scrollPane, 1);
+        HomePanel.setComponentZOrder(scrollPane2, 1);
+        HomePanel.setComponentZOrder(scrollPane4, 1);
+        HomePanel.setComponentZOrder(scrollPane5, 1);
+        HomePanel.setComponentZOrder(LeftPanel, 0);
+        HomePanel.setComponentZOrder(AccountButtonHolder, 0);
+
+        return HomePanel;
+    }
+
+    public JPanel CreateContentPanel(){
 
         JPanel ContentPanel = new JPanel();
         //ContentPanel.setLayout(new ScrollPaneLayout());
@@ -1100,9 +1570,9 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         // Films Grid Section
         JPanel MostPopular = new JPanel();
-        MostPopular.setLayout(new GridLayout(1, 3, 20, 20));  // Unlimited rows, 4 columns
+        MostPopular.setLayout(new GridLayout(1, 3, 30, 20));  // Unlimited rows, 4 columns
         MostPopular.setBackground(new Color(0x0D1116));
-        MostPopular.setBounds(75, 115, 750, 100);
+        MostPopular.setBounds(75, 115, 750, 150);
 
         for (int i = 0; i <3; i++) { // hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom
 
@@ -1171,9 +1641,9 @@ public class CinemaApp extends JFrame implements ActionListener {
         JPanel ExploreMorePanel = new JPanel();
         ExploreMorePanel.setLayout(new GridLayout(0, 4, 20, 20));  // Unlimited rows, 4 columns
         ExploreMorePanel.setBackground(new Color(0x0D1116));
-        ExploreMorePanel.setBounds(75, 940, 950, 1000);
+        ExploreMorePanel.setBounds(75, 990, 950, 1000);
 
-        for (int i = 0; i <22; i++) { // hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom
+        for (int i = 0; i <12; i++) { // hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom
 
             JPanel FilmInfo = new JPanel();
             FilmInfo.setLayout(null);
@@ -1200,15 +1670,324 @@ public class CinemaApp extends JFrame implements ActionListener {
         }
 
         ContentPanel.add(ExploreMorePanel);
-        
 
-        JScrollPane scrollPane = new JScrollPane(ContentPanel);
-        scrollPane.setBounds(99, 0, 1125, 750);
+        JLabel Promos = new JLabel("Promos ");
+        Promos.setBounds(75, 1900, 750, 30);
+        Promos.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        Promos.setForeground(Color.white);
+
+        ContentPanel.add(Promos);
+
+        JPanel PromosPanel1 = new JPanel();
+        PromosPanel1.setBounds(75, 1940, 460, 400);
+        PromosPanel1.setLayout(null);
+        PromosPanel1.setBackground(new Color(0x191D22));
+        PromosPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PromosPanel1.setBorder(BorderFactory.createLineBorder(new Color(0xFF6700), 3));// ta3 ki t intiracti m3a l panel
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PromosPanel1.setBorder(null);
+            }
+
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                JOptionPane.showMessageDialog(null, "Opening promotion details...");
+            }
+        });
+
+        ContentPanel.add(PromosPanel1);
+
+        JPanel PromosPanel2 = new JPanel();
+        PromosPanel2.setBounds(555, 1940, 460, 400);
+        PromosPanel2.setLayout(null);
+        PromosPanel2.setBackground(new Color(0x191D22));
+        PromosPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PromosPanel2.setBorder(BorderFactory.createLineBorder(new Color(0xFF6700), 3));// ta3 ki t intiracti m3a l panel
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PromosPanel2.setBorder(null);
+            }
+
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                JOptionPane.showMessageDialog(null, "Opening promotion details...");
+            }
+        });
+
+        ContentPanel.add(PromosPanel2);
+
+
+        return ContentPanel;
+    }
+    
+    public JPanel CreateAccountPanel(){
+
+        JPanel AccountPanel = new JPanel();
+        AccountPanel.setOpaque(false);
+        AccountPanel.setLayout(null);
+        AccountPanel.setPreferredSize(new Dimension(1200, 3500));
+
+        JPanel OptionPanel = new JPanel();
+        OptionPanel.setBounds(0, 0, 350, 750);
+        OptionPanel.setLayout(null);
+        OptionPanel.setBackground(new Color(0x0A0D10));
+
+        AccountPanel.add(OptionPanel);
+
+        JLabel AccountTitle = new JLabel("Account");
+        AccountTitle.setBounds(50, 100, 250, 50);
+        AccountTitle.setFont(new Font("Segoe UI", Font.BOLD, 35));
+        AccountTitle.setForeground(Color.white);
+
+        OptionPanel.add(AccountTitle);
+
+        JLabel AccountTitle2 = new JLabel("Management");
+        AccountTitle2.setBounds(50, 150, 350, 50);
+        AccountTitle2.setFont(new Font("Segoe UI", Font.BOLD, 35));
+        AccountTitle2.setForeground(Color.white);
+
+        OptionPanel.add(AccountTitle2);
+
+        JButton IdSettings = new JButton("Account ID");
+        IdSettings.setBounds(25, 275, 250, 30);
+        IdSettings.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        IdSettings.setForeground(new Color(0xCBCBCB));
+        IdSettings.setContentAreaFilled(false);
+        IdSettings.setBorderPainted(false);
+        IdSettings.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        IdSettings.addActionListener(e -> {
+            
+        });
+        JButton IdButton = new JButton();
+        IdButton.setBounds(50, 280, 25, 25);
+        IdButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        IdButton.setBackground(new Color(0xCBCBCB));
+        IdButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        IdButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        IdButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xD42E00));
+                IdButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xCBCBCB));
+                IdButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        IdSettings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xD42E00));
+                IdButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xCBCBCB));
+                IdButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(IdSettings);
+        OptionPanel.add(IdButton);
+        
+        JButton PersonalInfo = new JButton("Personnal information");
+        PersonalInfo.setBounds(70, 320, 250, 30);
+        PersonalInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PersonalInfo.setForeground(new Color(0xCBCBCB));
+        PersonalInfo.setContentAreaFilled(false);
+        PersonalInfo.setBorderPainted(false);
+        PersonalInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PersonalInfo.addActionListener(e -> {
+            
+        });
+        JButton PersonalButton = new JButton();
+        PersonalButton.setBounds(50, 325, 25, 25);
+        PersonalButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PersonalButton.setBackground(new Color(0xCBCBCB));
+        PersonalButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PersonalButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        PersonalButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xD42E00));
+                PersonalButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xCBCBCB));
+                PersonalButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        PersonalInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xD42E00));
+                PersonalButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xCBCBCB));
+                PersonalButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(PersonalInfo);
+        OptionPanel.add(PersonalButton);
+
+
+        JButton PaymentInfo = new JButton("Payement information");
+        PaymentInfo.setBounds(70, 365, 250, 30);
+        PaymentInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PaymentInfo.setForeground(new Color(0xCBCBCB));
+        PaymentInfo.setContentAreaFilled(false);
+        PaymentInfo.setBorderPainted(false);
+        PaymentInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PaymentInfo.addActionListener(e -> {
+            
+        });
+        JButton PayementButton = new JButton();
+        PayementButton.setBounds(50, 370, 25, 25);
+        PayementButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PayementButton.setBackground(new Color(0xCBCBCB));
+        PayementButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PayementButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        PayementButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xD42E00));
+                PayementButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xCBCBCB));
+                PayementButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        PaymentInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xD42E00));
+                PayementButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xCBCBCB));
+                PayementButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(PaymentInfo);
+        OptionPanel.add(PayementButton);
+
+
+        JButton SignInInfo = new JButton("Account sign in management");
+        SignInInfo.setBounds(47, 410, 350, 30);
+        SignInInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        SignInInfo.setForeground(new Color(0xCBCBCB));
+        SignInInfo.setContentAreaFilled(false);
+        SignInInfo.setBorderPainted(false);
+        SignInInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SignInInfo.addActionListener(e -> {
+            
+        });
+        JButton SignInButton = new JButton();
+        SignInButton.setBounds(50, 415, 25, 25);
+        SignInButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        SignInButton.setBackground(new Color(0xCBCBCB));
+        SignInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SignInButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SignInButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xD42E00));
+                SignInButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xCBCBCB));
+                SignInButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        SignInInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xD42E00));
+                SignInButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xCBCBCB));
+                SignInButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(SignInInfo);
+        OptionPanel.add(SignInButton);
+
+
+        JButton Exit = new JButton("Exit");
+        Exit.setBounds(-50, 650, 350, 30);
+        Exit.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        Exit.setForeground(new Color(0xCBCBCB));
+        Exit.setContentAreaFilled(false);
+        Exit.setBorderPainted(false);
+        Exit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        JButton ExitButton = new JButton();
+        ExitButton.setBounds(50, 655, 25, 25);
+        ExitButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        ExitButton.setBackground(new Color(0xCBCBCB));
+        ExitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        ExitButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        ExitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Exit.setForeground(new Color(0xD42E00));
+                ExitButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Exit.setForeground(new Color(0xCBCBCB));
+                ExitButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        Exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Exit.setForeground(new Color(0xD42E00));
+                ExitButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Exit.setForeground(new Color(0xCBCBCB));
+                ExitButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(Exit);
+        OptionPanel.add(ExitButton);
+
+
+
+        //elements panel --------------------------------------------------------
+        JPanel ElementsPanel = new JPanel();
+        ElementsPanel.setOpaque(false);
+        ElementsPanel.setLayout(null);
+        ElementsPanel.setPreferredSize(new Dimension(850, 1750));
+
+        JScrollPane scrollPane = new JScrollPane(ElementsPanel);
+        scrollPane.setBounds(349, -1, 855, 755);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setOpaque(false);
-        scrollPane.getViewport().setBackground(Color.white);
+        scrollPane.getViewport().setBackground(new Color(0x0D1116));
 
-        ContentPanel.addMouseWheelListener(e -> {
+        ElementsPanel.addMouseWheelListener(e -> {
             JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();// had scroll par rapport l y
             int notches = e.getWheelRotation();
             int currentValue = verticalScrollBar.getValue();
@@ -1217,23 +1996,6 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
 
         HomePanel.add(scrollPane);
-
-        ImageIcon icon = new ImageIcon("C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\home.png");
-        Image image = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        ImageIcon resizedIcon = new ImageIcon(image);
-
-        // Create JButton with resized icon
-        JButton HomeButton2 = new JButton(resizedIcon);
-        HomeButton2.setBounds(20, 10, 100, 100); // Set button size
-        HomeButton2.setContentAreaFilled(false);
-        //HomeButton2.setOpaque(false);
-        HomeButton2.setBorderPainted(false);
-        HomeButton2.setFocusPainted(false);
-        HomeButton2.addActionListener(e->{
-            ContentPanel.setVisible(false);
-        });
-        ContentPanel.add(HomeButton2);
-
         
         
         
@@ -1617,239 +2379,5 @@ public class CinemaApp extends JFrame implements ActionListener {
         nowShowingLabel.setForeground(Color.black);
         nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
         EmptyPanel.add(nowShowingLabel);*/
-
-        return HomePanel;
-    }
-
-    public JPanel CreateAdminInterface() {
-        
-        JPanel AdminElements = new JPanel();
-        AdminElements.setBounds(0, 0, 1200, 720);
-        AdminElements.setLayout(null);
-        AdminElements.setOpaque(true);
-        AdminElements.setBackground(new Color(100, 100, 100));
-
-        JLabel welcomeLabel = new JLabel("Welcome, Admin!");
-        welcomeLabel.setBounds(50, 50, 300, 50);
-        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        welcomeLabel.setForeground(Color.white);
-
-        AdminElements.add(welcomeLabel);
-
-        JPanel SettingsPanel = new JPanel();
-        SettingsPanel.setBounds(-300, 0, 300, 750);
-        SettingsPanel.setLayout(null);
-        SettingsPanel.setOpaque(true);
-        SettingsPanel.setBackground(new Color(0x270000));
-
-        AdminElements.add(SettingsPanel);
-
-        JButton AddFilm = new JButton("add film");
-        AddFilm.setBounds(20, 75, 270, 40);
-        AddFilm.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        AddFilm.setBackground(Color.gray);
-        AddFilm.setForeground(Color.white);
-        AddFilm.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        SettingsPanel.add(AddFilm);
-
-        JButton BonusesButton = new JButton("Bonuses");
-        BonusesButton.setBounds(20, 135, 270, 40);
-        BonusesButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        BonusesButton.setBackground(Color.gray);
-        BonusesButton.setForeground(Color.white);
-        BonusesButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        SettingsPanel.add(BonusesButton);
-
-        JButton BookedButton = new JButton("Booked");
-        BookedButton.setBounds(20, 195, 270, 40);
-        BookedButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        BookedButton.setBackground(Color.gray);
-        BookedButton.setForeground(Color.white);
-        BookedButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        SettingsPanel.add(BookedButton);
-
-        JButton FilterButton = new JButton("aplly filter");
-        FilterButton.setBounds(20, 255, 270, 40);
-        FilterButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        FilterButton.setBackground(Color.gray);
-        FilterButton.setForeground(Color.white);
-        FilterButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        SettingsPanel.add(FilterButton);
-
-
-        JButton ChangeAccButton = new JButton("Change accounts");
-        ChangeAccButton.setBounds(20, 590, 270, 40);
-        ChangeAccButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        ChangeAccButton.setBackground(Color.gray);
-        ChangeAccButton.setForeground(Color.white);
-        ChangeAccButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        ChangeAccButton.addActionListener(e -> {
-            MainCardLayout.show(MainPanel, "log in");
-        });
-
-        SettingsPanel.add(ChangeAccButton);
-
-        JButton LogoutButton = new JButton("Log out");
-        LogoutButton.setBounds(20, 650, 270, 40);
-        LogoutButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        LogoutButton.setBackground(Color.red);
-        LogoutButton.setForeground(Color.white);
-        LogoutButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        SettingsPanel.add(LogoutButton);
-
-
-        JTextField searchField = new JTextField("Type to Search...");
-        searchField.setBounds(75, 15, 1000, 30);
-        searchField.setFont(new Font("Arial", Font.BOLD, 15));
-        searchField.setBackground(new java.awt.Color(0x555555));
-        searchField.setForeground(Color.WHITE);
-        searchField.setCaretColor(Color.WHITE);
-
-        AdminElements.add(searchField);
-
-        JPanel SearchPanel = new JPanel();
-        SearchPanel.setBounds(75, 15, 1000, 30);
-        SearchPanel.setFont(new Font("Arial", Font.BOLD, 15));
-        SearchPanel.setBackground(new java.awt.Color(0x555555));
-
-        AdminElements.add(SearchPanel);
-
-        JLabel SettingText = new JLabel("Settings");
-        SettingText.setBounds(15, 10, 300, 55);
-        SettingText.setForeground(Color.white);
-        SettingText.setFont(new Font("Inter", Font.BOLD, 48));
-
-        SettingsPanel.add(SettingText);
-
-
-        JPanel EmptyPanel = new JPanel();
-        EmptyPanel.setBounds(300, 0, 900, 750);
-        EmptyPanel.setLayout(null);
-        EmptyPanel.setOpaque(false);
-        EmptyPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                timer2.start();
-            }
-        });
-        EmptyPanel.setVisible(false);
-
-        AdminElements.add(EmptyPanel);
-        
-        JButton ExitSettings = new JButton();
-        ExitSettings.setBounds(270, 10, 20, 20);
-        ExitSettings.setFont(new Font("Inter", Font.BOLD, 2));
-        ExitSettings.setBackground(Color.red);
-        ExitSettings.setForeground(Color.white);
-        ExitSettings.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        timer2 = new Timer(10, e->{
-            if(x == -300){
-                timer2.stop();
-            }else{
-                x-= xVelocity;
-                SettingsPanel.setBounds(x, 0, 300, 750);
-            }
-        });
-
-        ExitSettings.addActionListener(e->{
-            timer2.start();
-            EmptyPanel.setVisible(false);
-            searchField.setVisible(true);
-        });
-
-        SettingsPanel.add(ExitSettings);
-
-
-
-        JButton SettingsButton = new JButton();
-        SettingsButton.setBounds(15, 10, 40, 40);
-        SettingsButton.setFont(new Font("Inter", Font.BOLD, 18));
-        SettingsButton.setBackground(Color.red);
-        SettingsButton.setForeground(Color.white);
-        SettingsButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        timer = new Timer(10, e->{
-            if(x == 0){
-                timer.stop();
-            }else{
-                x+= xVelocity;
-                SettingsPanel.setBounds(x, 0, 300, 750);
-            }
-        });
-
-        SettingsButton.addActionListener(e->{
-            timer.start();
-            EmptyPanel.setVisible(true);
-            searchField.setVisible(false);
-        });
-
-        AdminElements.add(SettingsButton);
-
-        AdminElements.setComponentZOrder(SettingsPanel, 0);
-        AdminElements.setComponentZOrder(SettingsButton, 1);
-        AdminElements.setComponentZOrder(searchField, 1);
-        AdminElements.setComponentZOrder(welcomeLabel, 1);
-
-
-        return AdminElements;
-    }
-
-
-    public static void main(String[] args) {
-        try {
-            CinemaApp Frame = new CinemaApp();
-            Frame.setVisible(true);
-
-            // Revalidate and repaint to ensure the SettingsPanel is displayed
-            Frame.revalidate();
-            Frame.repaint();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Helper method for placeholder text behavior
-    public void addPlaceholderBehavior(JTextField field, String placeholder) {
-        field.addFocusListener(new java.awt.event.FocusAdapter() {
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                if (field.getText().equals(placeholder)) {
-                    field.setText("");
-                    field.setForeground(Color.WHITE);
-                }
-            }
-
-            @Override
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                if (field.getText().isEmpty()) {
-                    field.setText(placeholder);
-                    field.setForeground(Color.gray);
-                }
-            }
-        });
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == ChangeTheme) {
-            if (Counter % 2 == 0) {
-                Counter++;
-                this.BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
-                return;
-            } else {
-                Counter++;
-                this.BlurPanel.setBackground(new java.awt.Color(0x000000));
-                return;
-
-            }
-        }
-    }
 
 }

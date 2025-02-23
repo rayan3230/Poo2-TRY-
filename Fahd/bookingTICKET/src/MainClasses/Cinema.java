@@ -293,19 +293,6 @@ public class Cinema {
         System.out.println("2. Normal");
     }
 
-    public void DisplayMovieDates() {
-        System.out.println("Available Movie Dates: ");
-        for (Movie movie : movies) {
-            System.out.print("Title: " + movie.Title + ", Date: ");
-            for (Ticket ticket : tickets) {
-                if (ticket.movie == movie) {
-                    System.out.print(ticket.Date + ", ");
-                }
-            }
-            System.out.println(" ");
-        }
-    }
-
     public void DisplayMoviesByGenre(String genre) {
         for (Movie movie : movies) {
             if (movie.Genre.equalsIgnoreCase(genre)) {
@@ -391,18 +378,6 @@ public class Cinema {
                 System.out.println("Description: " + movie.Description);
                 System.out.println("Director: " + movie.Director);
                 System.out.println("Cast: " + movie.Cast);
-                System.out.println("---------------------------------------------");
-            }
-        }
-    }
-
-    public void DisplayMoviesByTicketType(String ticketType) {
-        for (Ticket ticket : tickets) {
-            if (ticket.Type.equalsIgnoreCase(ticketType)) {
-                System.out.println("---------------------------------------------");
-                System.out.println("Title: " + ticket.movie.Title);
-                System.out.println("Date: " + ticket.Date);
-                System.out.println("Type: " + ticket.Type);
                 System.out.println("---------------------------------------------");
             }
         }
@@ -505,7 +480,6 @@ public class Cinema {
                 filterList[filterCount] = choice;
                 filterCount++;
                 System.out.println("Enter the date you want to filter by (this mounth) : ");
-                DisplayMovieDates();
                 String date = scanner.next();
                 filter.SetDateFilter(date);
                 break;
@@ -558,7 +532,7 @@ public class Cinema {
                     DisplayMoviesByDate(filter.Date);
                     break;
                 case 6:
-                    DisplayMoviesByTicketType(filter.TicketType);
+                
                     break;
                 case 7:
                     DisplayMoviesByReleaseDate(filter.ReleaseDate);
@@ -573,64 +547,6 @@ public class Cinema {
     public void DisplayAvailableSeatsInRoom(Theater Room) {
         System.out.println("Normal places reamining  :  " + (Room.NormalCapacity - Room.NormalReservedPlaces)
                 + " VIP places remaining  :  " + (Room.VipCapacity - Room.VipReservedPlaces));
-    }
-
-    public void BookTicket(int MovieNumber, String TicketType, int Place) {
-        Ticket ticket = new Ticket(Place, TicketType, movies.get(MovieNumber).ReleaseDate, movies.get(MovieNumber));
-        AddTicket(ticket);
-    }
-
-    public Ticket saerchTicketByNumber(int TicketNumber) {
-
-        if (tickets.get(TicketNumber) == null) {
-            System.out.println("Ticket not found.");
-            return null;
-        }
-
-        Ticket t = tickets.get(TicketNumber);
-        System.out.println("Ticket Number : " + t.number);
-        System.out.println("Type : " + t.Type);
-        System.out.println("Date : " + t.Date);
-        System.out.println("Movie : " + t.movie.Title);
-        return t;
-    }
-
-    public Ticket SearchTicketByMovie(Movie movie) {
-        for (Ticket t : tickets) {
-            if (t.movie.equals(movie)) {
-                System.out.println("Ticket Number : " + t.number);
-                System.out.println("Type : " + t.Type);
-                System.out.println("Date : " + t.Date);
-                return t;
-            }
-        }
-        return null;
-    }
-
-    public Ticket SearchTicketByType(String type) {
-        for (Ticket t : tickets) {
-            if (t.Type.equalsIgnoreCase(type)) {
-                System.out.println("Ticket Number : " + t.number);
-                System.out.println("Type : " + t.Type);
-                System.out.println("Date : " + t.Date);
-                System.out.println("Movie : " + t.movie.Title);
-                return t;
-            }
-        }
-        return null;
-    }
-
-    public Ticket SearchTicketByDate(String Date) {
-        for (Ticket t : tickets) {
-            if (t.Date.equalsIgnoreCase(Date)) {
-                System.out.println("Ticket Number : " + t.number);
-                System.out.println("Type : " + t.Type);
-                System.out.println("Date : " + t.Date);
-                System.out.println("Movie : " + t.movie.Title);
-                return t;
-            }
-        }
-        return null;
     }
 
 }
