@@ -1,9 +1,9 @@
 package ManagementClasses;
 
 public class Theater {
-
-    public int NormalCapacity;
+    
     public int TheaterId;
+    public int NormalCapacity;
     public int VipCapacity;
     public Boolean Available;
     public int TotalPlaces;

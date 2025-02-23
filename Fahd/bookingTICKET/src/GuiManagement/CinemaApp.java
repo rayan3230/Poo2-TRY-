@@ -29,7 +29,6 @@ public class CinemaApp extends JFrame implements ActionListener {
 
     //fonctionnalities elements ---------------------------------------
     public Timer timer, timer2, timer3, timer4;
-    public JButton ChangeTheme;
     public int x = -300;
     public int xVelocity = 30;
     public int x2 = -300;
@@ -332,7 +331,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         JLabel LogoName = new JLabel("POOMovie");
         LogoName.setBounds(70, 24, 192, 52);
         LogoName.setFont(new Font("Inter", Font.BOLD, 35));
-        LogoName.setForeground(new Color(0xFF6700));
+        LogoName.setForeground(Color.red);
 
         SignInElements.add(LogoName);
 
@@ -415,54 +414,34 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField AdressInput = new JTextField();
         AdressInput.setBounds(285, 430, 500, 45);
         AdressInput.setFont(new Font("Arial", Font.BOLD, 20));
-        AdressInput.setBackground(new java.awt.Color(0x222222));
-        AdressInput.setForeground(Color.WHITE);
+        AdressInput.setBackground(new java.awt.Color(0xBBBBBB));
+        AdressInput.setForeground(Color.BLACK);
         AdressInput.setCaretColor(Color.WHITE);
 
         SignInElements.add(AdressInput);
 
-        ChangeTheme = new JButton("Change theme");
-        ChangeTheme.setBounds(950, 25, 130, 30);
-        ChangeTheme.setBackground(Color.WHITE);
-        ChangeTheme.setFont(new Font("Inter", Font.BOLD, 12));
-        ChangeTheme.setFocusable(false);
-        ChangeTheme.setUI(new RoundButtonUI(new Color(0x000000)));
+        JButton ExitButton = new JButton("Change theme");
+        ExitButton.setBounds(950, 25, 130, 30);
+        ExitButton.setBackground(Color.WHITE);
+        ExitButton.setFont(new Font("Inter", Font.BOLD, 12));
+        ExitButton.setFocusable(false);
+        ExitButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
-        ChangeTheme.addMouseListener(new java.awt.event.MouseAdapter() {
+        ExitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ChangeTheme.setBackground(new Color(0x999999));
+                ExitButton.setBackground(new Color(0x999999));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ChangeTheme.setBackground(Color.WHITE);
+                ExitButton.setBackground(Color.WHITE);
             }
         });
 
-        ChangeTheme.addActionListener(e -> {
+        ExitButton.addActionListener(e -> {
 
-            if (Counter % 2 == 0) {
-
-                ChangeTheme.setBackground(new java.awt.Color(0x000000));
-                ChangeTheme.setForeground(Color.WHITE);
-                WelcomText1.setForeground(new java.awt.Color(0x000000));
-                WelcomText2.setForeground(new java.awt.Color(0x000000));
-                DescriptionText.setForeground(new java.awt.Color(0x000000));
-                AdressInput.setBackground(new java.awt.Color(0xBBBBBB));
-                AdressInput.setForeground(Color.BLACK);
-            } else {
-
-                ChangeTheme.setBackground(new java.awt.Color(0xFFFFFF));
-                ChangeTheme.setForeground(Color.BLACK);
-                WelcomText1.setForeground(new java.awt.Color(0xFFFFFF));
-                WelcomText2.setForeground(new java.awt.Color(0xFFFFFF));
-                DescriptionText.setForeground(new java.awt.Color(0xFFFFFF));
-                AdressInput.setBackground(new java.awt.Color(0x222222));
-                AdressInput.setForeground(Color.WHITE);
-            }
-            this.actionPerformed(e);
         });
 
-        SignInElements.add(ChangeTheme);
+        SignInElements.add(ExitButton);
 
         return SignInElements;
     }
@@ -484,7 +463,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         imageLabel.setBounds(10, 20, 64, 64);
         loginPanel.add(imageLabel);
 
-        TransparentPanel RectangleLogin = new TransparentPanel(0.9f);
+        TransparentPanel RectangleLogin = new TransparentPanel(0.5f);
         RectangleLogin.setBounds(400, 100, 440, 620);
         RectangleLogin.setLayout(null);
         RectangleLogin.setBackground(Color.black);
@@ -499,10 +478,10 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField EmailField = new JTextField("   Email or username or phone number");
         EmailField.setBounds(50, 120, 340, 40);
         EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        EmailField.setForeground(Color.white);
-        EmailField.setCaretColor(Color.white);
+        EmailField.setForeground(Color.black);
+        EmailField.setCaretColor(Color.black);
         // EmailField.setBackground(new Color(80, 77, 74, 230));
-        EmailField.setBackground(new Color(0x444444));
+        EmailField.setBackground(new Color(0xBBBBBB));
         EmailField.setOpaque(true);
 
         EmailField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -510,7 +489,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (EmailField.getText().equals("   Email or username or phone number")) {
                     EmailField.setText("");
-                    EmailField.setForeground(Color.white);
+                    EmailField.setForeground(Color.black);
                 }
             }
 
@@ -518,7 +497,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (EmailField.getText().isEmpty() || EmailField.getText().trim().isEmpty()) {
                     EmailField.setText("Type to Search...");
-                    EmailField.setForeground(Color.white);
+                    EmailField.setForeground(Color.black);
                 }
             }
 
@@ -529,17 +508,17 @@ public class CinemaApp extends JFrame implements ActionListener {
         JPasswordField PasswordField = new JPasswordField("Password");
         PasswordField.setBounds(50, 200, 340, 40);
         PasswordField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        PasswordField.setForeground(Color.white);
-        PasswordField.setCaretColor(Color.white);
+        PasswordField.setForeground(Color.black);
+        PasswordField.setCaretColor(Color.black);
         // PasswordField.setBackground(new Color(80, 77, 74, 230));
-        PasswordField.setBackground(new Color(0x444444));
+        PasswordField.setBackground(new Color(0xBBBBBB));
         PasswordField.setOpaque(true);
         PasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (PasswordField.getText().equals("Password")) {
                     PasswordField.setText("");
-                    PasswordField.setForeground(Color.white);
+                    PasswordField.setForeground(Color.black);
                 }
             }
 
@@ -547,7 +526,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (PasswordField.getText().isEmpty() || PasswordField.getPassword().length == 0) {
                     PasswordField.setText("Password");
-                    PasswordField.setForeground(Color.white);
+                    PasswordField.setForeground(Color.black);
                 }
             }
         });
@@ -648,7 +627,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         RegisterElements.add(imageLabel);
 
         // signUP panel -----------------------------------------------------------
-        TransparentPanel SignUpPanel = new TransparentPanel(0.9f);
+        TransparentPanel SignUpPanel = new TransparentPanel(0.5f);
         SignUpPanel.setBounds(400, 100, 440, 620);
         SignUpPanel.setLayout(null);
         SignUpPanel.setBackground(Color.black);
@@ -663,18 +642,16 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField UserNameField = new JTextField("    Username");
         UserNameField.setBounds(50, 120, 340, 40);
         UserNameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        UserNameField.setForeground(Color.gray);
-        UserNameField.setCaretColor(Color.white);
-        UserNameField.setBackground(new Color(0x444444));
+        UserNameField.setForeground(Color.black);
+        UserNameField.setCaretColor(Color.black);
+        UserNameField.setBackground(new Color(0xBBBBBB));
         UserNameField.setOpaque(true);
-        UserNameField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-        UserNameField.setBorder(null);
         UserNameField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (UserNameField.getText().equals("    Username")) {
                     UserNameField.setText("");
-                    UserNameField.setForeground(Color.WHITE);
+                    UserNameField.setForeground(Color.black);
                 }
             }
 
@@ -682,7 +659,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (UserNameField.getText().isEmpty() || UserNameField.getText().trim().isEmpty()) {
                     UserNameField.setText("    Username");
-                    UserNameField.setForeground(Color.gray);
+                    UserNameField.setForeground(Color.black);
                 }
             }
         });
@@ -691,17 +668,16 @@ public class CinemaApp extends JFrame implements ActionListener {
         JPasswordField PasswordsField = new JPasswordField("    Password");
         PasswordsField.setBounds(50, 200, 340, 40);
         PasswordsField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        PasswordsField.setForeground(Color.gray);
-        PasswordsField.setCaretColor(Color.white);
-        PasswordsField.setBackground(new Color(0x444444));
+        PasswordsField.setForeground(Color.black);
+        PasswordsField.setCaretColor(Color.black);
+        PasswordsField.setBackground(new Color(0xBBBBBB));
         PasswordsField.setOpaque(true);
-        PasswordsField.setBorder(null);
         PasswordsField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (PasswordsField.getText().equals("    Password")) {
                     PasswordsField.setText("");
-                    PasswordsField.setForeground(Color.WHITE);
+                    PasswordsField.setForeground(Color.black);
                 }
             }
 
@@ -709,7 +685,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (PasswordsField.getText().isEmpty() || PasswordsField.getPassword().length == 0) {
                     PasswordsField.setText("    Password");
-                    PasswordsField.setForeground(Color.gray);
+                    PasswordsField.setForeground(Color.black);
                 }
             }
         });
@@ -718,18 +694,17 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField EmailField = new JTextField("   email@example.com");
         EmailField.setBounds(50, 280, 340, 40);
         EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        EmailField.setForeground(Color.gray);
-        EmailField.setCaretColor(Color.white);
-        EmailField.setBackground(new Color(0x444444));
+        EmailField.setForeground(Color.black);
+        EmailField.setCaretColor(Color.black);
+        EmailField.setBackground(new Color(0xBBBBBB));
         EmailField.setOpaque(true);
-        EmailField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-        EmailField.setBorder(null);
+
         EmailField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (EmailField.getText().equals("   email@example.com")) {
                     EmailField.setText("");
-                    EmailField.setForeground(Color.white);
+                    EmailField.setForeground(Color.black);
                 }
             }
 
@@ -737,7 +712,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (EmailField.getText().isEmpty() || EmailField.getText().trim().isEmpty()) {
                     EmailField.setText("   email@example.com");
-                    EmailField.setForeground(Color.gray);
+                    EmailField.setForeground(Color.black);
                 }
             }
         });
@@ -746,18 +721,16 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField CardNmbrField = new JTextField("   Card Number");
         CardNmbrField.setBounds(50, 360, 340, 40);
         CardNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        CardNmbrField.setForeground(Color.gray);
-        CardNmbrField.setCaretColor(Color.white);
-        CardNmbrField.setBackground(new Color(0x444444));
+        CardNmbrField.setForeground(Color.black);
+        CardNmbrField.setCaretColor(Color.black);
+        CardNmbrField.setBackground(new Color(0xBBBBBB));
         CardNmbrField.setOpaque(true);
-        CardNmbrField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-        CardNmbrField.setBorder(null);
         CardNmbrField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (CardNmbrField.getText().equals("   Card Number")) {
                     CardNmbrField.setText("");
-                    CardNmbrField.setForeground(Color.white);
+                    CardNmbrField.setForeground(Color.black);
                 }
             }
 
@@ -765,7 +738,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (CardNmbrField.getText().isEmpty() || CardNmbrField.getText().trim().isEmpty()) {
                     CardNmbrField.setText("   Card Number");
-                    CardNmbrField.setForeground(Color.gray);
+                    CardNmbrField.setForeground(Color.black);
                 }
             }
         });
@@ -774,18 +747,17 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField CCVNmbrField = new JTextField("   CCV Number");
         CCVNmbrField.setBounds(50, 440, 340, 40);
         CCVNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        CCVNmbrField.setForeground(Color.gray);
-        CCVNmbrField.setCaretColor(Color.white);
-        CCVNmbrField.setBackground(new Color(0x444444));
+        CCVNmbrField.setForeground(Color.black);
+        CCVNmbrField.setCaretColor(Color.black);
+        CCVNmbrField.setBackground(new Color(0xBBBBBB));
         CCVNmbrField.setOpaque(true);
-        CCVNmbrField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-        CCVNmbrField.setBorder(null);
+        
         CCVNmbrField.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (CCVNmbrField.getText().equals("   CCV Number")) {
                     CCVNmbrField.setText("");
-                    CCVNmbrField.setForeground(Color.white);
+                    CCVNmbrField.setForeground(Color.black);
                 }
             }
 
@@ -793,7 +765,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (CCVNmbrField.getText().isEmpty() || CCVNmbrField.getText().trim().isEmpty()) {
                     CCVNmbrField.setText("   CCV Number");
-                    CCVNmbrField.setForeground(Color.gray);
+                    CCVNmbrField.setForeground(Color.black);
                 }
             }
         });
@@ -805,7 +777,6 @@ public class CinemaApp extends JFrame implements ActionListener {
         ConfirmSignUpButton.setFocusPainted(false);
         ConfirmSignUpButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         ConfirmSignUpButton.setBackground(Color.red);
-        ConfirmSignUpButton.setBorder(null);
         ConfirmSignUpButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
         ConfirmSignUpButton.addActionListener(e -> {
@@ -821,7 +792,6 @@ public class CinemaApp extends JFrame implements ActionListener {
         ReturnBtn.setFocusPainted(false);
         ReturnBtn.setFont(new Font("Segoe UI", Font.BOLD, 14));
         ReturnBtn.setBackground(Color.red);
-        ReturnBtn.setBorder(null);
         ReturnBtn.setUI(new RoundButtonUI(new Color(0x000000)));
         ReturnBtn.addActionListener(e -> {
             MainCardLayout.show(MainPanel, "open");
@@ -841,10 +811,17 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         // Logo
         JLabel LogoName = new JLabel("POOMovie");
-        LogoName.setBounds(20, 0, 192, 52);
-        LogoName.setFont(new Font("Holtwood One SC", Font.PLAIN, 32));
+        LogoName.setBounds(70, 24, 192, 52);
+        LogoName.setFont(new Font("Inter", Font.BOLD, 35));
         LogoName.setForeground(Color.red);
+
         forgotPanel.add(LogoName);
+
+        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        JLabel imageLabel = new JLabel(iconMovie);
+        imageLabel.setBounds(10, 20, 64, 64);
+
+        forgotPanel.add(imageLabel);
 
         // Center Rectangle Panel
         JPanel rectangleForgot = new JPanel() {
@@ -874,8 +851,8 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField usernameField = new JTextField("Enter your username");
         usernameField.setBounds(50, 120, 340, 40);
         usernameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        usernameField.setForeground(Color.gray);
-        usernameField.setBackground(new Color(80, 77, 74));
+        usernameField.setForeground(Color.black);
+        usernameField.setBackground(new Color(0xBBBBBB));
         usernameField.setCaretColor(Color.white);
         usernameField.setOpaque(true);
         usernameField.setBorder(null);
@@ -893,8 +870,8 @@ public class CinemaApp extends JFrame implements ActionListener {
         JTextField answerField = new JTextField("Enter your answer");
         answerField.setBounds(50, 230, 340, 40);
         answerField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-        answerField.setForeground(Color.gray);
-        answerField.setBackground(new Color(80, 77, 74));
+        answerField.setForeground(Color.black);
+        answerField.setBackground(new Color(0xBBBBBB));
         answerField.setCaretColor(Color.white);
         answerField.setOpaque(true);
         answerField.setBorder(null);
@@ -2892,18 +2869,6 @@ public class CinemaApp extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == ChangeTheme) {
-            if (Counter % 2 == 0) {
-                Counter++;
-                this.BlurPanel.setBackground(new java.awt.Color(0xFFFFFF));
-                return;
-            } else {
-                Counter++;
-                this.BlurPanel.setBackground(new java.awt.Color(0x000000));
-                return;
-
-            }
-        }
     }
 
 
