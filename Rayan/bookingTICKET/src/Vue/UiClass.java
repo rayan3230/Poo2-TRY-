@@ -1,11 +1,27 @@
 package Vue;
 
 import Controller.GestionAccounts;
-import Moodle.Accounts;
+import Controller.*;
+import Moodle.*;
+import Moodle.Movie.genre;
+import Moodle.Movie.statusFilm;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Arrays;
+import javax.swing.*;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import java.awt.*;
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.ButtonUI;
 public class UiClass extends JFrame {
     public JPanel mainPanel;
     public JPanel ContentAdminPanel;
@@ -1078,7 +1094,7 @@ public class UiClass extends JFrame {
         
 
         
-        ImageIcon image1 = resizedIcon("Rayan\\bookingTICKET\\img\\FilmIcon.png");
+        ImageIcon image1 = resizedIcon("Rayan\\bookingTICKET\\img\\FilmIcon.png",50,50);
         JButton ButtonMovie = new JButton(image1);
         ButtonMovie.setBounds(40, 200, 70, 70);
         ButtonMovie.setContentAreaFilled(false);
@@ -1090,7 +1106,7 @@ public class UiClass extends JFrame {
         });
         LeftPanel.add(ButtonMovie);
 
-        ImageIcon image2 = resizedIcon("Rayan\\bookingTICKET\\img\\UserIcon.png");
+        ImageIcon image2 = resizedIcon("Rayan\\bookingTICKET\\img\\UserIcon.png",50,50);
         JButton ButtonUser = new JButton(image2);
         ButtonUser.setBounds(40, 300, 70, 70);
         ButtonUser.setContentAreaFilled(false);
@@ -1102,7 +1118,7 @@ public class UiClass extends JFrame {
         });
         LeftPanel.add(ButtonUser);
 
-        ImageIcon image3 = resizedIcon("Rayan\\bookingTICKET\\img\\HallIcon.png");
+        ImageIcon image3 = resizedIcon("Rayan\\bookingTICKET\\img\\HallIcon.png", 50 ,50);
         JButton ButtonHall = new JButton(image3);
         ButtonHall.setBounds(40, 400, 70, 70);
         ButtonHall.setContentAreaFilled(false);
@@ -1114,7 +1130,7 @@ public class UiClass extends JFrame {
         });
         LeftPanel.add(ButtonHall);
 
-        ImageIcon image4 = resizedIcon("Rayan\\bookingTICKET\\img\\LogoutIcon.png");
+        ImageIcon image4 = resizedIcon("Rayan\\bookingTICKET\\img\\LogoutIcon.png",50,50);
         JButton ButtonLogout = new JButton(image4);
         ButtonLogout.setBounds(40, 500, 70, 70);
         ButtonLogout.setContentAreaFilled(false);
@@ -1177,11 +1193,7 @@ public class UiClass extends JFrame {
         MoviePicture.setLayout(null);
         AddMoviePanel.add(MoviePicture);
 
-        JLabel FilmPicture = new JLabel("+");
-        FilmPicture.setBounds(120 , 10 ,200 ,390);
-        FilmPicture.setForeground(Color.white);
-        FilmPicture.setFont(new Font("Arial", Font.PLAIN, 100));
-        MoviePicture.add(FilmPicture);
+
 
 
         JPanel InfoFilm = new JPanel();
@@ -1225,7 +1237,7 @@ public class UiClass extends JFrame {
         description.setLineWrap(true); 
         description.setWrapStyleWord(true); 
         description.setBorder(null);
-        TextAreaBehave(description, "       Movie description");
+        TextAreaBehave(description, "     Movie description");
         InfoFilm.add(description);
 
         JTextField duree = new JTextField();
@@ -1254,7 +1266,10 @@ public class UiClass extends JFrame {
 
 
         JButton SecondPage = new JButton(">");
-        SecondPage.setBounds(20, 500 , 30 , 30 );
+        SecondPage.setBounds(20, 500 , 50 , 50 );
+        SecondPage.setBackground(Color.white);
+        SecondPage.setFocusPainted(false);
+        SecondPage.setBorderPainted(false);
         SecondPage.setText(">");
         SecondPage.setFocusPainted(false);
         SecondPage.addActionListener(e -> {
@@ -1263,32 +1278,276 @@ public class UiClass extends JFrame {
         });
         InfoFilm.add(SecondPage);
 
+        JButton FirstPage = new JButton(">");
+        FirstPage.setBounds(20, 500 , 50 , 50 );
+        FirstPage.setBackground(Color.white);
+        FirstPage.setFocusPainted(false);
+        FirstPage.setBorderPainted(false);
+        FirstPage.setText("<");
+        FirstPage.setFocusPainted(false);
+        FirstPage.addActionListener(e -> {
+            InfoFilm.setVisible(true);
+            InfoFilm2.setVisible(false);
+        });
+        InfoFilm2.add(FirstPage);
+
+        Movie.genre[] genres = Movie.genre.values(); 
+        JComboBox<genre> genreComboBox = new JComboBox<>(genres);
+        genreComboBox.setBounds(20, 40, 150, 30); 
+        genreComboBox.setForeground(Color.black);
+        genreComboBox.setFocusable(false);
+        genreComboBox.setBackground(Color.white);
+        genreComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        RoundedButton showGenre = new RoundedButton("Show Selected Genre" , 7);
+        showGenre.setBounds(190, 40, 30, 30);
+        showGenre.setFont(new Font("Arial", Font.PLAIN, 16));
+        
+        showGenre.addActionListener(e->{
+            Movie.genre selectedGenre = (Movie.genre) genreComboBox.getSelectedItem();
+            System.out.println(selectedGenre);
+        });
+        // Add components to the main panel
+        InfoFilm2.add(new JLabel("Choose a Genre: "));
+        InfoFilm2.add(genreComboBox);
+        InfoFilm2.add(showGenre);
+
+
+
+        Movie.statusFilm[] status = statusFilm.values(); 
+        JComboBox<statusFilm> StatusComboBox2 = new JComboBox<>(status);
+        StatusComboBox2.setBounds(20, 90, 150, 30); 
+        StatusComboBox2.setForeground(Color.black);
+        StatusComboBox2.setFocusable(true);
+        StatusComboBox2.setBackground(Color.white);
+        StatusComboBox2.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        RoundedButton showStatusButton = new RoundedButton("Show Selected Status" , 7);
+        showStatusButton.setBounds(190, 90, 30, 30);
+        showStatusButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        showStatusButton.addActionListener(e-> {
+            Movie.statusFilm selectedstatusFilm = (Movie.statusFilm) StatusComboBox2.getSelectedItem();
+            System.out.println(selectedstatusFilm);
+        });
+        InfoFilm2.add(showStatusButton);
+        InfoFilm2.add(StatusComboBox2);
+
+        JLabel regularSeatLbl = new JLabel();
+        regularSeatLbl.setBounds(30, 140, 150, 30);
+        regularSeatLbl.setText("Regular Seats: ");
+        regularSeatLbl.setForeground(Color.white);
+        regularSeatLbl.setFocusable(false);
+        regularSeatLbl.setFont(new Font("Arial", Font.BOLD, 16));
+        InfoFilm2.add(regularSeatLbl);
+
+        JTextField regularSeatPricefield = new JTextField();
+        regularSeatPricefield.setBounds(190, 140, 150, 30);
+        regularSeatPricefield.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        regularSeatPricefield.setForeground(Color.gray);
+        regularSeatPricefield.setBackground(new Color(80, 77, 74));
+        regularSeatPricefield.setCaretColor(Color.white);
+        regularSeatPricefield.setOpaque(true);
+        regularSeatPricefield.setBorder(null);
+        TextfieldBehave(regularSeatPricefield, "0da");
+        regularSeatPricefield.setFont(new Font("Arial", Font.PLAIN, 16));
+        InfoFilm2.add(regularSeatPricefield);
+
+        JLabel vipSeatPricelbl = new JLabel();
+        vipSeatPricelbl.setBounds(30, 200, 150, 30);
+        vipSeatPricelbl.setText("VIP Seats: ");
+        vipSeatPricelbl.setForeground(Color.white);
+        vipSeatPricelbl.setFocusable(false);
+        vipSeatPricelbl.setFont(new Font("Arial", Font.BOLD, 16));
+        InfoFilm2.add(vipSeatPricelbl);
+
+        JTextField vipSeatPricefield = new JTextField();
+        vipSeatPricefield.setBounds(190, 200, 150, 30);
+        vipSeatPricefield.setForeground(Color.black);
+        vipSeatPricefield.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        vipSeatPricefield.setForeground(Color.gray);
+        vipSeatPricefield.setBackground(new Color(80, 77, 74));
+        vipSeatPricefield.setCaretColor(Color.white);
+        vipSeatPricefield.setOpaque(true);
+        vipSeatPricefield.setBorder(null);
+        TextfieldBehave(vipSeatPricefield, "0da");
+        vipSeatPricefield.setFont(new Font("Arial", Font.PLAIN, 16));
+        InfoFilm2.add(vipSeatPricefield);
 
         
-        JDialog dateDialog = new JDialog(this, "Select Appointment Date", true);
-        dateDialog.setLayout(new BorderLayout());
-        dateDialog.setSize(300, 200);
-        dateDialog.setLocationRelativeTo(this);
+        JDialog timeDialog = new JDialog(this, "Select Time", true);
+        timeDialog.setLayout(new BorderLayout());
+        timeDialog.setSize(300, 200);
+        timeDialog.setLocationRelativeTo(this);
 
         
-        JPanel datePanel = new JPanel(new FlowLayout());
-        SpinnerDateModel dateModel = new SpinnerDateModel();
-        JSpinner dateSpinner = new JSpinner(dateModel);
-        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "yyyy-MM-dd HH:mm");
-        dateSpinner.setEditor(dateEditor);
-        datePanel.add(new JLabel("Select Date and Time: "));
-        datePanel.add(dateSpinner);
+        JPanel timePanel = new JPanel(new FlowLayout());
+        SpinnerDateModel timeModel = new SpinnerDateModel();
+        JSpinner timeSpinner = new JSpinner(timeModel);
+        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm");
+        timeSpinner.setEditor(timeEditor);
+        timePanel.add(new JLabel("Select Time: "));
+        timePanel.add(timeSpinner);
 
-        // Create buttons panel
+        
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton okButton = new JButton("OK");
         JButton cancelButton = new JButton("Cancel");
         buttonPanel.add(okButton);
         buttonPanel.add(cancelButton);
 
-        dateDialog.add(datePanel, BorderLayout.CENTER);
-        dateDialog.add(buttonPanel, BorderLayout.SOUTH);
-        //dateDialog.setVisible(true);
+        timeDialog.add(timePanel, BorderLayout.CENTER);
+        timeDialog.add(buttonPanel, BorderLayout.SOUTH);
+
+      
+        JLabel selectedTimeLabel = new JLabel("Selected Time: None");
+        selectedTimeLabel.setBounds(20, 260, 300, 30);
+        selectedTimeLabel.setForeground(Color.black);
+        selectedTimeLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        InfoFilm2.add(selectedTimeLabel);
+
+        
+        okButton.addActionListener(e -> {
+            
+            Date selectedTime = (Date) timeSpinner.getValue();
+
+            LocalTime localTime = selectedTime.toInstant()//-----------------------------------------
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalTime();
+
+        
+            String formattedTime = localTime.toString(); 
+            selectedTimeLabel.setText("Selected Time: " + formattedTime);
+
+           
+            timeDialog.dispose();
+        });
+
+        cancelButton.addActionListener(e -> {
+            selectedTimeLabel.setText("Selected Time: None"); 
+            timeDialog.dispose();
+        });
+
+       
+        RoundedButton showTimeBtn = new RoundedButton("Show Time" , 7);
+        showTimeBtn.setBounds(20, 300, 100, 30);
+        showTimeBtn.setFont(new Font("Arial", Font.PLAIN, 16));
+        showTimeBtn.addActionListener(e -> {
+            timeDialog.setVisible(true); 
+        });
+        InfoFilm2.add(showTimeBtn);
+
+        RoundedButton validateButton = new RoundedButton("Validate Fields", 10);
+        validateButton.setBounds(20, 450, 150, 40);
+        validateButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        validateButton.addActionListener(e -> {
+            boolean isValid = true;
+
+            
+            if (MovieName.getText().trim().isEmpty() || MovieName.getText().equals("   Movie Name")) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please enter a valid movie name.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+           
+            if (description.getText().trim().isEmpty() || description.getText().equals("     Movie description")) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please enter a valid movie description.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            
+            if (duree.getText().trim().isEmpty() || duree.getText().equals("   Film duration")) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please enter a valid film duration.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+          
+            if (rating.getText().trim().isEmpty() || rating.getText().equals("   Film Rating")) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please enter a valid film rating.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+          
+            if (genreComboBox.getSelectedItem() == null) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please select a genre.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+       
+            if (StatusComboBox2.getSelectedItem() == null) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please select a status.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+           
+            if (regularSeatPricefield.getText().trim().isEmpty() || regularSeatPricefield.getText().equals("0da")) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please enter a valid regular seat price.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+           
+            if (vipSeatPricefield.getText().trim().isEmpty() || vipSeatPricefield.getText().equals("0da")) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please enter a valid VIP seat price.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            
+            if (selectedTimeLabel.getText().equals("Selected Time: None")) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please select a valid time.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+       
+            if (isValid) {
+                JOptionPane.showMessageDialog(this, "All fields are valid!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        InfoFilm2.add(validateButton);
+
+    
+       
+        
+        JLabel FilmPicture = new JLabel();
+        FilmPicture.setBounds(0, 0, 400, 400);
+        FilmPicture.setForeground(Color.white);
+        FilmPicture.setBackground(Color.green);
+        MoviePicture.add(FilmPicture);
+               
+
+              
+        RoundedButton FilmSelectpath = new RoundedButton("Select Film Image", 10);
+        FilmSelectpath.setBounds(40, 400, 70, 40);
+        FilmSelectpath.setForeground(Color.red);
+        FilmSelectpath.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Image Files", "jpg", "png", "gif");
+            fileChooser.setFileFilter(filter);
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String pathfilm = selectedFile.getAbsolutePath(); 
+
+                pathfilm = pathfilm.replace("\\", "\\\\");
+                System.out.println(pathfilm);
+
+                // Update the FilmPicture label with the selected image
+                //ImageIcon MoviePic = resizedIcon(pathfilm , 400 , 300);
+                ImageIcon icon = new ImageIcon(pathfilm);
+                Image image = icon.getImage().getScaledInstance(FilmPicture.getHeight(), FilmPicture.getWidth(), Image.SCALE_SMOOTH);
+                ImageIcon MoviePic = new ImageIcon(image);
+                FilmPicture.setIcon(MoviePic); 
+
+            }
+        });
+        InfoFilm2.add(FilmSelectpath);
+
+
+
+        
+        
+
+
+    
+
 
 
                 
@@ -1301,10 +1560,11 @@ public class UiClass extends JFrame {
 
         
 
-        
+    
 
         return homeAdminPanel;
     }
+
    
 
     public void HandleLogin(String email, String password ){
@@ -1411,10 +1671,10 @@ public class UiClass extends JFrame {
         });
     }
 
-    public ImageIcon resizedIcon(String path){
+    public ImageIcon resizedIcon(String path , int height , int width){
 
         ImageIcon icon = new ImageIcon(path);
-        Image image = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        Image image = icon.getImage().getScaledInstance(height, width, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(image);
         
 
