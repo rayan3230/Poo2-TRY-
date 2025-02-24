@@ -13,6 +13,15 @@ public class GestionMovie {
     public int movieCount = 0;
     public int showTimeCount = 0;
 
+    public GestionMovie() {
+        // Movie movie = new Movie("The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\film1.jpg" , statusFilm.AVAILABLE, LocalTime.of(12, 30));
+        // Movie movie2 = new Movie( "The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE, LocalTime.of(12, 30));
+        // //Movie movie3 = new Movie( "The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE, LocalTime.of(12,30));
+        
+        // Movies.add(movie);
+        // Movies.add(movie2);
+        // //Movies.add(movie3);
+    }
 
     public void addMovie(String Title,String Description, int duration, genre genre, String rating,
         double regularSeatPrice, double vipSeatPrice , String imagepath , statusFilm status , LocalTime ShowTime){
@@ -41,5 +50,14 @@ public class GestionMovie {
             System.out.println("Show Time: " + movie.showeTime);
             System.out.println();
         }
+    }
+    public Boolean CheckifMovieExist(String Title){
+        for (Movie movie : Movies) {
+            if (movie.Title.equals(Title)) {
+               
+                return true;
+            }
+        }
+        return false;
     }
 }

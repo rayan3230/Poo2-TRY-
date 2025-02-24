@@ -61,10 +61,16 @@ public class UiClass extends JFrame {
         mainPanel.add(homeAdminPanel, "homeAdmin");
 
         setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "homeAdmin");
+        cardLayout.show(mainPanel, "homeUser");
         
    
     }
+
+    // public void refreshUserPanel() {
+    //     JPanel homeUserPanel = createHomeUserPanel(currentuser);
+    //     mainPanel.add(homeUserPanel, "homeUser");
+    //     cardLayout.show(mainPanel, "homeUser");
+    // }
 
     
     public JPanel createWelcomePanel() {
@@ -985,13 +991,13 @@ public class UiClass extends JFrame {
         });
 
         
-        for (int i = 0; i < 20; i++) { //hna lazem nhto les film f arrays list w nhsbo la longeur ta3hom 
+        for (int i = 0; i < movies.Movies.size(); i++) {
             final int index = i;
             JPanel filmPanel = new JPanel() {
                 @Override
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
-                    ImageIcon icon = new ImageIcon("Rayan/bookingTICKET/img/film" + (index + 1) + ".jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
+                    ImageIcon icon = new ImageIcon(movies.Movies.get(index).imagePath);
                     Image img = icon.getImage();
                     g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
                 }
@@ -1236,7 +1242,7 @@ public class UiClass extends JFrame {
         description.setLineWrap(true); 
         description.setWrapStyleWord(true); 
         description.setBorder(null);
-        TextAreaBehave(description, "     Movie description");
+        TextAreaBehave(description, "   Movie description");
         InfoFilm.add(description);
 
         userHasTyped = false; // User has not started typing
@@ -1283,17 +1289,17 @@ public class UiClass extends JFrame {
         rating.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                validateInput(rating ,"\\d+");
+                validateInput(rating ,"\\d*\\.?\\d+");
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                validateInput(rating ,"\\d+");
+                validateInput(rating ,"\\d*\\.?\\d+");
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                validateInput(rating ,"\\d+");
+                validateInput(rating ,"\\d*\\.?\\d+");
             }
         });
         InfoFilm.add(rating);
@@ -1389,17 +1395,17 @@ public class UiClass extends JFrame {
         regularSeatPricefield.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                validateInput(regularSeatPricefield ,"\\d+");
+                validateInput(regularSeatPricefield ,"\\d*\\.?\\d+");
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                validateInput(regularSeatPricefield ,"\\d+");
+                validateInput(regularSeatPricefield ,"\\d*\\.?\\d+");
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                validateInput(regularSeatPricefield ,"\\d+");
+                validateInput(regularSeatPricefield ,"\\d*\\.?\\d+");
             }
         });
         InfoFilm2.add(regularSeatPricefield);
@@ -1426,17 +1432,17 @@ public class UiClass extends JFrame {
         vipSeatPricefield.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                validateInput(vipSeatPricefield ,"\\d+");
+                validateInput(vipSeatPricefield ,"\\d*\\.?\\d+");
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                validateInput(vipSeatPricefield ,"\\d+");
+                validateInput(vipSeatPricefield ,"\\d*\\.?\\d+");
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                validateInput(vipSeatPricefield ,"\\d+");
+                validateInput(vipSeatPricefield ,"\\d*\\.?\\d+");
             }
         });
         InfoFilm2.add(vipSeatPricefield);
@@ -1559,13 +1565,12 @@ public class UiClass extends JFrame {
                 JOptionPane.showMessageDialog(this, "Please enter a valid input", "Error", JOptionPane.ERROR_MESSAGE);
                 }else{
                     isValid = true;
-                    JOptionPane.showMessageDialog(this, "All fields are valid!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
             
             if(isValid == true) {
-                JOptionPane.showMessageDialog(this, "Mhboll Ana , 3andek l film", "Success", JOptionPane.INFORMATION_MESSAGE);
-
                 String MovieTitletxt = MovieName.getText();
+                if(!movies.CheckifMovieExist(MovieTitletxt)){
+                    JOptionPane.showMessageDialog(this, "Mhboll Ana , 3andek l film", "Success", JOptionPane.INFORMATION_MESSAGE);
                 String Descriptiontxt = description.getText();
                 int DureeMovie = Integer.parseInt(duree.getText().trim());
                 String RatingMovie = rating.getText();
@@ -1573,12 +1578,16 @@ public class UiClass extends JFrame {
                 statusFilm statusMovie = (statusFilm) StatusComboBox2.getSelectedItem();
                 double regularSeatPrice = Double.parseDouble(regularSeatPricefield.getText().trim());
                 double vipSeatPrice = Double.parseDouble(vipSeatPricefield.getText().trim());
-                String imagepath = FilmPicture.getIcon().toString();
-
-
-
                 movies.addMovie(MovieTitletxt, Descriptiontxt, DureeMovie, genreMovie, RatingMovie, regularSeatPrice, vipSeatPrice, pathfilm, statusMovie, localTime);
                 movies.DisplayMovies();
+                //refreshUserPanel();
+
+                }else{
+                    JOptionPane.showMessageDialog(this, "A film with the same name already exists", "Error", JOptionPane.ERROR_MESSAGE);
+
+                    JOptionPane.showMessageDialog(this, "The arraylist contain " + movies.Movies.size(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
 
 
