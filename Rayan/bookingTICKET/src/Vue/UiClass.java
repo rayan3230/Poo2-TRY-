@@ -1,34 +1,31 @@
 package Vue;
 
 import Controller.GestionAccounts;
-import Controller.*;
+import Controller.GestionMovie;
 import Moodle.*;
 import Moodle.Movie.genre;
 import Moodle.Movie.statusFilm;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Arrays;
-import javax.swing.*;
+import java.io.File;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
-
-import java.awt.*;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.ButtonUI;
 public class UiClass extends JFrame {
+    public boolean userHasTyped; 
+    public LocalTime localTime;
+    public String pathfilm ;
+    public GestionMovie movies = new GestionMovie();
     public JPanel mainPanel;
     public JPanel ContentAdminPanel;
     public CardLayout cardLayout;
     public GestionAccounts Accounts;  
     public Accounts currentuser ;
     public Accounts currentadmin;  
+
     
     public UiClass(){
         // Initialize Accounts in the constructor
@@ -42,6 +39,8 @@ public class UiClass extends JFrame {
         setBounds(100, 100, 1200, 750);
         setLocationRelativeTo(null);
         setResizable(false);
+
+        
 
         //  CardLayout khir
         cardLayout = new CardLayout();
@@ -1182,7 +1181,7 @@ public class UiClass extends JFrame {
         JPanel AddMoviePanel = new JPanel();
         AddMoviePanel.setLayout(null);
         AddMoviePanel.setBounds(0 ,0 , 1050 ,750);
-        AddMoviePanel.setBackground(Color.black);
+        AddMoviePanel.setBackground(Color.green);
         MoviesPanel.add(AddMoviePanel);
 
 
@@ -1240,6 +1239,8 @@ public class UiClass extends JFrame {
         TextAreaBehave(description, "     Movie description");
         InfoFilm.add(description);
 
+        userHasTyped = false; // User has not started typing
+        
         JTextField duree = new JTextField();
         duree.setBounds( 30, 390 , 200 , 40);
         duree.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -1249,6 +1250,25 @@ public class UiClass extends JFrame {
         duree.setOpaque(true);
         duree.setBorder(null);
         TextfieldBehave(duree, "   Film duration");
+        duree.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userHasTyped = true; // User has started typing
+                validateInput(duree, "\\d+");
+            }
+        
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                userHasTyped = true; // User has started typing
+                validateInput(duree, "\\d+");
+            }
+        
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userHasTyped = true; // User has started typing
+                validateInput(duree, "\\d+");
+            }
+        });
         InfoFilm.add(duree);
 
         JTextField rating = new JTextField();
@@ -1260,6 +1280,22 @@ public class UiClass extends JFrame {
         rating.setOpaque(true);
         rating.setBorder(null);
         TextfieldBehave(rating, "   Film Rating");
+        rating.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                validateInput(rating ,"\\d+");
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                validateInput(rating ,"\\d+");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                validateInput(rating ,"\\d+");
+            }
+        });
         InfoFilm.add(rating);
 
         
@@ -1350,6 +1386,22 @@ public class UiClass extends JFrame {
         regularSeatPricefield.setBorder(null);
         TextfieldBehave(regularSeatPricefield, "0da");
         regularSeatPricefield.setFont(new Font("Arial", Font.PLAIN, 16));
+        regularSeatPricefield.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                validateInput(regularSeatPricefield ,"\\d+");
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                validateInput(regularSeatPricefield ,"\\d+");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                validateInput(regularSeatPricefield ,"\\d+");
+            }
+        });
         InfoFilm2.add(regularSeatPricefield);
 
         JLabel vipSeatPricelbl = new JLabel();
@@ -1371,6 +1423,22 @@ public class UiClass extends JFrame {
         vipSeatPricefield.setBorder(null);
         TextfieldBehave(vipSeatPricefield, "0da");
         vipSeatPricefield.setFont(new Font("Arial", Font.PLAIN, 16));
+        vipSeatPricefield.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                validateInput(vipSeatPricefield ,"\\d+");
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                validateInput(vipSeatPricefield ,"\\d+");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                validateInput(vipSeatPricefield ,"\\d+");
+            }
+        });
         InfoFilm2.add(vipSeatPricefield);
 
         
@@ -1383,7 +1451,7 @@ public class UiClass extends JFrame {
         JPanel timePanel = new JPanel(new FlowLayout());
         SpinnerDateModel timeModel = new SpinnerDateModel();
         JSpinner timeSpinner = new JSpinner(timeModel);
-        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm");
+        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "yyyy/MM/dd HH:mm");
         timeSpinner.setEditor(timeEditor);
         timePanel.add(new JLabel("Select Time: "));
         timePanel.add(timeSpinner);
@@ -1405,25 +1473,25 @@ public class UiClass extends JFrame {
         selectedTimeLabel.setFont(new Font("Arial", Font.BOLD, 16));
         InfoFilm2.add(selectedTimeLabel);
 
+      
+
         
         okButton.addActionListener(e -> {
-            
             Date selectedTime = (Date) timeSpinner.getValue();
-
-            LocalTime localTime = selectedTime.toInstant()//-----------------------------------------
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalTime();
-
-        
-            String formattedTime = localTime.toString(); 
+            localTime = selectedTime.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalTime();
+            String formattedTime = selectedTime.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime()
+                .format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
             selectedTimeLabel.setText("Selected Time: " + formattedTime);
-
-           
             timeDialog.dispose();
         });
 
+
         cancelButton.addActionListener(e -> {
-            selectedTimeLabel.setText("Selected Time: None"); 
+            selectedTimeLabel.setText("Selected Time: None");
             timeDialog.dispose();
         });
 
@@ -1436,84 +1504,12 @@ public class UiClass extends JFrame {
         });
         InfoFilm2.add(showTimeBtn);
 
-        RoundedButton validateButton = new RoundedButton("Validate Fields", 10);
-        validateButton.setBounds(20, 450, 150, 40);
-        validateButton.setFont(new Font("Arial", Font.PLAIN, 16));
-        validateButton.addActionListener(e -> {
-            boolean isValid = true;
-
-            
-            if (MovieName.getText().trim().isEmpty() || MovieName.getText().equals("   Movie Name")) {
-                isValid = false;
-                JOptionPane.showMessageDialog(this, "Please enter a valid movie name.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-           
-            if (description.getText().trim().isEmpty() || description.getText().equals("     Movie description")) {
-                isValid = false;
-                JOptionPane.showMessageDialog(this, "Please enter a valid movie description.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-            
-            if (duree.getText().trim().isEmpty() || duree.getText().equals("   Film duration")) {
-                isValid = false;
-                JOptionPane.showMessageDialog(this, "Please enter a valid film duration.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-          
-            if (rating.getText().trim().isEmpty() || rating.getText().equals("   Film Rating")) {
-                isValid = false;
-                JOptionPane.showMessageDialog(this, "Please enter a valid film rating.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-          
-            if (genreComboBox.getSelectedItem() == null) {
-                isValid = false;
-                JOptionPane.showMessageDialog(this, "Please select a genre.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-       
-            if (StatusComboBox2.getSelectedItem() == null) {
-                isValid = false;
-                JOptionPane.showMessageDialog(this, "Please select a status.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-           
-            if (regularSeatPricefield.getText().trim().isEmpty() || regularSeatPricefield.getText().equals("0da")) {
-                isValid = false;
-                JOptionPane.showMessageDialog(this, "Please enter a valid regular seat price.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-           
-            if (vipSeatPricefield.getText().trim().isEmpty() || vipSeatPricefield.getText().equals("0da")) {
-                isValid = false;
-                JOptionPane.showMessageDialog(this, "Please enter a valid VIP seat price.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-            
-            if (selectedTimeLabel.getText().equals("Selected Time: None")) {
-                isValid = false;
-                JOptionPane.showMessageDialog(this, "Please select a valid time.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-       
-            if (isValid) {
-                JOptionPane.showMessageDialog(this, "All fields are valid!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        InfoFilm2.add(validateButton);
-
-    
-       
-        
         JLabel FilmPicture = new JLabel();
         FilmPicture.setBounds(0, 0, 400, 400);
         FilmPicture.setForeground(Color.white);
         FilmPicture.setBackground(Color.green);
         MoviePicture.add(FilmPicture);
-               
 
-              
         RoundedButton FilmSelectpath = new RoundedButton("Select Film Image", 10);
         FilmSelectpath.setBounds(40, 400, 70, 40);
         FilmSelectpath.setForeground(Color.red);
@@ -1524,7 +1520,7 @@ public class UiClass extends JFrame {
             int returnValue = fileChooser.showOpenDialog(null);
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
-                String pathfilm = selectedFile.getAbsolutePath(); 
+                pathfilm = selectedFile.getAbsolutePath(); 
 
                 pathfilm = pathfilm.replace("\\", "\\\\");
                 System.out.println(pathfilm);
@@ -1535,10 +1531,70 @@ public class UiClass extends JFrame {
                 Image image = icon.getImage().getScaledInstance(FilmPicture.getHeight(), FilmPicture.getWidth(), Image.SCALE_SMOOTH);
                 ImageIcon MoviePic = new ImageIcon(image);
                 FilmPicture.setIcon(MoviePic); 
+                
 
             }
+
         });
         InfoFilm2.add(FilmSelectpath);
+
+        RoundedButton validateButton = new RoundedButton("Validate Fields", 10);
+        validateButton.setBounds(20, 450, 150, 40);
+        validateButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        validateButton.addActionListener(e -> {
+            boolean isValid = false;
+            if (MovieName.getText().trim().isEmpty() || MovieName.getText().equals("   Movie Name") || 
+                    description.getText().trim().isEmpty() || description.getText().equals("     Movie description")||
+                        duree.getText().trim().isEmpty() || duree.getText().equals("   Film duration") ||
+                            rating.getText().trim().isEmpty() || rating.getText().equals("   Film Rating") ||
+                                genreComboBox.getSelectedItem() == null || StatusComboBox2.getSelectedItem() == null|| 
+                                    regularSeatPricefield.getText().trim().isEmpty() || regularSeatPricefield.getText().equals("0da")|| 
+                                        vipSeatPricefield.getText().trim().isEmpty() || vipSeatPricefield.getText().equals("0da")||selectedTimeLabel.getText().equals("Selected Time: None")||
+                                             FilmPicture.getIcon() == null) {
+                isValid = false;
+                JOptionPane.showMessageDialog(this, "Please fill all the fields ", "Error", JOptionPane.ERROR_MESSAGE);
+                
+            }else if(!duree.getText().trim().matches("\\d+")||!rating.getText().trim().matches("\\d+")||!regularSeatPricefield.getText().trim().matches("\\d+") ||!vipSeatPricefield.getText().trim().matches("\\d+")){
+                    isValid = false;
+                JOptionPane.showMessageDialog(this, "Please enter a valid input", "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    isValid = true;
+                    JOptionPane.showMessageDialog(this, "All fields are valid!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+            
+            if(isValid == true) {
+                JOptionPane.showMessageDialog(this, "Mhboll Ana , 3andek l film", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                String MovieTitletxt = MovieName.getText();
+                String Descriptiontxt = description.getText();
+                int DureeMovie = Integer.parseInt(duree.getText().trim());
+                String RatingMovie = rating.getText();
+                genre genreMovie = (genre) genreComboBox.getSelectedItem();
+                statusFilm statusMovie = (statusFilm) StatusComboBox2.getSelectedItem();
+                double regularSeatPrice = Double.parseDouble(regularSeatPricefield.getText().trim());
+                double vipSeatPrice = Double.parseDouble(vipSeatPricefield.getText().trim());
+                String imagepath = FilmPicture.getIcon().toString();
+
+
+
+                movies.addMovie(MovieTitletxt, Descriptiontxt, DureeMovie, genreMovie, RatingMovie, regularSeatPrice, vipSeatPrice, pathfilm, statusMovie, localTime);
+                movies.DisplayMovies();
+            }
+
+
+        });
+        InfoFilm2.add(validateButton);
+
+    
+       
+        
+
+               
+
+              
+
+
+
 
 
 
@@ -1624,8 +1680,6 @@ public class UiClass extends JFrame {
         }
     }
 
-
-
     public void TextfieldBehave(JTextField textField, String placeholder) {
         textField.setText(placeholder);
         textField.setForeground(Color.GRAY);
@@ -1634,21 +1688,26 @@ public class UiClass extends JFrame {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (textField.getText().equals(placeholder)) {
-                    textField.setText("");
-                    textField.setForeground(Color.WHITE);
+                    SwingUtilities.invokeLater(() -> {
+                        textField.setText("");
+                        textField.setForeground(Color.WHITE);
+                    });
                 }
             }
 
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (textField.getText().isEmpty()) {
-                    textField.setText(placeholder);
-                    textField.setForeground(Color.GRAY);
+                    SwingUtilities.invokeLater(() -> {
+                        textField.setText(placeholder);
+                        textField.setForeground(Color.GRAY);
+                    });
                 }
             }
         });
     }
-    public void TextAreaBehave(JTextArea textField, String placeholder) {
+    
+       public void TextAreaBehave(JTextArea textField, String placeholder) {
         textField.setText(placeholder);
         textField.setForeground(Color.GRAY);
 
@@ -1656,16 +1715,20 @@ public class UiClass extends JFrame {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
                 if (textField.getText().equals(placeholder)) {
-                    textField.setText("");
-                    textField.setForeground(Color.WHITE);
+                    SwingUtilities.invokeLater(() -> {
+                        textField.setText("");
+                        textField.setForeground(Color.WHITE);
+                    });
                 }
             }
 
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (textField.getText().isEmpty()) {
-                    textField.setText(placeholder);
-                    textField.setForeground(Color.GRAY);
+                    SwingUtilities.invokeLater(() -> {
+                        textField.setText(placeholder);
+                        textField.setForeground(Color.GRAY);
+                    });
                 }
             }
         });
@@ -1680,7 +1743,27 @@ public class UiClass extends JFrame {
 
         return  resizedIcon;
     }
+  
+    public void validateInput(JTextField textField, String regex) {
+        String input = textField.getText().trim();
+    
+        // Skip validation if the text field contains placeholder text
+        if (input.equals("   Movie Name") || input.equals("   Film duration") || 
+            input.equals("   Film Rating") || input.equals("0da")) {
+            textField.setBorder(BorderFactory.createLineBorder(new Color(80, 77, 74))); // Reset border color
+            return;
+        }
+    
+        // Validate the input
+        if (input.matches(regex)) {
+            textField.setBorder(BorderFactory.createLineBorder(Color.GREEN)); // Valid input
+        } else {
+            textField.setBorder(BorderFactory.createLineBorder(Color.RED)); // Invalid input
+         //   JOptionPane.showMessageDialog(this, "Please enter a valid input", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
+    
     public static void main(String[] args) {
         try {
             UiClass frame = new UiClass();

@@ -28,7 +28,7 @@ public  class  Movie {
     }
 
     public Movie(String Title,String Description, int duration, genre genre, String rating,
-            double regularSeatPrice, double vipSeatPrice , String imagePath, statusFilm status) {
+            double regularSeatPrice, double vipSeatPrice , String imagePath, statusFilm status, LocalTime ShowTime) {
 
             this.id=id+1;
             this.Title = Title;
@@ -40,6 +40,7 @@ public  class  Movie {
             this.vipSeatPrice = vipSeatPrice;
             this.imagePath = imagePath;
             this.statusfilm = status;
+            this.showeTime = ShowTime;
      }
 
     // public void printDuration() {
