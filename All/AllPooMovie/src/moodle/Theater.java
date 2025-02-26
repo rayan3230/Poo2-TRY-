@@ -3,8 +3,6 @@ package moodle;
 import java.util.ArrayList;
 import java.util.List;
 
-import Moodle.*;
-
 public class Theater {
     
     public int TheaterId;
