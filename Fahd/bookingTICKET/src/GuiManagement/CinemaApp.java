@@ -3474,6 +3474,7 @@ public class CinemaApp extends JFrame implements ActionListener {
     
 
     }
+
     public JPanel CreateTicketPanel(){
         JPanel TicketPanel = new JPanel();
 
