@@ -145,41 +145,9 @@ public class CinemaApp extends JFrame implements ActionListener {
         //Account Panel--------------------------------------------------------
         JPanel AccountPanel = CreateAccountPanel();
 
-        scrollPane3 = new JScrollPane(AccountPanel);
-        scrollPane3.setBounds(-1, -1, 1210, 760);
-        scrollPane3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane3.setOpaque(false);
-        scrollPane3.getViewport().setBorder(null);
-        scrollPane3.getViewport().setBackground(new Color(0x0D1116));
-
-        AccountPanel.addMouseWheelListener(e -> {
-            JScrollBar verticalScrollBar = scrollPane3.getVerticalScrollBar();// had scroll par rapport l y
-            int notches = e.getWheelRotation();
-            int currentValue = verticalScrollBar.getValue();
-            int scrollAmount = 30; // Adjust scroll speed
-            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
-        });
-
 
         //Account admin Panel--------------------------------------------------------
         JPanel AccountAdminPanel = CreateAccountAdminPanel();
-
-        scrollPane4 = new JScrollPane(AccountAdminPanel);
-        scrollPane4.setBounds(-1, -1, 1210, 760);
-        scrollPane4.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scrollPane4.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane4.setOpaque(false);
-        scrollPane4.getViewport().setBorder(null);
-        scrollPane4.getViewport().setBackground(new Color(0x0D1116));
-
-        AccountAdminPanel.addMouseWheelListener(e -> {
-            JScrollBar verticalScrollBar = scrollPane4.getVerticalScrollBar();// had scroll par rapport l y
-            int notches = e.getWheelRotation();
-            int currentValue = verticalScrollBar.getValue();
-            int scrollAmount = 30; // Adjust scroll speed
-            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
-        });
 
 
 
@@ -191,11 +159,11 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(ForgotPasswordPanel, "forgot Password");
         MainPanel.add(ClientPanel, "user");
         MainPanel.add(AdminPanel, "admin");
-        MainPanel.add(scrollPane3, "account");
-        MainPanel.add(scrollPane4, "account admin");
+        MainPanel.add(AccountPanel, "account");
+        MainPanel.add(AccountAdminPanel, "account admin");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "admin");
+        MainCardLayout.show(MainPanel, "user");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -2040,7 +2008,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         IdPanel.add(NameField);
 
-        JButton SaveId = new JButton("Save cahnges");
+        JButton SaveId = new JButton("Save changes");
         SaveId.setBounds(575, 200, 150, 30);
         SaveId.setFont(new Font("Segoe UI", Font.BOLD, 15));
         SaveId.setBackground(new Color(0xCBCBCB));
@@ -2253,7 +2221,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         PersoPanel.add(PhoneNumberField);
 
-        JButton SavePersonnal = new JButton("Save cahnges");
+        JButton SavePersonnal = new JButton("Save changes");
         SavePersonnal.setBounds(575, 450, 150, 30);
         SavePersonnal.setFont(new Font("Segoe UI", Font.BOLD, 15));
         SavePersonnal.setBackground(new Color(0xCBCBCB));
@@ -2376,7 +2344,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         PayPanel.add(CcvNumber);
 
-        JButton SavePayement = new JButton("Save cahnges");
+        JButton SavePayement = new JButton("Save changes");
         SavePayement.setBounds(575, 150, 150, 30);
         SavePayement.setFont(new Font("Segoe UI", Font.BOLD, 15));
         SavePayement.setBackground(new Color(0xCBCBCB));
@@ -2559,7 +2527,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         SignPanel.add(ConfirmPassword);
 
-        JButton SaveSignIn = new JButton("Save cahnges");
+        JButton SaveSignIn = new JButton("Save changes");
         SaveSignIn.setBounds(575, 350, 150, 30);
         SaveSignIn.setFont(new Font("Segoe UI", Font.BOLD, 15));
         SaveSignIn.setBackground(new Color(0xCBCBCB));
@@ -2922,7 +2890,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (NameField.getText().isEmpty() || NameField.getText().trim().isEmpty()) {
-                    NameField.setText("Type to Search...");
+                    NameField.setText("  Name");
                     NameField.setForeground(Color.white);
                 }
             }
@@ -2931,7 +2899,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         IdPanel.add(NameField);
 
-        JButton SaveId = new JButton("Save cahnges");
+        JButton SaveId = new JButton("Save changes");
         SaveId.setBounds(575, 200, 150, 30);
         SaveId.setFont(new Font("Segoe UI", Font.BOLD, 15));
         SaveId.setBackground(new Color(0xCBCBCB));
@@ -3015,7 +2983,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (FirstNameField.getText().isEmpty() || FirstNameField.getText().trim().isEmpty()) {
-                    FirstNameField.setText("Type to Search...");
+                    FirstNameField.setText("  First name");
                     FirstNameField.setForeground(Color.white);
                 }
             }
@@ -3045,7 +3013,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (LastNameField.getText().isEmpty() || LastNameField.getText().trim().isEmpty()) {
-                    LastNameField.setText("Type to Search...");
+                    LastNameField.setText("  Last name");
                     LastNameField.setForeground(Color.white);
                 }
             }
@@ -3075,7 +3043,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (EmailField.getText().isEmpty() || EmailField.getText().trim().isEmpty()) {
-                    EmailField.setText("Type to Search...");
+                    EmailField.setText("  email@gmail.com");
                     EmailField.setForeground(Color.white);
                 }
             }
@@ -3105,7 +3073,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (AgeField.getText().isEmpty() || AgeField.getText().trim().isEmpty()) {
-                    AgeField.setText("Type to Search...");
+                    AgeField.setText("  22");
                     AgeField.setForeground(Color.white);
                 }
             }
@@ -3135,7 +3103,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (PhoneNumberField.getText().isEmpty() || PhoneNumberField.getText().trim().isEmpty()) {
-                    PhoneNumberField.setText("Type to Search...");
+                    PhoneNumberField.setText(" 05XX XX XX XX");
                     PhoneNumberField.setForeground(Color.white);
                 }
             }
@@ -3144,7 +3112,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         PersoPanel.add(PhoneNumberField);
 
-        JButton SavePersonnal = new JButton("Save cahnges");
+        JButton SavePersonnal = new JButton("Save changes");
         SavePersonnal.setBounds(575, 450, 150, 30);
         SavePersonnal.setFont(new Font("Segoe UI", Font.BOLD, 15));
         SavePersonnal.setBackground(new Color(0xCBCBCB));
@@ -3228,7 +3196,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (CardNumber.getText().isEmpty() || CardNumber.getText().trim().isEmpty()) {
-                    CardNumber.setText("Type to Search...");
+                    CardNumber.setText("  Card number");
                     CardNumber.setForeground(Color.white);
                 }
             }
@@ -3258,7 +3226,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (CcvNumber.getText().isEmpty() || CcvNumber.getText().trim().isEmpty()) {
-                    CcvNumber.setText("Type to Search...");
+                    CcvNumber.setText("  Ccv number");
                     CcvNumber.setForeground(Color.white);
                 }
             }
@@ -3267,7 +3235,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         PayPanel.add(CcvNumber);
 
-        JButton SavePayement = new JButton("Save cahnges");
+        JButton SavePayement = new JButton("Save changes");
         SavePayement.setBounds(575, 150, 150, 30);
         SavePayement.setFont(new Font("Segoe UI", Font.BOLD, 15));
         SavePayement.setBackground(new Color(0xCBCBCB));
@@ -3344,7 +3312,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (UsernameField.getText().isEmpty() || UsernameField.getText().trim().isEmpty()) {
-                    UsernameField.setText("Type to Search...");
+                    UsernameField.setText("  username");
                     UsernameField.setForeground(Color.white);
                 }
             }
@@ -3360,7 +3328,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         SignPanel.add(PasswordInfo);
 
-        JTextField CurrentPassword = new JTextField("  username");
+        JTextField CurrentPassword = new JTextField("  password");
         CurrentPassword.setBounds(375, 185, 250, 30);
         CurrentPassword.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         CurrentPassword.setForeground(Color.white);
@@ -3372,7 +3340,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         CurrentPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             @Override
             public void focusGained(java.awt.event.FocusEvent evt) {
-                if (CurrentPassword.getText().equals("  username")) {
+                if (CurrentPassword.getText().equals("  password")) {
                     CurrentPassword.setText("");
                     CurrentPassword.setForeground(Color.white);
                 }
@@ -3381,7 +3349,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (CurrentPassword.getText().isEmpty() || CurrentPassword.getText().trim().isEmpty()) {
-                    CurrentPassword.setText("Type to Search...");
+                    CurrentPassword.setText("  password");
                     CurrentPassword.setForeground(Color.white);
                 }
             }
@@ -3411,7 +3379,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (NewPassword.getText().isEmpty() || NewPassword.getText().trim().isEmpty()) {
-                    NewPassword.setText("Type to Search...");
+                    NewPassword.setText("  New password");
                     NewPassword.setForeground(Color.white);
                 }
             }
@@ -3441,7 +3409,7 @@ public class CinemaApp extends JFrame implements ActionListener {
             @Override
             public void focusLost(java.awt.event.FocusEvent evt) {
                 if (ConfirmPassword.getText().isEmpty() || ConfirmPassword.getText().trim().isEmpty()) {
-                    ConfirmPassword.setText("Type to Search...");
+                    ConfirmPassword.setText("  Confirm password");
                     ConfirmPassword.setForeground(Color.white);
                 }
             }
@@ -3450,7 +3418,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         SignPanel.add(ConfirmPassword);
 
-        JButton SaveSignIn = new JButton("Save cahnges");
+        JButton SaveSignIn = new JButton("Save changes");
         SaveSignIn.setBounds(575, 350, 150, 30);
         SaveSignIn.setFont(new Font("Segoe UI", Font.BOLD, 15));
         SaveSignIn.setBackground(new Color(0xCBCBCB));
