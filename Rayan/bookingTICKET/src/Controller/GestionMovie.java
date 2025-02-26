@@ -16,11 +16,18 @@ public class GestionMovie {
     public GestionMovie() {
         // Movie movie = new Movie("The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\film1.jpg" , statusFilm.AVAILABLE, LocalTime.of(12, 30));
         // Movie movie2 = new Movie( "The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE, LocalTime.of(12, 30));
-        // //Movie movie3 = new Movie( "The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE, LocalTime.of(12,30));
-        
+        // Movie movie3 = new Movie( "The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE, LocalTime.of(12,30));
+        // Movie movie4 = new Movie("The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE, LocalTime.of(12,30));
+        // Movie movie5 = new Movie("The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE, LocalTime.of(12,30));
+        // Movie movie6 = new Movie("The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE, LocalTime.of(12,30));
+        // Movie movie7 = new Movie("The Dark Knight", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE, LocalTime.of(12,30));
         // Movies.add(movie);
         // Movies.add(movie2);
-        // //Movies.add(movie3);
+        // Movies.add(movie3);
+        // Movies.add(movie4);
+        // Movies.add(movie5);
+        // Movies.add(movie6);
+        // Movies.add(movie7);
     }
 
     public void addMovie(String Title,String Description, int duration, genre genre, String rating,

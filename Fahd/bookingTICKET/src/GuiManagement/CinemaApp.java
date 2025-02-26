@@ -33,7 +33,7 @@ public class CinemaApp extends JFrame implements ActionListener {
     public int xVelocity = 30;
     public int x2 = -300;
     public int x2Velocity = 30;
-    public JScrollPane scrollPane3;
+    public JScrollPane scrollPane3, scrollPane4;
 
     // decorative Panels ------------------------------------------------
     public TransparentPanel BlurPanel, BlurPanel2, BlurPanel3;
@@ -162,6 +162,28 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
 
 
+        //Account admin Panel--------------------------------------------------------
+        JPanel AccountAdminPanel = CreateAccountAdminPanel();
+
+        scrollPane4 = new JScrollPane(AccountAdminPanel);
+        scrollPane4.setBounds(-1, -1, 1210, 760);
+        scrollPane4.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane4.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane4.setOpaque(false);
+        scrollPane4.getViewport().setBorder(null);
+        scrollPane4.getViewport().setBackground(new Color(0x0D1116));
+
+        AccountAdminPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane4.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+
+
+
         // main panel management-----------------------------------------------
         MainPanel.add(SignInPanel, "open");
         MainPanel.add(RegisterPanel, "register");
@@ -170,9 +192,10 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(ClientPanel, "user");
         MainPanel.add(AdminPanel, "admin");
         MainPanel.add(scrollPane3, "account");
+        MainPanel.add(scrollPane4, "account admin");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "user");
+        MainCardLayout.show(MainPanel, "admin");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -2591,6 +2614,898 @@ public class CinemaApp extends JFrame implements ActionListener {
         return AccountPanel;
     }
 
+    public JPanel CreateAccountAdminPanel(){
+
+        JPanel AccountAdminPanel = new JPanel();
+        AccountAdminPanel.setOpaque(false);
+        AccountAdminPanel.setLayout(null);
+        AccountAdminPanel.setPreferredSize(new Dimension(1200, 3500));
+
+        JPanel OptionPanel = new JPanel();
+        OptionPanel.setBounds(0, 0, 350, 750);
+        OptionPanel.setLayout(null);
+        OptionPanel.setBackground(new Color(0x0A0D10));
+
+        AccountAdminPanel.add(OptionPanel);
+
+        JLabel AccountTitle = new JLabel("Account");
+        AccountTitle.setBounds(50, 100, 250, 50);
+        AccountTitle.setFont(new Font("Segoe UI", Font.BOLD, 35));
+        AccountTitle.setForeground(Color.white);
+
+        OptionPanel.add(AccountTitle);
+
+        JLabel AccountTitle2 = new JLabel("Management");
+        AccountTitle2.setBounds(50, 150, 350, 50);
+        AccountTitle2.setFont(new Font("Segoe UI", Font.BOLD, 35));
+        AccountTitle2.setForeground(Color.white);
+
+        OptionPanel.add(AccountTitle2);
+
+        JButton IdSettings = new JButton("Account ID");
+        IdSettings.setBounds(25, 275, 250, 30);
+        IdSettings.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        IdSettings.setForeground(new Color(0xCBCBCB));
+        IdSettings.setContentAreaFilled(false);
+        IdSettings.setBorderPainted(false);
+        IdSettings.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        IdSettings.addActionListener(e -> {
+            
+        });
+        JButton IdButton = new JButton();
+        IdButton.setBounds(50, 280, 25, 25);
+        IdButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        IdButton.setBackground(new Color(0xCBCBCB));
+        IdButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        IdButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        IdButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xD42E00));
+                IdButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xCBCBCB));
+                IdButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        IdSettings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xD42E00));
+                IdButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                IdSettings.setForeground(new Color(0xCBCBCB));
+                IdButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(IdSettings);
+        OptionPanel.add(IdButton);
+        
+        JButton PersonalInfo = new JButton("Personnal information");
+        PersonalInfo.setBounds(70, 320, 250, 30);
+        PersonalInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PersonalInfo.setForeground(new Color(0xCBCBCB));
+        PersonalInfo.setContentAreaFilled(false);
+        PersonalInfo.setBorderPainted(false);
+        PersonalInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PersonalInfo.addActionListener(e -> {
+            
+        });
+        JButton PersonalButton = new JButton();
+        PersonalButton.setBounds(50, 325, 25, 25);
+        PersonalButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PersonalButton.setBackground(new Color(0xCBCBCB));
+        PersonalButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PersonalButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        PersonalButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xD42E00));
+                PersonalButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xCBCBCB));
+                PersonalButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        PersonalInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xD42E00));
+                PersonalButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PersonalInfo.setForeground(new Color(0xCBCBCB));
+                PersonalButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(PersonalInfo);
+        OptionPanel.add(PersonalButton);
+
+
+        JButton PaymentInfo = new JButton("Payement information");
+        PaymentInfo.setBounds(70, 365, 250, 30);
+        PaymentInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PaymentInfo.setForeground(new Color(0xCBCBCB));
+        PaymentInfo.setContentAreaFilled(false);
+        PaymentInfo.setBorderPainted(false);
+        PaymentInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PaymentInfo.addActionListener(e -> {
+            
+        });
+        JButton PayementButton = new JButton();
+        PayementButton.setBounds(50, 370, 25, 25);
+        PayementButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PayementButton.setBackground(new Color(0xCBCBCB));
+        PayementButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        PayementButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        PayementButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xD42E00));
+                PayementButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xCBCBCB));
+                PayementButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        PaymentInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xD42E00));
+                PayementButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PaymentInfo.setForeground(new Color(0xCBCBCB));
+                PayementButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(PaymentInfo);
+        OptionPanel.add(PayementButton);
+
+
+        JButton SignInInfo = new JButton("Account sign in management");
+        SignInInfo.setBounds(47, 410, 350, 30);
+        SignInInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        SignInInfo.setForeground(new Color(0xCBCBCB));
+        SignInInfo.setContentAreaFilled(false);
+        SignInInfo.setBorderPainted(false);
+        SignInInfo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SignInInfo.addActionListener(e -> {
+            
+        });
+        JButton SignInButton = new JButton();
+        SignInButton.setBounds(50, 415, 25, 25);
+        SignInButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        SignInButton.setBackground(new Color(0xCBCBCB));
+        SignInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SignInButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SignInButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xD42E00));
+                SignInButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xCBCBCB));
+                SignInButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        SignInInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xD42E00));
+                SignInButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SignInInfo.setForeground(new Color(0xCBCBCB));
+                SignInButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(SignInInfo);
+        OptionPanel.add(SignInButton);
+
+
+        JButton Exit = new JButton("Exit");
+        Exit.setBounds(-50, 650, 350, 30);
+        Exit.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        Exit.setForeground(new Color(0xCBCBCB));
+        Exit.setContentAreaFilled(false);
+        Exit.setBorderPainted(false);
+        Exit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        JButton ExitButton = new JButton();
+        ExitButton.setBounds(50, 655, 25, 25);
+        ExitButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        ExitButton.setBackground(new Color(0xCBCBCB));
+        ExitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        ExitButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        ExitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Exit.setForeground(new Color(0xD42E00));
+                ExitButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Exit.setForeground(new Color(0xCBCBCB));
+                ExitButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        Exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Exit.setForeground(new Color(0xD42E00));
+                ExitButton.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Exit.setForeground(new Color(0xCBCBCB));
+                ExitButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        OptionPanel.add(Exit);
+        OptionPanel.add(ExitButton);
+
+
+
+        //elements panel --------------------------------------------------------
+        JPanel ElementsPanel = new JPanel();
+        ElementsPanel.setOpaque(false);
+        ElementsPanel.setLayout(null);
+        ElementsPanel.setPreferredSize(new Dimension(850, 1750));
+
+        JScrollPane scrollPane = new JScrollPane(ElementsPanel);
+        scrollPane.setBounds(349, -1, 855, 755);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setBackground(new Color(0x0A0D10));
+
+        ElementsPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        AccountAdminPanel.add(scrollPane);
+
+
+        //id panel-------------------------------------------------------------------
+        JPanel IdPanel = new JPanel();
+        IdPanel.setBounds(50, 75, 750, 250);
+        IdPanel.setBackground(new Color(0x2B2B2B));
+        IdPanel.setLayout(null);
+
+        JLabel NameInfo = new JLabel("Your personnal name");
+        NameInfo.setBounds(375, 25, 250, 30);
+        NameInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        NameInfo.setForeground(Color.white);
+
+        IdPanel.add(NameInfo);
+
+        JTextField NameField = new JTextField("  Name");
+        NameField.setBounds(375, 65, 250, 30);
+        NameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        NameField.setForeground(Color.white);
+        NameField.setCaretColor(Color.white);
+        // NameField.setBackground(new Color(80, 77, 74, 230));
+        NameField.setBackground(new Color(0x151515));
+        NameField.setOpaque(true);
+
+        NameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (NameField.getText().equals("  Name")) {
+                    NameField.setText("");
+                    NameField.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (NameField.getText().isEmpty() || NameField.getText().trim().isEmpty()) {
+                    NameField.setText("Type to Search...");
+                    NameField.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        IdPanel.add(NameField);
+
+        JButton SaveId = new JButton("Save cahnges");
+        SaveId.setBounds(575, 200, 150, 30);
+        SaveId.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        SaveId.setBackground(new Color(0xCBCBCB));
+        SaveId.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SaveId.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SaveId.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SaveId.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SaveId.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        IdPanel.add(SaveId);
+
+
+        JPanel IdHolderPanel = new JPanel();
+        IdHolderPanel.setBounds(0, 0, 325, 250);
+        IdHolderPanel.setLayout(null);
+        IdHolderPanel.setBackground(new Color(0x1C2837));
+
+        JLabel IdText = new JLabel("Account ID");
+        IdText.setBounds(50, 25, 200, 30);
+        IdText.setForeground(Color.white);
+        IdText.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+        JLabel IdTextDescription = new JLabel("This Id information are used to log in ,but ");
+        IdTextDescription.setBounds(50, 75, 250, 30);
+        IdTextDescription.setForeground(Color.white);
+        IdTextDescription.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        JLabel IdTextDescription2 = new JLabel("also to allow a better service provider");
+        IdTextDescription2.setBounds(50, 95, 250, 30);
+        IdTextDescription2.setForeground(Color.white);
+        IdTextDescription2.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        IdHolderPanel.add(IdTextDescription2);
+        IdHolderPanel.add(IdTextDescription);
+        IdHolderPanel.add(IdText);
+
+
+        IdPanel.add(IdHolderPanel);
+
+        ElementsPanel.add(IdPanel);
+
+
+        //personnal panel ----------------------------------------------------------------
+        JPanel PersoPanel = new JPanel();
+        PersoPanel.setBounds(50, 365, 750, 500);
+        PersoPanel.setBackground(new Color(0x2B2B2B));
+        PersoPanel.setLayout(null);
+
+        JLabel PersonnalInfo = new JLabel("Personnal informations ");
+        PersonnalInfo.setBounds(375, 25, 250, 30);
+        PersonnalInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PersonnalInfo.setForeground(Color.white);
+
+        PersoPanel.add(PersonnalInfo);
+
+        JTextField FirstNameField = new JTextField("  First name");
+        FirstNameField.setBounds(375, 65, 250, 30);
+        FirstNameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        FirstNameField.setForeground(Color.white);
+        FirstNameField.setCaretColor(Color.white);
+        // FirstNameField.setBackground(new Color(80, 77, 74, 230));
+        FirstNameField.setBackground(new Color(0x151515));
+        FirstNameField.setOpaque(true);
+
+        FirstNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (FirstNameField.getText().equals("  First name")) {
+                    FirstNameField.setText("");
+                    FirstNameField.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (FirstNameField.getText().isEmpty() || FirstNameField.getText().trim().isEmpty()) {
+                    FirstNameField.setText("Type to Search...");
+                    FirstNameField.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        PersoPanel.add(FirstNameField);
+
+        JTextField LastNameField = new JTextField("  Last name");
+        LastNameField.setBounds(375, 105, 250, 30);
+        LastNameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        LastNameField.setForeground(Color.white);
+        LastNameField.setCaretColor(Color.white);
+        // LastNameField.setBackground(new Color(80, 77, 74, 230));
+        LastNameField.setBackground(new Color(0x151515));
+        LastNameField.setOpaque(true);
+
+        LastNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (LastNameField.getText().equals("  Last name")) {
+                    LastNameField.setText("");
+                    LastNameField.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (LastNameField.getText().isEmpty() || LastNameField.getText().trim().isEmpty()) {
+                    LastNameField.setText("Type to Search...");
+                    LastNameField.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        PersoPanel.add(LastNameField);
+
+        JTextField EmailField = new JTextField("  email@gmail.com");
+        EmailField.setBounds(375, 145, 250, 30);
+        EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        EmailField.setForeground(Color.white);
+        EmailField.setCaretColor(Color.white);
+        // EmailField.setBackground(new Color(80, 77, 74, 230));
+        EmailField.setBackground(new Color(0x151515));
+        EmailField.setOpaque(true);
+
+        EmailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (EmailField.getText().equals("  email@gmail.com")) {
+                    EmailField.setText("");
+                    EmailField.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (EmailField.getText().isEmpty() || EmailField.getText().trim().isEmpty()) {
+                    EmailField.setText("Type to Search...");
+                    EmailField.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        PersoPanel.add(EmailField);
+
+        JTextField AgeField = new JTextField("  22");
+        AgeField.setBounds(375, 185, 250, 30);
+        AgeField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        AgeField.setForeground(Color.white);
+        AgeField.setCaretColor(Color.white);
+        // AgeField.setBackground(new Color(80, 77, 74, 230));
+        AgeField.setBackground(new Color(0x151515));
+        AgeField.setOpaque(true);
+
+        AgeField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (AgeField.getText().equals("  22")) {
+                    AgeField.setText("");
+                    AgeField.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (AgeField.getText().isEmpty() || AgeField.getText().trim().isEmpty()) {
+                    AgeField.setText("Type to Search...");
+                    AgeField.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        PersoPanel.add(AgeField);
+
+        JTextField PhoneNumberField = new JTextField(" 05XX XX XX XX");
+        PhoneNumberField.setBounds(375, 225, 250, 30);
+        PhoneNumberField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        PhoneNumberField.setForeground(Color.white);
+        PhoneNumberField.setCaretColor(Color.white);
+        // PhoneNumberField.setBackground(new Color(80, 77, 74, 230));
+        PhoneNumberField.setBackground(new Color(0x151515));
+        PhoneNumberField.setOpaque(true);
+
+        PhoneNumberField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (PhoneNumberField.getText().equals(" 05XX XX XX XX")) {
+                    PhoneNumberField.setText("");
+                    PhoneNumberField.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (PhoneNumberField.getText().isEmpty() || PhoneNumberField.getText().trim().isEmpty()) {
+                    PhoneNumberField.setText("Type to Search...");
+                    PhoneNumberField.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        PersoPanel.add(PhoneNumberField);
+
+        JButton SavePersonnal = new JButton("Save cahnges");
+        SavePersonnal.setBounds(575, 450, 150, 30);
+        SavePersonnal.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        SavePersonnal.setBackground(new Color(0xCBCBCB));
+        SavePersonnal.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SavePersonnal.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SavePersonnal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SavePersonnal.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SavePersonnal.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        PersoPanel.add(SavePersonnal);
+
+
+        JPanel PersoHolder = new JPanel();
+        PersoHolder.setBounds(0, 0, 325, 500);
+        PersoHolder.setLayout(null);
+        PersoHolder.setBackground(new Color(0x1C2837));
+
+        JLabel PersoText = new JLabel("Personnal informations");
+        PersoText.setBounds(50, 25, 350, 30);
+        PersoText.setForeground(Color.white);
+        PersoText.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+        JLabel PersoTextDescription = new JLabel("This informations are private and will ");
+        PersoTextDescription.setBounds(50, 75, 250, 30);
+        PersoTextDescription.setForeground(Color.white);
+        PersoTextDescription.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        JLabel PersoTextDescription2 = new JLabel("not be shared with others");
+        PersoTextDescription2.setBounds(50, 95, 250, 30);
+        PersoTextDescription2.setForeground(Color.white);
+        PersoTextDescription2.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        PersoHolder.add(PersoTextDescription2);
+        PersoHolder.add(PersoTextDescription);
+        PersoHolder.add(PersoText);
+
+        PersoPanel.add(PersoHolder);
+
+        ElementsPanel.add(PersoPanel);
+
+
+
+        //payements panel---------------------------------------------------------
+        JPanel PayPanel = new JPanel();
+        PayPanel.setBounds(50, 905, 750, 200);
+        PayPanel.setBackground(new Color(0x2B2B2B));
+        PayPanel.setLayout(null);
+
+        JLabel PayInfo = new JLabel("Payement informations ");
+        PayInfo.setBounds(375, 25, 250, 30);
+        PayInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PayInfo.setForeground(Color.white);
+
+        PayPanel.add(PayInfo);
+
+        JTextField CardNumber = new JTextField("  Card number");
+        CardNumber.setBounds(375, 65, 250, 30);
+        CardNumber.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        CardNumber.setForeground(Color.white);
+        CardNumber.setCaretColor(Color.white);
+        // CardNumber.setBackground(new Color(80, 77, 74, 230));
+        CardNumber.setBackground(new Color(0x151515));
+        CardNumber.setOpaque(true);
+
+        CardNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (CardNumber.getText().equals("  Card number")) {
+                    CardNumber.setText("");
+                    CardNumber.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (CardNumber.getText().isEmpty() || CardNumber.getText().trim().isEmpty()) {
+                    CardNumber.setText("Type to Search...");
+                    CardNumber.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        PayPanel.add(CardNumber);
+
+        JTextField CcvNumber = new JTextField("  Ccv number");
+        CcvNumber.setBounds(375, 105, 250, 30);
+        CcvNumber.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        CcvNumber.setForeground(Color.white);
+        CcvNumber.setCaretColor(Color.white);
+        // CcvNumber.setBackground(new Color(80, 77, 74, 230));
+        CcvNumber.setBackground(new Color(0x151515));
+        CcvNumber.setOpaque(true);
+
+        CcvNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (CcvNumber.getText().equals("  Ccv number")) {
+                    CcvNumber.setText("");
+                    CcvNumber.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (CcvNumber.getText().isEmpty() || CcvNumber.getText().trim().isEmpty()) {
+                    CcvNumber.setText("Type to Search...");
+                    CcvNumber.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        PayPanel.add(CcvNumber);
+
+        JButton SavePayement = new JButton("Save cahnges");
+        SavePayement.setBounds(575, 150, 150, 30);
+        SavePayement.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        SavePayement.setBackground(new Color(0xCBCBCB));
+        SavePayement.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SavePayement.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SavePayement.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SavePayement.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SavePayement.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        PayPanel.add(SavePayement);
+
+        JPanel PayHolder = new JPanel();
+        PayHolder.setBounds(0, 0, 325, 200);
+        PayHolder.setLayout(null);
+        PayHolder.setBackground(new Color(0x1C2837));
+
+        JLabel PayText = new JLabel("Payment informations");
+        PayText.setBounds(50, 25, 350, 30);
+        PayText.setForeground(Color.white);
+        PayText.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+        JLabel PayTextDescription = new JLabel("your credit and payement information");
+        PayTextDescription.setBounds(50, 75, 250, 30);
+        PayTextDescription.setForeground(Color.white);
+        PayTextDescription.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        PayHolder.add(PayTextDescription);
+        PayHolder.add(PayText);
+
+        PayPanel.add(PayHolder);
+
+        ElementsPanel.add(PayPanel);
+
+
+
+        //sign in infos panel ------------------------------------------------
+        JPanel SignPanel = new JPanel();
+        SignPanel.setBounds(50, 1145, 750, 400);
+        SignPanel.setBackground(new Color(0x2B2B2B));
+        SignPanel.setLayout(null);
+
+        JLabel SignInfo = new JLabel("sign and log in informations");
+        SignInfo.setBounds(375, 25, 250, 30);
+        SignInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        SignInfo.setForeground(Color.white);
+
+        SignPanel.add(SignInfo);
+
+        JTextField UsernameField = new JTextField("  username");
+        UsernameField.setBounds(375, 65, 250, 30);
+        UsernameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        UsernameField.setForeground(Color.white);
+        UsernameField.setCaretColor(Color.white);
+        // UsernameField.setBackground(new Color(80, 77, 74, 230));
+        UsernameField.setBackground(new Color(0x151515));
+        UsernameField.setOpaque(true);
+
+        UsernameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (UsernameField.getText().equals("  username")) {
+                    UsernameField.setText("");
+                    UsernameField.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (UsernameField.getText().isEmpty() || UsernameField.getText().trim().isEmpty()) {
+                    UsernameField.setText("Type to Search...");
+                    UsernameField.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        SignPanel.add(UsernameField);
+
+        JLabel PasswordInfo = new JLabel("Password");
+        PasswordInfo.setBounds(375, 145, 250, 30);
+        PasswordInfo.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        PasswordInfo.setForeground(Color.white);
+
+        SignPanel.add(PasswordInfo);
+
+        JTextField CurrentPassword = new JTextField("  username");
+        CurrentPassword.setBounds(375, 185, 250, 30);
+        CurrentPassword.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        CurrentPassword.setForeground(Color.white);
+        CurrentPassword.setCaretColor(Color.white);
+        // CurrentPassword.setBackground(new Color(80, 77, 74, 230));
+        CurrentPassword.setBackground(new Color(0x151515));
+        CurrentPassword.setOpaque(true);
+
+        CurrentPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (CurrentPassword.getText().equals("  username")) {
+                    CurrentPassword.setText("");
+                    CurrentPassword.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (CurrentPassword.getText().isEmpty() || CurrentPassword.getText().trim().isEmpty()) {
+                    CurrentPassword.setText("Type to Search...");
+                    CurrentPassword.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        SignPanel.add(CurrentPassword);
+
+        JTextField NewPassword = new JTextField("  New password");
+        NewPassword.setBounds(375, 225, 250, 30);
+        NewPassword.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        NewPassword.setForeground(Color.white);
+        NewPassword.setCaretColor(Color.white);
+        // NewPassword.setBackground(new Color(80, 77, 74, 230));
+        NewPassword.setBackground(new Color(0x151515));
+        NewPassword.setOpaque(true);
+
+        NewPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (NewPassword.getText().equals("  New password")) {
+                    NewPassword.setText("");
+                    NewPassword.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (NewPassword.getText().isEmpty() || NewPassword.getText().trim().isEmpty()) {
+                    NewPassword.setText("Type to Search...");
+                    NewPassword.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        SignPanel.add(NewPassword);
+
+        JTextField ConfirmPassword = new JTextField("  Confirm password");
+        ConfirmPassword.setBounds(375, 265, 250, 30);
+        ConfirmPassword.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        ConfirmPassword.setForeground(Color.white);
+        ConfirmPassword.setCaretColor(Color.white);
+        // ConfirmPassword.setBackground(new Color(80, 77, 74, 230));
+        ConfirmPassword.setBackground(new Color(0x151515));
+        ConfirmPassword.setOpaque(true);
+
+        ConfirmPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (ConfirmPassword.getText().equals("  Confirm password")) {
+                    ConfirmPassword.setText("");
+                    ConfirmPassword.setForeground(Color.white);
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (ConfirmPassword.getText().isEmpty() || ConfirmPassword.getText().trim().isEmpty()) {
+                    ConfirmPassword.setText("Type to Search...");
+                    ConfirmPassword.setForeground(Color.white);
+                }
+            }
+
+        });
+
+        SignPanel.add(ConfirmPassword);
+
+        JButton SaveSignIn = new JButton("Save cahnges");
+        SaveSignIn.setBounds(575, 350, 150, 30);
+        SaveSignIn.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        SaveSignIn.setBackground(new Color(0xCBCBCB));
+        SaveSignIn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SaveSignIn.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        SaveSignIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SaveSignIn.setBackground(new Color(0xD42E00));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SaveSignIn.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        SignPanel.add(SaveSignIn);
+
+        JPanel SignHolder = new JPanel();
+        SignHolder.setBounds(0, 0, 325, 400);
+        SignHolder.setLayout(null);
+        SignHolder.setBackground(new Color(0x1C2837));
+
+        JLabel SignText = new JLabel("Sign in Management");
+        SignText.setBounds(50, 25, 350, 30);
+        SignText.setForeground(Color.white);
+        SignText.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+        JLabel SignTextDescription = new JLabel("change your sign and log in infos ");
+        SignTextDescription.setBounds(50, 75, 250, 30);
+        SignTextDescription.setForeground(Color.white);
+        SignTextDescription.setFont(new Font("Segoe UI", Font.BOLD, 10));
+
+        SignHolder.add(SignTextDescription);
+        SignHolder.add(SignText);
+
+        SignPanel.add(SignHolder);
+
+        ElementsPanel.add(SignPanel);
+
+
+
+
+        Exit.addActionListener(e -> {
+            MainCardLayout.show(MainPanel, "admin");
+        });
+
+        ExitButton.addActionListener(e -> {
+            MainCardLayout.show(MainPanel, "admin");
+        });
+
+        return AccountAdminPanel;
+    
+
+    }
     public JPanel CreateTicketPanel(){
         JPanel TicketPanel = new JPanel();
 
@@ -2653,179 +3568,275 @@ public class CinemaApp extends JFrame implements ActionListener {
     }
 
     public JPanel CreateAdminInterface() {
+        CardLayout layout = new CardLayout();
         
-        JPanel AdminElements = new JPanel();
-        AdminElements.setBounds(0, 0, 1200, 720);
+        JPanel AdminElements = new JPanel(layout);
         AdminElements.setLayout(null);
+        AdminElements.setBounds(0, 0, 1200, 750);
         AdminElements.setOpaque(true);
-        AdminElements.setBackground(new Color(100, 100, 100));
+        AdminElements.setBackground(new Color(0x0D1116));
 
-        JLabel welcomeLabel = new JLabel("Welcome, Admin!");
-        welcomeLabel.setBounds(50, 50, 300, 50);
-        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        welcomeLabel.setForeground(Color.white);
+        //Left panel ----------------------------------------------------------------
+        JPanel LeftPanel = new JPanel();
+        LeftPanel.setBounds(0,0, 100, 750);
+        LeftPanel.setBackground(new Color(0x191D22));
+        LeftPanel.setLayout(null);
 
-        AdminElements.add(welcomeLabel);
+        AdminElements.add(LeftPanel, "left panel");
+        LeftPanel.setVisible(true);
 
-        JPanel SettingsPanel = new JPanel();
-        SettingsPanel.setBounds(-300, 0, 300, 750);
-        SettingsPanel.setLayout(null);
-        SettingsPanel.setOpaque(true);
-        SettingsPanel.setBackground(new Color(0x270000));
+        JButton HomeButton = new JButton();
+        HomeButton.setBounds(30, 210, 40, 40);
 
-        AdminElements.add(SettingsPanel);
+        ImageIcon originalIcon6 = new ImageIcon(
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\home (1).png");
+        Image originalImage6 = originalIcon6.getImage();
+        Image scaledImage6 = originalImage6.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon6 = new ImageIcon(scaledImage6);
 
-        JButton AddFilm = new JButton("add film");
-        AddFilm.setBounds(20, 75, 270, 40);
-        AddFilm.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        AddFilm.setBackground(Color.gray);
-        AddFilm.setForeground(Color.white);
-        AddFilm.setUI(new RoundButtonUI(new Color(0x000000)));
+        HomeButton.setIcon(scaledIcon6);
+        HomeButton.setBackground(new Color(0xCBCBCB));
+        HomeButton.setForeground(new Color(0x191D22));
+        HomeButton.setFont(new Font("Inter", Font.BOLD, 15));
+        HomeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        HomeButton.setUI(new RoundButtonUI(new Color(0x000000)));
 
-        SettingsPanel.add(AddFilm);
+        TransparentPanel HoverHome = new TransparentPanel(0.5f);
+        HoverHome.setBounds(0, 215, 7, 25);
+        HoverHome.setVisible(false);
+        HoverHome.setBackground(new Color(0x878787));
 
-        JButton BonusesButton = new JButton("Bonuses");
-        BonusesButton.setBounds(20, 135, 270, 40);
-        BonusesButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        BonusesButton.setBackground(Color.gray);
-        BonusesButton.setForeground(Color.white);
-        BonusesButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        SettingsPanel.add(BonusesButton);
-
-        JButton BookedButton = new JButton("Booked");
-        BookedButton.setBounds(20, 195, 270, 40);
-        BookedButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        BookedButton.setBackground(Color.gray);
-        BookedButton.setForeground(Color.white);
-        BookedButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        SettingsPanel.add(BookedButton);
-
-        JButton FilterButton = new JButton("aplly filter");
-        FilterButton.setBounds(20, 255, 270, 40);
-        FilterButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        FilterButton.setBackground(Color.gray);
-        FilterButton.setForeground(Color.white);
-        FilterButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        SettingsPanel.add(FilterButton);
+        LeftPanel.add(HoverHome);
 
 
-        JButton ChangeAccButton = new JButton("Change accounts");
-        ChangeAccButton.setBounds(20, 590, 270, 40);
-        ChangeAccButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        ChangeAccButton.setBackground(Color.gray);
-        ChangeAccButton.setForeground(Color.white);
-        ChangeAccButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        HomeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                HomeButton.setBackground(new Color(0x878787));
+                HoverHome.setVisible(true);
 
-        ChangeAccButton.addActionListener(e -> {
-            MainCardLayout.show(MainPanel, "log in");
-        });
+            }
 
-        SettingsPanel.add(ChangeAccButton);
-
-        JButton LogoutButton = new JButton("Log out");
-        LogoutButton.setBounds(20, 650, 270, 40);
-        LogoutButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        LogoutButton.setBackground(Color.red);
-        LogoutButton.setForeground(Color.white);
-        LogoutButton.setUI(new RoundButtonUI(new Color(0x000000)));
-
-        SettingsPanel.add(LogoutButton);
-
-
-        JTextField searchField = new JTextField("Type to Search...");
-        searchField.setBounds(75, 15, 1000, 30);
-        searchField.setFont(new Font("Arial", Font.BOLD, 15));
-        searchField.setBackground(new java.awt.Color(0x555555));
-        searchField.setForeground(Color.WHITE);
-        searchField.setCaretColor(Color.WHITE);
-
-        AdminElements.add(searchField);
-
-        JPanel SearchPanel = new JPanel();
-        SearchPanel.setBounds(75, 15, 1000, 30);
-        SearchPanel.setFont(new Font("Arial", Font.BOLD, 15));
-        SearchPanel.setBackground(new java.awt.Color(0x555555));
-
-        AdminElements.add(SearchPanel);
-
-        JLabel SettingText = new JLabel("Settings");
-        SettingText.setBounds(15, 10, 300, 55);
-        SettingText.setForeground(Color.white);
-        SettingText.setFont(new Font("Inter", Font.BOLD, 48));
-
-        SettingsPanel.add(SettingText);
-
-
-        JPanel EmptyPanel = new JPanel();
-        EmptyPanel.setBounds(300, 0, 900, 750);
-        EmptyPanel.setLayout(null);
-        EmptyPanel.setOpaque(false);
-        EmptyPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                timer2.start();
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                HomeButton.setBackground(new Color(0xCBCBCB));
+                HoverHome.setVisible(false);
             }
         });
-        EmptyPanel.setVisible(false);
 
-        AdminElements.add(EmptyPanel);
+        LeftPanel.add(HomeButton);
         
-        JButton ExitSettings = new JButton();
-        ExitSettings.setBounds(270, 10, 20, 20);
-        ExitSettings.setFont(new Font("Inter", Font.BOLD, 2));
-        ExitSettings.setBackground(Color.red);
-        ExitSettings.setForeground(Color.white);
-        ExitSettings.setUI(new RoundButtonUI(new Color(0x000000)));
 
-        timer2 = new Timer(10, e->{
-            if(x == -300){
-                timer2.stop();
-            }else{
-                x-= xVelocity;
-                SettingsPanel.setBounds(x, 0, 300, 750);
+
+        JButton AllButton = new JButton();
+        AllButton.setBounds(30, 280, 40, 40);
+
+        ImageIcon originalIcon = new ImageIcon(
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\all.png");
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+        AllButton.setIcon(scaledIcon);
+        AllButton.setBackground(new Color(0xCBCBCB));
+        AllButton.setForeground(new Color(0x191D22));
+        AllButton.setFont(new Font("Inter", Font.BOLD, 15));
+        AllButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        AllButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        AllButton.setContentAreaFilled(false); // Make the button background transparent
+        AllButton.setBorderPainted(false); // Remove the button border
+        AllButton.setFocusPainted(false); // Remove the focus border
+
+        TransparentPanel HoverAll = new TransparentPanel(0.5f);
+        HoverAll.setBounds(0, 285, 7, 25);
+        HoverAll.setVisible(false);
+        HoverAll.setBackground(new Color(0x878787));
+
+        LeftPanel.add(HoverAll);
+
+
+        AllButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AllButton.setBackground(new Color(0x878787));
+                HoverAll.setVisible(true);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AllButton.setBackground(new Color(0xCBCBCB));
+                HoverAll.setVisible(false);
             }
         });
 
-        ExitSettings.addActionListener(e->{
-            timer2.start();
-            EmptyPanel.setVisible(false);
-            searchField.setVisible(true);
-        });
-
-        SettingsPanel.add(ExitSettings);
+        LeftPanel.add(AllButton);
 
 
 
-        JButton SettingsButton = new JButton();
-        SettingsButton.setBounds(15, 10, 40, 40);
-        SettingsButton.setFont(new Font("Inter", Font.BOLD, 18));
-        SettingsButton.setBackground(Color.red);
-        SettingsButton.setForeground(Color.white);
-        SettingsButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        JButton MyTicketButton = new JButton();
 
-        timer = new Timer(10, e->{
-            if(x == 0){
-                timer.stop();
-            }else{
-                x+= xVelocity;
-                SettingsPanel.setBounds(x, 0, 300, 750);
+        MyTicketButton.setBounds(30, 350, 40, 40);
+        ImageIcon originalIcon2 = new ImageIcon(
+                "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\ticket.png");
+        Image originalImage2 = originalIcon2.getImage();
+        Image scaledImage2 = originalImage2.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon2 = new ImageIcon(scaledImage2);
+
+        MyTicketButton.setIcon(scaledIcon2);
+        MyTicketButton.setBackground(new Color(0xAD3000));
+        MyTicketButton.setForeground(new Color(0x191D22));
+        MyTicketButton.setFont(new Font("Inter", Font.BOLD, 15));
+        MyTicketButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        MyTicketButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        TransparentPanel HoverTicket = new TransparentPanel(0.5f);
+        HoverTicket.setBounds(0, 355, 7, 25);
+        HoverTicket.setVisible(false);
+        HoverTicket.setBackground(new Color(0xAD3000));
+
+        LeftPanel.add(HoverTicket);
+
+
+        MyTicketButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MyTicketButton.setBackground(new Color(0x550000));
+                HoverTicket.setVisible(true);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MyTicketButton.setBackground(new Color(0xAD3000));
+                HoverTicket.setVisible(false);
             }
         });
 
-        SettingsButton.addActionListener(e->{
-            timer.start();
-            EmptyPanel.setVisible(true);
-            searchField.setVisible(false);
+        LeftPanel.add(MyTicketButton);
+
+
+
+        JButton BalanceButton = new JButton();
+        BalanceButton.setBounds(30, 420, 40, 40);
+
+        ImageIcon originalIcon3 = new ImageIcon(
+            "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\dollar.png");
+        Image originalImage3 = originalIcon3.getImage();
+        Image scaledImage3 = originalImage3.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon3 = new ImageIcon(scaledImage3);
+
+        BalanceButton.setIcon(scaledIcon3);
+        BalanceButton.setBackground(new Color(0xA96E00));
+        BalanceButton.setForeground(new Color(0x191D22));
+        BalanceButton.setFont(new Font("Inter", Font.BOLD, 14));
+        BalanceButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        BalanceButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        TransparentPanel HoverBalance = new TransparentPanel(0.5f);
+        HoverBalance.setBounds(0, 425, 7, 25);
+        HoverBalance.setVisible(false);
+        HoverBalance.setBackground(new Color(0xA96E00));
+
+        LeftPanel.add(HoverBalance);
+
+
+        BalanceButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BalanceButton.setBackground(new Color(0x763B00));
+                HoverBalance.setVisible(true);
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BalanceButton.setBackground(new Color(0xA96E00));
+                HoverBalance.setVisible(false);
+            }
         });
 
-        AdminElements.add(SettingsButton);
+        LeftPanel.add(BalanceButton);
 
-        AdminElements.setComponentZOrder(SettingsPanel, 0);
-        AdminElements.setComponentZOrder(SettingsButton, 1);
-        AdminElements.setComponentZOrder(searchField, 1);
-        AdminElements.setComponentZOrder(welcomeLabel, 1);
+
+        TransparentPanel ButtonHolder = new TransparentPanel(1f);
+        ButtonHolder.setBounds(0, 0, 1200, 50);
+        ButtonHolder.setBackground(new Color(0x333333));
+        ButtonHolder.setLayout(null);
+
+        AdminElements.add(ButtonHolder);
+
+
+        JButton AccountButton = new JButton();
+        AccountButton.setBounds(30, 7, 40, 40);
+
+        ImageIcon originalIcon7 = new ImageIcon(
+            "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\profile-user.png");
+        Image originalImage7 = originalIcon7.getImage();
+        Image scaledImage7 = originalImage7.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon7 = new ImageIcon(scaledImage7);
+
+        AccountButton.setIcon(scaledIcon7);
+        AccountButton.setBackground(new Color(0xCBCBCB));
+        AccountButton.setForeground(new Color(0x191D22));
+        AccountButton.setFont(new Font("Inter", Font.BOLD, 15));
+        AccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        AccountButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        AccountButton.addActionListener(e->{
+
+            MainCardLayout.show(MainPanel, "account admin");
+
+        });
+
+        AccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AccountButton.setBackground(new Color(0x878787));
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AccountButton.setBackground(new Color(0xCBCBCB));
+            }
+        });
+
+        ButtonHolder.add(AccountButton);
+
+
+
+        JButton LogOutButton = new JButton();
+        LogOutButton.setBounds(1100, 7, 40, 40);
+
+        ImageIcon originalIcon8 = new ImageIcon(
+            "Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\exit.png");
+        Image originalImage8 = originalIcon8.getImage();
+        Image scaledImage8 = originalImage8.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon8 = new ImageIcon(scaledImage8);
+
+        LogOutButton.setIcon(scaledIcon8);
+        LogOutButton.setBackground(new Color(0xAD2500));
+        LogOutButton.setForeground(new Color(0x191D22));
+        LogOutButton.setFont(new Font("Inter", Font.BOLD, 15));
+        LogOutButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        LogOutButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        
+        LogOutButton.addActionListener(e->{
+            MainCardLayout.show(MainPanel, "open");
+        });
+
+        LogOutButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LogOutButton.setBackground(new Color(0x550000));
+
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LogOutButton.setBackground(new Color(0xAD2500));
+            }
+        });
+
+        ButtonHolder.add(LogOutButton);
+
+        AdminElements.setComponentZOrder(LeftPanel, 1);
+        AdminElements.setComponentZOrder(ButtonHolder, 0);
 
 
         return AdminElements;
