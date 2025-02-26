@@ -271,25 +271,12 @@ public class Cinema {
         movies.add(movie);
     }
 
-
     public void AddTheater(Theater theater) {
         theaters.add(theater);
     }
 
-    public void RemoveMovie(Movie movie) {
-        movies.remove(movie);
-    }
-
-    public void RemoveTheater(Theater theater) {
-        theaters.remove(theater);
-    }
-
     public void addBroadcast(Broadcast broadcast) {
         broadcasts.add(broadcast);
-    }
-
-    public void removeBroadcast(Broadcast broadcast) {
-        broadcasts.remove(broadcast);
     }
 
     public void DisplayMovie() {
@@ -304,17 +291,6 @@ public class Cinema {
             System.out.println("Description: " + movie.Description);
             System.out.println("Director: " + movie.Director);
             System.out.println("Cast: " + movie.Cast);
-            System.out.println("---------------------------------------------");
-        }
-    }
-
-    public void DisplayAdmin() {
-        for (Admin admin : admins) {
-            System.out.println("---------------------------------------------");
-            System.out.println("Name: " + admin.FirstName + " " + admin.LastName);
-            System.out.println("Age: " + admin.Age);
-            System.out.println("Email: " + admin.Email);
-            System.out.println("Phone Number: " + admin.PhoneNumber);
             System.out.println("---------------------------------------------");
         }
     }
@@ -370,31 +346,14 @@ public class Cinema {
         System.out.println("2. Normal");
     }
 
-    public void DisplaySeats(int[] seats) {
-        for (int i = 0; i < seats.length; i++) {
-            if (seats[i] == 1) {
-                System.out.print("Seat " + (i + 1) + " is booked. ");
-            } else {
-                System.out.print("Seat " + (i + 1) + " is available. ");
+    public Boolean CheckifMovieExist(String Title){
+        for (Movie movie : movies) {
+            if (movie.Title.equals(Title)) {
+               
+                return true;
             }
         }
-        System.out.println();
+        return false;
     }
 
-    public void DisplayAvailableSeatsInRoom(Theater Room) {
-        System.out.println("Normal places reamining  :  " + (Room.NormalCapacity - Room.NormalReservedPlaces)
-                + " VIP places remaining  :  " + (Room.VipCapacity - Room.VipReservedPlaces));
-    }
-
-
-    public void DisplayBroadcast(){
-        System.out.println("Broadcasting movies : ");
-        for(Broadcast broadcast : broadcasts){
-            System.out.println("---------------------------------------------");
-            System.out.println("Movie Title: " + broadcast.movie.Title);
-            System.out.println("Theater Number: " + broadcast.Room.TheaterId);
-            System.out.println("Broadcast Date: " + broadcast.Date);
-            System.out.println("---------------------------------------------");
-        }
-    }
 }
