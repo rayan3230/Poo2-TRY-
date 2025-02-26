@@ -13,7 +13,7 @@ public class Client extends Account{
     public String PhoneNumber;
     public double cardNum;
     public int CCVnbr;
-    public List<String> Intrests = new ArrayList<String>();
+    public List<String> Intrests = new ArrayList<>();
 
     public Client(String firstName, String lastName, String email, String phoneNumber, String username, String password) {
 
