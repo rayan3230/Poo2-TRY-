@@ -95,29 +95,6 @@ public class booked extends JFrame {
         contentPanel.setBounds(200, 50, 900, 750);
         contentPanel.setBackground(Color.black);
 
-        // Remove cards panel
-        // JPanel cardsPanel = new JPanel(null);
-        // cardsPanel.setBounds((900-200*3-50*2)/2, 0, 900, 500); // Adjusted bounds
-        // cardsPanel.setBackground(Color.BLACK);
-        // cardsPanel.setForeground(Color.WHITE);
-        // int cardWidth = 230;
-        // int cardHeight = 130;
-        // int gap = 50;
-        // for (int i = 0; i < 6; i++) {
-        //     JButton cardButton = new JButton();
-        //     cardButton.setBounds((i % 3) * (cardWidth + gap), (i / 3) * (cardHeight + gap), cardWidth, cardHeight);
-        //     Border lineBorder = BorderFactory.createLineBorder(Color.WHITE);
-        //     cardButton.setBackground(Color.DARK_GRAY);
-
-        //     // Customize the picture for each button
-        //     ImageIcon movieIcon = new ImageIcon("Poo2-TRY-\\\\\\\\Wassim\\\\\\\\bookingTICKET\\\\\\\\images\\\\\\\\movie" + (i + 1) + ".png");
-        //     cardButton.setIcon(movieIcon);
-        //     cardButton.setHorizontalAlignment(SwingConstants.CENTER);
-        //     cardButton.setVerticalAlignment(SwingConstants.CENTER);
-
-        //     cardsPanel.add(cardButton);
-        // }
-        // contentPanel.add(cardsPanel);
 
         mainPanel.add(contentPanel);
 
