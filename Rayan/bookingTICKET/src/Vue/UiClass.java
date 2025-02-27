@@ -1978,13 +1978,6 @@ public class UiClass extends JFrame {
         //MainUserPanel.setVisible(false);
 
 
-
-
-        
-
-
-
-
     
         return homePanel;
     }
