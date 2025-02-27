@@ -1,4 +1,4 @@
-package moodle;
+package Model;
 
 public class Account {
 

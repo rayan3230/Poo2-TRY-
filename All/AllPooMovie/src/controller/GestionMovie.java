@@ -3,11 +3,12 @@ package controller;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import moodle.*;
-import moodle.Movie.AgeRating;
-import moodle.Movie.MovieGenre;
-import moodle.Movie.language;
-import moodle.Movie.statusFilm;
+
+import Model.*;
+import Model.Movie.AgeRating;
+import Model.Movie.MovieGenre;
+import Model.Movie.language;
+import Model.Movie.statusFilm;
 
 
 

@@ -1,7 +1,8 @@
 package controller;
 import java.util.ArrayList;
-import moodle.*;
-import moodle.Account.Status;
+
+import Model.*;
+import Model.Account.Status;
 
 public class GestionAccounts {
     public ArrayList<Client> ClientAccounts = new ArrayList<>();

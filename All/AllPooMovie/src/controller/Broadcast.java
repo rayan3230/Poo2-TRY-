@@ -1,7 +1,8 @@
 package controller;
 
 import java.time.LocalDate;
-import moodle.*;
+
+import Model.*;
 
 public class Broadcast {
     public Movie movie;

@@ -1,8 +1,9 @@
 package controller;
 
 import java.time.LocalDateTime;
-import moodle.Account;
-import moodle.Seats;
+
+import Model.Account;
+import Model.Seats;
 
 public class Booking {
     public int id;
