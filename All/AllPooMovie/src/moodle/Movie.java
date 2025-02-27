@@ -1,35 +1,56 @@
 package moodle;
 
-import javax.swing.ImageIcon;
+import java.time.LocalTime;
 
 public class Movie {
-
+    
+    public int id =0;
     public String Title;
-    public String Genre;
+    public MovieGenre Genre;
     public float Duration; // in hours
     public String Description;
     public String Director;
     public String Cast;
     public String ReleaseDate;
+    public LocalTime showeTime;
     public float Rating; // out of 10
-    public String AgeRating; // G, PG13, PG16, PG18
+    public AgeRating AgeRating; // G, PG13, PG16, PG18
     public Theater Room;
-    public ImageIcon Banner;
+    public double regularSeatPrice;
+    public double vipSeatPrice;
+    public language MovieLanguage;
+    public statusFilm statusfilm;
+    public String ImagePath;
+    public Boolean SensetiveContente;
+    
 
 
-    enum Genre {
-        Action, Comedy, Drama, Horoor, Science_Fiction, Thriller, Adventure, Fantasy, Mystery, Romance, Crime,
+    public enum MovieGenre {
+        Action, Comedy, Drama, Horor, Science_Fiction, Thriller, Adventure, Fantasy, Mystery, Romance, Crime,
         Animation, Music, Documentary, Family, Sport, News, Travel, Game, History
 
     }
-
-    enum AgeRating {
-        G, PG6, PG8, PG13, PG16, PG18
+    public enum language{
+        VOSTFR,
+        VF,
+        VOSTEN,
+        VO,
     }
 
-    public Movie(String Title, String Genre, float Duration, String Description, String Director,
-            String Cast, String ReleaseDate, float Rating, String AgeRating, Theater Room) {
+    public enum AgeRating {
+        G, PG6, PG8, PG13, PG16, PG18
+    }
+    public enum statusFilm{
+        AVAILABLE,
+        SOLD_OUT,
+        UPCOMING
+    }
 
+    public Movie(String Title, MovieGenre Genre, float Duration, String Description, String Director,
+            String Cast, String ReleaseDate, float Rating, AgeRating AgeRating, Theater Room , language MovieLanguage ,
+                 double regularSeatPrice , double vipSeatPrice , String ImagePath , statusFilm status , LocalTime ShowTime) {
+
+        this.id = id+1;
         this.Title = Title;
         this.Genre = Genre;
         this.Duration = Duration;
@@ -39,7 +60,22 @@ public class Movie {
         this.ReleaseDate = ReleaseDate;
         this.Rating = Rating;
         this.AgeRating = AgeRating;
+        this.MovieLanguage = MovieLanguage;
+        this.regularSeatPrice = regularSeatPrice;
+        this.vipSeatPrice = vipSeatPrice;
+        this.ImagePath = ImagePath;
+        this.statusfilm = status;
+        this.showeTime = ShowTime;
         this.Room = Room;
+        if(this.AgeRating == AgeRating.PG18){
+            this.SensetiveContente = true;
+        }else{
+            this.SensetiveContente = false;
+        }
+        if(this.Genre == MovieGenre.Horor||this.Genre == MovieGenre.Thriller || this.Genre == MovieGenre.Action){
+            this.SensetiveContente = true;
+
+        }
     }
 
 }

@@ -1,13 +1,14 @@
 package controller;
 
+import java.time.LocalDate;
 import moodle.*;
 
 public class Broadcast {
     public Movie movie;
     public Theater Room;
-    public String Date;
+    public LocalDate Date;
 
-    public Broadcast(Movie movie, Theater Room, String Date) {
+    public Broadcast(Movie movie, Theater Room, LocalDate Date) {
         this.movie = movie;
         this.Room = Room;
         this.Date = Date;

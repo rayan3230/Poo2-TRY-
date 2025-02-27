@@ -10,9 +10,9 @@ public class Admin extends Account{
     public String Email;
     public String PhoneNumber;
 
-    public Admin(String FirstName, String LastName, String username, String password, String status) {
+    public Admin(String FirstName, String LastName, String email, String username ,String password, Status status) {
 
-        super(username, password, "Admin", status);
+        super(username, password, email,"Admin", status);
         this.FirstName = FirstName;
         this.LastName = LastName;
     }

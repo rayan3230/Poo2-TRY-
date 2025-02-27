@@ -4,29 +4,33 @@ public class Account {
 
     public String username;
     public String password;
-
     public String role;
-    public String status;
+    public String email;
+    public Status status;
 
-    enum Status{
-        admin, manager
+    public enum Status{
+        admin,
+        manager,
+        client
     }
 
     // Admin Account
-    public Account(String username, String password, String role, String status) {
+    public Account(String username, String password,String email, String role, Status status) {
 
         this.username = username;
         this.password = password;
+        this.email = email;
         this.role = role;
         this.status = status;
 
     }
 
     // Client Account
-    public Account(String username, String password) {
+    public Account(String username, String password , Status status) {
 
         this.username = username;
         this.password = password;
+        this.status = status;
     }
 
     public void ChangeUserName(Account account, String newUserName) {
@@ -41,7 +45,7 @@ public class Account {
         account.role = NewRole;
     }
 
-    public void ChangeStatus(Account account, String NewStatus) {
+    public void ChangeStatus(Account account, Status NewStatus) {
         account.status = NewStatus;
     }
 
