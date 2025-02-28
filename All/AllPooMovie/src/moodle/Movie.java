@@ -13,7 +13,6 @@ public class Movie {
     public String ReleaseDate;
     public float Rating; // out of 10
     public String AgeRating; // G, PG13, PG16, PG18
-    public Theater Room;
     public ImageIcon Banner;
 
 
@@ -28,7 +27,7 @@ public class Movie {
     }
 
     public Movie(String Title, String Genre, float Duration, String Description, String Director,
-            String Cast, String ReleaseDate, float Rating, String AgeRating, Theater Room) {
+            String Cast, String ReleaseDate, float Rating, String AgeRating, ImageIcon Banner) {
 
         this.Title = Title;
         this.Genre = Genre;
@@ -39,7 +38,7 @@ public class Movie {
         this.ReleaseDate = ReleaseDate;
         this.Rating = Rating;
         this.AgeRating = AgeRating;
-        this.Room = Room;
+        this.Banner = Banner;
     }
 
 }

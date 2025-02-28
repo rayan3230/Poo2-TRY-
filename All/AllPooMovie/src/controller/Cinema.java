@@ -1,8 +1,8 @@
 package controller;
 
-import moodle.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+import javax.swing.ImageIcon;
+import moodle.*;
 
 public class Cinema {
 
@@ -120,59 +120,71 @@ public class Cinema {
 
 
         // Create movies
+
+        ImageIcon Movie1Banner = new ImageIcon();
+        ImageIcon Movie2Banner = new ImageIcon();
+        ImageIcon Movie3Banner = new ImageIcon();
+        ImageIcon Movie4Banner = new ImageIcon();
+        ImageIcon Movie5Banner = new ImageIcon();
+        ImageIcon Movie6Banner = new ImageIcon();
+        ImageIcon Movie7Banner = new ImageIcon();
+        ImageIcon Movie8Banner = new ImageIcon();
+        ImageIcon Movie9Banner = new ImageIcon();
+
+        
         Movie Movie1 = new Movie("Avengers: Endgame", "Action", 3.02f,
                 "After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
                 "Anthony Russo, Joe Russo", "Robert Downey Jr., Chris Evans, Mark Ruffalo",
                 "2019-04-26",
-                8.4f, "PG13", Room1);
+                8.4f, "PG13", Movie1Banner);
 
         Movie Movie2 = new Movie("Joker", "Crime", 2.02f,
                 "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker.",
                 "Todd Phillips", "Joaquin Phoenix, Robert De Niro, Zazie Beetz",
                 "2019-10-04",
-                8.5f, "R", Room2);
+                8.5f, "R", Movie2Banner);
 
         Movie Movie3 = new Movie("Parasite", "Thriller", 2.12f,
                 "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
                 "Bong Joon Ho", "Kang-ho Song, Sun-kyun Lee, Yeo-jeong Jo",
                 "2019-05-30",
-                8.6f, "R", Room3);
+                8.6f, "R", Movie3Banner);
 
         Movie Movie4 = new Movie("Blair Witch", "Horror", 1.29f,
                 "After discovering a video showing what he believes to be his vanished sister Heather, James and a group of friends head to the forest believed to be inhabited by the Blair Witch.",
                 "Adam Wingard", "James Allen McCune, Callie Hernandez, Corbin Reid",
                 "2016-09-16",
-                5.0f, "PG13", Room4);
+                5.0f, "PG13", Movie4Banner);
 
         Movie Movie5 = new Movie("Batman: Arkham Knight", "Action", 1.75f,
                 "Batman faces the ultimate threat against the city he is sworn to protect. The Scarecrow returns to unite an impressive roster of super villains, including Penguin, Two-Face, and Harley Quinn, to destroy The Dark Knight forever.",
                 "Sefton Hill", "Kevin Conroy, John Noble, Jonathan Banks",
                 "2015-06-23",
-                9.0f, "PG13", Room5);
+                9.0f, "PG13", Movie5Banner);
 
         Movie Movie6 = new Movie("The Gorge", "Thriller", 2.10f,
                 "A thrilling story set in a remote gorge where a group of friends must survive against all odds.",
                 "Scott Derrickson", "Ethan Hawke, Jeremy Renner, Elizabeth Olsen",
                 "2023-10-13",
-                7.5f, "PG16", Room6);
+                7.5f, "PG16", Movie6Banner);
 
         Movie Movie7 = new Movie("The Batman", "Action", 2.55f,
                 "When a sadistic serial killer begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption and question his family's involvement.",
                 "Matt Reeves", "Robert Pattinson, Zoë Kravitz, Jeffrey Wright",
                 "2022-03-04",
-                8.2f, "PG13", Room7);
+                8.2f, "PG13", Movie7Banner);
 
         Movie Movie8 = new Movie("Deadpool 2", "Action", 2.00f,
                 "Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool), brings together a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg Cable.",
                 "David Leitch", "Ryan Reynolds, Josh Brolin, Morena Baccarin",
                 "2018-05-18",
-                7.7f, "PG18", Room1);
+                7.7f, "PG18", Movie8Banner);
 
         Movie Movie9 = new Movie("Vice Versa 2", "Animation", 1.45f,
                 "The sequel to the beloved animated film, following the adventures of Riley and her emotions as they navigate new challenges.",
                 "Pete Docter", "Amy Poehler, Bill Hader, Lewis Black",
                 "2023-11-22",
-                8.0f, "PG", Room2);
+                8.0f, "PG", Movie9Banner);
 
         AddMovie(Movie1);
         AddMovie(Movie2);
