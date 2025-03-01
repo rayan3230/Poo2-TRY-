@@ -6,8 +6,8 @@ import javax.swing.*;
 
 public class page extends JFrame {
 
-    private CardLayout cardLayout = new CardLayout();
-    private JPanel container = new JPanel(cardLayout);
+    private final CardLayout cardLayout = new CardLayout();
+    private final JPanel container = new JPanel(cardLayout);
     private JPanel loginPanel, registerPanel;
 
     public page() {
@@ -31,7 +31,7 @@ public class page extends JFrame {
         loginPanel = new JPanel(null); // Use null layout for absolute positioning
 
         // Specify the path to the background image
-        JLabel background = new JLabel(new ImageIcon("Poo2-TRY-\\\\Wassim\\\\bookingTICKET\\\\images\\\\image.jpg"));
+        JLabel background = new JLabel(new ImageIcon("Poo2-TRY-\\Wassim\\bookingTICKET\\images\\image.jpg"));
         background.setBounds(0, 0, 1100, 800);
         loginPanel.add(background);
 
@@ -80,7 +80,7 @@ public class page extends JFrame {
         roleCombo.setBounds(50, 270, 300, 30);
         card.add(roleCombo);
 
-        RoundedButton loginBtn = new RoundedButton("Login", 3);
+        RoundedButton loginBtn = new RoundedButton( 3);
         loginBtn.setBounds(50, 320, 300, 50);
         loginBtn.setBackground(Color.RED);
         loginBtn.setForeground(Color.WHITE);
@@ -100,7 +100,7 @@ public class page extends JFrame {
         registerLink.setFont(new Font("Arial", Font.BOLD, 12));
         card.add(registerLink);
 
-        loginBtn.addActionListener(e -> {
+        loginBtn.addActionListener(_ -> {
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
             String role = (String) roleCombo.getSelectedItem();
@@ -118,7 +118,7 @@ public class page extends JFrame {
             }
         });
 
-        registerLink.addActionListener(e -> cardLayout.show(container, "register"));
+        registerLink.addActionListener(_ -> cardLayout.show(container, "register"));
 
         // Add the background label last to ensure it is at the bottom
         loginPanel.add(logoLabel);
@@ -129,7 +129,7 @@ public class page extends JFrame {
         exitButton.setBackground(Color.RED);
         exitButton.setForeground(Color.WHITE);
         exitButton.setFont(new Font("Arial", Font.BOLD, 8));
-        exitButton.addActionListener(e -> System.exit(0));
+        exitButton.addActionListener(_ -> System.exit(0));
         loginPanel.add(exitButton);
     }
 
@@ -206,7 +206,7 @@ public class page extends JFrame {
         roleCombo.setBounds(50, 430, 300, 30);
         card.add(roleCombo);
 
-        RoundedButton registerBtn = new RoundedButton("Register", 3);
+        RoundedButton registerBtn = new RoundedButton( 3);
         registerBtn.setBounds(50, 480, 300, 50);
         registerBtn.setBackground(Color.RED);
         registerBtn.setForeground(Color.WHITE);
@@ -226,7 +226,7 @@ public class page extends JFrame {
         loginLink.setFont(new Font("Arial", Font.BOLD, 12));
         card.add(loginLink);
 
-        registerBtn.addActionListener(e -> {
+        registerBtn.addActionListener(_ -> {
             String name = nameField.getText();
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
@@ -245,7 +245,7 @@ public class page extends JFrame {
             cardLayout.show(container, "login");
         });
 
-        loginLink.addActionListener(e -> cardLayout.show(container, "login"));
+        loginLink.addActionListener(_ -> cardLayout.show(container, "login"));
 
         // Add the background label last to ensure it is at the bottom
         registerPanel.add(logoLabel);

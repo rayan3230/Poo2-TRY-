@@ -61,16 +61,16 @@ public class UiClass extends JFrame {
         mainPanel.add(homeAdminPanel, "homeAdmin");
 
         setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "homeAdmin");
+        cardLayout.show(mainPanel, "homeUser");
         
    
     }
 
-    public void refreshUserPanel() {
-        JPanel homeUserPanel = createHomeUserPanel(currentuser);
-        mainPanel.add(homeUserPanel, "homeUser");
-        //cardLayout.show(mainPanel, "homeUser");
-    }
+    // public void refreshUserPanel() {
+    //     JPanel homeUserPanel = createHomeUserPanel(currentuser);
+    //     mainPanel.add(homeUserPanel, "homeUser");
+    //     cardLayout.show(mainPanel, "homeUser");
+    // }
 
     
     public JPanel createWelcomePanel() {
@@ -807,234 +807,234 @@ public class UiClass extends JFrame {
     }
     
 
-//     public JPanel createHomeUserPanel(Accounts UserAccount) {
-//         JPanel homePanel = new JPanel();
-//         homePanel.setLayout(null);
-//         homePanel.setBounds(0, 0, 1200, 750);
-//         homePanel.setBackground(Color.green);
+    public JPanel createHomeUserPanel(Accounts UserAccount) {
+        JPanel homePanel = new JPanel();
+        homePanel.setLayout(null);
+        homePanel.setBounds(0, 0, 1200, 750);
+        homePanel.setBackground(Color.green);
 
 
-//         //--------------Background panel(main)
-//         JPanel MainUserPanel = new JPanel();
-//         MainUserPanel.setBounds(300, 0, 1200, 750);
-//         MainUserPanel.setBackground(new Color(18, 18, 18));
-//         MainUserPanel.setLayout(null);
-//         homePanel.add(MainUserPanel);
-//         MainUserPanel.setVisible(true);
+        //--------------Background panel(main)
+        JPanel MainUserPanel = new JPanel();
+        MainUserPanel.setBounds(300, 0, 1200, 750);
+        MainUserPanel.setBackground(new Color(18, 18, 18));
+        MainUserPanel.setLayout(null);
+        homePanel.add(MainUserPanel);
+        MainUserPanel.setVisible(true);
     
-//         // Only add welcome label if UserAccount is not null
-//         // if (UserAccount != null) {
-//         //     JLabel usernamelbl = new JLabel("Welcome, " + UserAccount.username + "!");
-//         //     usernamelbl.setBounds(50, 120, 300, 50);
-//         //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
-//         //     usernamelbl.setForeground(Color.red);
-//         //     homePanel.add(usernamelbl);
-//         // } else {
-//         //     JLabel usernamelbl = new JLabel("Welcome, nkmk!");
-//         //     usernamelbl.setBounds(50, 120, 300, 50);
-//         //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
-//         //     usernamelbl.setForeground(Color.red);
-//         //     homePanel.add(usernamelbl);
-//         // }
+        // Only add welcome label if UserAccount is not null
+        // if (UserAccount != null) {
+        //     JLabel usernamelbl = new JLabel("Welcome, " + UserAccount.username + "!");
+        //     usernamelbl.setBounds(50, 120, 300, 50);
+        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        //     usernamelbl.setForeground(Color.red);
+        //     homePanel.add(usernamelbl);
+        // } else {
+        //     JLabel usernamelbl = new JLabel("Welcome, nkmk!");
+        //     usernamelbl.setBounds(50, 120, 300, 50);
+        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        //     usernamelbl.setForeground(Color.red);
+        //     homePanel.add(usernamelbl);
+        // }
 
 
-//         //--------------Left black panel
-//         JPanel LeftBlackPanel = new JPanel();
-//         LeftBlackPanel.setBounds(0, 0, 300, 750);
-//         LeftBlackPanel.setBackground(new Color(24, 24, 24));
-//         LeftBlackPanel.setLayout(null);
-//         homePanel.add(LeftBlackPanel);
+        //--------------Left black panel
+        JPanel LeftBlackPanel = new JPanel();
+        LeftBlackPanel.setBounds(0, 0, 300, 750);
+        LeftBlackPanel.setBackground(new Color(24, 24, 24));
+        LeftBlackPanel.setLayout(null);
+        homePanel.add(LeftBlackPanel);
 
-//         JLabel LogoName = new JLabel("CINEMACITY");
-//         LogoName.setBounds(17, -124, 300, 300);
-//         LogoName.setForeground(Color.RED);
-//         LogoName.setFont(new Font("Segoe UI", Font.BOLD, 25));
-//         LeftBlackPanel.add(LogoName);
+        JLabel LogoName = new JLabel("CINEMACITY");
+        LogoName.setBounds(17, -124, 300, 300);
+        LogoName.setForeground(Color.RED);
+        LogoName.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        LeftBlackPanel.add(LogoName);
 
-//         JPanel BalancePanel = new JPanel();
-//         BalancePanel.setBounds(20, 70, 260, 120);
-//         BalancePanel.setLayout(null);
-//         BalancePanel.setBackground(new Color(30, 30, 30));
-//         LeftBlackPanel.add(BalancePanel);
+        JPanel BalancePanel = new JPanel();
+        BalancePanel.setBounds(20, 70, 260, 120);
+        BalancePanel.setLayout(null);
+        BalancePanel.setBackground(new Color(30, 30, 30));
+        LeftBlackPanel.add(BalancePanel);
 
-//         JLabel BalanceLabel = new JLabel(" Balance");
-//         BalanceLabel.setBounds(10, 10, 100, 30);
-//         BalanceLabel.setForeground(Color.white);
-//         BalanceLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
-//         BalancePanel.add(BalanceLabel);
+        JLabel BalanceLabel = new JLabel(" Balance");
+        BalanceLabel.setBounds(10, 10, 100, 30);
+        BalanceLabel.setForeground(Color.white);
+        BalanceLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        BalancePanel.add(BalanceLabel);
 
-//         JLabel BalanceValue = new JLabel("$56,00 " );
-//         BalanceValue.setFont(new Font("Arial", Font.BOLD, 24));
-//         BalanceValue.setForeground(Color.RED);//new Color(183, 255, 0)
-//         BalanceValue.setBounds(10, 55, 100, 30);
-//         BalancePanel.add(BalanceValue);
+        JLabel BalanceValue = new JLabel("$56,00 " );
+        BalanceValue.setFont(new Font("Arial", Font.BOLD, 24));
+        BalanceValue.setForeground(Color.RED);//new Color(183, 255, 0)
+        BalanceValue.setBounds(10, 55, 100, 30);
+        BalancePanel.add(BalanceValue);
 
-//         RoundedButton Dipostebalance = new RoundedButton("",10);
-//         Dipostebalance.setBounds(190, 30, 50, 50);
-//         Dipostebalance.setBackground(Color.RED);//new Color(183, 255, 0)
-//         Dipostebalance.addActionListener(e -> {
-//             JOptionPane.showMessageDialog(homePanel, "Deposit functionality is not available yet.");
-//         });
-//         BalancePanel.add(Dipostebalance);
+        RoundedButton Dipostebalance = new RoundedButton("",10);
+        Dipostebalance.setBounds(190, 30, 50, 50);
+        Dipostebalance.setBackground(Color.RED);//new Color(183, 255, 0)
+        Dipostebalance.addActionListener(e -> {
+            JOptionPane.showMessageDialog(homePanel, "Deposit functionality is not available yet.");
+        });
+        BalancePanel.add(Dipostebalance);
 
 
 
-// //-----------------------Left side buttons-----------------------
-//         JButton FavoriteButton = new JButton("Favorite");
-//         FavoriteButton.setBounds(20, 250, 210, 40);
-//         FavoriteButton.setBackground(new Color(30, 30, 30));
-//         FavoriteButton.setForeground(Color.WHITE);
-//         FavoriteButton.setHorizontalAlignment(SwingConstants.LEFT);
-//         FavoriteButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-//         LeftBlackPanel.add(FavoriteButton);
+//-----------------------Left side buttons-----------------------
+        JButton FavoriteButton = new JButton("Favorite");
+        FavoriteButton.setBounds(20, 250, 210, 40);
+        FavoriteButton.setBackground(new Color(30, 30, 30));
+        FavoriteButton.setForeground(Color.WHITE);
+        FavoriteButton.setHorizontalAlignment(SwingConstants.LEFT);
+        FavoriteButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+        LeftBlackPanel.add(FavoriteButton);
 
         
-//         JButton BonusesButton = new JButton("Bonuses");
-//         BonusesButton.setBounds(20, 350, 210, 40);
-//         BonusesButton.setBackground(new Color(30, 30, 30));
-//         BonusesButton.setForeground(Color.WHITE);
-//         BonusesButton.setHorizontalAlignment(SwingConstants.LEFT);
-//         BonusesButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-//         LeftBlackPanel.add(BonusesButton);
+        JButton BonusesButton = new JButton("Bonuses");
+        BonusesButton.setBounds(20, 350, 210, 40);
+        BonusesButton.setBackground(new Color(30, 30, 30));
+        BonusesButton.setForeground(Color.WHITE);
+        BonusesButton.setHorizontalAlignment(SwingConstants.LEFT);
+        BonusesButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+        LeftBlackPanel.add(BonusesButton);
 
-//         JButton BookedButton = new JButton("Booked");
-//         BookedButton.setBounds(20, 450, 210, 40);
-//         BookedButton.setBackground(new Color(30, 30, 30));
-//         BookedButton.setForeground(Color.WHITE);
-//         BookedButton.setHorizontalAlignment(SwingConstants.LEFT);
-//         BookedButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-//         LeftBlackPanel.add(BookedButton);
+        JButton BookedButton = new JButton("Booked");
+        BookedButton.setBounds(20, 450, 210, 40);
+        BookedButton.setBackground(new Color(30, 30, 30));
+        BookedButton.setForeground(Color.WHITE);
+        BookedButton.setHorizontalAlignment(SwingConstants.LEFT);
+        BookedButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+        LeftBlackPanel.add(BookedButton);
         
-//         JButton LogoutButton = new JButton("Log out...");
-//         LogoutButton.setBounds(20, 550, 210, 40);
-//         LogoutButton.setBackground(new Color(30, 30, 30));
-//         LogoutButton.setForeground(Color.WHITE);
-//         LogoutButton.setHorizontalAlignment(SwingConstants.LEFT);
-//         LogoutButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-//         LogoutButton.addActionListener(e->{
-//             JOptionPane.showMessageDialog(homePanel, "You are logged out.");
-//             cardLayout.show(mainPanel, "login");
-//         });
-//         LeftBlackPanel.add(LogoutButton);
+        JButton LogoutButton = new JButton("Log out...");
+        LogoutButton.setBounds(20, 550, 210, 40);
+        LogoutButton.setBackground(new Color(30, 30, 30));
+        LogoutButton.setForeground(Color.WHITE);
+        LogoutButton.setHorizontalAlignment(SwingConstants.LEFT);
+        LogoutButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
+        LogoutButton.addActionListener(e->{
+            JOptionPane.showMessageDialog(homePanel, "You are logged out.");
+            cardLayout.show(mainPanel, "login");
+        });
+        LeftBlackPanel.add(LogoutButton);
 
 
-//         //----------Main Panels things----------
+        //----------Main Panels things----------
 
-//         JPanel SearchPanel = new JPanel();
-//         SearchPanel.setBounds(30, 20, 600, 40);
-//         SearchPanel.setLayout(null);
-//         SearchPanel.setBackground(new Color(30, 30, 30));
-//         MainUserPanel.add(SearchPanel);
+        JPanel SearchPanel = new JPanel();
+        SearchPanel.setBounds(30, 20, 600, 40);
+        SearchPanel.setLayout(null);
+        SearchPanel.setBackground(new Color(30, 30, 30));
+        MainUserPanel.add(SearchPanel);
 
-//         JTextField searchField = new JTextField("Type to Search...");
-//         searchField.setBounds(10, 5, 380, 30);
-//         searchField.setBackground(new Color(30, 30, 30));
-//         searchField.setForeground(Color.GRAY);
-//         searchField.setBorder(null);
+        JTextField searchField = new JTextField("Type to Search...");
+        searchField.setBounds(10, 5, 380, 30);
+        searchField.setBackground(new Color(30, 30, 30));
+        searchField.setForeground(Color.GRAY);
+        searchField.setBorder(null);
 
-//         searchField.addFocusListener(new java.awt.event.FocusAdapter() {
-//             @Override
-//             public void focusGained(java.awt.event.FocusEvent evt) {
-//                 if (searchField.getText().equals("Type to Search...")) {
-//                     searchField.setText("");
-//                     searchField.setForeground(Color.WHITE);
-//                 }
-//             }
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().equals("Type to Search...")) {
+                    searchField.setText("");
+                    searchField.setForeground(Color.WHITE);
+                }
+            }
 
-//             @Override
-//             public void focusLost(java.awt.event.FocusEvent evt) {
-//                 if (searchField.getText().isEmpty() || searchField.getText().trim().isEmpty()) {
-//                     searchField.setText("Type to Search...");
-//                     searchField.setForeground(Color.gray);
-//                 }
-//             }
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (searchField.getText().isEmpty() || searchField.getText().trim().isEmpty()) {
+                    searchField.setText("Type to Search...");
+                    searchField.setForeground(Color.gray);
+                }
+            }
 
-//         });
-//         SearchPanel.add(searchField);
+        });
+        SearchPanel.add(searchField);
 
-//     //----------Slide Panel--------------------------------
+    //----------Slide Panel--------------------------------
     
-//         JPanel slidePanel = new JPanel(){
-//         @Override
-//         protected void paintComponent(Graphics g) {
-//             super.paintComponent(g);
-//             ImageIcon icon = new ImageIcon("Rayan/bookingTICKET/img/Avatar.jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
-//             Image img = icon.getImage();
-//             g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-//         }
-//         };
-//         slidePanel.setBounds(30, 78, 840, 350);
-//         slidePanel.setLayout(null);
-//         slidePanel.setBackground(new Color(30, 30, 30));
-//         MainUserPanel.add(slidePanel);
+        JPanel slidePanel = new JPanel(){
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            ImageIcon icon = new ImageIcon("Rayan/bookingTICKET/img/Avatar.jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
+            Image img = icon.getImage();
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+        }
+        };
+        slidePanel.setBounds(30, 78, 840, 350);
+        slidePanel.setLayout(null);
+        slidePanel.setBackground(new Color(30, 30, 30));
+        MainUserPanel.add(slidePanel);
 
 
-//         JPanel filmsGridPanel = new JPanel();
-//         filmsGridPanel.setLayout(new GridLayout(0, 4, 10, 10));  // Unlimited rows, 4 columns
-//         filmsGridPanel.setBackground(new Color(18, 18, 18));
+        JPanel filmsGridPanel = new JPanel();
+        filmsGridPanel.setLayout(new GridLayout(0, 4, 10, 10));  // Unlimited rows, 4 columns
+        filmsGridPanel.setBackground(new Color(18, 18, 18));
 
         
-//         JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
-//         scrollPane.setBounds(30, 450, 840, 280);
-//         scrollPane.setBorder(null);
-//         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-//         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//         scrollPane.getViewport().setBackground(new Color(18, 18, 18));
+        JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
+        scrollPane.setBounds(30, 450, 840, 280);
+        scrollPane.setBorder(null);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getViewport().setBackground(new Color(18, 18, 18));
         
         
-//         filmsGridPanel.addMouseWheelListener(e -> {
-//             JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();//had scroll pa rapport l y
-//             int notches = e.getWheelRotation();
-//             int currentValue = verticalScrollBar.getValue();
-//             int scrollAmount = 30; // Adjust scroll speed
-//             verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
-//         });
+        filmsGridPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();//had scroll pa rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
 
         
-//         for (int i = 0; i < movies.Movies.size(); i++) {
-//             final int index = i;
-//             JPanel filmPanel = new JPanel() {
-//                 @Override
-//                 protected void paintComponent(Graphics g) {
-//                     super.paintComponent(g);
-//                     ImageIcon icon = new ImageIcon(movies.Movies.get(index).imagePath);
-//                     Image img = icon.getImage();
-//                     g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-//                 }
-//             };
+        for (int i = 0; i < movies.Movies.size(); i++) {
+            final int index = i;
+            JPanel filmPanel = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    ImageIcon icon = new ImageIcon(movies.Movies.get(index).imagePath);
+                    Image img = icon.getImage();
+                    g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+                }
+            };
            
-//             filmPanel.setLayout(null);
-//             filmPanel.setPreferredSize(new Dimension(200, 230));
-//             filmPanel.setBackground(new Color(24, 24, 24));
-//             filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            filmPanel.setLayout(null);
+            filmPanel.setPreferredSize(new Dimension(200, 230));
+            filmPanel.setBackground(new Color(24, 24, 24));
+            filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
             
-//             // Hayla hadi :-) 
-//             filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-//                 public void mouseEntered(java.awt.event.MouseEvent evt) {
-//                     filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));//ta3 ki t intiracti m3a l panel
-//                 }
-//                 public void mouseExited(java.awt.event.MouseEvent evt) {
-//                     filmPanel.setBorder(null);
-//                 }
-//                 public void mouseClicked(java.awt.event.MouseEvent evt) {
+            // Hayla hadi :-) 
+            filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));//ta3 ki t intiracti m3a l panel
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    filmPanel.setBorder(null);
+                }
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
 
-//                     JOptionPane.showMessageDialog(null, "Opening film details...");
-//                 }
-//             });
+                    JOptionPane.showMessageDialog(null, "Opening film details...");
+                }
+            });
             
-//             filmsGridPanel.add(filmPanel);
-//         }
+            filmsGridPanel.add(filmPanel);
+        }
 
-//         MainUserPanel.add(scrollPane);
+        MainUserPanel.add(scrollPane);
 
 
-//         JLabel nowShowingLabel = new JLabel("Our Movies");
-//         nowShowingLabel.setBounds(30, 430, 200, 20);
-//         nowShowingLabel.setForeground(Color.WHITE);
-//         nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
-//         MainUserPanel.add(nowShowingLabel);
+        JLabel nowShowingLabel = new JLabel("Our Movies");
+        nowShowingLabel.setBounds(30, 430, 200, 20);
+        nowShowingLabel.setForeground(Color.WHITE);
+        nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+        MainUserPanel.add(nowShowingLabel);
 
-//         //MainUserPanel.setVisible(false);
+        //MainUserPanel.setVisible(false);
 
 
 
@@ -1045,8 +1045,8 @@ public class UiClass extends JFrame {
 
 
     
-//         return homePanel;
-//     }
+        return homePanel;
+    }
 
     public JPanel createHomeAdminPanel(Accounts AdminAccounts){
 
@@ -1580,7 +1580,7 @@ public class UiClass extends JFrame {
                 double vipSeatPrice = Double.parseDouble(vipSeatPricefield.getText().trim());
                 movies.addMovie(MovieTitletxt, Descriptiontxt, DureeMovie, genreMovie, RatingMovie, regularSeatPrice, vipSeatPrice, pathfilm, statusMovie, localTime);
                 movies.DisplayMovies();
-                refreshUserPanel();
+                //refreshUserPanel();
 
                 }else{
                     JOptionPane.showMessageDialog(this, "A film with the same name already exists", "Error", JOptionPane.ERROR_MESSAGE);
@@ -1596,8 +1596,32 @@ public class UiClass extends JFrame {
 
     
        
-          
+        
 
+               
+
+              
+
+
+
+
+
+
+        
+        
+
+
+    
+
+
+
+                
+                
+
+
+
+
+        
 
         
 
@@ -1746,247 +1770,6 @@ public class UiClass extends JFrame {
             textField.setBorder(BorderFactory.createLineBorder(Color.RED)); // Invalid input
          //   JOptionPane.showMessageDialog(this, "Please enter a valid input", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    public JPanel createHomeUserPanel(Accounts UserAccount) {
-        JPanel homePanel = new JPanel();
-        homePanel.setLayout(null);
-        homePanel.setBounds(0, 0, 1200, 750);
-        homePanel.setBackground(Color.green);
-
-
-        //--------------Background panel(main)
-        JPanel MainUserPanel = new JPanel();
-        MainUserPanel.setBounds(300, 0, 1200, 750);
-        MainUserPanel.setBackground(new Color(18, 18, 18));
-        MainUserPanel.setLayout(null);
-        homePanel.add(MainUserPanel);
-        MainUserPanel.setVisible(true);
-    
-        // Only add welcome label if UserAccount is not null
-        // if (UserAccount != null) {
-        //     JLabel usernamelbl = new JLabel("Welcome, " + UserAccount.username + "!");
-        //     usernamelbl.setBounds(50, 120, 300, 50);
-        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        //     usernamelbl.setForeground(Color.red);
-        //     homePanel.add(usernamelbl);
-        // } else {
-        //     JLabel usernamelbl = new JLabel("Welcome, nkmk!");
-        //     usernamelbl.setBounds(50, 120, 300, 50);
-        //     usernamelbl.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        //     usernamelbl.setForeground(Color.red);
-        //     homePanel.add(usernamelbl);
-        // }
-
-
-        //--------------Left black panel
-        JPanel LeftBlackPanel = new JPanel();
-        LeftBlackPanel.setBounds(0, 0, 300, 750);
-        LeftBlackPanel.setBackground(new Color(24, 24, 24));
-        LeftBlackPanel.setLayout(null);
-        homePanel.add(LeftBlackPanel);
-
-        JLabel LogoName = new JLabel("CINEMACITY");
-        LogoName.setBounds(17, -124, 300, 300);
-        LogoName.setForeground(Color.RED);
-        LogoName.setFont(new Font("Segoe UI", Font.BOLD, 25));
-        LeftBlackPanel.add(LogoName);
-
-        JPanel BalancePanel = new JPanel();
-        BalancePanel.setBounds(20, 70, 260, 120);
-        BalancePanel.setLayout(null);
-        BalancePanel.setBackground(new Color(30, 30, 30));
-        LeftBlackPanel.add(BalancePanel);
-
-        JLabel BalanceLabel = new JLabel(" Balance");
-        BalanceLabel.setBounds(10, 10, 100, 30);
-        BalanceLabel.setForeground(Color.white);
-        BalanceLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        BalancePanel.add(BalanceLabel);
-
-        JLabel BalanceValue = new JLabel("$56,00 " );
-        BalanceValue.setFont(new Font("Arial", Font.BOLD, 24));
-        BalanceValue.setForeground(Color.RED);//new Color(183, 255, 0)
-        BalanceValue.setBounds(10, 55, 100, 30);
-        BalancePanel.add(BalanceValue);
-
-        RoundedButton Dipostebalance = new RoundedButton("",10);
-        Dipostebalance.setBounds(190, 30, 50, 50);
-        Dipostebalance.setBackground(Color.RED);//new Color(183, 255, 0)
-        Dipostebalance.addActionListener(e -> {
-            JOptionPane.showMessageDialog(homePanel, "Deposit functionality is not available yet.");
-        });
-        BalancePanel.add(Dipostebalance);
-
-
-
-//-----------------------Left side buttons-----------------------
-        JButton FavoriteButton = new JButton("Favorite");
-        FavoriteButton.setBounds(20, 250, 210, 40);
-        FavoriteButton.setBackground(new Color(30, 30, 30));
-        FavoriteButton.setForeground(Color.WHITE);
-        FavoriteButton.setHorizontalAlignment(SwingConstants.LEFT);
-        FavoriteButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-        LeftBlackPanel.add(FavoriteButton);
-
-        
-        JButton BonusesButton = new JButton("Bonuses");
-        BonusesButton.setBounds(20, 350, 210, 40);
-        BonusesButton.setBackground(new Color(30, 30, 30));
-        BonusesButton.setForeground(Color.WHITE);
-        BonusesButton.setHorizontalAlignment(SwingConstants.LEFT);
-        BonusesButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-        LeftBlackPanel.add(BonusesButton);
-
-        JButton BookedButton = new JButton("Booked");
-        BookedButton.setBounds(20, 450, 210, 40);
-        BookedButton.setBackground(new Color(30, 30, 30));
-        BookedButton.setForeground(Color.WHITE);
-        BookedButton.setHorizontalAlignment(SwingConstants.LEFT);
-        BookedButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-        LeftBlackPanel.add(BookedButton);
-        
-        JButton LogoutButton = new JButton("Log out...");
-        LogoutButton.setBounds(20, 550, 210, 40);
-        LogoutButton.setBackground(new Color(30, 30, 30));
-        LogoutButton.setForeground(Color.WHITE);
-        LogoutButton.setHorizontalAlignment(SwingConstants.LEFT);
-        LogoutButton.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 0));
-        LogoutButton.addActionListener(e->{
-            JOptionPane.showMessageDialog(homePanel, "You are logged out.");
-            cardLayout.show(mainPanel, "login");
-        });
-        LeftBlackPanel.add(LogoutButton);
-
-
-        //----------Main Panels things----------
-
-        JPanel SearchPanel = new JPanel();
-        SearchPanel.setBounds(30, 20, 600, 40);
-        SearchPanel.setLayout(null);
-        SearchPanel.setBackground(new Color(30, 30, 30));
-        MainUserPanel.add(SearchPanel);
-
-        JTextField searchField = new JTextField("Type to Search...");
-        searchField.setBounds(10, 5, 380, 30);
-        searchField.setBackground(new Color(30, 30, 30));
-        searchField.setForeground(Color.GRAY);
-        searchField.setBorder(null);
-
-        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                if (searchField.getText().equals("Type to Search...")) {
-                    searchField.setText("");
-                    searchField.setForeground(Color.WHITE);
-                }
-            }
-
-            @Override
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                if (searchField.getText().isEmpty() || searchField.getText().trim().isEmpty()) {
-                    searchField.setText("Type to Search...");
-                    searchField.setForeground(Color.gray);
-                }
-            }
-
-        });
-        SearchPanel.add(searchField);
-
-    //----------Slide Panel--------------------------------
-    
-        JPanel slidePanel = new JPanel(){
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            ImageIcon icon = new ImageIcon("Rayan/bookingTICKET/img/Avatar.jpg"); // sahel sahel ndirlha hal (jsp kifah njib l path)
-            Image img = icon.getImage();
-            g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-        }
-        };
-        slidePanel.setBounds(30, 78, 840, 350);
-        slidePanel.setLayout(null);
-        slidePanel.setBackground(new Color(30, 30, 30));
-        MainUserPanel.add(slidePanel);
-
-
-        JPanel filmsGridPanel = new JPanel();
-        filmsGridPanel.setLayout(new GridLayout(0, 4, 10, 10));  // Unlimited rows, 4 columns
-        filmsGridPanel.setBackground(new Color(18, 18, 18));
-
-        
-        JScrollPane scrollPane = new JScrollPane(filmsGridPanel); // create scroll ghir l hada l panel
-        scrollPane.setBounds(30, 450, 840, 280);
-        scrollPane.setBorder(null);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getViewport().setBackground(new Color(18, 18, 18));
-        
-        
-        filmsGridPanel.addMouseWheelListener(e -> {
-            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();//had scroll pa rapport l y
-            int notches = e.getWheelRotation();
-            int currentValue = verticalScrollBar.getValue();
-            int scrollAmount = 30; // Adjust scroll speed
-            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
-        });
-
-        
-        for (int i = 0; i < movies.Movies.size(); i++) {
-            final int index = i;
-            JPanel filmPanel = new JPanel() {
-                @Override
-                protected void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-                    ImageIcon icon = new ImageIcon(movies.Movies.get(index).imagePath);
-                    Image img = icon.getImage();
-                    g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
-                }
-            };
-           
-            filmPanel.setLayout(null);
-            filmPanel.setPreferredSize(new Dimension(200, 220));
-            filmPanel.setBackground(new Color(24, 24, 24));
-            filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            
-            // Hayla hadi :-) 
-            filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-                public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 1));//ta3 ki t intiracti m3a l panel
-                }
-                public void mouseExited(java.awt.event.MouseEvent evt) {
-                    filmPanel.setBorder(null);
-                }
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-
-                    JOptionPane.showMessageDialog(null, "Opening film details...");
-                }
-            });
-            
-            filmsGridPanel.add(filmPanel);
-        }
-
-        MainUserPanel.add(scrollPane);
-
-
-        JLabel nowShowingLabel = new JLabel("Our Movies");
-        nowShowingLabel.setBounds(30, 430, 200, 20);
-        nowShowingLabel.setForeground(Color.WHITE);
-        nowShowingLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
-        MainUserPanel.add(nowShowingLabel);
-
-        //MainUserPanel.setVisible(false);
-
-
-
-
-        
-
-
-
-
-    
-        return homePanel;
     }
 
     
