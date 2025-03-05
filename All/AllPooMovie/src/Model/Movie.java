@@ -15,6 +15,7 @@ public class Movie {
     public MovieAgeRating AgeRating; // G, PG13, PG16, PG18
     public Language MovieLanguage;
     public String ImagePath;
+    public String Trailer;
 
     public enum MovieGenre {
         Action, Comedy, Drama, Horror, Science_Fiction, Thriller, Adventure, Fantasy, Mystery, Romance, Crime,
