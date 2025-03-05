@@ -12,6 +12,7 @@ public class Client extends Account{
     public double cardNum;
     public int CCVnbr;
     public ArrayList<Movie.MovieGenre> Intrests = new ArrayList<>();
+    
 
     public Client(String firstName, String lastName, String email, String phoneNumber, String username, String password) {
 
@@ -22,13 +23,6 @@ public class Client extends Account{
         this.PhoneNumber = phoneNumber;
     }
 
-    public void UpdateClient(Account client, String newFirstName, String newLastName, int newAge, String newEmail,
-            String newPhoneNumber) {
-        this.FirstName = newFirstName;
-        this.LastName = newLastName;
-        this.Age = newAge;
-        this.Email = newEmail;
-        this.PhoneNumber = newPhoneNumber;
-    }
+
 
 }

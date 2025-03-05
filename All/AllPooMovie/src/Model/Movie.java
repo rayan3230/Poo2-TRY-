@@ -1,5 +1,7 @@
 package Model;
 
+import java.time.LocalTime;
+
 public class Movie {
     public int id =0;
     public String Title;
@@ -8,11 +10,10 @@ public class Movie {
     public String Description;
     public String Director;
     public String Cast;
-    public String ReleaseDate;
+    public LocalTime ReleaseDate;
     public float Rating; // out of 10
     public MovieAgeRating AgeRating; // G, PG13, PG16, PG18
     public Language MovieLanguage;
-    
     public String ImagePath;
 
     public enum MovieGenre {
@@ -33,7 +34,7 @@ public class Movie {
     }
 
     public Movie(int Id, String Title, MovieGenre Genre, float Duration, String Description, String Director,
-            String Cast, String ReleaseDate, float Rating, MovieAgeRating AgeRating, Language MovieLanguage, String ImagePath) {
+            String Cast, LocalTime ReleaseDate, float Rating, MovieAgeRating AgeRating, Language MovieLanguage, String ImagePath) {
 
         this.id = Id;
         this.Title = Title;
