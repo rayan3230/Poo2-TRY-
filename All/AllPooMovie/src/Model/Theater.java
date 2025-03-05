@@ -24,6 +24,13 @@ public class Theater {
         this.isAvailable = Available;
         this.TotalPlaces = NormalCapacity + VipCapacity;
     }
-
+    public void initialseat(){
+        for(int i=0; i<NormalCapacity; i++){
+            NormalSeats.add(new Seats(i+1, Seats.SeatType.REGULAR));
+        }
+        for(int i=0; i<VipCapacity; i++){
+            VipSeats.add(new Seats(i+1, Seats.SeatType.VIP));
+        }
+    }
 
 }
