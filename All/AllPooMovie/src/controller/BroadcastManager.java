@@ -8,6 +8,7 @@ public class BroadcastManager {
 
     public MovieManager movieManager;
     public TheaterManager theaterManager;
+    
     public ArrayList<Broadcast> broadcasts;
 
 
@@ -72,6 +73,41 @@ public class BroadcastManager {
 
     public void removeBroadcast(Broadcast broadcast) {
         broadcasts.remove(broadcast);
+    }
+
+    public void DisplayBroadcast(){
+        for(Broadcast broadcast : broadcasts){
+            System.out.println("Movie: " + broadcast.movie.Title + " Theater: " + broadcast.Room.TheaterId + " Date: " + broadcast.Date);
+        }
+    }
+
+    
+    public void InitiliazeTicket(){
+        for(Broadcast broadcast : broadcasts){
+            for(Theater Room : theaterManager.theaters){
+                for(int i = 0; i<Room.NormalSeats.size(); i++){
+                    Ticket ticket = new Ticket(i+1, Ticket.TicketType.Normal, broadcast);
+                    broadcast.tickets.add(ticket);
+                }
+                for(int i = 0; i<Room.NormalSeats.size(); i++){
+                    Ticket ticket = new Ticket(i+1, Ticket.TicketType.VIP, broadcast);
+                    broadcast.tickets.add(ticket);
+                }
+            }
+        }
+        
+    }
+    
+    public void DisplayTickets(Broadcast broadcast){
+        for (Ticket ticket : broadcast.tickets) {
+            System.out.println("---------------------------------");
+            System.out.println("Ticket ID: " + ticket.number);
+            System.out.println("Ticket Type: " + ticket.Type);
+            System.out.println("movie : " + ticket.broadcast.movie.Title);
+            System.out.println("Theater ID: " + ticket.broadcast.Room.TheaterId);
+            System.out.println("Date: " + ticket.broadcast.Date);
+            System.out.println("---------------------------------");
+        }
     }
 
 

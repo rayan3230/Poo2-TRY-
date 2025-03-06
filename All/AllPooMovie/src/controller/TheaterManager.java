@@ -40,4 +40,17 @@ public class TheaterManager {
         theaters.get(theaterId).isAvailable = true;
     }
 
+    public void DisplayTheater(){
+        for(Theater theater : theaters){
+            System.out.println("---------------------------------");
+            System.out.println("Theater ID: " + theater.TheaterId);
+            System.out.println("Total Places: " + theater.TotalPlaces);
+            System.out.println("Normal Capacity: " + theater.NormalCapacity);
+            System.out.println("Vip Capacity: " + theater.VipCapacity);
+            System.out.println("Availability: " + theater.isAvailable);
+            System.out.println("Normal Reserved Places: " + theater.NormalReservedPlaces);
+            System.out.println("Vip Reserved Places: " + theater.VipReservedPlaces);
+            System.out.println("---------------------------------");
+        }
+    }
 }
