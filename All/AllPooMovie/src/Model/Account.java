@@ -4,20 +4,18 @@ public class Account {
 
     public String username;
     public String password;
-    public String role;
     public Status status;
 
     public enum Status{
-        admin,
-        manager
+        Admin,
+        Manager
     }
 
     // Admin Account
-    public Account(String username, String password, String role, Status status) {
+    public Account(String username, String password, Status status) {
 
         this.username = username;
         this.password = password;
-        this.role = role;
         this.status = status;
 
     }
