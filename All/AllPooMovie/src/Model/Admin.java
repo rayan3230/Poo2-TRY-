@@ -8,7 +8,7 @@ public class Admin extends Account{
     public String Email;
     public String PhoneNumber;
 
-    public Admin(String FirstName, String LastName, String username, String password, Status status) {
+    public Admin(String FirstName, String LastName, String Email, String username, String password, Status status) {
 
         super(username, password, status.Admin);
         this.FirstName = FirstName;

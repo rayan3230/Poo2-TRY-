@@ -46,7 +46,7 @@ public class Cinema {
 
         addClient(client1);
 
-        Admin admin1 = new Admin("fahd", "djedi", "fahd", "yuji", "manager");
+        Admin admin1 = new Admin("fahd", "djedi", "fahd@gmail.com", "yuji", "manager");
 
         addAdmin(admin1);
 
