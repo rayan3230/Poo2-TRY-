@@ -9,6 +9,7 @@ public class MovieManager {
     public ArrayList<Movie> movies;
 
     public MovieManager(){
+        
         movies = new ArrayList<Movie>();
 
         
