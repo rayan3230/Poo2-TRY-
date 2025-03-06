@@ -1,7 +1,7 @@
 package controller;
 
-import java.util.ArrayList;
 import Model.*;
+import java.util.ArrayList;
 
 public class TheaterManager {
 
@@ -9,7 +9,7 @@ public class TheaterManager {
 
     public TheaterManager() {
 
-        this.theaters = new ArrayList<Theater>();
+        this.theaters = new ArrayList<>();
 
         Theater Room1 = new Theater(0, 200, 40, 1, true);
         Theater Room2 = new Theater(1, 300, 60, 2, true);
@@ -30,6 +30,14 @@ public class TheaterManager {
 
     public void AddTheater(Theater theater) {
         theaters.add(theater);
+    }
+
+    public void setTheaterUnAvailable(int theaterId) {
+        theaters.get(theaterId).isAvailable = false;
+    }
+
+    public void setTheaterAvailable(int theaterId) {
+        theaters.get(theaterId).isAvailable = true;
     }
 
 }

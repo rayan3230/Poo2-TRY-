@@ -1,8 +1,8 @@
 package controller;
 
 import Model.*;
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class BroadcastManager {
 
@@ -12,7 +12,7 @@ public class BroadcastManager {
 
 
     public BroadcastManager() {
-        broadcasts = new ArrayList<Broadcast>();
+        broadcasts = new ArrayList<>();
     
         Broadcast Broadcast1 = new Broadcast(movieManager.movies.get(0), theaterManager.theaters.get(0), LocalDate.of(2025, 3, 1));
         Broadcast Broadcast24 = new Broadcast(movieManager.movies.get(1), theaterManager.theaters.get(2), LocalDate.of(2025, 10, 20));
@@ -68,6 +68,10 @@ public class BroadcastManager {
     
     public void addBroadcast(Broadcast broadcast) {
         broadcasts.add(broadcast);
+    }
+
+    public void removeBroadcast(Broadcast broadcast) {
+        broadcasts.remove(broadcast);
     }
 
 

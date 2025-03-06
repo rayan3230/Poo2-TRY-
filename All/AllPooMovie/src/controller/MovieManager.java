@@ -10,7 +10,7 @@ public class MovieManager {
 
     public MovieManager(){
         
-        movies = new ArrayList<Movie>();
+        movies = new ArrayList<>();
 
         
         // Create movies and broadcast
@@ -189,6 +189,10 @@ public class MovieManager {
     
     public void AddMovie(Movie movie) {
         movies.add(movie);
+    }
+
+    public void RemoveMovie(Movie movie) {
+        movies.remove(movie);
     }
 
     
