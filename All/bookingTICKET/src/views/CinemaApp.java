@@ -145,7 +145,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         // add the main panel to the JFrame ----------------------------------
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "Welcome");
+        MainCardLayout.show(MainPanel, "Client");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -683,9 +683,307 @@ public class CinemaApp extends JFrame implements ActionListener {
     }
 
     public JPanel CreateClientInterface() {
-        JPanel ClientElements = new JPanel();
 
-        return ClientElements;
+        CardLayout layout = new CardLayout();
+
+        JPanel HomePanel = new JPanel(layout);
+        HomePanel.setLayout(null);
+        HomePanel.setBounds(0, 0, 1200, 750);
+        HomePanel.setOpaque(true);
+        HomePanel.setBackground(new Color(0x121213));
+
+        //Left panel ----------------------------------------------------------------
+        RoundedPanel LeftPanel = new RoundedPanel(35); 
+        LeftPanel.setBounds(30,30, 150, 650);
+        LeftPanel.setBackground(new Color(0x212121));
+        LeftPanel.setLayout(null);
+
+        HomePanel.add(LeftPanel);
+
+        JPanel StraightLine = new JPanel();
+        StraightLine.setBounds(220, 75, 930, 3);
+        StraightLine.setBackground(new Color(0x313131));
+
+        HomePanel.add(StraightLine);
+
+        RoundedPanel SearchBar = new RoundedPanel(35);
+        SearchBar.setBounds(250, 30, 800, 30);
+        SearchBar.setBackground(new Color(0x212121));
+        SearchBar.setLayout(null);
+
+        HomePanel.add(SearchBar);
+
+        JTextField SearchField = new JTextField();
+        SearchField.setBounds(10, 2, 800, 25);
+        SearchField.setFont(new Font("Inter", Font.BOLD, 15));
+        SearchField.setForeground(Color.white);
+        SearchField.setCaretColor(Color.white);
+        SearchField.setOpaque(false);
+        SearchField.setBorder(null);
+
+        TextfieldBehave(SearchField, "Search for a movie");
+
+        SearchBar.add(SearchField);
+
+        JButton Filter = new JButton();
+        Filter.setBounds(200, 32, 30, 30);
+        Filter.setFocusPainted(false);
+        Filter.setBorder(null);
+        Filter.setBackground(new Color(0x212121));
+        Filter.setUI(new RoundButtonUI(Color.black));
+        Filter.addActionListener(e -> {
+            // Open movie filter dialog
+        });
+        HomePanel.add(Filter);
+
+        JButton History = new JButton();
+        History.setBounds(1070, 29, 30, 30);
+        History.setFocusPainted(false);
+        History.setBorder(null);
+        History.setBackground(new Color(0x212121));
+        History.setUI(new RoundButtonUI(Color.black));
+        History.addActionListener(e -> {
+            // Open movie History dialog
+        });
+        HomePanel.add(History);
+
+        JButton Account = new JButton();
+        Account.setBounds(1110, 29, 50, 30);
+        Account.setFocusPainted(false);
+        Account.setBorder(null);
+        Account.setBackground(new Color(0x515151));
+        Account.setUI(new RoundButtonUI(Color.black));
+        Account.addActionListener(e -> {
+            // Open movie Account dialog
+        });
+        HomePanel.add(Account);
+
+        //content panel---------------------------------------------------------------
+        JPanel ContentPanel = CreateContentPanel();
+
+        JScrollPane scrollPane = new JScrollPane(ContentPanel);
+        scrollPane.setBounds(179, 85, 1009, 750);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setOpaque(false);
+        scrollPane.setBorder(null);
+
+        ContentPanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        HomePanel.add(scrollPane, "home");
+        scrollPane.setVisible(true);
+
+        HomePanel.setComponentZOrder(scrollPane, 1);
+        HomePanel.setComponentZOrder(LeftPanel, 0);
+        HomePanel.setComponentZOrder(StraightLine, 0);
+        HomePanel.setComponentZOrder(SearchBar, 0);
+        HomePanel.setComponentZOrder(Filter, 0);
+        HomePanel.setComponentZOrder(History, 0);
+        HomePanel.setComponentZOrder(Account, 0);
+
+        return HomePanel;
+    }
+
+    public JPanel CreateContentPanel() {
+        JPanel ContentPanel = new JPanel();
+        ContentPanel.setLayout(null);
+        ContentPanel.setOpaque(true);
+        ContentPanel.setBackground(new Color(0x121213));
+        ContentPanel.setPreferredSize(new Dimension(1009, 2250));
+
+        // Most popular movie
+        RoundedPanel MostPopularPanel = new RoundedPanel(35);
+        MostPopularPanel.setBounds(25, 20, 955, 400);
+        MostPopularPanel.setBackground(new Color(0x212121));
+        MostPopularPanel.setLayout(null);
+
+        ImageIcon imageIcon = resizedIcon("Poo2-TRY-\\Fahd\\bookingTICKET\\Images\\spiderman_no_way_home.png", 955, 400);
+        JLabel imageLabel = new JLabel(imageIcon);
+        imageLabel.setBounds(0, 0, 955, 400);
+
+        MostPopularPanel.add(imageLabel);
+
+        TransparentPanel backgroundPanel = new TransparentPanel(0.5f);
+        backgroundPanel.setBounds(0, 0, 955, 400);
+        backgroundPanel.setBackground(new Color(0x000000));
+        backgroundPanel.setLayout(null);
+
+        MostPopularPanel.add(backgroundPanel);
+
+        JLabel MostPopularLabel = new JLabel("Most Popular Movie");
+        MostPopularLabel.setBounds(25, 20, 200, 30);
+        MostPopularLabel.setFont(new Font("Inter", Font.BOLD, 20));
+        MostPopularLabel.setForeground(Color.white);
+
+        MostPopularPanel.add(MostPopularLabel);
+
+        JButton BookNow = new JButton("Book Now");
+        BookNow.setBounds(25, 350, 125, 30);
+        BookNow.setFont(new Font("Inter", Font.BOLD, 12));
+        BookNow.setForeground(Color.black);
+        BookNow.setBackground(Color.white);
+        BookNow.setFocusPainted(false);
+        BookNow.setUI(new RoundButtonUI(Color.black));
+        BookNow.addActionListener(e -> {
+            // Open Booking dialog
+        });
+
+        MostPopularPanel.add(BookNow);
+
+        JButton MoreInfo = new JButton("More Info :");
+        MoreInfo.setBounds(175, 350, 125, 30);
+        MoreInfo.setFont(new Font("Inter", Font.BOLD, 15));
+        MoreInfo.setForeground(Color.white);
+        MoreInfo.setBackground(Color.black);
+        MoreInfo.setFocusPainted(false);
+        MoreInfo.setUI(new RoundButtonUI(Color.black));
+        MoreInfo.addActionListener(e -> {
+            // Open Booking dialog
+        });
+
+        MostPopularPanel.add(MoreInfo);
+
+        MostPopularPanel.setComponentZOrder(imageLabel, 2);
+        MostPopularPanel.setComponentZOrder(backgroundPanel, 1);
+        MostPopularPanel.setComponentZOrder(MostPopularLabel, 0);
+        MostPopularPanel.setComponentZOrder(BookNow, 0);
+        MostPopularPanel.setComponentZOrder(MoreInfo, 0);
+
+
+        ContentPanel.add(MostPopularPanel);
+
+        // other popular movies
+        JLabel OtherPopularLabel = new JLabel("Other Popular Movies");
+        OtherPopularLabel.setBounds(25, 450, 600, 30);
+        OtherPopularLabel.setFont(new Font("Inter", Font.BOLD, 17));
+        OtherPopularLabel.setForeground(Color.white);
+
+        ContentPanel.add(OtherPopularLabel);
+
+        RoundedPanel OtherPopularPanel = new RoundedPanel(35);
+        OtherPopularPanel.setBounds(25, 500, 950, 300);
+        OtherPopularPanel.setBackground(new Color(0x121213));
+        OtherPopularPanel.setLayout(new GridLayout(1, 3, 115, 20));
+        OtherPopularPanel.setBorder(null);
+        OtherPopularPanel.setOpaque(false);
+
+
+        for (int i = 0; i < 3; i++) {
+            RoundedPanel moviePanel = new RoundedPanel(15);
+            moviePanel.setBounds(0, 0, 280, 360);
+            moviePanel.setLayout(null);
+            moviePanel.setBackground(new Color(0x212121));
+
+            // Hayla hadi :-)
+            moviePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    moviePanel.setBorder(BorderFactory.createLineBorder(new Color(0xFF6700), 3));// ta3 ki t intiracti m3a l panel
+                }
+
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    moviePanel.setBorder(null);
+                }
+
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                    JOptionPane.showMessageDialog(null, "Opening film details...");
+                }
+            });
+
+            OtherPopularPanel.add(moviePanel);
+        }
+
+        ContentPanel.add(OtherPopularPanel);
+
+        // movies you may like
+        JLabel YouMayLikeLabel = new JLabel("Movies You May Like");
+        YouMayLikeLabel.setBounds(25, 850, 600, 30);
+        YouMayLikeLabel.setFont(new Font("Inter", Font.BOLD, 17));
+        YouMayLikeLabel.setForeground(Color.white);
+
+        ContentPanel.add(YouMayLikeLabel);
+
+        RoundedPanel YouMayLikePanel = new RoundedPanel(35);
+        YouMayLikePanel.setBounds(25, 900, 950, 600);
+        YouMayLikePanel.setBackground(new Color(0x121213));
+        YouMayLikePanel.setLayout(new GridLayout(0, 4, 40, 25));
+        YouMayLikePanel.setBorder(null);
+        YouMayLikePanel.setOpaque(false);
+
+        for (int i = 0; i < 8; i++) {
+            RoundedPanel moviePanel = new RoundedPanel(15);
+            moviePanel.setBounds(0, 0, 200, 300);
+            moviePanel.setLayout(null);
+            moviePanel.setBackground(new Color(0x212121));
+
+            // Hayla hadi :-)
+            moviePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    moviePanel.setBorder(BorderFactory.createLineBorder(new Color(0xFF6700), 3));
+                }
+
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    moviePanel.setBorder(null);
+                }
+
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    JOptionPane.showMessageDialog(null, "Opening film details...");
+                }
+            });
+
+            YouMayLikePanel.add(moviePanel);
+        }
+
+        ContentPanel.add(YouMayLikePanel);
+
+        //Promotions
+        JLabel PromotionsLabel = new JLabel("Promotions");
+        PromotionsLabel.setBounds(25, 1550, 600, 30);
+        PromotionsLabel.setFont(new Font("Inter", Font.BOLD, 17));
+        PromotionsLabel.setForeground(Color.white);
+
+        ContentPanel.add(PromotionsLabel);
+
+        RoundedPanel PromotionsPanel = new RoundedPanel(35);
+        PromotionsPanel.setBounds(25, 1600, 950, 400);
+        PromotionsPanel.setBackground(new Color(0x121213));
+        PromotionsPanel.setLayout(new GridLayout(1, 2, 50, 25));
+        PromotionsPanel.setBorder(null);
+        PromotionsPanel.setOpaque(false);
+
+        for (int i = 0; i < 2; i++) {
+            RoundedPanel moviePanel = new RoundedPanel(15);
+            moviePanel.setBounds(0, 0, 200, 300);
+            moviePanel.setLayout(null);
+            moviePanel.setBackground(new Color(0x212121));
+
+            // Hayla hadi :-)
+            moviePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    moviePanel.setBorder(BorderFactory.createLineBorder(new Color(0xFF6700), 3));
+                }
+
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    moviePanel.setBorder(null);
+                }
+
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    JOptionPane.showMessageDialog(null, "Opening film details...");
+                }
+            });
+
+            PromotionsPanel.add(moviePanel);
+        }
+
+        ContentPanel.add(PromotionsPanel);
+
+
+        return ContentPanel;
     }
 
     public JPanel CreateAdminInterface() {
@@ -718,13 +1016,12 @@ public class CinemaApp extends JFrame implements ActionListener {
 
 
 
-     public ImageIcon resizedIcon(String path , int height , int width){ // hadi bch tbdl l img l size li rak habo w trj3 direct ImageIcon t7yo direct f label ou f button
+     public ImageIcon resizedIcon(String path , int width , int height){ // hadi bch tbdl l img l size li rak habo w trj3 direct ImageIcon t7yo direct f label ou f button
 
         ImageIcon icon = new ImageIcon(path);
-        Image image = icon.getImage().getScaledInstance(height, width, Image.SCALE_SMOOTH);
+        Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(image);
         
-
         return  resizedIcon;
     }
 
