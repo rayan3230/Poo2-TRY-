@@ -1,12 +1,20 @@
 package views;
 
+import controller.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Timer;
 import javax.swing.*;
 
-
 public class CinemaApp extends JFrame implements ActionListener {
+    // Manager elements ------------------------------------------------
+    public MovieManager movieManager;
+    public ClientManager clientManager;
+    public AdminManager adminManager;
+    public TheaterManager theaterManager;
+    public BookingManager bookingManager;
+    public BroadcastManager broadcastManager;
+    
     // log in elements : ------------------------------------------------
     public JPanel WelcomePanel;
     public JPanel LogInPanel;
