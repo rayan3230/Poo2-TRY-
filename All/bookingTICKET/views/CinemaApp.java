@@ -5,6 +5,7 @@ import java.util.Timer;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -12,16 +13,16 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 
-
-public class CinemaApp extends JFrame{
-
+public class CinemaApp extends JFrame {
     // log in elements :
+    public JPanel WelcomePanel;
     public JPanel LogInPanel;
     public JPanel SignInPanel;
     public JPanel RegisterPanel;
     public JPanel ForgotPasswordPanel;
     public JPanel ClientPanel;
     public JPanel AdminPanel;
+    public JPanel MainPanel;
 
     //fonctionnalities elements ---------------------------------------
     public Timer timer, timer2, timer3, timer4;
@@ -33,25 +34,65 @@ public class CinemaApp extends JFrame{
 
     // layout manager -----------------------------------------------------
     public CardLayout MainCardLayout;
-
     public CinemaApp() {
-        setTitle("POO_Movies");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon AppLogo = new ImageIcon("All\\AllPooMovie\\Images\\LogoApp.jpg");
-        setIconImage(AppLogo.getImage());
-        setBounds(100, 100, 1200, 750);
-        setLocationRelativeTo(null);
-        setResizable(false);
+       // setUndecorated(true); 
+       setTitle("POO_Movies");
+       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       ImageIcon AppLogo = new ImageIcon("All\\bookingTICKET\\img\\Logo.png");
+       this.setIconImage(AppLogo.getImage());
+       setBounds(100, 100, 1200, 750);
+       setLocationRelativeTo(null);
+       setResizable(false);
+
+        MainCardLayout = new CardLayout();
+        MainPanel = new JPanel(MainCardLayout);
+
+        WelcomePanel = createWelcomePanel();
+        MainPanel.add(WelcomePanel, "welcome");
+
+
+        setContentPane(MainPanel);
+        MainCardLayout.show(MainPanel, "welcome");
 
 
 
 
     }
-    
 
 
 
-    public ImageIcon resizedIcon(String path , int height , int width){ // hadi bch tbdl l img l size li rak habo w trj3 direct ImageIcon t7yo direct f label ou f button
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     public ImageIcon resizedIcon(String path , int height , int width){ // hadi bch tbdl l img l size li rak habo w trj3 direct ImageIcon t7yo direct f label ou f button
 
         ImageIcon icon = new ImageIcon(path);
         Image image = icon.getImage().getScaledInstance(height, width, Image.SCALE_SMOOTH);
@@ -130,14 +171,11 @@ public class CinemaApp extends JFrame{
             }
         });
     }
-    
 
     public static void main(String[] args) {
-        try {
-            CinemaApp frame = new CinemaApp();
-            frame.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        CinemaApp frame = new CinemaApp();
+        frame.setVisible(true);
     }
+
+
 }
