@@ -1,7 +1,7 @@
 package Model;
 
 public class Ticket {
-    public int number;
+    public Seats Seat;
     public TicketType Type; // VIP, Normal
     public Broadcast broadcast;
 
@@ -11,8 +11,8 @@ public class Ticket {
         VIP, Normal
     }
 
-    public Ticket(int number, TicketType Type, Broadcast broadcast) {
-        this.number = number;
+    public Ticket(Seats Seat, TicketType Type, Broadcast broadcast) {
+        this.Seat = Seat;
         this.Type = Type;
         this.broadcast = broadcast;
     }

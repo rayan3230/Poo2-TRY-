@@ -163,7 +163,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(AccountAdminPanel, "account admin");
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "user");
+        MainCardLayout.show(MainPanel, "admin");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
@@ -178,7 +178,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         BackgroundPanel.setOpaque(false);
 
         // Blur panel--------------------------------------------------
-        this.BlurPanel = new TransparentPanel(0.5f);
+        this.BlurPanel = new TransparentPanel(0.75f);
         BlurPanel.setBounds(0, 0, 1200, 750);
         BlurPanel.setLayout(null);
         BlurPanel.setBackground(new java.awt.Color(0x2D3142));

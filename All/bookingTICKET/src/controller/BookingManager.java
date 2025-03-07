@@ -2,7 +2,6 @@ package controller;
 
 import Model.*;
 import java.util.ArrayList;
-import javax.sql.rowset.RowSetMetaDataImpl;
 
 public class BookingManager {
 
@@ -17,8 +16,8 @@ public class BookingManager {
         bookedTicket = new ArrayList<>();
     }
 
-    public void BookTicket(Client client, int TicketNumber, Broadcast broadcast, Ticket.TicketType Type) {
-        Ticket ticket = new Ticket(TicketNumber, Type, broadcast);
+    public void BookTicket(Client client, Seats Seat, Broadcast broadcast, Ticket.TicketType Type) {
+        Ticket ticket = new Ticket(Seat, Type, broadcast);
         ticket.Buyer = client;
         bookedTicket.add(ticket);
         broadcast.tickets.remove(ticket);
