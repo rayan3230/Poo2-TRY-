@@ -261,7 +261,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
 
         LogIn.addActionListener(e -> {
-            MainCardLayout.show(MainPanel, "logIn");
+            MainCardLayout.show(MainPanel, "LogIn");
         });
 
         WelcomeElements.add(LogIn);
@@ -433,7 +433,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         ReturnBtn.setBackground(Color.red);
         ReturnBtn.setUI(new RoundButtonUI(new Color(0x000000)));
         ReturnBtn.addActionListener(e -> {
-            MainCardLayout.show(MainPanel, "open");
+            MainCardLayout.show(MainPanel, "Welcome");
         });
         SignUpPanel.add(ReturnBtn);
 
@@ -545,7 +545,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         SignupButton.setBorderPainted(false);
         SignupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         SignupButton.addActionListener(e -> {
-            MainCardLayout.show(MainPanel, "register");
+            MainCardLayout.show(MainPanel, "SignIn");
         });
 
         RectangleLogin.add(SignupButton);
@@ -560,7 +560,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         returnbtnWelcomePanel.setBorder(BorderFactory.createEmptyBorder());
         returnbtnWelcomePanel.setUI(new RoundButtonUI(new Color(0x000000)));
         returnbtnWelcomePanel.addActionListener(e -> {
-            MainCardLayout.show(MainPanel, "open");
+            MainCardLayout.show(MainPanel, "Welcome");
         });
         RectangleLogin.add(returnbtnWelcomePanel);
 
@@ -658,7 +658,7 @@ public class CinemaApp extends JFrame implements ActionListener {
                         "Password Recovery",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                MainCardLayout.show(MainPanel, "login");
+                MainCardLayout.show(MainPanel, "LogIn");
             } else {
                 JOptionPane.showMessageDialog(ForgotPasswordElements,
                         "Incorrect answer. Please try again.",
@@ -676,7 +676,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         returnButton.setForeground(Color.white);
         returnButton.setFocusPainted(false);
         returnButton.setUI(new RoundButtonUI(new Color(0x000000)));
-        returnButton.addActionListener(e -> MainCardLayout.show(MainPanel, "log in"));
+        returnButton.addActionListener(e -> MainCardLayout.show(MainPanel, "LogIn"));
         rectangleForgot.add(returnButton);
 
         return ForgotPasswordElements;
