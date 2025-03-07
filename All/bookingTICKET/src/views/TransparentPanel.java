@@ -1,4 +1,4 @@
-package GuiManagement;
+package views;
 
 import java.awt.*;
 import javax.swing.*;
