@@ -1,11 +1,12 @@
 package views;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.util.Timer;
 import javax.swing.*;
 
 
-public class CinemaApp extends JFrame {
+public class CinemaApp extends JFrame implements ActionListener {
     // log in elements : ------------------------------------------------
     public JPanel WelcomePanel;
     public JPanel LogInPanel;
@@ -153,7 +154,6 @@ public class CinemaApp extends JFrame {
     }
 
     // create components ------------------------------------------------------------------
-    
     public JPanel CreateBackGroundPanel() {
 
         JPanel BackgroundPanel = new JPanel();
@@ -296,6 +296,7 @@ public class CinemaApp extends JFrame {
         AdressInput.setBackground(new java.awt.Color(0xBBBBBB));
         AdressInput.setForeground(Color.BLACK);
         AdressInput.setCaretColor(Color.WHITE);
+        TextfieldBehave(AdressInput, "Enter your email address");
 
         WelcomeElements.add(AdressInput);
 
@@ -327,18 +328,356 @@ public class CinemaApp extends JFrame {
 
     public JPanel CreateSignInElementsPanel() {
         JPanel SignInElements = new JPanel();
+        SignInElements.setBounds(0, 0, 1200, 750);
+        SignInElements.setLayout(null);
+        SignInElements.setOpaque(false);
+
+        JLabel LogoName = new JLabel("POOMovie");
+        LogoName.setBounds(70, 24, 192, 52);
+        LogoName.setFont(new Font("Inter", Font.BOLD, 35));
+        LogoName.setForeground(Color.red);
+
+        SignInElements.add(LogoName);
+
+        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        JLabel imageLabel = new JLabel(iconMovie);
+        imageLabel.setBounds(10, 20, 64, 64);
+
+        SignInElements.add(imageLabel);
+
+        // signUP panel -----------------------------------------------------------
+        TransparentPanel SignUpPanel = new TransparentPanel(0.5f);
+        SignUpPanel.setBounds(400, 100, 440, 620);
+        SignUpPanel.setLayout(null);
+        SignUpPanel.setBackground(Color.black);
+
+        JLabel SigninLabel = new JLabel("Sign In");
+        SigninLabel.setBounds(50, 40, 200, 50);
+        SigninLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        SigninLabel.setForeground(Color.white);
+
+        SignUpPanel.add(SigninLabel);
+
+        JTextField UserNameField = new JTextField();
+        UserNameField.setBounds(50, 120, 340, 40);
+        UserNameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        UserNameField.setForeground(Color.black);
+        UserNameField.setCaretColor(Color.black);
+        UserNameField.setBackground(new Color(0xBBBBBB));
+        UserNameField.setOpaque(true);
+        TextfieldBehave(UserNameField, "    Username");
+        SignUpPanel.add(UserNameField);
+
+        JPasswordField PasswordsField = new JPasswordField("    Password");
+        PasswordsField.setBounds(50, 200, 340, 40);
+        PasswordsField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        PasswordsField.setForeground(Color.black);
+        PasswordsField.setCaretColor(Color.black);
+        PasswordsField.setBackground(new Color(0xBBBBBB));
+        PasswordsField.setOpaque(true);
+        TextfieldBehave(PasswordsField, "    Password");
+        SignUpPanel.add(PasswordsField);
+
+        JTextField EmailField = new JTextField("   email@example.com");
+        EmailField.setBounds(50, 280, 340, 40);
+        EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        EmailField.setForeground(Color.black);
+        EmailField.setCaretColor(Color.black);
+        EmailField.setBackground(new Color(0xBBBBBB));
+        EmailField.setOpaque(true);
+
+        TextfieldBehave(EmailField, "   email@example.com");
+        SignUpPanel.add(EmailField);
+
+        JTextField CardNmbrField = new JTextField("   Card Number");
+        CardNmbrField.setBounds(50, 360, 340, 40);
+        CardNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        CardNmbrField.setForeground(Color.black);
+        CardNmbrField.setCaretColor(Color.black);
+        CardNmbrField.setBackground(new Color(0xBBBBBB));
+        CardNmbrField.setOpaque(true);
+        TextfieldBehave(CardNmbrField, "   Card Number");
+        SignUpPanel.add(CardNmbrField);
+
+        JTextField CCVNmbrField = new JTextField("   CCV Number");
+        CCVNmbrField.setBounds(50, 440, 340, 40);
+        CCVNmbrField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        CCVNmbrField.setForeground(Color.black);
+        CCVNmbrField.setCaretColor(Color.black);
+        CCVNmbrField.setBackground(new Color(0xBBBBBB));
+        CCVNmbrField.setOpaque(true);
+        
+        TextfieldBehave(CCVNmbrField, "   CCV Number");
+        SignUpPanel.add(CCVNmbrField);
+
+        JButton ConfirmSignUpButton = new JButton("sign up");
+        ConfirmSignUpButton.setBounds(250, 520, 180, 50);
+        ConfirmSignUpButton.setForeground(Color.white);
+        ConfirmSignUpButton.setFocusPainted(false);
+        ConfirmSignUpButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        ConfirmSignUpButton.setBackground(Color.red);
+        ConfirmSignUpButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        ConfirmSignUpButton.addActionListener(e -> {
+            HandleSignIn(UserNameField, PasswordsField, 
+            EmailField, CardNmbrField, CCVNmbrField, CCVNmbrField);
+        });
+
+        SignUpPanel.add(ConfirmSignUpButton);
+
+        JButton ReturnBtn = new JButton("return");
+        ReturnBtn.setBounds(20, 520, 180, 50);
+        ReturnBtn.setForeground(Color.white);
+        ReturnBtn.setFocusPainted(false);
+        ReturnBtn.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        ReturnBtn.setBackground(Color.red);
+        ReturnBtn.setUI(new RoundButtonUI(new Color(0x000000)));
+        ReturnBtn.addActionListener(e -> {
+            MainCardLayout.show(MainPanel, "open");
+        });
+        SignUpPanel.add(ReturnBtn);
+
+        SignInElements.add(SignUpPanel);
 
         return SignInElements;
     }
 
     public JPanel CreateLogInElementsPanel() {
         JPanel LogInElements = new JPanel();
+        LogInElements.setBounds(0, 0, 1200, 750);
+        LogInElements.setLayout(null);
+        LogInElements.setOpaque(false);
+
+        JLabel LogoName = new JLabel("POOMovie");
+        LogoName.setBounds(70, 24, 192, 52);
+        LogoName.setFont(new Font("Inter", Font.BOLD, 35));
+        LogoName.setForeground(Color.red);
+        LogInElements.add(LogoName);
+
+        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        JLabel imageLabel = new JLabel(iconMovie);
+        imageLabel.setBounds(10, 20, 64, 64);
+        LogInElements.add(imageLabel);
+
+        TransparentPanel RectangleLogin = new TransparentPanel(0.5f);
+        RectangleLogin.setBounds(400, 100, 440, 620);
+        RectangleLogin.setLayout(null);
+        RectangleLogin.setBackground(Color.black);
+        LogInElements.add(RectangleLogin);
+
+        JLabel LogInLabel = new JLabel("Log In");
+        LogInLabel.setBounds(50, 40, 200, 50);
+        LogInLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        LogInLabel.setForeground(Color.white);
+        RectangleLogin.add(LogInLabel);
+
+        JTextField EmailField = new JTextField("   Email or username or phone number");
+        EmailField.setBounds(50, 120, 340, 40);
+        EmailField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        EmailField.setForeground(Color.black);
+        EmailField.setCaretColor(Color.black);
+        // EmailField.setBackground(new Color(80, 77, 74, 230));
+        EmailField.setBackground(new Color(0xBBBBBB));
+        EmailField.setOpaque(true);
+
+        TextfieldBehave(EmailField, "   Email or username or phone number");
+
+        RectangleLogin.add(EmailField);
+
+        JPasswordField PasswordField = new JPasswordField(" Password");
+        PasswordField.setBounds(50, 200, 340, 40);
+        PasswordField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        PasswordField.setForeground(Color.black);
+        PasswordField.setCaretColor(Color.black);
+        // PasswordField.setBackground(new Color(80, 77, 74, 230));
+        PasswordField.setBackground(new Color(0xBBBBBB));
+        PasswordField.setOpaque(true);
+        TextfieldBehave(PasswordField, " Password");
+        RectangleLogin.add(PasswordField);
+
+
+        JButton LogInButton = new JButton("log in");
+        LogInButton.setBounds(50, 270, 340, 40);
+        LogInButton.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        LogInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        LogInButton.setBackground(Color.red);
+        LogInButton.setForeground(Color.white);
+        LogInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        LogInButton.setBorder(BorderFactory.createEmptyBorder());
+        LogInButton.setUI(new RoundButtonUI(new Color(0x000000)));
+
+        LogInButton.addActionListener(e -> {
+            HandleLogIn(EmailField.getText(), PasswordField.getText());
+        });
+
+
+        RectangleLogin.add(LogInButton);
+
+        JLabel Or = new JLabel("OR");
+        Or.setBounds(106 + 100, 310, 30, 40); // :- )
+        Or.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        Or.setForeground(Color.white);
+        RectangleLogin.add(Or);
+
+        JButton btnforgetpassword = new JButton("Forgot password ?");
+        btnforgetpassword.setBounds(25, 400, 200, 30);
+        btnforgetpassword.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        btnforgetpassword.setForeground(Color.white);
+        btnforgetpassword.setContentAreaFilled(false);
+        btnforgetpassword.setBorderPainted(false);
+        btnforgetpassword.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnforgetpassword.addActionListener(e -> {
+            MainCardLayout.show(MainPanel, "Forgot Password");
+        });
+        RectangleLogin.add(btnforgetpassword);
+
+        JLabel SignupLabel = new JLabel("New to POOMovie? ");
+        SignupLabel.setBounds(40, 450, 300, 50);
+        SignupLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        SignupLabel.setForeground(Color.white);
+        RectangleLogin.add(SignupLabel);
+
+        JButton SignupButton = new JButton("Sign Up Now...");
+        SignupButton.setBounds(140, 461, 200, 30);
+        SignupButton.setFont(new Font("Segoe UI", Font.BOLD, 17));
+        SignupButton.setForeground(Color.white);
+        SignupButton.setContentAreaFilled(false);
+        SignupButton.setBorderPainted(false);
+        SignupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        SignupButton.addActionListener(e -> {
+            MainCardLayout.show(MainPanel, "register");
+        });
+
+        RectangleLogin.add(SignupButton);
+
+        JButton returnbtnWelcomePanel = new JButton("return");
+        returnbtnWelcomePanel.setBounds(50, 350, 340, 40);
+        returnbtnWelcomePanel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        returnbtnWelcomePanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        returnbtnWelcomePanel.setBackground(new java.awt.Color(0x777777));
+        returnbtnWelcomePanel.setForeground(Color.white);
+        returnbtnWelcomePanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        returnbtnWelcomePanel.setBorder(BorderFactory.createEmptyBorder());
+        returnbtnWelcomePanel.setUI(new RoundButtonUI(new Color(0x000000)));
+        returnbtnWelcomePanel.addActionListener(e -> {
+            MainCardLayout.show(MainPanel, "open");
+        });
+        RectangleLogin.add(returnbtnWelcomePanel);
 
         return LogInElements;
     }
 
     public JPanel CreateForgotPasswordPanel() {
         JPanel ForgotPasswordElements = new JPanel();
+        ForgotPasswordElements.setLayout(null);
+        ForgotPasswordElements.setBounds(0, 0, 1200, 750);
+        ForgotPasswordElements.setOpaque(false);
+
+        // Logo
+        JLabel LogoName = new JLabel("POOMovie");
+        LogoName.setBounds(70, 24, 192, 52);
+        LogoName.setFont(new Font("Inter", Font.BOLD, 35));
+        LogoName.setForeground(Color.red);
+
+        ForgotPasswordElements.add(LogoName);
+
+        ImageIcon iconMovie = new ImageIcon("Poo2-TRY-/Rayan/bookingTICKET/img/movie.png");
+        JLabel imageLabel = new JLabel(iconMovie);
+        imageLabel.setBounds(10, 20, 64, 64);
+
+        ForgotPasswordElements.add(imageLabel);
+
+        // Center Rectangle Panel
+        JPanel rectangleForgot = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+                g2d.setColor(new Color(0, 0, 0));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+                g2d.dispose();
+            }
+        };
+        rectangleForgot.setBounds(400, 100, 440, 620);
+        rectangleForgot.setLayout(null);
+        rectangleForgot.setOpaque(false);
+        ForgotPasswordElements.add(rectangleForgot);
+
+        // Title
+        JLabel titleLabel = new JLabel("Password Recovery");
+        titleLabel.setBounds(50, 40, 300, 50);
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 25));
+        titleLabel.setForeground(Color.white);
+        rectangleForgot.add(titleLabel);
+
+        // Username field
+        JTextField usernameField = new JTextField("Enter your username");
+        usernameField.setBounds(50, 120, 340, 40);
+        usernameField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        usernameField.setForeground(Color.black);
+        usernameField.setBackground(new Color(0xBBBBBB));
+        usernameField.setCaretColor(Color.white);
+        usernameField.setOpaque(true);
+        usernameField.setBorder(null);
+        TextfieldBehave(usernameField, "Enter your username");
+        rectangleForgot.add(usernameField);
+
+        // Security Question
+        JLabel questionLabel = new JLabel("Security Question: What is 15 + 7 ?");
+        questionLabel.setBounds(50, 190, 340, 30);
+        questionLabel.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        questionLabel.setForeground(Color.white);
+        rectangleForgot.add(questionLabel);
+
+        // Answer field
+        JTextField answerField = new JTextField("Enter your answer");
+        answerField.setBounds(50, 230, 340, 40);
+        answerField.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        answerField.setForeground(Color.black);
+        answerField.setBackground(new Color(0xBBBBBB));
+        answerField.setCaretColor(Color.white);
+        answerField.setOpaque(true);
+        answerField.setBorder(null);
+        TextfieldBehave(answerField, "Enter your answer");
+        rectangleForgot.add(answerField);
+
+        // Submit Button
+        JButton submitButton = new JButton("Submit");
+        submitButton.setBounds(50, 300, 340, 40);
+        submitButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        submitButton.setBackground(Color.red);
+        submitButton.setForeground(Color.white);
+        submitButton.setFocusPainted(false);
+        submitButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        submitButton.addActionListener(e -> {
+            if (answerField.getText().equals("22")) {
+                // Show password in a dialog
+                JOptionPane.showMessageDialog(ForgotPasswordElements,
+                        "Your password is: YourStoredPassword",
+                        "Password Recovery",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                MainCardLayout.show(MainPanel, "login");
+            } else {
+                JOptionPane.showMessageDialog(ForgotPasswordElements,
+                        "Incorrect answer. Please try again.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        rectangleForgot.add(submitButton);
+
+        // Return Button
+        JButton returnButton = new JButton("Return to log in");
+        returnButton.setBounds(50, 360, 340, 40);
+        returnButton.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        returnButton.setBackground(Color.gray);
+        returnButton.setForeground(Color.white);
+        returnButton.setFocusPainted(false);
+        returnButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        returnButton.addActionListener(e -> MainCardLayout.show(MainPanel, "log in"));
+        rectangleForgot.add(returnButton);
 
         return ForgotPasswordElements;
     }
@@ -365,6 +704,16 @@ public class CinemaApp extends JFrame {
         JPanel AccountAdminPanel = new JPanel();
 
         return AccountAdminPanel;
+    }
+
+    // handle events ------------------------------------------------------------------------
+    public void HandleLogIn(String email, String password) {
+        // handle log in
+    }
+
+    public void HandleSignIn(JTextField username, JPasswordField password, JTextField email, JTextField cardNumber, 
+    JTextField ccvnbr, JTextField PhoneNumber) {
+        // handle SignIn
     }
 
 
@@ -463,6 +812,11 @@ public class CinemaApp extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
     }
 
 
