@@ -5,7 +5,6 @@ import java.util.Timer;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -35,11 +34,9 @@ public class CinemaApp extends JFrame {
     // layout manager -----------------------------------------------------
     public CardLayout MainCardLayout;
     public CinemaApp() {
-       // setUndecorated(true); 
+      
        setTitle("POO_Movies");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       ImageIcon AppLogo = new ImageIcon("All\\bookingTICKET\\img\\Logo.png");
-       this.setIconImage(AppLogo.getImage());
        setBounds(100, 100, 1200, 750);
        setLocationRelativeTo(null);
        setResizable(false);
@@ -47,17 +44,16 @@ public class CinemaApp extends JFrame {
         MainCardLayout = new CardLayout();
         MainPanel = new JPanel(MainCardLayout);
 
-        WelcomePanel = createWelcomePanel();
-        MainPanel.add(WelcomePanel, "welcome");
 
 
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "welcome");
+
 
 
 
 
     }
+
 
 
 
