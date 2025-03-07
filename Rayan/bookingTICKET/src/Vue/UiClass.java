@@ -6,6 +6,7 @@ import Moodle.*;
 import Moodle.Movie.genre;
 import Moodle.Movie.statusFilm;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -14,6 +15,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.w3c.dom.events.MouseEvent;
 public class UiClass extends JFrame {
     public boolean userHasTyped; 
     public LocalTime localTime;
@@ -26,6 +28,16 @@ public class UiClass extends JFrame {
     public Accounts currentuser ;
     public Accounts currentadmin;  
 
+    
+
+    // Panels
+    public JPanel welcomePanel ;
+    public JPanel loginPanel ;
+    public JPanel registerPanel ;
+    public JPanel forgotPasswordPanel;
+    public JPanel homeUserPanel;
+    public JPanel homeAdminPanel ;
+    public JPanel UserInterface;
     
     public UiClass(){
         // Initialize Accounts in the constructor
@@ -46,12 +58,13 @@ public class UiClass extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        JPanel welcomePanel = createWelcomePanel();
-        JPanel loginPanel = createLoginPanel();
-        JPanel registerPanel = createRegisterPanel();
-        JPanel forgotPasswordPanel = createForgotPasswordPanel();
-        JPanel homeUserPanel = createHomeUserPanel(currentuser);
-        JPanel homeAdminPanel = createHomeAdminPanel(currentadmin);
+        welcomePanel = createWelcomePanel();
+        loginPanel = createLoginPanel();
+        registerPanel = createRegisterPanel();
+        forgotPasswordPanel = createForgotPasswordPanel();
+        homeUserPanel = createHomeUserPanel(currentuser);
+        homeAdminPanel = createHomeAdminPanel(currentadmin);
+        UserInterface = createInterfaceUserPanel();
 
         mainPanel.add(welcomePanel, "welcome");
         mainPanel.add(loginPanel, "login");
@@ -59,9 +72,10 @@ public class UiClass extends JFrame {
         mainPanel.add(forgotPasswordPanel, "forgotPassword");
         mainPanel.add(homeUserPanel, "homeUser");
         mainPanel.add(homeAdminPanel, "homeAdmin");
+        mainPanel.add(UserInterface, "interfaceUser");
 
         setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "homeUser");
+        cardLayout.show(mainPanel, "interfaceUser");
         
    
     }
@@ -1628,6 +1642,276 @@ public class UiClass extends JFrame {
     
 
         return homeAdminPanel;
+    }
+    public JPanel createInterfaceUserPanel(){
+        RoundedPanel panel = new RoundedPanel(10);
+        panel.setLayout(null);
+        panel.setBounds(0, 0, 1200, 750);
+        panel.setBackground(new Color(30 ,30 ,30));
+
+        int SCROLL_SPEED = 50;
+        JPanel ContentPanel = new JPanel();
+        ContentPanel.setLayout(null);
+        ContentPanel.setPreferredSize(new Dimension(1050, 1200));
+        ContentPanel.setBackground(new Color(30 ,30 ,30));
+
+        
+        JScrollPane scrollPane = new JScrollPane(ContentPanel);
+        scrollPane.setBounds(200, 0, 1050, 750);
+        scrollPane.setBorder(null);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getViewport().setBackground(new Color(30, 30, 30));
+        panel.add(scrollPane);
+
+        ContentPanel.addMouseWheelListener(e -> {
+            if (scrollPane != null) {
+                JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+                int currentValue = verticalScrollBar.getValue();
+                int scrollAmount = e.getWheelRotation() * SCROLL_SPEED;
+                verticalScrollBar.setValue(currentValue + scrollAmount);
+            }
+        });
+
+        RoundedPanel SearchBar = new RoundedPanel(30);
+        SearchBar.setLayout(null);
+        SearchBar.setBounds(150, 20, 640, 40);
+        SearchBar.setOpaque(false);
+        SearchBar.setBackground(Color.darkGray);
+        ContentPanel.add(SearchBar);
+
+        JTextField SearchText = new JTextField("  Search");
+        SearchText.setBounds(10, 5, 380, 30);
+        SearchText.setBackground(Color.darkGray);
+        SearchText.setForeground(Color.WHITE);
+        SearchText.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        SearchText.setBorder(null);
+        SearchText.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (SearchText.getText().equals("  Search")) {
+                    SwingUtilities.invokeLater(() -> {
+                        SearchText.setText("");
+                        SearchText.setForeground(Color.WHITE);
+                    });
+                }
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (SearchText.getText().isEmpty()) {
+                    SwingUtilities.invokeLater(() -> {
+                        SearchText.setText("  Search");
+                        SearchText.setForeground(Color.WHITE);
+                    });
+                }
+            }
+        });
+        SearchBar.add(SearchText);
+
+        JSeparator separator = new JSeparator();
+        separator.setOrientation(SwingConstants.HORIZONTAL);
+        separator.setForeground(Color.gray);
+        separator.setBounds(55, 70, 850, 1); // x, y, width, height
+        ContentPanel.add(separator);
+
+        RoundedButton TypeButton = new RoundedButton("All >" , 40);
+        TypeButton.setBounds(80, 20, 60, 40);
+        TypeButton.setOpaque(false);
+        TypeButton.setBackground(Color.darkGray);
+        TypeButton.setForeground(Color.WHITE);
+        TypeButton.setContentAreaFilled(false);
+        TypeButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        TypeButton.addActionListener(e->{
+            JOptionPane.showMessageDialog(panel, "Type");
+        });
+        ContentPanel.add(TypeButton);
+
+        RoundedPanel UserPanel = new RoundedPanel(20);
+        UserPanel.setLayout(null);
+        UserPanel.setBounds(820, 10, 80, 50);
+        UserPanel.setBackground(Color.darkGray);
+        ContentPanel.add(UserPanel);
+
+        JLabel UserLabel = new JLabel("User");
+        UserLabel.setBounds(40, 3, 30, 30);
+        UserLabel.setForeground(Color.WHITE);
+        UserLabel.setFont(new Font("Segoe UI", Font.BOLD, 10));
+        UserPanel.add(UserLabel);
+
+        RoundedPanel UserPHOTO = new RoundedPanel(80);
+        UserPHOTO.setLayout(null);
+        UserPHOTO.setBackgroundImage("Rayan\\bookingTICKET\\img\\UserIcon1.png");
+        UserPHOTO.setBounds(5, 10, 30, 30);
+        UserPHOTO.setBackground(Color.red);
+        UserPanel.add(UserPHOTO);
+
+
+        
+
+        
+
+        RoundedPanel LeftPanel = new RoundedPanel(20);
+        LeftPanel.setLayout(null);
+        LeftPanel.setBounds(30, 40, 160, 630);
+        LeftPanel.setBackground(Color.darkGray);
+        panel.add(LeftPanel);
+
+        JLabel LogoName = new JLabel("INEMATIC");
+        LogoName.setBounds(25, 6, 120, 50);
+        LogoName.setForeground(Color.WHITE);
+        LogoName.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        LeftPanel.add(LogoName);
+        JLabel CLogored = new JLabel("C");
+        CLogored.setBounds(15, 6, 120, 50);
+        CLogored.setForeground(Color.red);
+        CLogored.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        LeftPanel.add(CLogored);
+
+        RoundedButton HomeButton = new RoundedButton("Home", 20);
+        HomeButton.setBounds(20, 100, 120, 40);
+        HomeButton.setBackground(Color.darkGray);
+        HomeButton.setForeground(Color.WHITE);
+        HomeButton.setContentAreaFilled(false);
+        HomeButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        HomeButton.addActionListener(e->{
+            JOptionPane.showMessageDialog(panel, "Home");
+        });
+        LeftPanel.add(HomeButton);
+
+        RoundedButton HomeButton2 = new RoundedButton("Home", 20);
+        HomeButton2.setBounds(20, 200, 120, 40);
+        HomeButton2.setBackground(Color.darkGray);
+        HomeButton2.setForeground(Color.WHITE);
+        HomeButton2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        HomeButton2.addActionListener(e->{
+            JOptionPane.showMessageDialog(panel, "Home");
+        });
+        LeftPanel.add(HomeButton2);
+
+        JSeparator separator2 = new JSeparator();
+        separator2.setOrientation(SwingConstants.HORIZONTAL);
+        separator2.setForeground(Color.gray);
+        separator2.setBounds(22, 280, 120, 1); // x, y, width, height
+        LeftPanel.add(separator2);
+
+        RoundedButton HomeButton3 = new RoundedButton("Home", 20);
+        HomeButton3.setBounds(20, 300, 120, 40);
+        HomeButton3.setBackground(Color.darkGray);
+        HomeButton3.setForeground(Color.WHITE);
+        HomeButton3.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        HomeButton3.addActionListener(e->{
+            JOptionPane.showMessageDialog(panel, "Home");
+        });
+        LeftPanel.add(HomeButton3);
+
+        RoundedButton HomeButton4 = new RoundedButton("Home", 20);
+        HomeButton4.setBounds(20, 400, 120, 40);
+        HomeButton4.setBackground(Color.darkGray);
+        HomeButton4.setForeground(Color.WHITE);
+        HomeButton4.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        HomeButton4.addActionListener(e->{
+            JOptionPane.showMessageDialog(panel, "Home");
+        });
+        LeftPanel.add(HomeButton4);
+
+        RoundedPanel SlidePanelMovie = new RoundedPanel(20 ,true);
+        SlidePanelMovie.setLayout(null);
+        SlidePanelMovie.setGradient(400,new Color(0, 0, 0, 0),new Color(0, 0, 0, 230));
+        SlidePanelMovie.setBackgroundImage("Rayan/bookingTICKET/img/Spideman.jpg");
+        SlidePanelMovie.setBounds(64, 90, 800, 270);
+        SlidePanelMovie.setBackground(Color.darkGray);
+        ContentPanel.add(SlidePanelMovie);
+
+        JLabel MsgLabel = new JLabel("You Might Like") ;
+        MsgLabel.setBounds(64, 370, 200, 30);
+        MsgLabel.setForeground(Color.WHITE);
+        MsgLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        ContentPanel.add(MsgLabel);
+
+        File moviesFolder = new File("Rayan/bookingTICKET/img/Films/");
+        File[] imageFiles = moviesFolder.listFiles((dir, name) -> 
+            name.toLowerCase().endsWith(".jpg") || 
+            name.toLowerCase().endsWith(".png") || 
+            name.toLowerCase().endsWith(".jpeg"));
+
+        
+        int NbrsFilm = imageFiles != null ? imageFiles.length : 0;
+        int rowneeded = (NbrsFilm + 2) / 3; 
+        int heightneeded = rowneeded * 380; 
+        int neededit = heightneeded + 500; 
+        
+       
+        JPanel filmsGridPanel = new JPanel();
+        filmsGridPanel.setLayout(new GridLayout(rowneeded, 3, 60, 80)); 
+        filmsGridPanel.setBackground(new Color(30, 30, 30));
+        filmsGridPanel.setBounds(64, 420, 800, heightneeded);
+        
+        // Add films to grid
+        if (imageFiles != null) {
+         for (File imageFile : imageFiles) {
+            RoundedPanel filmPanel = new RoundedPanel(20, true);
+            String pathfilm = imageFile.getPath();
+            filmPanel.setBackgroundImage(pathfilm);
+            filmPanel.setLayout(null);
+            filmPanel.setGradient(300,new Color(0, 0, 0, 0),new Color(0, 0, 0, 230));
+            filmPanel.setPreferredSize(new Dimension(250, 350));
+            filmPanel.setBackground(new Color(24, 24, 24));
+            filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            filmPanel.setBorder(null);
+            
+            // Add hover effect
+            filmPanel.addMouseListener(new MouseAdapter() {
+                public void mouseEntered(MouseEvent e) {
+                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 2));
+                }
+                public void mouseExited(MouseEvent e) {
+                    filmPanel.setBorder(null);
+                }
+                public void mouseClicked(MouseEvent e) {
+                    JOptionPane.showMessageDialog(null, "Opening " + imageFile.getName());
+                }
+            });
+            
+            // Add title label
+            String movieTitle = imageFile.getName().replaceFirst("[.][^.]+$", "");
+            JLabel titleLabel = new JLabel(movieTitle);
+            titleLabel.setBounds(20, filmPanel.getPreferredSize().height +120, 230, 30);
+            titleLabel.setForeground(Color.WHITE);
+            titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+            filmPanel.add(titleLabel);
+
+            // Add the panel to the grid
+            filmsGridPanel.add(filmPanel);
+        }
+    }
+        
+        ContentPanel.setPreferredSize(new Dimension(1050, neededit));
+        ContentPanel.add(filmsGridPanel);
+
+
+
+
+
+
+
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+        return panel;
     }
 
    
