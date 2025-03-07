@@ -261,7 +261,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
 
         LogIn.addActionListener(e -> {
-            MainCardLayout.show(MainPanel, "log in");
+            MainCardLayout.show(MainPanel, "logIn");
         });
 
         WelcomeElements.add(LogIn);
@@ -285,7 +285,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
 
         SignIn.addActionListener(e -> {
-            MainCardLayout.show(MainPanel, "register");
+            MainCardLayout.show(MainPanel, "SignIn");
         });
 
         WelcomeElements.add(SignIn);
