@@ -162,7 +162,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         BackgroundPanel.setOpaque(false);
 
         // Blur panel--------------------------------------------------
-        this.BlurPanel = new TransparentPanel(0.5f);
+        this.BlurPanel = new TransparentPanel(0.75f);
         BlurPanel.setBounds(0, 0, 1200, 750);
         BlurPanel.setLayout(null);
         BlurPanel.setBackground(new java.awt.Color(0x2D3142));
