@@ -170,7 +170,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         // add the main panel to the JFrame ----------------------------------
         setContentPane(MainPanel);
-        MainCardLayout.show(MainPanel, "Buy");
+        MainCardLayout.show(MainPanel, "Welcome");
 
         // Revalidate and repaint to ensure the SettingsPanel is displayed
         this.revalidate();
