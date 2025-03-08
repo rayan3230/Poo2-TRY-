@@ -13,6 +13,11 @@ public class BookingManager {
     public ArrayList<Ticket> bookedTicket;
 
     public BookingManager() {
+        movieManager = new MovieManager();
+        theaterManager = new TheaterManager();
+        broadcastManager = new BroadcastManager();
+        clientManager = new ClientManager();
+        
         bookedTicket = new ArrayList<>();
     }
 

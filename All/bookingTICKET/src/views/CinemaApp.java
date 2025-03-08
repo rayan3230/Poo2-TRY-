@@ -8,12 +8,12 @@ import javax.swing.*;
 
 public class CinemaApp extends JFrame implements ActionListener {
     // Manager elements ------------------------------------------------
-    public MovieManager movieManager;
-    public ClientManager clientManager;
-    public AdminManager adminManager;
-    public TheaterManager theaterManager;
-    public BookingManager bookingManager;
-    public BroadcastManager broadcastManager;
+    public static MovieManager movieManager;
+    public static ClientManager clientManager;
+    public static AdminManager adminManager;
+    public static TheaterManager theaterManager;
+    public static BookingManager bookingManager;
+    public static BroadcastManager broadcastManager;
     
     // log in elements : ------------------------------------------------
     public JPanel WelcomePanel;
@@ -39,6 +39,14 @@ public class CinemaApp extends JFrame implements ActionListener {
     public CardLayout MainCardLayout;
 
     public CinemaApp() {
+        // Initialize managers
+        movieManager = new MovieManager();
+        clientManager = new ClientManager();
+        adminManager = new AdminManager();
+        theaterManager = new TheaterManager();
+        bookingManager = new BookingManager();
+        broadcastManager = new BroadcastManager();
+
       
        // Initialize components
        this.setTitle("MovieBooking App");
@@ -784,15 +792,38 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
 
         HomePanel.add(scrollPane, "home");
-        scrollPane.setVisible(true);
+        scrollPane.setVisible(false);
+
+        //Movie panel---------------------------------------------------------------
+        JPanel MoviePanel = CreateMoviePanel();
+
+        JScrollPane scrollPane2 = new JScrollPane(MoviePanel);
+        scrollPane2.setBounds(179, 85, 1009, 750);
+        scrollPane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane2.setOpaque(false);
+        scrollPane2.setBorder(null);
+
+        MoviePanel.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPane2.getVerticalScrollBar();// had scroll par rapport l y
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; // Adjust scroll speed
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        HomePanel.add(scrollPane2, "movies");
+        scrollPane2.setVisible(true);
 
         HomePanel.setComponentZOrder(scrollPane, 1);
+        HomePanel.setComponentZOrder(scrollPane2, 1);
         HomePanel.setComponentZOrder(LeftPanel, 0);
         HomePanel.setComponentZOrder(StraightLine, 0);
         HomePanel.setComponentZOrder(SearchBar, 0);
         HomePanel.setComponentZOrder(Filter, 0);
         HomePanel.setComponentZOrder(History, 0);
         HomePanel.setComponentZOrder(Account, 0);
+
+        
 
         return HomePanel;
     }
@@ -994,6 +1025,55 @@ public class CinemaApp extends JFrame implements ActionListener {
         return ContentPanel;
     }
 
+    public JPanel CreateMoviePanel(){
+        JPanel MoviePanel = new JPanel();
+        MoviePanel.setLayout(null);
+        MoviePanel.setOpaque(true);
+        MoviePanel.setBackground(new Color(0x121213));
+        MoviePanel.setPreferredSize(new Dimension(1009, 2250));
+
+        // All movies
+        JLabel AllMoviesLabel = new JLabel("Other Popular Movies");
+        AllMoviesLabel.setBounds(25, 20, 600, 30);
+        AllMoviesLabel.setFont(new Font("Inter", Font.BOLD, 17));
+        AllMoviesLabel.setForeground(Color.white);
+
+        MoviePanel.add(AllMoviesLabel);
+
+        RoundedPanel AllMoviesPanel = new RoundedPanel(35);
+        AllMoviesPanel.setBounds(25, 70, 950, MovieManager.movies.size() * 50 + MovieManager.movies.size() * 25);
+        AllMoviesPanel.setBackground(new Color(0x121213));
+        AllMoviesPanel.setLayout(new GridLayout(0, 4, 40, 25));
+
+        for (int i = 0; i < MovieManager.movies.size(); i++) {
+            RoundedPanel moviePanel = new RoundedPanel(15);
+            moviePanel.setBounds(0, 0, 200, 300);
+            moviePanel.setLayout(null);
+            moviePanel.setBackground(new Color(0x212121));
+
+            // Hayla hadi :-)
+            moviePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    moviePanel.setBorder(BorderFactory.createLineBorder(new Color(0xFF6700), 3));
+                }
+
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    moviePanel.setBorder(null);
+                }
+
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    JOptionPane.showMessageDialog(null, "Opening film details...");
+                }
+            });
+
+            AllMoviesPanel.add(moviePanel);
+        }
+
+        MoviePanel.add(AllMoviesPanel);
+        
+        return MoviePanel;
+    }
+    
     public JPanel CreateAdminInterface() {
         JPanel AdminElements = new JPanel();
 
