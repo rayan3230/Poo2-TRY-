@@ -11,7 +11,6 @@ public class MovieManager {
     public MovieManager(){
         
         movies = new ArrayList<>();
-
         
         // Create movies and broadcast
         Movie Movie1 = new Movie(0, "Avengers: Endgame", Movie.MovieGenre.Action, 3.02f,
@@ -158,7 +157,12 @@ public class MovieManager {
                 LocalDate.of(2017, 12, 20),
                 6.9f, Movie.MovieAgeRating.PG13, Movie.Language.VOSTFR, "Jumanji_Welcome_to_the_Jungle.png");
         
-                
+        Movie Movie25 = new Movie(24, "Invincible", Movie.MovieGenre.Action, 1.45f,
+                "Based on the comic book series by Robert Kirkman, Cory Walker, and Ryan Ottley, Invincible follows the story of Mark Grayson, a teenager who inherits superpowers from his father, the most powerful superhero on the planet.",
+                "Robert Kirkman", "Steven Yeun, J.K. Simmons, Sandra Oh",
+                LocalDate.of(2021, 3, 26),
+                9.7f, Movie.MovieAgeRating.PG18, Movie.Language.VOSTFR, "Invincible.png");
+        
         AddMovie(Movie1);
         AddMovie(Movie2);
         AddMovie(Movie3);
@@ -183,7 +187,7 @@ public class MovieManager {
         AddMovie(Movie22);
         AddMovie(Movie23);
         AddMovie(Movie24);
-
+        AddMovie(Movie25);
 
     }
     
@@ -210,6 +214,16 @@ public class MovieManager {
             System.out.println("Cast: " + movie.Cast);
             System.out.println("---------------------------------------------");
         }
+    }
+
+    public Movie GetBestRated() {
+        Movie bestRated = movies.get(0);
+        for (Movie movie : movies) {
+            if (movie.Rating > bestRated.Rating) {
+                bestRated = movie;
+            }
+        }
+        return bestRated;
     }
 
 
