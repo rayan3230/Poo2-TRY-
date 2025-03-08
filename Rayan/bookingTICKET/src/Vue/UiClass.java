@@ -6,7 +6,6 @@ import Moodle.*;
 import Moodle.Movie.genre;
 import Moodle.Movie.statusFilm;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -15,7 +14,6 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.w3c.dom.events.MouseEvent;
 public class UiClass extends JFrame {
     public boolean userHasTyped; 
     public LocalTime localTime;
@@ -43,7 +41,7 @@ public class UiClass extends JFrame {
         // Initialize Accounts in the constructor
         Accounts = new GestionAccounts();
         
-       // setUndecorated(true); 
+        setUndecorated(true); 
         setTitle("POO_Movies");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon AppLogo = new ImageIcon("Rayan\\bookingTICKET\\img\\Logo.png");
@@ -1647,13 +1645,13 @@ public class UiClass extends JFrame {
         RoundedPanel panel = new RoundedPanel(10);
         panel.setLayout(null);
         panel.setBounds(0, 0, 1200, 750);
-        panel.setBackground(new Color(30 ,30 ,30));
+        panel.setBackground(new Color(20 ,20 ,20));
 
         int SCROLL_SPEED = 50;
         JPanel ContentPanel = new JPanel();
         ContentPanel.setLayout(null);
         ContentPanel.setPreferredSize(new Dimension(1050, 1200));
-        ContentPanel.setBackground(new Color(30 ,30 ,30));
+        ContentPanel.setBackground(new Color(20 ,20 ,20));
 
         
         JScrollPane scrollPane = new JScrollPane(ContentPanel);
@@ -1754,7 +1752,7 @@ public class UiClass extends JFrame {
         RoundedPanel LeftPanel = new RoundedPanel(20);
         LeftPanel.setLayout(null);
         LeftPanel.setBounds(30, 40, 160, 630);
-        LeftPanel.setBackground(Color.darkGray);
+        LeftPanel.setBackground(new Color(35,35,35));
         panel.add(LeftPanel);
 
         JLabel LogoName = new JLabel("INEMATIC");
@@ -1768,26 +1766,33 @@ public class UiClass extends JFrame {
         CLogored.setFont(new Font("Segoe UI", Font.BOLD, 16));
         LeftPanel.add(CLogored);
 
-        RoundedButton HomeButton = new RoundedButton("Home", 20);
-        HomeButton.setBounds(20, 100, 120, 40);
-        HomeButton.setBackground(Color.darkGray);
+        RoundedButton HomeButton = new RoundedButton("  Home", 20);
+        HomeButton.setBounds(0, 100, 150, 40);
         HomeButton.setForeground(Color.WHITE);
+        HomeButton.setBackground(new Color(0, 0, 0, 0));
         HomeButton.setContentAreaFilled(false);
         HomeButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        HomeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                HomeButton.setBackground(Color.gray);
+                HomeButton.setBackground(new Color(0, 0, 0, 50));
+
+            }
+            
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                HomeButton.setBackground(new Color(0, 0, 0, 0));
+                
+            }
+        });
+        JLabel IconButton1 = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\Homeicon.png", 30, 30));
+        IconButton1.setBounds(20, 104, 30, 30);
+        LeftPanel.add(IconButton1);
         HomeButton.addActionListener(e->{
             JOptionPane.showMessageDialog(panel, "Home");
         });
         LeftPanel.add(HomeButton);
 
-        RoundedButton HomeButton2 = new RoundedButton("Home", 20);
-        HomeButton2.setBounds(20, 200, 120, 40);
-        HomeButton2.setBackground(Color.darkGray);
-        HomeButton2.setForeground(Color.WHITE);
-        HomeButton2.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        HomeButton2.addActionListener(e->{
-            JOptionPane.showMessageDialog(panel, "Home");
-        });
-        LeftPanel.add(HomeButton2);
+
 
         JSeparator separator2 = new JSeparator();
         separator2.setOrientation(SwingConstants.HORIZONTAL);
@@ -1795,33 +1800,44 @@ public class UiClass extends JFrame {
         separator2.setBounds(22, 280, 120, 1); // x, y, width, height
         LeftPanel.add(separator2);
 
-        RoundedButton HomeButton3 = new RoundedButton("Home", 20);
-        HomeButton3.setBounds(20, 300, 120, 40);
-        HomeButton3.setBackground(Color.darkGray);
-        HomeButton3.setForeground(Color.WHITE);
-        HomeButton3.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        HomeButton3.addActionListener(e->{
-            JOptionPane.showMessageDialog(panel, "Home");
-        });
-        LeftPanel.add(HomeButton3);
 
-        RoundedButton HomeButton4 = new RoundedButton("Home", 20);
-        HomeButton4.setBounds(20, 400, 120, 40);
-        HomeButton4.setBackground(Color.darkGray);
-        HomeButton4.setForeground(Color.WHITE);
-        HomeButton4.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        HomeButton4.addActionListener(e->{
-            JOptionPane.showMessageDialog(panel, "Home");
-        });
-        LeftPanel.add(HomeButton4);
+
 
         RoundedPanel SlidePanelMovie = new RoundedPanel(20 ,true);
         SlidePanelMovie.setLayout(null);
         SlidePanelMovie.setGradient(400,new Color(0, 0, 0, 0),new Color(0, 0, 0, 230));
-        SlidePanelMovie.setBackgroundImage("Rayan/bookingTICKET/img/Spideman.jpg");
+        SlidePanelMovie.setBackgroundImage("Rayan/bookingTICKET/img/IntoTheSpiderVerse.jpg");
         SlidePanelMovie.setBounds(64, 90, 800, 270);
         SlidePanelMovie.setBackground(Color.darkGray);
         ContentPanel.add(SlidePanelMovie);
+
+        RoundedButton Gotodetails = new RoundedButton("More About :", 40);
+        Gotodetails.setBounds(180, 200, 130, 40);
+        Gotodetails.setBackground(Color.BLACK);
+        Gotodetails.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        Gotodetails.setForeground(Color.gray);
+        Gotodetails.setBorderPainted(false);
+        Gotodetails.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        Gotodetails.addActionListener(e->{
+            JOptionPane.showMessageDialog(panel, "Details");
+        });
+        SlidePanelMovie.add(Gotodetails);
+
+        RoundedButton BookNow = new RoundedButton("Book Now ", 40);
+        BookNow.setBounds(40, 200, 130, 37);
+        BookNow.setBackground(Color.white);
+        BookNow.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        BookNow.setForeground(Color.black);
+        BookNow.setBorderPainted(false);
+        BookNow.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        BookNow.addActionListener(e->{
+            JOptionPane.showMessageDialog(panel, "Details");
+        });
+        SlidePanelMovie.add(BookNow);
+
+
+
 
         JLabel MsgLabel = new JLabel("You Might Like") ;
         MsgLabel.setBounds(64, 370, 200, 30);
@@ -1837,17 +1853,18 @@ public class UiClass extends JFrame {
 
         
         int NbrsFilm = imageFiles != null ? imageFiles.length : 0;
-        int rowneeded = (NbrsFilm + 2) / 3; 
-        int heightneeded = rowneeded * 380; 
-        int neededit = heightneeded + 500; 
+        int columns = 3; 
+        int rowneeded = (int) Math.ceil((double)NbrsFilm / columns);
+        int heightneeded = rowneeded * 320; 
+        int neededit = heightneeded + 500;
         
-       
         JPanel filmsGridPanel = new JPanel();
-        filmsGridPanel.setLayout(new GridLayout(rowneeded, 3, 60, 80)); 
-        filmsGridPanel.setBackground(new Color(30, 30, 30));
+       
+        filmsGridPanel.setLayout(new GridLayout(0, columns, 60, 80)); 
+        filmsGridPanel.setBackground(new Color(20, 20, 20));
         filmsGridPanel.setBounds(64, 420, 800, heightneeded);
         
-        // Add films to grid
+        
         if (imageFiles != null) {
          for (File imageFile : imageFiles) {
             RoundedPanel filmPanel = new RoundedPanel(20, true);
@@ -1860,28 +1877,15 @@ public class UiClass extends JFrame {
             filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
             filmPanel.setBorder(null);
             
-            // Add hover effect
-            filmPanel.addMouseListener(new MouseAdapter() {
-                public void mouseEntered(MouseEvent e) {
-                    filmPanel.setBorder(BorderFactory.createLineBorder(Color.red, 2));
-                }
-                public void mouseExited(MouseEvent e) {
-                    filmPanel.setBorder(null);
-                }
-                public void mouseClicked(MouseEvent e) {
-                    JOptionPane.showMessageDialog(null, "Opening " + imageFile.getName());
-                }
-            });
             
-            // Add title label
             String movieTitle = imageFile.getName().replaceFirst("[.][^.]+$", "");
             JLabel titleLabel = new JLabel(movieTitle);
-            titleLabel.setBounds(20, filmPanel.getPreferredSize().height +120, 230, 30);
+            titleLabel.setBounds(20, filmPanel.getPreferredSize().height +30, 230, 30);
             titleLabel.setForeground(Color.WHITE);
             titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
             filmPanel.add(titleLabel);
 
-            // Add the panel to the grid
+            
             filmsGridPanel.add(filmPanel);
         }
     }
