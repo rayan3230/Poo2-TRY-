@@ -7,8 +7,10 @@ public class GestionAccounts {
     public ArrayList<Accounts> AdminAccounts = new ArrayList<>();
 
     public GestionAccounts(){
-        accounts.add(new Accounts("q", "q", "q@gmail.com", 1234567890, 123));
-        // Add admin account
+        accounts.add(new Accounts("Rayan3230", "q", "q@gmail.com", 1234567890, 123));
+        accounts.add(new Accounts("Wassim222", "w", "" + 1234567890, 1234567890, 123));
+        
+        
         AdminAccounts.add(new Accounts("admin", "admin", "admin@gmail.com", 0, 0));
     }
     
