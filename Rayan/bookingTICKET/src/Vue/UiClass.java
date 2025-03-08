@@ -6,6 +6,8 @@ import Moodle.*;
 import Moodle.Movie.genre;
 import Moodle.Movie.statusFilm;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -36,6 +38,7 @@ public class UiClass extends JFrame {
     public JPanel homeUserPanel;
     public JPanel homeAdminPanel ;
     public JPanel UserInterface;
+    public JPanel AdminInterface;
     
     public UiClass(){
         // Initialize Accounts in the constructor
@@ -63,6 +66,7 @@ public class UiClass extends JFrame {
         homeUserPanel = createHomeUserPanel(currentuser);
         homeAdminPanel = createHomeAdminPanel(currentadmin);
         UserInterface = createInterfaceUserPanel();
+        AdminInterface = createInterfaceAdminPanel();
 
         mainPanel.add(welcomePanel, "welcome");
         mainPanel.add(loginPanel, "login");
@@ -71,9 +75,10 @@ public class UiClass extends JFrame {
         mainPanel.add(homeUserPanel, "homeUser");
         mainPanel.add(homeAdminPanel, "homeAdmin");
         mainPanel.add(UserInterface, "interfaceUser");
+        mainPanel.add(AdminInterface, "interfaceAdmin");
 
         setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "interfaceUser");
+        cardLayout.show(mainPanel, "interfaceAdmin");
         
    
     }
@@ -1922,7 +1927,230 @@ public class UiClass extends JFrame {
 
         return panel;
     }
+    public JPanel createInterfaceAdminPanel(){
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBounds(0, 0, 1050, 750);
+        panel.setBackground(new Color(20, 20, 20));
 
+        JPanel LeftPanel = new JPanel();
+        LeftPanel.setLayout(null);
+        LeftPanel.setBounds(0, 0, 200, 750);
+        LeftPanel.setBackground(new Color(30 , 30 ,30));
+        panel.add(LeftPanel);
+
+        JLabel LogoName = new JLabel("INEMATIC");
+        LogoName.setBounds(55, 6, 120, 50);
+        LogoName.setForeground(Color.WHITE);
+        LogoName.setFont(new Font("Bebas Neue", Font.BOLD, 18));
+        LeftPanel.add(LogoName);
+        JLabel CLogored = new JLabel("C");
+        CLogored.setBounds(41, 21, 30, 20);
+        CLogored.setForeground(Color.red);
+        CLogored.setFont(new Font("Bebas Neue", Font.BOLD, 18));
+        LeftPanel.add(CLogored);
+
+
+
+
+
+        JSeparator separator1 = new JSeparator();
+        separator1.setOrientation(SwingConstants.VERTICAL);
+        separator1.setBackground(Color.white);
+        separator1.setForeground(Color.white);
+        separator1.setBounds(198, 0, 5, 750);
+        LeftPanel.add(separator1);
+
+
+        JPanel MiddlePanel = new JPanel();
+        MiddlePanel.setLayout(null);
+        MiddlePanel.setBounds(200, 0, 780, 750);
+        MiddlePanel.setBackground(new Color(30 , 30 ,30));
+        panel.add(MiddlePanel);
+
+        JPanel BroadcastDashboard = new JPanel();
+        BroadcastDashboard.setLayout(null);
+        BroadcastDashboard.setBounds(0, 0, 780, 750);
+        BroadcastDashboard.setBackground(new Color(30 , 30 ,30));
+        MiddlePanel.add(BroadcastDashboard);
+
+        JLabel Broadcastlbl = new JLabel("Broadcast  Dashboard");
+        Broadcastlbl.setBounds(50, 30, 300, 30);
+        Broadcastlbl.setForeground(Color.WHITE);
+        Broadcastlbl.setFont(new Font("Bebas Neue", Font.BOLD, 23));
+        BroadcastDashboard.add(Broadcastlbl);
+
+        RoundedPanel UserPanel = new RoundedPanel(50);
+        UserPanel.setLayout(null);
+        UserPanel.setBounds(670, 20, 90, 46);
+        UserPanel.setBackground(Color.darkGray);
+        BroadcastDashboard.add(UserPanel);
+
+        JLabel UserLabel = new JLabel("User");
+        UserLabel.setBounds(40, 3, 30, 30);
+        UserLabel.setForeground(Color.WHITE);
+        UserLabel.setFont(new Font("Segoe UI", Font.BOLD, 10));
+        UserPanel.add(UserLabel);
+
+        RoundedPanel UserPHOTO = new RoundedPanel(80);
+        UserPHOTO.setLayout(null);
+        UserPHOTO.setBackgroundImage("Rayan\\bookingTICKET\\img\\UserIcon1.png");
+        UserPHOTO.setBounds(5, 10, 30, 30);
+        UserPHOTO.setBackground(Color.red);
+        UserPanel.add(UserPHOTO);
+
+        RoundedPanel SearchPanel = new RoundedPanel(30);
+        SearchPanel.setLayout(null);
+        SearchPanel.setBounds(300, 100, 460, 35);
+        SearchPanel.setBackground(new Color(30, 30, 30));
+        SearchPanel.setRoundedBorder(Color.WHITE, 1);
+        BroadcastDashboard.add(SearchPanel);
+
+        JTextField SearchField = new JTextField("Search with Theater");
+        SearchField.setBounds(10, 5, 400, 25);
+        SearchField.setBackground(new Color(30, 30, 30));
+        SearchField.setForeground(Color.WHITE);
+        SearchField.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        SearchField.setBorder(null);
+        TextfieldBehave(SearchField, "Search with Theater");
+        SearchPanel.add(SearchField);
+
+        JLabel Movielbl = new JLabel("   Movie");
+        Movielbl.setBounds(200, 157, 200, 30);
+        Movielbl.setForeground(Color.WHITE);
+        Movielbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        BroadcastDashboard.add(Movielbl);
+
+        JLabel Theaterlbl = new JLabel("Theater");
+        Theaterlbl.setBounds(420, 157, 200, 30);
+        Theaterlbl.setForeground(Color.WHITE);
+        Theaterlbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        BroadcastDashboard.add(Theaterlbl);
+
+        JLabel Datelbl = new JLabel("Date");
+        Datelbl.setBounds(640, 157, 200, 30);
+        Datelbl.setForeground(Color.WHITE);
+        Datelbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        BroadcastDashboard.add(Datelbl);  
+
+        JLabel Selectlbl = new JLabel("Select");
+        Selectlbl.setBounds(60, 157, 200, 30);
+        Selectlbl.setForeground(Color.WHITE);
+        Selectlbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        BroadcastDashboard.add(Selectlbl);
+
+        JSeparator separatorhorBroad = new JSeparator();
+        separatorhorBroad.setOrientation(SwingConstants.HORIZONTAL);
+        separatorhorBroad.setBackground(Color.white);
+        separatorhorBroad.setForeground(Color.white); 
+        separatorhorBroad.setBounds(25, 190, 730, 1);
+        BroadcastDashboard.add(separatorhorBroad);
+
+
+        JPanel movieDashboard = new JPanel();
+        movieDashboard.setLayout(null);
+        movieDashboard.setBounds(0, 0, 780, 750);
+        movieDashboard.setBackground(Color.pink);
+        MiddlePanel.add(movieDashboard);
+
+
+
+        JPanel UserInsightsDashboard = new JPanel();
+        UserInsightsDashboard.setLayout(null);
+        UserInsightsDashboard.setBounds(0, 0, 780, 750);
+        UserInsightsDashboard.setBackground(Color.red);
+        MiddlePanel.add(UserInsightsDashboard);
+
+        JPanel cardContainer = new JPanel();
+        cardContainer.setLayout(new CardLayout());
+        cardContainer.setBounds(0, 0, 777, 750);
+        cardContainer.add(BroadcastDashboard, "broadcast");
+        cardContainer.add(movieDashboard, "movies");
+        cardContainer.add(UserInsightsDashboard, "users");
+
+        ((CardLayout) cardContainer.getLayout()).show(cardContainer, "broadcast");
+
+
+        MiddlePanel.setLayout(null);
+        MiddlePanel.add(cardContainer);
+
+
+        JSeparator separator2 = new JSeparator();
+        separator2.setOrientation(SwingConstants.VERTICAL);
+        separator2.setBackground(Color.white);
+        separator2.setForeground(Color.white); // Add this line
+        separator2.setBounds(778, 0, 2, 750);
+        MiddlePanel.add(separator2);
+
+
+        RoundedButton broadcastButton = new RoundedButton("Broadcast", 20);
+        broadcastButton.setBounds(20, 100, 160, 40);
+        broadcastButton.setForeground(Color.WHITE);
+        broadcastButton.setBackground(new Color(0, 0, 0, 0));
+        broadcastButton.setContentAreaFilled(false);
+        broadcastButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        broadcastButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "broadcast"));
+        broadcastButton.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                broadcastButton.setBackground(new Color(40, 40, 40));
+                broadcastButton.setContentAreaFilled(true);
+            }
+            public void mouseExited(MouseEvent e) {
+                broadcastButton.setBackground(new Color(0, 0, 0, 0));
+                broadcastButton.setContentAreaFilled(false);
+            }
+        });
+        LeftPanel.add(broadcastButton);
+
+        RoundedButton moviesButton = new RoundedButton("Movies", 20);
+        moviesButton.setBounds(20, 160, 160, 40);
+        moviesButton.setForeground(Color.WHITE);
+        moviesButton.setBackground(new Color(0, 0, 0, 0));
+        moviesButton.setContentAreaFilled(false);
+        moviesButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        moviesButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "movies"));
+        moviesButton.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                moviesButton.setBackground(new Color(40, 40, 40));
+                moviesButton.setContentAreaFilled(true);
+            }
+            public void mouseExited(MouseEvent e) {
+                moviesButton.setBackground(new Color(0, 0, 0, 0));
+                moviesButton.setContentAreaFilled(false);
+            }
+        });
+        LeftPanel.add(moviesButton);
+
+        RoundedButton usersButton = new RoundedButton("Users", 20);
+        usersButton.setBounds(20, 220, 160, 40);
+        usersButton.setForeground(Color.WHITE);
+        usersButton.setBackground(new Color(0, 0, 0, 0));
+        usersButton.setContentAreaFilled(false);
+        usersButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        usersButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "users"));
+        usersButton.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                usersButton.setBackground(new Color(40, 40, 40));
+                usersButton.setContentAreaFilled(true);
+            }
+            public void mouseExited(MouseEvent e) {
+                usersButton.setBackground(new Color(0, 0, 0, 0));
+                usersButton.setContentAreaFilled(false);
+            }
+        });
+        LeftPanel.add(usersButton);
+
+        JPanel RightPanel = new JPanel();
+        RightPanel.setLayout(null);
+        RightPanel.setBounds(980, 0, 270, 750);
+        RightPanel.setBackground(new Color(30 , 30 ,30));//new Color(30 , 30 ,30)
+        panel.add(RightPanel);
+
+
+
+
+        return panel;
+    }
    
 
     public void HandleLogin(String email, String password ){

@@ -11,6 +11,9 @@ public class RoundedPanel extends JPanel {
     private int gradientHeight;
     private Color gradientStartColor;
     private Color gradientEndColor;
+    private boolean hasBorder;
+    private float borderThickness;
+    private Color borderColor;
 
     public RoundedPanel(int radius) {
         this(radius, false);
@@ -23,8 +26,20 @@ public class RoundedPanel extends JPanel {
         this.gradientStartColor = new Color(0, 0, 0, 0);
         this.gradientEndColor = new Color(0, 0, 0, 230);
         setOpaque(false);
+        this.hasBorder = false;
+        this.borderThickness = 1;
+        this.borderColor = Color.WHITE;
     }
-
+    public void setRoundedBorder(Color color, float thickness) {
+        this.hasBorder = true;
+        this.borderColor = color;
+        this.borderThickness = thickness;
+        repaint();
+    }
+    public void removeBorder() {
+        this.hasBorder = false;
+        repaint();
+    }
     public void setGradient(int height, Color startColor, Color endColor) {
         this.gradientHeight = height;
         this.gradientStartColor = startColor;
@@ -52,8 +67,15 @@ public class RoundedPanel extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     
         // Create the round rectangle shape
-        RoundRectangle2D roundedRect = new RoundRectangle2D.Double(0, 0, getWidth()-1, getHeight()-1, radius, radius);
-        
+        RoundRectangle2D roundedRect = new RoundRectangle2D.Double(
+            borderThickness/2.0, 
+            borderThickness/2.0, 
+            getWidth() - borderThickness, 
+            getHeight() - borderThickness, 
+            radius, 
+            radius
+        );
+    
         // Set the clip to ensure everything is drawn within rounded borders
         g2.setClip(roundedRect);
     
@@ -74,20 +96,18 @@ public class RoundedPanel extends JPanel {
             // Fill with background color if no image
             g2.setColor(getBackground());
             g2.fill(roundedRect);
-            
-            // Log warning if image was attempted to be set but failed
-            if (getBackground() == null) {
-                System.out.println("Warning: No background image or color set");
-            }
         }
     
-        // Draw border
-        g2.setColor(getForeground());
-        g2.draw(roundedRect);
+        // Draw border if enabled
+        if (hasBorder) {
+            g2.setClip(null);
+            g2.setStroke(new BasicStroke(borderThickness));
+            g2.setColor(borderColor);
+            g2.draw(roundedRect);
+        }
     
         g2.dispose();
     }
-
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(200, 200); // Default size, can be overridden
