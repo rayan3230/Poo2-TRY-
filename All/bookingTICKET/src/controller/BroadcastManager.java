@@ -13,6 +13,9 @@ public class BroadcastManager {
 
 
     public BroadcastManager() {
+        movieManager = new MovieManager();
+        theaterManager = new TheaterManager();
+        
         broadcasts = new ArrayList<>();
     
         Broadcast Broadcast1 = new Broadcast(movieManager.movies.get(0), theaterManager.theaters.get(0), LocalDate.of(2025, 3, 1));

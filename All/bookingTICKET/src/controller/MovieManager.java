@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class MovieManager {
     
-    public ArrayList<Movie> movies;
+    public static ArrayList<Movie> movies;
 
     public MovieManager(){
         
