@@ -41,7 +41,7 @@ public class UiClass extends JFrame {
         // Initialize Accounts in the constructor
         Accounts = new GestionAccounts();
         
-        setUndecorated(true); 
+        //setUndecorated(true); 
         setTitle("POO_Movies");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon AppLogo = new ImageIcon("Rayan\\bookingTICKET\\img\\Logo.png");
@@ -73,7 +73,7 @@ public class UiClass extends JFrame {
         mainPanel.add(UserInterface, "interfaceUser");
 
         setContentPane(mainPanel);
-        cardLayout.show(mainPanel, "homeAdmin");
+        cardLayout.show(mainPanel, "interfaceUser");
         
    
     }
@@ -1806,7 +1806,7 @@ public class UiClass extends JFrame {
         RoundedPanel SlidePanelMovie = new RoundedPanel(20 ,true);
         SlidePanelMovie.setLayout(null);
         SlidePanelMovie.setGradient(400,new Color(0, 0, 0, 0),new Color(0, 0, 0, 230));
-        SlidePanelMovie.setBackgroundImage("Rayan/bookingTICKET/img/IntoTheSpiderVerse.jpg");
+        SlidePanelMovie.setBackgroundImage("Rayan/bookingTICKET/img/Spiderman.png");
         SlidePanelMovie.setBounds(64, 90, 800, 270);
         SlidePanelMovie.setBackground(Color.darkGray);
         ContentPanel.add(SlidePanelMovie);
@@ -1832,7 +1832,7 @@ public class UiClass extends JFrame {
         BookNow.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         BookNow.addActionListener(e->{
-            JOptionPane.showMessageDialog(panel, "Details");
+            JOptionPane.showMessageDialog(panel, "book soon when you Have enough money"," Error", JOptionPane.ERROR_MESSAGE);
         });
         SlidePanelMovie.add(BookNow);
 
@@ -1876,11 +1876,16 @@ public class UiClass extends JFrame {
             filmPanel.setBackground(new Color(24, 24, 24));
             filmPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
             filmPanel.setBorder(null);
+            filmPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    JOptionPane.showMessageDialog(panel, "Coming Soon!");
+                }
+            });
             
             
             String movieTitle = imageFile.getName().replaceFirst("[.][^.]+$", "");
             JLabel titleLabel = new JLabel(movieTitle);
-            titleLabel.setBounds(20, filmPanel.getPreferredSize().height +30, 230, 30);
+            titleLabel.setBounds(20, filmPanel.getPreferredSize().height + 30, 230, 30);
             titleLabel.setForeground(Color.WHITE);
             titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
             filmPanel.add(titleLabel);
