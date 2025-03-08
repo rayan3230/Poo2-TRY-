@@ -1,5 +1,6 @@
 package views;
 
+import Model.*;
 import controller.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +15,9 @@ public class CinemaApp extends JFrame implements ActionListener {
     public static TheaterManager theaterManager;
     public static BookingManager bookingManager;
     public static BroadcastManager broadcastManager;
+
+    // Main elements : ------------------------------------------------
+    public static Movie CurrentMovie;
     
     // log in elements : ------------------------------------------------
     public JPanel WelcomePanel;
@@ -150,7 +154,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         JPanel AccountAdminPanel = CreateAccountAdminPanel();
 
         //buy panel--------------------------------------------------------
-        JPanel BuyPanel = CreateBuyPanel();
+        JPanel BuyPanel = CreateBuyPanel(CurrentMovie);
 
 
         // add panels to the main panel ----------------------------------------
@@ -2251,7 +2255,7 @@ public class CinemaApp extends JFrame implements ActionListener {
     }
 
 
-    public JPanel CreateBuyPanel(){
+    public JPanel CreateBuyPanel(Movie movie){
         JPanel BuyPanel = new JPanel();
         BuyPanel.setLayout(null);
         BuyPanel.setBounds(0, 0, 1200, 750);
