@@ -1,7 +1,8 @@
 package controller;
 
-import java.util.ArrayList;
 import Model.*;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class AdminManager {
 
@@ -46,6 +47,45 @@ public class AdminManager {
         //If client credentials don't match, return null
         return null;
     }
+    
+    static public void addAdmin(String name,String email,String password,Boolean status) {
+        String sql = "INSERT INTO admins (Name, Email, Password,Status) VALUES ('"
+                 + name + "', '" + email + "', '" + password + "', " + status +  ")";
+    
+    try (Connection conn = DatabaseConnection.connect();
+         Statement stmt = conn.createStatement()) {
+        
+        int rowsInserted = stmt.executeUpdate(sql); // Directly executing SQL query
+        
+        if (rowsInserted > 0) {
+            System.out.println("Admin added successfully!");
+        }
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
 
+    }
+
+
+        static public void removeAdmin(int AdminID) {
+        String sql = "DELETE FROM admins WHERE AdminID = " + AdminID;
+
+        try (Connection conn = DatabaseConnection.connect();
+        Statement stmt = conn.createStatement()) {
+        
+            int rowsDeleted = stmt.executeUpdate(sql);
+            if (rowsDeleted > 0) {
+                System.out.println("Admin deleted successfully!");
+            }else {
+                System.out.println("Admin not found. No deletion performed.");
+            }    
+            
+        }
+         catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
