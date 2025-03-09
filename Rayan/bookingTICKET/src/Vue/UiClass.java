@@ -25,10 +25,10 @@ public class UiClass extends JFrame {
     public String pathfilm ;
     public GestionMovie movies = new GestionMovie();
     public GestionBroadcast broadcasts = new GestionBroadcast();
+    public GestionAccounts Accounts = new GestionAccounts();
     public JPanel mainPanel;
     public JPanel ContentAdminPanel;
     public CardLayout cardLayout;
-    public GestionAccounts Accounts;  
     public Accounts currentuser ;
     public Accounts currentadmin;  
 
@@ -1937,6 +1937,9 @@ public class UiClass extends JFrame {
         panel.setBounds(0, 0, 1050, 750);
         panel.setBackground(new Color(20, 20, 20));
 
+
+
+//---------------------------left panel------------------------------
         JPanel LeftPanel = new JPanel();
         LeftPanel.setLayout(null);
         LeftPanel.setBounds(0, 0, 170, 750);
@@ -1965,12 +1968,16 @@ public class UiClass extends JFrame {
         separator1.setBounds(168, 0, 5, 750);
         LeftPanel.add(separator1);
 
+ //--------------------------Middle Panel--------------------------------
+
 
         JPanel MiddlePanel = new JPanel();
         MiddlePanel.setLayout(null);
         MiddlePanel.setBounds(170, 0, 750, 750);
         MiddlePanel.setBackground(new Color(30 , 30 ,30));
         panel.add(MiddlePanel);
+
+     //---------------About Broadcast--------------------------------
 
         JPanel BroadcastDashboard = new JPanel();
         BroadcastDashboard.setLayout(null);
@@ -2010,54 +2017,55 @@ public class UiClass extends JFrame {
         SearchPanel.setRoundedBorder(Color.WHITE, 1);
         BroadcastDashboard.add(SearchPanel);
 
-        JTextField SearchField = new JTextField("Search with Theater");
-        SearchField.setBounds(10, 5, 400, 25);
-        SearchField.setBackground(new Color(30, 30, 30));
-        SearchField.setForeground(Color.WHITE);
-        SearchField.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        SearchField.setBorder(null);
-        TextfieldBehave(SearchField, "Search with Theater");
-        SearchPanel.add(SearchField);
+        JTextField SearchFieldbroadcast = new JTextField("Search with Theater");
+        SearchFieldbroadcast.setBounds(10, 5, 400, 25);
+        SearchFieldbroadcast.setBackground(new Color(30, 30, 30));
+        SearchFieldbroadcast.setForeground(Color.WHITE);
+        SearchFieldbroadcast.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        SearchFieldbroadcast.setBorder(null);
+        TextfieldBehave(SearchFieldbroadcast, "Search with Theater");
+        SearchPanel.add(SearchFieldbroadcast);
 
-        JLabel Movielbl = new JLabel("   Movie");
-        Movielbl.setBounds(200, 157, 200, 30);
-        Movielbl.setForeground(Color.WHITE);
-        Movielbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        BroadcastDashboard.add(Movielbl);
+        JLabel Movielblbroad = new JLabel("   Movie");
+        Movielblbroad.setBounds(200, 157, 200, 30);
+        Movielblbroad.setForeground(Color.WHITE);
+        Movielblbroad.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        BroadcastDashboard.add(Movielblbroad);
 
-        JLabel Theaterlbl = new JLabel("Theater");
-        Theaterlbl.setBounds(420, 157, 200, 30);
-        Theaterlbl.setForeground(Color.WHITE);
-        Theaterlbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        BroadcastDashboard.add(Theaterlbl);
+        JLabel Theaterlblbroad = new JLabel("Theater");
+        Theaterlblbroad.setBounds(420, 157, 200, 30);
+        Theaterlblbroad.setForeground(Color.WHITE);
+        Theaterlblbroad.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        BroadcastDashboard.add(Theaterlblbroad);
 
-        JLabel Datelbl = new JLabel("Date");
-        Datelbl.setBounds(640, 157, 200, 30);
-        Datelbl.setForeground(Color.WHITE);
-        Datelbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        BroadcastDashboard.add(Datelbl);  
+        JLabel Datelblbroad = new JLabel("Date");
+        Datelblbroad.setBounds(640, 157, 200, 30);
+        Datelblbroad.setForeground(Color.WHITE);
+        Datelblbroad.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        BroadcastDashboard.add(Datelblbroad);  
 
-        JLabel Selectlbl = new JLabel("Select");
-        Selectlbl.setBounds(60, 157, 200, 30);
-        Selectlbl.setForeground(Color.WHITE);
-        Selectlbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        BroadcastDashboard.add(Selectlbl);
+        JLabel SelectlblBroad = new JLabel("Select");
+        SelectlblBroad.setBounds(60, 157, 200, 30);
+        SelectlblBroad.setForeground(Color.WHITE);
+        SelectlblBroad.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        BroadcastDashboard.add(SelectlblBroad);
 
+   
         JPanel Broadcast = new JPanel();
         Broadcast.setLayout(null);
         Broadcast.setBounds(35, 200, 700, 440);
         Broadcast.setBackground(new Color(30, 30, 30));
         
 
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(null);
-        contentPanel.setBackground(new Color(30, 30, 30));
+        JPanel contentPanelBroad = new JPanel();
+        contentPanelBroad.setLayout(null);
+        contentPanelBroad.setBackground(new Color(30, 30, 30));
 
 
-        int totalHeight = broadcasts.broadcasts.size() * 50; 
-        contentPanel.setPreferredSize(new Dimension(650, Math.max(500, totalHeight)));
+        int totalHeightBroad = broadcasts.broadcasts.size() * 50; 
+        contentPanelBroad.setPreferredSize(new Dimension(650, Math.max(500, totalHeightBroad)));
 
-        ArrayList<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+        ArrayList<JCheckBox> checkBoxesBroadcast = new ArrayList<JCheckBox>();
 
         for(int i = 0; i < broadcasts.broadcasts.size(); i++) {
             JPanel broadcastRow = new JPanel();
@@ -2091,57 +2099,57 @@ public class UiClass extends JFrame {
             selectCheckBox.setForeground(Color.white);
             selectCheckBox.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
             broadcastRow.add(selectCheckBox);
-            checkBoxes.add(selectCheckBox);
+            checkBoxesBroadcast.add(selectCheckBox);
 
-            contentPanel.add(broadcastRow);
+            contentPanelBroad.add(broadcastRow);
         }
 
       
-        JScrollPane scrollPanel = new JScrollPane(contentPanel);
-        scrollPanel.setBounds(35, 200, 700, 440);
-        scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPanel.setBorder(null);
-        scrollPanel.getVerticalScrollBar().setUnitIncrement(16);
-        scrollPanel.getViewport().setBackground(new Color(30, 30, 30));
+        JScrollPane scrollPanelBroadcast = new JScrollPane(contentPanelBroad);
+        scrollPanelBroadcast.setBounds(35, 200, 700, 440);
+        scrollPanelBroadcast.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPanelBroadcast.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPanelBroadcast.setBorder(null);
+        scrollPanelBroadcast.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPanelBroadcast.getViewport().setBackground(new Color(30, 30, 30));
 
        
-        contentPanel.addMouseWheelListener(e -> {
-            JScrollBar verticalScrollBar = scrollPanel.getVerticalScrollBar();
+        contentPanelBroad.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPanelBroadcast.getVerticalScrollBar();
             int notches = e.getWheelRotation();
             int currentValue = verticalScrollBar.getValue();
             int scrollAmount = 30; 
             verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
         });
 
-        BroadcastDashboard.add(scrollPanel);
+        BroadcastDashboard.add(scrollPanelBroadcast);
 
-        RoundedButton UnSelectAll = new RoundedButton("Unselected All" , 5);
-        UnSelectAll.setBounds(20, 650, 120, 30);
-        UnSelectAll.setForeground(Color.BLACK);
-        UnSelectAll.setBackground(Color.white);
-        UnSelectAll.addActionListener(e->{
-            for(JCheckBox checkBox : checkBoxes) {
+        RoundedButton UnSelectAllBroad = new RoundedButton("Unselected All" , 5);
+        UnSelectAllBroad.setBounds(20, 650, 120, 30);
+        UnSelectAllBroad.setForeground(Color.BLACK);
+        UnSelectAllBroad.setBackground(Color.white);
+        UnSelectAllBroad.addActionListener(e->{
+            for(JCheckBox checkBox : checkBoxesBroadcast) {
                 if(checkBox.isSelected()){
                     checkBox.setSelected(false);
                 }
                 
             }
         });
-        BroadcastDashboard.add(UnSelectAll);
+        BroadcastDashboard.add(UnSelectAllBroad);
         
-        RoundedButton selectAll = new RoundedButton("Selected All" , 5);
-        selectAll.setBounds(180, 650, 120, 30);
-        selectAll.setForeground(Color.BLACK);
-        selectAll.setBackground(Color.white);
-        selectAll.addActionListener(e->{
-            for(JCheckBox checkBox : checkBoxes) {
+        RoundedButton selectAllBroad = new RoundedButton("Selected All" , 5);
+        selectAllBroad.setBounds(180, 650, 120, 30);
+        selectAllBroad.setForeground(Color.BLACK);
+        selectAllBroad.setBackground(Color.white);
+        selectAllBroad.addActionListener(e->{
+            for(JCheckBox checkBox : checkBoxesBroadcast) {
                 if(!checkBox.isSelected()){
                     checkBox.setSelected(true);
                 }
             }
         });
-        BroadcastDashboard.add(selectAll);
+        BroadcastDashboard.add(selectAllBroad);
 
 
 
@@ -2153,36 +2161,318 @@ public class UiClass extends JFrame {
         separatorhorBroad.setBounds(21, 190, 720, 1);
         BroadcastDashboard.add(separatorhorBroad);
 
-        JLabel lbl = new JLabel();
-        lbl.setBounds(20, 200 , 600, 300);
-        lbl.setForeground(Color.white);
-        lbl.setText(broadcasts.broadcasts.get(1).movie.Title);
-        lbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        Broadcast.add(lbl);  
+ 
+
+//----------------------About Movies------------------------
 
 
-        JPanel movieDashboard = new JPanel();
-        movieDashboard.setLayout(null);
-        movieDashboard.setBounds(0, 0, 780, 750);
-        movieDashboard.setBackground(Color.pink);
-        MiddlePanel.add(movieDashboard);
+        JPanel MoviesDashboard = new JPanel();
+        MoviesDashboard.setLayout(null);
+        MoviesDashboard.setBounds(0, 0, 750, 750);
+        MoviesDashboard.setBackground(new Color(30 , 30 ,30));
+        MiddlePanel.add(MoviesDashboard);
+
+        JLabel Moviecastlbl = new JLabel("Movies  Dashboard");
+        Moviecastlbl.setBounds(35, 26, 300, 30);
+        Moviecastlbl.setForeground(Color.WHITE);
+        Moviecastlbl.setFont(new Font("Bebas Neue", Font.BOLD, 23));
+        MoviesDashboard.add(Moviecastlbl);
+
+        RoundedPanel UserPanelMovie = new RoundedPanel(50);
+        UserPanelMovie.setLayout(null);
+        UserPanelMovie.setBounds(650, 20, 90, 46);
+        UserPanelMovie.setBackground(Color.darkGray);
+        MoviesDashboard.add(UserPanelMovie);
+
+        JLabel UserLabelmovie = new JLabel("User");
+        UserLabelmovie.setBounds(40, 3, 30, 30);
+        UserLabelmovie.setForeground(Color.WHITE);
+        UserLabelmovie.setFont(new Font("Segoe UI", Font.BOLD, 10));
+        UserPanelMovie.add(UserLabelmovie);
+
+        RoundedPanel UserPHOTOMovie = new RoundedPanel(80);
+        UserPHOTOMovie.setLayout(null);
+        UserPHOTOMovie.setBackgroundImage("Rayan\\bookingTICKET\\img\\UserIcon1.png");
+        UserPHOTOMovie.setBounds(5, 10, 30, 30);
+        UserPHOTOMovie.setBackground(Color.red);
+        UserPanelMovie.add(UserPHOTOMovie);
+
+        RoundedPanel SearchPanelMovie = new RoundedPanel(30);
+        SearchPanelMovie.setLayout(null);
+        SearchPanelMovie.setBounds(280, 100, 460, 35);
+        SearchPanelMovie.setBackground(new Color(30, 30, 30));
+        SearchPanelMovie.setRoundedBorder(Color.WHITE, 1);
+        MoviesDashboard.add(SearchPanelMovie);
+
+        JTextField SearchFieldMovie = new JTextField("Search with Theater");
+        SearchFieldMovie.setBounds(10, 5, 400, 25);
+        SearchFieldMovie.setBackground(new Color(30, 30, 30));
+        SearchFieldMovie.setForeground(Color.WHITE);
+        SearchFieldMovie.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        SearchFieldMovie.setBorder(null);
+        TextfieldBehave(SearchFieldMovie, "Search with Theater");
+        SearchPanelMovie.add(SearchFieldMovie);
+
+        JSeparator separatorhorMovie = new JSeparator();
+        separatorhorMovie.setOrientation(SwingConstants.HORIZONTAL);
+        separatorhorMovie.setBackground(Color.white);
+        separatorhorMovie.setForeground(Color.white); 
+        separatorhorMovie.setBounds(21, 190, 720, 1);
+        MoviesDashboard.add(separatorhorMovie);
+
+        JLabel selectedlblMovie = new JLabel ("Selected");
+        selectedlblMovie.setBounds(60, 157, 200, 30);
+        selectedlblMovie.setForeground(Color.white);
+        selectedlblMovie.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        MoviesDashboard.add(selectedlblMovie);
+
+        // JLabel Namelbl = new JLabel("   Movie");
+        // Namelbl.setBounds(200, 157, 200, 30);
+        // Namelbl.setForeground(Color.WHITE);
+        // Namelbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        // BroadcastDashboard.add(Namelbl);
+
+        // JLabel Theaterlblbroad = new JLabel("Theater");
+        // Theaterlblbroad.setBounds(420, 157, 200, 30);
+        // Theaterlblbroad.setForeground(Color.WHITE);
+        // Theaterlblbroad.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        // BroadcastDashboard.add(Theaterlblbroad);
+
+        // JLabel Datelblbroad = new JLabel("Date");
+        // Datelblbroad.setBounds(640, 157, 200, 30);
+        // Datelblbroad.setForeground(Color.WHITE);
+        // Datelblbroad.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        // BroadcastDashboard.add(Datelblbroad); 
 
 
+
+
+
+
+
+//---------------User Insights DashBoard--------------------------------
 
         JPanel UserInsightsDashboard = new JPanel();
         UserInsightsDashboard.setLayout(null);
         UserInsightsDashboard.setBounds(0, 0, 780, 750);
-        UserInsightsDashboard.setBackground(Color.red);
+        UserInsightsDashboard.setBackground(new Color(30,30,30));
         MiddlePanel.add(UserInsightsDashboard);
+
+
+        JLabel UserInsightlbl = new JLabel("User Insights Dashboard");
+        UserInsightlbl.setBounds(35, 26, 300, 30);
+        UserInsightlbl.setForeground(Color.WHITE);
+        UserInsightlbl.setFont(new Font("Bebas Neue", Font.BOLD, 23));
+        UserInsightsDashboard.add(UserInsightlbl);
+
+        RoundedPanel UserPanelUser = new RoundedPanel(50);
+        UserPanelUser.setLayout(null);
+        UserPanelUser.setBounds(650, 20, 90, 46);
+        UserPanelUser.setBackground(Color.darkGray);
+        UserInsightsDashboard.add(UserPanelUser);
+
+        JLabel UserLabelUser = new JLabel("User");
+        UserLabelUser.setBounds(40, 3, 30, 30);
+        UserLabelUser.setForeground(Color.WHITE);
+        UserLabelUser.setFont(new Font("Segoe UI", Font.BOLD, 10));
+        UserPanelUser.add(UserLabelUser);
+
+        RoundedPanel UserPHOTOUser = new RoundedPanel(80);
+        UserPHOTOUser.setLayout(null);
+        UserPHOTOUser.setBackgroundImage("Rayan\\bookingTICKET\\img\\UserIcon1.png");
+        UserPHOTOUser.setBounds(5, 10, 30, 30);
+        UserPHOTOUser.setBackground(Color.red);
+        UserPanelUser.add(UserPHOTOUser);
+
+        RoundedPanel SearchPanelUser = new RoundedPanel(30);
+        SearchPanelUser.setLayout(null);
+        SearchPanelUser.setBounds(280, 100, 460, 35);
+        SearchPanelUser.setBackground(new Color(30, 30, 30));
+        SearchPanelUser.setRoundedBorder(Color.WHITE, 1);
+        UserInsightsDashboard.add(SearchPanelUser);
+
+        JTextField SearchFieldUser = new JTextField("Search with Email");
+        SearchFieldUser.setBounds(10, 5, 400, 25);
+        SearchFieldUser.setBackground(new Color(30, 30, 30));
+        SearchFieldUser.setForeground(Color.WHITE);
+        SearchFieldUser.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        SearchFieldUser.setBorder(null);
+        TextfieldBehave(SearchFieldUser, "Search with Email");
+        SearchPanelUser.add(SearchFieldUser);
+
+        JSeparator separatorhorUser = new JSeparator();
+        separatorhorUser.setOrientation(SwingConstants.HORIZONTAL);
+        separatorhorUser.setBackground(Color.white);
+        separatorhorUser.setForeground(Color.white); 
+        separatorhorUser.setBounds(21, 190, 720, 1);
+        UserInsightsDashboard.add(separatorhorUser);
+
+        JLabel selectedlblUser = new JLabel ("Selected");
+        selectedlblUser.setBounds(30, 157, 60, 30);
+        selectedlblUser.setForeground(Color.white);
+        selectedlblUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        UserInsightsDashboard.add(selectedlblUser);
+
+        JLabel NamelblUser = new JLabel("Name");
+        NamelblUser.setBounds(110, 157, 60, 30);
+        NamelblUser.setForeground(Color.WHITE);
+        NamelblUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        UserInsightsDashboard.add(NamelblUser);
+
+        JLabel EmaillblUser = new JLabel("Email");
+        EmaillblUser.setBounds(235, 157, 60, 30);
+        EmaillblUser.setForeground(Color.WHITE);
+        EmaillblUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        UserInsightsDashboard.add(EmaillblUser);
+
+        JLabel PhoneNumberLblUser = new JLabel("PhoneNumber");
+        PhoneNumberLblUser.setBounds(380, 157, 80, 30);
+        PhoneNumberLblUser.setForeground(Color.WHITE);
+        PhoneNumberLblUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        UserInsightsDashboard.add(PhoneNumberLblUser); 
+        
+
+        JLabel AgelblUser = new JLabel("Age");
+        AgelblUser.setBounds(570, 157, 60, 30);
+        AgelblUser.setForeground(Color.WHITE);
+        AgelblUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        UserInsightsDashboard.add(AgelblUser); 
+
+
+        JLabel BalancelblUser = new JLabel("Balance");
+        BalancelblUser.setBounds(655, 157, 60, 30);
+        BalancelblUser.setForeground(Color.WHITE);
+        BalancelblUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        UserInsightsDashboard.add(BalancelblUser); 
+
+        JPanel UsersPanelList = new JPanel();
+        UsersPanelList.setLayout(null);
+        UsersPanelList.setBounds(35, 200, 700, 440);
+        UsersPanelList.setBackground(new Color(30, 30, 30));
+
+        JPanel contentPanelUserList = new JPanel();
+        contentPanelUserList.setLayout(null);
+        contentPanelUserList.setBackground(new Color(30, 30, 30));
+
+        int totalHeightUserList = Accounts.Clients.size() * 50; 
+        contentPanelUserList.setPreferredSize(new Dimension(650, Math.max(500, totalHeightUserList)));
+
+        ArrayList<JCheckBox> checkBoxesUserList = new ArrayList<JCheckBox>();
+
+        for(int i = 0; i < Accounts.Clients.size(); i++) {
+            JPanel UserListRow = new JPanel();
+            UserListRow.setLayout(null);
+            UserListRow.setBounds(0, i * 50, 650, 40);
+            UserListRow.setBackground(new Color(30, 30, 30));
+
+            
+            JLabel NameUser = new JLabel(Accounts.Clients.get(i).username);
+            NameUser.setBounds(67, 5, 200, 30);
+            NameUser.setForeground(Color.white);
+            NameUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            UserListRow.add(NameUser);
+
+          
+            JLabel EmailUser = new JLabel(Accounts.Clients.get(i).Email);
+            EmailUser.setBounds(190, 5, 200, 30);
+            EmailUser.setForeground(Color.white);
+            EmailUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            UserListRow.add(EmailUser);
+            
+            JLabel PhonenumberUser = new JLabel(String.valueOf(Accounts.Clients.get(i).PhoneNumber));
+            PhonenumberUser.setBounds(370, 5, 200, 30);
+            PhonenumberUser.setForeground(Color.white);
+            PhonenumberUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            UserListRow.add(PhonenumberUser);
+            
+            JLabel AgeUser = new JLabel(String.valueOf(Accounts.Clients.get(i).Age));
+            AgeUser.setBounds(540, 5, 200, 30);
+            AgeUser.setForeground(Color.white);
+            AgeUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            UserListRow.add(AgeUser);
+            
+            
+            JLabel BalanceUser = new JLabel(String.valueOf(Accounts.Clients.get(i).Balance));
+            BalanceUser.setBounds(640, 5, 200, 30);
+            BalanceUser.setForeground(Color.white);
+            BalanceUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            UserListRow.add(BalanceUser);
+
+
+            JCheckBox selectCheckBox = new JCheckBox();
+            selectCheckBox.setBounds(4, 5, 20, 20);
+            selectCheckBox.setBackground(new Color(30, 30, 30));
+            selectCheckBox.setForeground(Color.white);
+            selectCheckBox.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            UserListRow.add(selectCheckBox);
+            checkBoxesUserList.add(selectCheckBox);
+
+            contentPanelUserList.add(UserListRow);
+        }
+
+        JScrollPane scrollPanelUserList = new JScrollPane(contentPanelUserList);
+        scrollPanelUserList.setBounds(35, 200, 700, 440);
+        scrollPanelUserList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPanelUserList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPanelUserList.setBorder(null);
+        scrollPanelUserList.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPanelUserList.getViewport().setBackground(new Color(30, 30, 30));
+
+        contentPanelUserList.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPanelBroadcast.getVerticalScrollBar();
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; 
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        UserInsightsDashboard.add(scrollPanelUserList);
+
+        RoundedButton UnSelectAllUser = new RoundedButton("Unselected All" , 5);
+        UnSelectAllUser.setBounds(20, 650, 120, 30);
+        UnSelectAllUser.setForeground(Color.BLACK);
+        UnSelectAllUser.setBackground(Color.white);
+        UnSelectAllUser.addActionListener(e->{
+            for(JCheckBox checkBox : checkBoxesUserList) {
+                if(checkBox.isSelected()){
+                    checkBox.setSelected(false);
+                }
+                
+            }
+        });
+        UserInsightsDashboard.add(UnSelectAllUser);
+        
+        RoundedButton selectAllUser = new RoundedButton("Selected All" , 5);
+        selectAllUser.setBounds(180, 650, 120, 30);
+        selectAllUser.setForeground(Color.BLACK);
+        selectAllUser.setBackground(Color.white);
+        selectAllUser.addActionListener(e->{
+            for(JCheckBox checkBox : checkBoxesUserList) {
+                if(!checkBox.isSelected()){
+                    checkBox.setSelected(true);
+                }
+            }
+        });
+        UserInsightsDashboard.add(selectAllUser);
+
+
+
+
+
+
+
+
+
+
 
         JPanel cardContainer = new JPanel();
         cardContainer.setLayout(new CardLayout());
         cardContainer.setBounds(0, 0, 777, 750);
         cardContainer.add(BroadcastDashboard, "broadcast");
-        cardContainer.add(movieDashboard, "movies");
+        cardContainer.add(MoviesDashboard, "movies");
         cardContainer.add(UserInsightsDashboard, "users");
 
-        ((CardLayout) cardContainer.getLayout()).show(cardContainer, "broadcast");
+        ((CardLayout) cardContainer.getLayout()).show(cardContainer, "users");
 
 
         MiddlePanel.setLayout(null);
@@ -2329,17 +2619,7 @@ public class UiClass extends JFrame {
         datenow.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
         RightPanel.add(datenow);
 
-        RoundedButton displayBroadcast = new RoundedButton("Display Broadcast", 20);
-        displayBroadcast.setBounds(20, 100, 160, 40);
-        displayBroadcast.setForeground(Color.WHITE);
-        displayBroadcast.setBackground(new Color(0, 0, 0, 0));
-        displayBroadcast.setContentAreaFilled(false);
-        displayBroadcast.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        displayBroadcast.addActionListener(e -> {
-            broadcasts.displayallbroadcasts();
-            
-        });
-        RightPanel.add(displayBroadcast);
+
         
         
         
@@ -2349,12 +2629,12 @@ public class UiClass extends JFrame {
    
 
     public void HandleLogin(String email, String password ){
-        if (Accounts.isAdmin(email, password)) {
-            JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            currentadmin = Accounts.getAccountadmin(email, password);
-            cardLayout.show(mainPanel, "homeAdmin");
-            return;
-        }
+        // if (Accounts.isAdmin(email, password)) {
+        //     JOptionPane.showMessageDialog(null, "Welcome Admin!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        //     currentadmin = Accounts.getAccountadmin(email, password);
+        //     cardLayout.show(mainPanel, "homeAdmin");
+        //     return;
+        // }
         if(Accounts.CheckAccountIfCreated(email, password)){
 
             JOptionPane.showMessageDialog(null, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -2388,7 +2668,7 @@ public class UiClass extends JFrame {
                     return false;
                 }
 
-                Accounts.AddAccount(username.getText(), new String(password.getPassword()), email.getText(), cardNum, CCVnbr);
+                //Accounts.AddAccount(username.getText(), new String(password.getPassword()), email.getText(), cardNum, CCVnbr);
     
                 JOptionPane.showMessageDialog(null, "Account created successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 return true;

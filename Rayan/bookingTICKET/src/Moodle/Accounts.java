@@ -3,25 +3,27 @@ package Moodle;
 public class Accounts {
     public String username;
     public String password;
-    public String email;
-    public double cardNumber;
-    public int CCVnbr;
-    public double balance;
-    
-    public Accounts(String username, String password, String email, double cardNumber, int CCVnbr) {
+    public Status status;
+
+    public enum Status{
+        Admin,
+        Manager
+    }
+
+    // Admin Account
+    public Accounts(String username, String password, Status status) {
+
         this.username = username;
         this.password = password;
-        this.email = email;
-        this.cardNumber = cardNumber;
-        this.CCVnbr = CCVnbr;
-        this.balance = 0.0;
+        this.status = status;
+
     }
-    public Accounts(double balance){
-        this.balance = balance;
-    }
-    
-    public void deposit(double amount) {
-        balance += amount;
+
+    // Client Account
+    public Accounts(String username, String password) {
+
+        this.username = username;
+        this.password = password;
     }
 
   
