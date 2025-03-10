@@ -1,13 +1,11 @@
 package views;
 
-import Model.Client;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.util.TimerTask;
 import controller.*;
+import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.util.Timer;
 
 public class login extends JFrame {
 
@@ -36,7 +34,7 @@ public class login extends JFrame {
 
         add(cardPanel);
 
-        cardLayout.show(cardPanel, "signup");
+        cardLayout.show(cardPanel, "login");
     }
 
     private void createLoginPanel() {
@@ -55,7 +53,7 @@ public class login extends JFrame {
         JPanel movingimage = new JPanel();
         movingimage.setLayout(null);
         movingimage.setBackground(null);
-        movingimage.setBounds(126, 493, 135, 5);
+        movingimage.setBounds(126, 493, 135, 10);
         cardPanel.add(movingimage);
 
 
@@ -80,7 +78,6 @@ public class login extends JFrame {
         RoundedPanel imagPanel = new RoundedPanel(5);
         imagPanel.setLayout(null);
         imagPanel.setBounds(16, 16, 355, 456);
-        //imagPanel.setBackgroundImage("Poo2-TRY-\\\\All\\bookingTICKET\\images\\image1.png"); // Use double backslashes
         imagPanel.setRoundedBorder(Color.white, 1);
         imagPanel.setOpaque(false);
         cardPanel.add(imagPanel);
@@ -89,7 +86,6 @@ public class login extends JFrame {
             "Poo2-TRY-\\\\All\\bookingTICKET\\images\\image1.png",
             "Poo2-TRY-\\\\All\\bookingTICKET\\images\\image2.png",
             "Poo2-TRY-\\\\All\\bookingTICKET\\images\\image3.png",
-            "Poo2-TRY-\\\\All\\bookingTICKET\\images\\image4.png",
         };
 
         // Timer to change images
@@ -99,6 +95,7 @@ public class login extends JFrame {
 
             @Override
             public void run() {
+                rect3.setBackground(Color.gray);
                 imagPanel.setBackgroundImage(imagePaths[currentIndex]);
                 currentIndex = (currentIndex + 1) % imagePaths.length;
                 if(currentIndex == 0){
@@ -167,7 +164,7 @@ public class login extends JFrame {
         emailField.setBounds(435, 251, 390, 39);
         emailField.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(Color.white, 1),
-            new EmptyBorder(5, 10, 5, 10) // Add padding inside the text field
+            new EmptyBorder(5, 10, 5, 10) // espace da5el textfield min tekteb
         ));
         emailField.setForeground(Color.white);
         emailField.setBackground(secondarycolor);
@@ -230,17 +227,30 @@ public class login extends JFrame {
         loginButton.setFont(new Font("Roboto", Font.BOLD, 16));
         loginButton.setOpaque(false);
         loginButton.setRoundedBorder(Color.WHITE, 1);
-        loginButton.addActionListener(event -> {
-            String username = UserField.getText();
-            String email = emailField.getText();
-            String password = new String(passwordField.getPassword());
-            // Call the login method from the controller
-            // controller.login(username, email, password);
+        loginButton.addActionListener(e -> {
+            String username = UserField.getText().trim();
+            String email = emailField.getText().trim();
+            String password = new String(passwordField.getPassword()).trim();
+
+            if(username.equals("Enter your username") || email.equals("Enter your email") || password.equals("Enter your Password")){
+                JOptionPane.showMessageDialog(null, "Please fill all the fields!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if(ClientManager.userexist(username, email, password)){
+                JOptionPane.showMessageDialog(null, "User logged in successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                emailField.setText("");
+                passwordField.setText("");
+                UserField.setText("");
+                cardLayout.show(this.cardPanel, "login");
+            }else{
+                JOptionPane.showMessageDialog(null, "User not found!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
         cardPanel.add(loginButton);
 
         JButton goToSignUpButton = new JButton("Don't have an account? Sign up");
-        goToSignUpButton.setBounds(435, 104, 200, 20);
+        goToSignUpButton.setBounds(418, 95, 200, 20);
         goToSignUpButton.setForeground(Color.white);
         goToSignUpButton.setFont(new Font("Roboto", Font.PLAIN, 12));
         goToSignUpButton.setBorderPainted(false);
@@ -313,7 +323,6 @@ public class login extends JFrame {
             "Poo2-TRY-\\\\All\\bookingTICKET\\images\\image1.png",
             "Poo2-TRY-\\\\All\\bookingTICKET\\images\\image2.png",
             "Poo2-TRY-\\\\All\\bookingTICKET\\images\\image3.png",
-            "Poo2-TRY-\\\\All\\bookingTICKET\\images\\image4.png",
         };
 
         // Timer to change images
@@ -324,7 +333,7 @@ public class login extends JFrame {
             @Override
             public void run() {
                 imagPanel.setBackgroundImage(imagePaths[currentIndex]);
-                currentIndex = (currentIndex + 1) % imagePaths.length;
+                currentIndex = (currentIndex + 1) % (imagePaths.length );
                 if(currentIndex == 0){
                     rect1.setBackground(Color.white);
                     rect2.setBackground(Color.GRAY);
@@ -569,12 +578,17 @@ public class login extends JFrame {
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
             ClientManager.addClient(user_name,lname,name, email, password, Integer.parseInt(age), 0);
-            emailField.setText("");
-            passwordField.setText("");
-            UserField.setText("");
-            username.setText("");
-            LastNameField.setText("");
-            AgeField.setText("");
+            if(ClientManager.addClient(user_name,lname,name, email, password, Integer.parseInt(age), 0)){
+                JOptionPane.showMessageDialog(null, "User added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                emailField.setText("");
+                passwordField.setText("");
+                UserField.setText("");
+                username.setText("");
+                LastNameField.setText("");
+                AgeField.setText("");
+                cardLayout.show(this.cardPanel, "login");
+            }
+            
         });
         cardPanel.add(signinbutton);
 
