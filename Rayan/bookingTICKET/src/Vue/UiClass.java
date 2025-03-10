@@ -7,8 +7,6 @@ import Moodle.*;
 import Moodle.Movie.genre;
 import Moodle.Movie.statusFilm;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -1940,6 +1938,7 @@ public class UiClass extends JFrame {
 
 
 //---------------------------left panel------------------------------
+
         JPanel LeftPanel = new JPanel();
         LeftPanel.setLayout(null);
         LeftPanel.setBounds(0, 0, 170, 750);
@@ -1977,7 +1976,33 @@ public class UiClass extends JFrame {
         MiddlePanel.setBackground(Color.red);
         panel.add(MiddlePanel);
 
-    //---------------About Broadcast--------------------------------
+
+//---------------------------about Home--------------------------------
+        JPanel HomeDashboard = new JPanel();
+        HomeDashboard.setLayout(null);
+        HomeDashboard.setBounds(0, 0, 1400, 750);
+        HomeDashboard.setBackground(Color.blue);
+        MiddlePanel.add(HomeDashboard);
+//--------------------------------about theater--------------
+        JPanel theaterDashboard = new JPanel();
+        theaterDashboard.setLayout(null);
+        theaterDashboard.setBounds(0, 0, 1400, 750);
+        theaterDashboard.setBackground(Color.red);
+        MiddlePanel.add(theaterDashboard);
+
+//-------------------------------about Admins--------------------------------
+        JPanel adminDashboard = new JPanel();
+        adminDashboard.setLayout(null);
+        adminDashboard.setBounds(0, 0, 1400, 750);
+        adminDashboard.setBackground(Color.green);
+        MiddlePanel.add(adminDashboard);
+//---------------------------------about Stats--------------------------------
+        JPanel StatsDashboard = new JPanel();
+        StatsDashboard.setLayout(null);
+        StatsDashboard.setBounds(0, 0, 1400, 750);
+        StatsDashboard.setBackground(Color.WHITE);
+        MiddlePanel.add(StatsDashboard);
+//------------------------------About Broadcast--------------------------------
 
         JPanel BroadcastDashboard = new JPanel();
         BroadcastDashboard.setLayout(null);
@@ -3210,12 +3235,18 @@ public class UiClass extends JFrame {
 
 
 
+
         JPanel cardContainer = new JPanel();
         cardContainer.setLayout(new CardLayout());
         cardContainer.setBounds(0, 0, 1200, 750);
         cardContainer.add(BroadcastDashboard, "broadcast");
         cardContainer.add(MoviesDashboard, "movies");
         cardContainer.add(UserInsightsDashboard, "users");
+        cardContainer.add(HomeDashboard, "home");
+        cardContainer.add(theaterDashboard,"theater");
+        cardContainer.add(adminDashboard,"admin");
+        cardContainer.add(StatsDashboard,"stats");
+
 
         ((CardLayout) cardContainer.getLayout()).show(cardContainer, "movies");
 
@@ -3226,12 +3257,19 @@ public class UiClass extends JFrame {
 
 
         RoundedButton homebutton = new RoundedButton("Home", 20);
-        homebutton.setBounds(10, 220, 150, 40);
+        homebutton.setBounds(10, 100, 150, 40);
         homebutton.setForeground(Color.WHITE);
         homebutton.setBackground(new Color(0, 0, 0, 0));
         homebutton.setContentAreaFilled(false);
         homebutton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        homebutton.setHoverEffect(new Color(0, 0, 0 , 0), new Color(40, 40, 40));
+        homebutton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "home"));
+
         LeftPanel.add(homebutton);
+
+        JLabel HomeButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\home 1.png", 20, 20));
+        HomeButtonicon.setBounds(5, 11, 20, 20);
+        homebutton.add(HomeButtonicon);
 
         RoundedButton moviesButton = new RoundedButton("Movies", 20);
         moviesButton.setBounds(10, 160, 150, 40);
@@ -3240,20 +3278,11 @@ public class UiClass extends JFrame {
         moviesButton.setContentAreaFilled(false);
         moviesButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         moviesButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "movies"));
-        moviesButton.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {
-                moviesButton.setBackground(new Color(40, 40, 40));
-                moviesButton.setContentAreaFilled(true);
-            }
-            public void mouseExited(MouseEvent e) {
-                moviesButton.setBackground(new Color(0, 0, 0, 0));
-                moviesButton.setContentAreaFilled(false);
-            }
-        });
+        moviesButton.setHoverEffect(new Color(0, 0, 0 , 0), new Color(40, 40, 40));
         LeftPanel.add(moviesButton);
 
         
-        JLabel MovieButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\clapperboard.png", 20, 20));
+        JLabel MovieButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\clapperboard.png", 20, 20));
         MovieButtonicon.setBounds(5, 11, 20, 20);
         moviesButton.add(MovieButtonicon);
 
@@ -3266,65 +3295,98 @@ public class UiClass extends JFrame {
         usersButton.setContentAreaFilled(false);
         usersButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         usersButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "users"));
-        usersButton.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {
-                usersButton.setBackground(new Color(40, 40, 40));
-                usersButton.setContentAreaFilled(true);
-            }
-            public void mouseExited(MouseEvent e) {
-                usersButton.setBackground(new Color(0, 0, 0, 0));
-                usersButton.setContentAreaFilled(false);
-            }
-        });
+        usersButton.setHoverEffect(new Color(0, 0, 0 , 0), new Color(40, 40, 40));
         LeftPanel.add(usersButton);
 
-        JLabel usrButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\user1.png", 20, 20));
+        JLabel usrButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\user1.png", 20, 20));
         usrButtonicon.setBounds(5, 11, 20, 20);
         usersButton.add(usrButtonicon);
 
-        RoundedButton Theaterbutton = new RoundedButton("Users", 20);
-        Theaterbutton.setBounds(10, 220, 150, 40);
+        RoundedButton Theaterbutton = new RoundedButton("Theater", 20);
+        Theaterbutton.setBounds(10, 280, 150, 40);
         Theaterbutton.setForeground(Color.WHITE);
         Theaterbutton.setBackground(new Color(0, 0, 0, 0));
         Theaterbutton.setContentAreaFilled(false);
         Theaterbutton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        Theaterbutton.setHoverEffect(new Color(0, 0, 0 , 0), new Color(40, 40, 40));
+        Theaterbutton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "theater"));
         LeftPanel.add(Theaterbutton);
 
+        JLabel TheaterButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\Theatericon.png", 20, 20));
+        TheaterButtonicon.setBounds(5, 11, 20, 20);
+        Theaterbutton.add(TheaterButtonicon);
 
 
 
         RoundedButton broadcastButton = new RoundedButton("  Broadcast", 20);
-        broadcastButton.setBounds(10, 100, 150, 40);
+        broadcastButton.setBounds(10, 350, 150, 40);
         broadcastButton.setForeground(Color.WHITE);
         broadcastButton.setBackground(new Color(0, 0, 0, 0));
         broadcastButton.setContentAreaFilled(false);
         broadcastButton.setLayout(null);
         broadcastButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         broadcastButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "broadcast"));
-        broadcastButton.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {
-                broadcastButton.setBackground(new Color(40, 40, 40));
-                broadcastButton.setContentAreaFilled(true);
-            }
-            public void mouseExited(MouseEvent e) {
-                broadcastButton.setBackground(new Color(0, 0, 0, 0));
-                broadcastButton.setContentAreaFilled(false);
-            }
-        });
+        broadcastButton.setHoverEffect(new Color(0, 0, 0 , 0), new Color(40, 40, 40));
         LeftPanel.add(broadcastButton);
 
-        JLabel broadcastButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\Broadcasticon.png", 20, 20));
+
+        JLabel broadcastButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\Broadcasticon.png", 20, 20));
         broadcastButtonicon.setBounds(5, 11, 20, 20);
         broadcastButton.add(broadcastButtonicon);
 
 
-        RoundedButton Adminbutton = new RoundedButton("Users", 20);
-        Adminbutton.setBounds(10, 220, 150, 40);
+        RoundedButton Adminbutton = new RoundedButton("Admin", 20);
+        Adminbutton.setBounds(10, 410, 150, 40);
         Adminbutton.setForeground(Color.WHITE);
         Adminbutton.setBackground(new Color(0, 0, 0, 0));
         Adminbutton.setContentAreaFilled(false);
         Adminbutton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        Adminbutton.setHoverEffect(new Color(0, 0, 0 , 0), new Color(40, 40, 40));
+        Adminbutton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "admin"));
         LeftPanel.add(Adminbutton);
+
+        JLabel AdminButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\administrator 1.png", 20, 20));
+        AdminButtonicon.setBounds(5, 11, 20, 20);
+        Adminbutton.add(AdminButtonicon);
+
+        JSeparator separatorLeft = new JSeparator();
+        separatorLeft.setOrientation(SwingConstants.HORIZONTAL);
+        separatorLeft.setBackground(Color.white);
+        separatorLeft.setForeground(Color.white);
+        separatorLeft.setBounds(10, 460,  150, 1);
+        LeftPanel.add(separatorLeft);
+
+        RoundedButton Statsbutton = new RoundedButton("Stats", 20);
+        Statsbutton.setBounds(10, 485, 150, 40);
+        Statsbutton.setForeground(Color.WHITE);
+        Statsbutton.setBackground(new Color(0, 0, 0, 0));
+        Statsbutton.setContentAreaFilled(false);
+        Statsbutton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        Statsbutton.setHoverEffect(new Color(0, 0, 0 , 0), new Color(40, 40, 40));
+        Statsbutton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "stats"));
+        LeftPanel.add(Statsbutton);
+
+        JLabel StatsButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\pie-chart 1.png", 20, 20));
+        StatsButtonicon.setBounds(5, 11, 20, 20);
+        Statsbutton.add(StatsButtonicon);
+
+
+        RoundedButton Logoutbutton = new RoundedButton("Log out", 20);
+        Logoutbutton.setBounds(10, 630, 150, 40);
+        Logoutbutton.setForeground(Color.WHITE);
+        Logoutbutton.setBackground(new Color(0, 0, 0, 0));
+        Logoutbutton.setContentAreaFilled(false);
+        Logoutbutton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        Logoutbutton.setHoverEffect(new Color(0, 0, 0 , 0), new Color(40, 40, 40));
+        Logoutbutton.addActionListener(e ->{
+            cardLayout.show(mainPanel, "welcome");
+        });
+        LeftPanel.add(Logoutbutton);
+
+        JLabel LogiutButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\logout 1.png", 20, 20));
+        LogiutButtonicon.setBounds(5, 11, 20, 20);
+        Logoutbutton.add(LogiutButtonicon);
+
 
 
 
@@ -3336,12 +3398,7 @@ public class UiClass extends JFrame {
         // RightPanel.setBackground(new Color(30 , 30 ,30));//new Color(30 , 30 ,30)
         // panel.add(RightPanel);
         
-        // JSeparator separator2 = new JSeparator();
-        // separator2.setOrientation(SwingConstants.VERTICAL);
-        // separator2.setBackground(Color.white);
-        // separator2.setForeground(Color.white);
-        // separator2.setBounds(2, 0, 2, 750);
-        // RightPanel.add(separator2);
+ 
 
         // JLabel nbrUser = new JLabel("Number of Users");
         // nbrUser.setBounds(70, 20, 200, 30);
