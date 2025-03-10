@@ -19,7 +19,7 @@ public class GestionAccounts {
         Clients.add(new Client("Mehdi","Benazza",19,9000,"Mehdi@gmail.com","0478574834343","Mehdi7478","edfdf"));
         Clients.add(new Client("Mahmoud", "Mahmoud", 77,7599,"mahmoud@gmail.com", "055098765432", "mahmoud123", "asdf"));
         Clients.add(new Client("Hassan", "Hassan", 45,3022,"hassan@gmail.com", "055098765432", "hassan1999", "jkl"));
-        //Clients.add(new Client("Mehdi","Benazza",19,12000,"Mehdi@gmail.com","0478574834343","Mehdi7478","edfdf"));
+        Clients.add(new Client("Mehdi","Benazza",10,12000,"Mehdi@gmail.com","0478574834343","Mehdi7478","edfdf"));
 
 
         

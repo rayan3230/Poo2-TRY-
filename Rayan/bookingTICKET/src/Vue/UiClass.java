@@ -2050,6 +2050,12 @@ public class UiClass extends JFrame {
         SelectlblBroad.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
         BroadcastDashboard.add(SelectlblBroad);
 
+        JSeparator separatorhorBroad = new JSeparator();
+        separatorhorBroad.setOrientation(SwingConstants.HORIZONTAL);
+        separatorhorBroad.setBackground(Color.white);
+        separatorhorBroad.setForeground(Color.white); 
+        separatorhorBroad.setBounds(21, 190, 720, 1);
+        BroadcastDashboard.add(separatorhorBroad);
    
         JPanel Broadcast = new JPanel();
         Broadcast.setLayout(null);
@@ -2124,8 +2130,11 @@ public class UiClass extends JFrame {
 
         BroadcastDashboard.add(scrollPanelBroadcast);
 
+        int buttonwidth = 97 ;
+        int gap = 20 ;
+
         RoundedButton UnSelectAllBroad = new RoundedButton("Unselected All" , 5);
-        UnSelectAllBroad.setBounds(20, 650, 120, 30);
+        UnSelectAllBroad.setBounds(64, 650, 97, 27);
         UnSelectAllBroad.setForeground(Color.BLACK);
         UnSelectAllBroad.setBackground(Color.white);
         UnSelectAllBroad.addActionListener(e->{
@@ -2137,9 +2146,10 @@ public class UiClass extends JFrame {
             }
         });
         BroadcastDashboard.add(UnSelectAllBroad);
+
         
         RoundedButton selectAllBroad = new RoundedButton("Selected All" , 5);
-        selectAllBroad.setBounds(180, 650, 120, 30);
+        selectAllBroad.setBounds(64 + buttonwidth + gap , 650, 97, 27);
         selectAllBroad.setForeground(Color.BLACK);
         selectAllBroad.setBackground(Color.white);
         selectAllBroad.addActionListener(e->{
@@ -2151,83 +2161,140 @@ public class UiClass extends JFrame {
         });
         BroadcastDashboard.add(selectAllBroad);
 
+        RoundedButton EditBroad = new RoundedButton("Edit" , 5);
+        EditBroad.setBounds(64 + buttonwidth*2 + gap*2, 650, 97, 27);
+        EditBroad.setForeground(Color.BLACK);
+        EditBroad.setBackground(Color.white);
+        BroadcastDashboard.add(EditBroad);
+
+        RoundedButton AddBroad = new RoundedButton("Add" , 5);
+        AddBroad.setBounds(64 + buttonwidth*3 + gap*3, 650, 97, 27);
+        AddBroad.setForeground(Color.BLACK);
+        AddBroad.setBackground(Color.white);
+        BroadcastDashboard.add(AddBroad);
+
+        RoundedButton DeleteBroad = new RoundedButton("Delete" , 5);
+        DeleteBroad.setBounds(64 + buttonwidth*4 + gap*4, 650, 97, 27);
+        DeleteBroad.setForeground(Color.BLACK);
+        DeleteBroad.setBackground(Color.white);
+        BroadcastDashboard.add(DeleteBroad);
 
 
+
+
+        //-------right things
+
+        JSeparator separator1Broad = new JSeparator();
+        separator1Broad.setOrientation(SwingConstants.VERTICAL);
+        separator1Broad.setBackground(Color.white);
+        separator1Broad.setForeground(Color.white);
+        separator1Broad.setBounds(780, 00, 2, 750);
+        BroadcastDashboard.add(separator1Broad);
+        
+
+        JLabel nbrBroad = new JLabel("Total Number of Broadcast");
+        nbrBroad.setBounds(800, 20, 200, 30);
+        nbrBroad.setForeground(Color.WHITE);
+        nbrBroad.setFont(new Font("Bebas Neue", Font.BOLD, 15));
+        BroadcastDashboard.add(nbrBroad);
+
+
+        RoundedPanel CircleBroad = new RoundedPanel(100);
+        CircleBroad.setLayout(null);
+        CircleBroad.setBounds(855, 80, 100, 100);
+        CircleBroad.setBackground( new Color(0, 0, 0, 0));
+        CircleBroad.setRoundedBorder(Color.WHITE, 2);
+        BroadcastDashboard.add(CircleBroad);
+
+        JLabel nbrUserLabelBroad = new JLabel();
+
+        if(broadcasts.broadcasts.size() < 10){
+            nbrUserLabelBroad.setBounds(40, 32, 100, 30);
+            nbrUserLabelBroad.setText(String.valueOf(broadcasts.broadcasts.size()));
+        }else{
+            nbrUserLabelBroad.setBounds(33, 32, 100, 30);
+            nbrUserLabelBroad.setText(String.valueOf(broadcasts.broadcasts.size()));
+        }
+        
+        nbrUserLabelBroad.setForeground(Color.WHITE);
+        nbrUserLabelBroad.setFont(new Font("Bebas Neue", Font.BOLD, 30));
+        CircleBroad.add(nbrUserLabelBroad);
+        
+        JSeparator separatorRght1Broadcast = new JSeparator();
+        separatorRght1Broadcast.setOrientation(SwingConstants.HORIZONTAL);
+        separatorRght1Broadcast.setBackground(Color.white);
+        separatorRght1Broadcast.setForeground(Color.white); 
+        separatorRght1Broadcast.setBounds(790, 240, 220, 1);
+        BroadcastDashboard.add(separatorRght1Broadcast);
+
+        JLabel TopWatchedMovie = new JLabel("Top Watched Movie");
+        TopWatchedMovie.setBounds(830, 255, 250, 30);
+        TopWatchedMovie.setForeground(Color.WHITE);
+        TopWatchedMovie.setFont(new Font("Bebas Neue", Font.BOLD, 15));
+        BroadcastDashboard.add(TopWatchedMovie);
+
+        JLabel NameTopMovie = new JLabel(); 
+        NameTopMovie.setBounds(850, 300, 250, 30);
+        NameTopMovie.setForeground(Color.WHITE);
+        NameTopMovie.setFont(new Font("Roboto", Font.TYPE1_FONT, 13));
+        String mostFrequentMovie = null;
+        int maxCount = 0;
 
         
-        // JSeparator separator2 = new JSeparator();
-        // separator2.setOrientation(SwingConstants.VERTICAL);
-        // separator2.setBackground(Color.white);
-        // separator2.setForeground(Color.white);
-        // separator2.setBounds(780, 00, 2, 750);
-        // BroadcastDashboard.add(separator2);
+        for (int i = 0; i < broadcasts.broadcasts.size(); i++) {
+            String currentMovie = broadcasts.broadcasts.get(i).movie.Title;
+            int currentCount = 0;
+
+            
+            for (int j = 0; j <  broadcasts.broadcasts.size(); j++) {
+                if (broadcasts.broadcasts.get(j).movie.Title.equals(currentMovie)) {
+                    currentCount++;
+                }
+            }
+
+            
+            if (currentCount > maxCount) {
+                maxCount = currentCount;
+                mostFrequentMovie = currentMovie;
+            }
+        }
+        NameTopMovie.setText(mostFrequentMovie);
+        BroadcastDashboard.add(NameTopMovie);
+
+        JLabel nbrofbroadcast = new JLabel();
+        nbrofbroadcast.setBounds(860, 350, 250, 30);
+        nbrofbroadcast.setForeground(Color.WHITE);
+        nbrofbroadcast.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        nbrofbroadcast.setText(String.valueOf(maxCount + "   Broadcasts"));
+        BroadcastDashboard.add(nbrofbroadcast);
+
+        JSeparator separatorRght2Broadcast = new JSeparator();
+        separatorRght2Broadcast.setOrientation(SwingConstants.HORIZONTAL);
+        separatorRght2Broadcast.setBackground(Color.white);
+        separatorRght2Broadcast.setForeground(Color.white);
+        separatorRght2Broadcast.setBounds(790, 400, 220, 1);
+        BroadcastDashboard.add(separatorRght2Broadcast);
+
+        JSeparator separatorRght3Broadcast = new JSeparator();
+        separatorRght3Broadcast.setOrientation(SwingConstants.HORIZONTAL);
+        separatorRght3Broadcast.setBackground(Color.white);
+        separatorRght3Broadcast.setForeground(Color.white);
+        separatorRght3Broadcast.setBounds(790, 660, 220, 1);
+        BroadcastDashboard.add(separatorRght3Broadcast);
+
+        JLabel DatetodayBroad = new JLabel("Date:");
+        DatetodayBroad.setBounds(840, 675, 200, 30);
+        DatetodayBroad.setForeground(Color.WHITE);
+        DatetodayBroad.setFont(new Font("Bebas Neue", Font.BOLD, 13));
+        BroadcastDashboard.add(DatetodayBroad);
         
-
-        // JLabel nbrUser = new JLabel("Number of Users");
-        // nbrUser.setBounds(840, 20, 200, 30);
-        // nbrUser.setForeground(Color.WHITE);
-        // nbrUser.setFont(new Font("Bebas Neue", Font.BOLD, 16));
-        // BroadcastDashboard.add(nbrUser);
-
-
-        // RoundedPanel Circle = new RoundedPanel(100);
-        // Circle.setLayout(null);
-        // Circle.setBounds(85, 80, 100, 100);
-        // Circle.setBackground( new Color(0, 0, 0, 0));
-        // Circle.setRoundedBorder(Color.WHITE, 2);
-        // BroadcastDashboard.add(Circle);
-
-        // JLabel nbrUserLabel = new JLabel("10");
-        // nbrUserLabel.setBounds(32, 32, 100, 30);
-        // nbrUserLabel.setForeground(Color.WHITE);
-        // nbrUserLabel.setFont(new Font("Bebas Neue", Font.BOLD, 30));
-        // Circle.add(nbrUserLabel);
-        
-        // JSeparator separatorRght1 = new JSeparator();
-        // separatorRght1.setOrientation(SwingConstants.HORIZONTAL);
-        // separatorRght1.setBackground(Color.white);
-        // separatorRght1.setForeground(Color.white); 
-        // separatorRght1.setBounds(15, 240, 240, 1);
-        // BroadcastDashboard.add(separatorRght1);
-
-        // JLabel AvgBalance = new JLabel("Average Balance per user ");
-        // AvgBalance.setBounds(30, 260, 200, 30);
-        // AvgBalance.setForeground(Color.WHITE);
-        // AvgBalance.setFont(new Font("Bebas Neue", Font.BOLD, 16));
-        // BroadcastDashboard.add(AvgBalance);
+        JLabel datenowBroad = new JLabel(LocalDate.now().toString());
+        datenowBroad.setBounds(880, 675, 200, 30);
+        datenowBroad.setForeground(Color.WHITE);
+        datenowBroad.setFont(new Font("Bebas Neue", Font.BOLD, 13));
+        BroadcastDashboard.add(datenowBroad);
 
 
-        // RoundedPanel Circle2 = new RoundedPanel(100);
-        // Circle2.setLayout(null);
-        // Circle2.setBounds(85, 320, 100, 100);
-        // Circle2.setBackground( new Color(0, 0, 0, 0));
-        // Circle2.setRoundedBorder(Color.WHITE, 2);
-        // BroadcastDashboard.add(Circle2);
-
-        // JLabel AvrgBalance = new JLabel("100$");
-        // AvrgBalance.setBounds(17, 32, 100, 30);
-        // AvrgBalance.setForeground(Color.WHITE);
-        // AvrgBalance.setFont(new Font("Bebas Neue", Font.BOLD, 30));
-        // Circle2.add(AvrgBalance);
-
-        // JSeparator separatorRght2 = new JSeparator();
-        // separatorRght2.setOrientation(SwingConstants.HORIZONTAL);
-        // separatorRght2.setBackground(Color.white);
-        // separatorRght2.setForeground(Color.white); 
-        // separatorRght2.setBounds(15, 540, 240, 1);
-        // BroadcastDashboard.add(separatorRght2);
-
-        // JLabel Datetoday = new JLabel("Date:");
-        // Datetoday.setBounds(60, 630, 200, 30);
-        // Datetoday.setForeground(Color.WHITE);
-        // Datetoday.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        // BroadcastDashboard.add(Datetoday);
-        
-        // JLabel datenow = new JLabel(LocalDate.now().toString());
-        // datenow.setBounds(100, 630, 200, 30);
-        // datenow.setForeground(Color.WHITE);
-        // datenow.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        // BroadcastDashboard.add(datenow);
 
  
 
@@ -2756,7 +2823,7 @@ public class UiClass extends JFrame {
         cardContainer.add(MoviesDashboard, "movies");
         cardContainer.add(UserInsightsDashboard, "users");
 
-        ((CardLayout) cardContainer.getLayout()).show(cardContainer, "users");
+        ((CardLayout) cardContainer.getLayout()).show(cardContainer, "broadcast");
 
 
         MiddlePanel.setLayout(null);
