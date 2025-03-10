@@ -1,6 +1,7 @@
 package controller;
 
 import Model.*;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -109,6 +110,29 @@ public class BroadcastManager {
             System.out.println("---------------------------------");
         }
     }
+
+    public static void addBroadcast(int MovieID, int TheaterID, String Language, Date BroadcastDate) {
+        String sql = "INSERT INTO broadcasts (MovieID, TheaterID, Language, BroadcastDate) VALUES (?, ?, ?, ?)";
+        
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, MovieID);
+            pstmt.setInt(2, TheaterID);
+            pstmt.setString(3, Language);
+            pstmt.setDate(4, BroadcastDate);
+            
+            int rowsInserted = pstmt.executeUpdate();
+            
+            if (rowsInserted > 0) {
+                System.out.println("Broadcast added successfully!");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

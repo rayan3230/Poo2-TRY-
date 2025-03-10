@@ -48,44 +48,50 @@ public class AdminManager {
         return null;
     }
     
-    static public void addAdmin(String name,String email,String password,Boolean status) {
-        String sql = "INSERT INTO admins (Name, Email, Password,Status) VALUES ('"
-                 + name + "', '" + email + "', '" + password + "', " + status +  ")";
-    
-    try (Connection conn = DatabaseConnection.connect();
-         Statement stmt = conn.createStatement()) {
+    public static void addAdmin(String name, String email, String password, boolean status) {
+        String sql = "INSERT INTO admins (Name, Email, Password, Status) VALUES (?, ?, ?, ?)";
         
-        int rowsInserted = stmt.executeUpdate(sql); // Directly executing SQL query
-        
-        if (rowsInserted > 0) {
-            System.out.println("Admin added successfully!");
-        }
-        
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-
-    }
-
-
-        static public void removeAdmin(int AdminID) {
-        String sql = "DELETE FROM admins WHERE AdminID = " + AdminID;
-
         try (Connection conn = DatabaseConnection.connect();
-        Statement stmt = conn.createStatement()) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, password);
+            pstmt.setBoolean(4, status); // Boolean is handled correctly
+            
+            int rowsInserted = pstmt.executeUpdate();
+            
+            if (rowsInserted > 0) {
+                System.out.println("Admin added successfully!");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+
+
+    public static void removeAdmin(int adminID) {
+        String sql = "DELETE FROM admins WHERE AdminID = ?";
         
-            int rowsDeleted = stmt.executeUpdate(sql);
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, adminID);
+            
+            int rowsDeleted = pstmt.executeUpdate();
+            
             if (rowsDeleted > 0) {
                 System.out.println("Admin deleted successfully!");
-            }else {
+            } else {
                 System.out.println("Admin not found. No deletion performed.");
             }    
             
-        }
-         catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
+    
 
 }

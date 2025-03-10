@@ -9,43 +9,48 @@ public class ClientManager {
 
     }
     
-    static public void addClient(String name,String email,String password,int Age,int balance) {
-        String sql = "INSERT INTO users (Name, Email, Password,Age, Balance) VALUES ('"
-                 + name + "', '" + email + "', '" + password + "', " + Age + ", " + balance + ")";
-    
-    try (Connection conn = DatabaseConnection.connect();
-         Statement stmt = conn.createStatement()) {
+    public static void addClient(String name, String email, String password, int age, int balance) {
+        String sql = "INSERT INTO users (Name, Email, Password, Age, Balance) VALUES (?, ?, ?, ?, ?)";
         
-        int rowsInserted = stmt.executeUpdate(sql); // Directly executing SQL query
-        
-        if (rowsInserted > 0) {
-            System.out.println("User added successfully!");
-        }
-        
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-
-    }
-
-    static public void removeClient(int UserID) {
-        String sql = "DELETE FROM users WHERE UserID = " + UserID;
-
         try (Connection conn = DatabaseConnection.connect();
-        Statement stmt = conn.createStatement()) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, name);
+            pstmt.setString(2, email);
+            pstmt.setString(3, password);
+            pstmt.setInt(4, age);
+            pstmt.setInt(5, balance);
+            
+            int rowsInserted = pstmt.executeUpdate();
+            
+            if (rowsInserted > 0) {
+                System.out.println("User added successfully!");
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeClient(int userID) {
+        String sql = "DELETE FROM users WHERE UserID = ?";
         
-            int rowsDeleted = stmt.executeUpdate(sql);
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, userID);
+            
+            int rowsDeleted = pstmt.executeUpdate();
+            
             if (rowsDeleted > 0) {
                 System.out.println("User deleted successfully!");
-            }else {
+            } else {
                 System.out.println("User not found. No deletion performed.");
             }    
             
-        }
-         catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
     
 
@@ -65,8 +70,5 @@ public class ClientManager {
     }*/
 
 
-    public static void main(String[] args) {
-        //ClientManager.addClient("wassim","wassim","wassim",30);
-        ClientManager.removeClient(1);
-    }
+
 }
