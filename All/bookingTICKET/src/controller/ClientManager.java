@@ -83,10 +83,10 @@ public class ClientManager {
         }
 
         return false;
-    }
+        }
 
-    public static void updateClient(int userID, String username, String lname, String name, String email, String password, int age, int balance) {
-        String sql = "UPDATE users SET username = ?, LastName = ?, Name = ?, Email = ?, Password = ?, Age = ?, Balance = ? WHERE UserID = ?";
+        public static void updateClientName(int userID, String username, String lname, String name) {
+        String sql = "UPDATE users SET username = ?, LastName = ?, Name = ? WHERE UserID = ?";
 
         try (Connection conn = DatabaseConnection.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -94,25 +94,110 @@ public class ClientManager {
             pstmt.setString(1, username);
             pstmt.setString(2, lname);
             pstmt.setString(3, name);
-            pstmt.setString(4, email);
-            pstmt.setString(5, password);
-            pstmt.setInt(6, age);
-            pstmt.setInt(7, balance);
-            pstmt.setInt(8, userID);
+            pstmt.setInt(4, userID);
 
             int rowsUpdated = pstmt.executeUpdate();
 
             if (rowsUpdated > 0) {
-                System.out.println("User updated successfully!");
+            System.out.println("User name updated successfully!");
             } else {
-                System.out.println("User not found. No update performed.");
+            System.out.println("User not found. No update performed.");
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }}
+        }
+        }
 
-        public static boolean userexist(String username, String email, String password) {
+        public static void updateClientEmail(int userID, String email) {
+        String sql = "UPDATE users SET Email = ? WHERE UserID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            pstmt.setInt(2, userID);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+            System.out.println("User email updated successfully!");
+            } else {
+            System.out.println("User not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+
+        public static void updateClientPassword(int userID, String password) {
+        String sql = "UPDATE users SET Password = ? WHERE UserID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, password);
+            pstmt.setInt(2, userID);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+            System.out.println("User password updated successfully!");
+            } else {
+            System.out.println("User not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+
+        public static void updateClientAge(int userID, int age) {
+        String sql = "UPDATE users SET Age = ? WHERE UserID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, age);
+            pstmt.setInt(2, userID);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+            System.out.println("User age updated successfully!");
+            } else {
+            System.out.println("User not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+
+        public static void updateClientBalance(int userID, int balance) {
+        String sql = "UPDATE users SET Balance = ? WHERE UserID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, balance);
+            pstmt.setInt(2, userID);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+            System.out.println("User balance updated successfully!");
+            } else {
+            System.out.println("User not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+
+        public static boolean userExists(String username, String email, String password) {
             String sql = "SELECT COUNT(*) FROM users WHERE username = ? AND Email = ? AND Password = ?";
     
             try (Connection conn = DatabaseConnection.connect();
@@ -134,4 +219,40 @@ public class ClientManager {
             return false;
         }
 
+
+        public static int numberofusers() {
+            String sql = "SELECT COUNT(*) FROM users";
+    
+            try (Connection conn = DatabaseConnection.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+    
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    
+            return 0;
+        }
+
+        public static int averagebalance() {
+            String sql = "SELECT AVG(Balance) FROM users";
+    
+            try (Connection conn = DatabaseConnection.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+    
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    
+            return 0;
+        }
 }

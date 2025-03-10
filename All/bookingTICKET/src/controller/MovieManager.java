@@ -1,6 +1,10 @@
 package controller;
 
 import Model.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -212,5 +216,22 @@ public class MovieManager {
         }
     }
 
+    public static int numberofmovies() {
+            String sql = "SELECT COUNT(*) FROM movies";
+    
+            try (Connection conn = DatabaseConnection.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+    
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    
+            return 0;
+        }
 
 }

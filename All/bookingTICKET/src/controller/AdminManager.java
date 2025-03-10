@@ -93,5 +93,22 @@ public class AdminManager {
         }
     }
     
+    public static int numberofadmins() {
+        String sql = "SELECT COUNT(*) FROM admins";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 
 }

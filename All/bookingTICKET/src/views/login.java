@@ -237,7 +237,7 @@ public class login extends JFrame {
                 return;
             }
 
-            if(ClientManager.userexist(username, email, password)){
+            if(ClientManager.userExists(username, email, password)){
                 JOptionPane.showMessageDialog(null, "User logged in successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 emailField.setText("");
                 passwordField.setText("");

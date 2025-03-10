@@ -1,6 +1,10 @@
 package controller;
 
 import Model.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TheaterManager {
@@ -53,4 +57,22 @@ public class TheaterManager {
             System.out.println("---------------------------------");
         }
     }
+
+    public static int numberoftheaters() {
+            String sql = "SELECT COUNT(*) FROM theaters";
+    
+            try (Connection conn = DatabaseConnection.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+    
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    
+            return 0;
+        }
 }
