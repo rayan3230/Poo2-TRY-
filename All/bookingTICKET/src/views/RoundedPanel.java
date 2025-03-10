@@ -3,6 +3,10 @@ package views;
 
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class RoundedPanel extends JPanel {
@@ -37,6 +41,7 @@ public class RoundedPanel extends JPanel {
         this.borderThickness = thickness;
         repaint();
     }
+
     public void removeBorder() {
         this.hasBorder = false;
         repaint();
