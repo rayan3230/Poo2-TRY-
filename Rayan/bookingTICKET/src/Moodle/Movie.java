@@ -1,5 +1,6 @@
 package Moodle;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public  class  Movie {
@@ -13,7 +14,9 @@ public  class  Movie {
     public double vipSeatPrice;
     public String imagePath;
     public statusFilm statusfilm;
-    public genre genreEnum;
+    public genre MovieGenre;
+    public LocalDate ReleaseDate;
+    public MovieAgeRating AgeRating;
 
     public enum genre {
         COMEDY,
@@ -27,20 +30,26 @@ public  class  Movie {
         UPCOMING
     }
 
+    public enum MovieAgeRating {
+        G, PG6, PG8, PG13, PG16, PG18
+    }
+
     public Movie(String Title,String Description, int duration, genre genre, String rating,
-            double regularSeatPrice, double vipSeatPrice , String imagePath, statusFilm status, LocalTime ShowTime) {
+            double regularSeatPrice, double vipSeatPrice , String imagePath ,statusFilm status,  LocalDate ReleaseDate ,LocalTime ShowTime ,MovieAgeRating AgeRating) {
 
             this.id=id+1;
             this.Title = Title;
             this.description = description;
             this.duration = duration;
-            this.genreEnum = genre;
+            this.MovieGenre = genre;
             this.rating = rating;
             this.regularSeatPrice = regularSeatPrice;
             this.vipSeatPrice = vipSeatPrice;
             this.imagePath = imagePath;
             this.statusfilm = status;
             this.showeTime = ShowTime;
+            this.ReleaseDate = ReleaseDate;
+            this.AgeRating = AgeRating;
      }
 
     // public void printDuration() {

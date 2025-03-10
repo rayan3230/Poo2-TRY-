@@ -1599,7 +1599,7 @@ public class UiClass extends JFrame {
                 statusFilm statusMovie = (statusFilm) StatusComboBox2.getSelectedItem();
                 double regularSeatPrice = Double.parseDouble(regularSeatPricefield.getText().trim());
                 double vipSeatPrice = Double.parseDouble(vipSeatPricefield.getText().trim());
-                movies.addMovie(MovieTitletxt, Descriptiontxt, DureeMovie, genreMovie, RatingMovie, regularSeatPrice, vipSeatPrice, pathfilm, statusMovie, localTime);
+               // movies.addMovie(MovieTitletxt, Descriptiontxt, DureeMovie, genreMovie, RatingMovie, regularSeatPrice, vipSeatPrice, pathfilm, statusMovie, localTime);
                 movies.DisplayMovies();
                 //refreshUserPanel();
 
@@ -2298,7 +2298,7 @@ public class UiClass extends JFrame {
 
  
 
-//----------------------About Movies------------------------
+//----------------------Movies Panel------------------------
 
 
         JPanel MoviesDashboard = new JPanel();
@@ -2356,28 +2356,422 @@ public class UiClass extends JFrame {
         MoviesDashboard.add(separatorhorMovie);
 
         JLabel selectedlblMovie = new JLabel ("Selected");
-        selectedlblMovie.setBounds(60, 157, 200, 30);
+        selectedlblMovie.setBounds(40, 157, 200, 30);
         selectedlblMovie.setForeground(Color.white);
         selectedlblMovie.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
         MoviesDashboard.add(selectedlblMovie);
 
-        // JLabel Namelbl = new JLabel("   Movie");
-        // Namelbl.setBounds(200, 157, 200, 30);
-        // Namelbl.setForeground(Color.WHITE);
-        // Namelbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        // BroadcastDashboard.add(Namelbl);
+        JLabel MovieTitlelbl = new JLabel("Title");
+        MovieTitlelbl.setBounds(160, 157, 200, 30);
+        MovieTitlelbl.setForeground(Color.WHITE);
+        MovieTitlelbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        MoviesDashboard.add(MovieTitlelbl);
 
-        // JLabel Theaterlblbroad = new JLabel("Theater");
-        // Theaterlblbroad.setBounds(420, 157, 200, 30);
-        // Theaterlblbroad.setForeground(Color.WHITE);
-        // Theaterlblbroad.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        // BroadcastDashboard.add(Theaterlblbroad);
+        JLabel GenrelblMovie = new JLabel("Genre");
+        GenrelblMovie.setBounds(300, 157, 200, 30);
+        GenrelblMovie.setForeground(Color.WHITE);
+        GenrelblMovie.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        MoviesDashboard.add(GenrelblMovie);
 
-        // JLabel Datelblbroad = new JLabel("Date");
-        // Datelblbroad.setBounds(640, 157, 200, 30);
-        // Datelblbroad.setForeground(Color.WHITE);
-        // Datelblbroad.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        // BroadcastDashboard.add(Datelblbroad); 
+        JLabel RatinglblMovie = new JLabel("Rating");
+        RatinglblMovie.setBounds(395, 157, 200, 30);
+        RatinglblMovie.setForeground(Color.WHITE);
+        RatinglblMovie.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        MoviesDashboard.add(RatinglblMovie);
+        
+        JLabel AgeRatinglblMovie = new JLabel("Age rating");
+        AgeRatinglblMovie.setBounds(505, 157, 200, 30);
+        AgeRatinglblMovie.setForeground(Color.WHITE);
+        AgeRatinglblMovie.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        MoviesDashboard.add(AgeRatinglblMovie); 
+
+        JLabel releaseDatelbl = new JLabel("Release Date");
+        releaseDatelbl.setBounds(625, 157, 200, 30);
+        releaseDatelbl.setForeground(Color.WHITE);
+        releaseDatelbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+        MoviesDashboard.add(releaseDatelbl); 
+
+        JPanel MoviePanelList = new JPanel();
+        MoviePanelList.setLayout(null);
+        MoviePanelList.setBounds(35, 200, 700, 440);
+        MoviePanelList.setBackground(new Color(30, 30, 30));
+
+        JPanel contentPanelMovieList = new JPanel();
+        contentPanelMovieList.setLayout(null);
+        contentPanelMovieList.setBackground(new Color(30, 30, 30));
+
+        int totalHeightMovieList = movies.Movies.size() * 50; 
+        contentPanelMovieList.setPreferredSize(new Dimension(650, Math.max(500, totalHeightMovieList)));
+
+        ArrayList<JCheckBox> checkBoxesMovieList = new ArrayList<JCheckBox>();
+
+        for(int i = 0; i < movies.Movies.size(); i++) {
+            JPanel MovieListRow = new JPanel();
+            MovieListRow.setLayout(null);
+            MovieListRow.setBounds(0, i * 50, 700, 40);
+            MovieListRow.setBackground(new Color(30, 30, 30));
+
+            JCheckBox selectCheckBox = new JCheckBox();
+            selectCheckBox.setBounds(4, 5, 20, 20);
+            selectCheckBox.setBackground(new Color(30, 30, 30));
+            selectCheckBox.setForeground(Color.white);
+            selectCheckBox.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            MovieListRow.add(selectCheckBox);
+            checkBoxesMovieList.add(selectCheckBox);
+
+            
+            JLabel MovieNamelbl = new JLabel(movies.Movies.get(i).Title);
+            MovieNamelbl.setBounds(100, 5, 200, 30);
+            MovieNamelbl.setForeground(Color.white);
+            MovieNamelbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            MovieListRow.add(MovieNamelbl);
+
+          
+            JLabel GenreMovielbl = new JLabel(String.valueOf(movies.Movies.get(i).MovieGenre));
+            GenreMovielbl.setBounds(260, 5, 200, 30);
+            GenreMovielbl.setForeground(Color.white);
+            GenreMovielbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            MovieListRow.add(GenreMovielbl);
+            
+            JLabel RatingMovielbl = new JLabel(movies.Movies.get(i).rating);
+            RatingMovielbl.setBounds(370, 5, 200, 30);
+            RatingMovielbl.setForeground(Color.white);
+            RatingMovielbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            MovieListRow.add(RatingMovielbl);
+            
+            JLabel AgeRatingMovielbl = new JLabel(String.valueOf(movies.Movies.get(i).AgeRating));
+            AgeRatingMovielbl.setBounds(480, 5, 200, 30);
+            AgeRatingMovielbl.setForeground(Color.white);
+            AgeRatingMovielbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            MovieListRow.add(AgeRatingMovielbl);
+            
+            
+            JLabel releaseDateMovielbl = new JLabel(movies.Movies.get(i).ReleaseDate.toString());
+            releaseDateMovielbl.setBounds(600, 5, 400, 30);
+            releaseDateMovielbl.setForeground(Color.white);
+            releaseDateMovielbl.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
+            MovieListRow.add(releaseDateMovielbl);
+
+
+
+
+            contentPanelMovieList.add(MovieListRow);
+        }
+
+        JScrollPane scrollPanelMovieList = new JScrollPane(contentPanelMovieList);
+        scrollPanelMovieList.setBounds(35, 200, 700, 440);
+        scrollPanelMovieList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPanelMovieList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPanelMovieList.setBorder(null);
+        scrollPanelMovieList.getVerticalScrollBar().setUnitIncrement(16);
+        scrollPanelMovieList.getViewport().setBackground(new Color(30, 30, 30));
+
+        contentPanelMovieList.addMouseWheelListener(e -> {
+            JScrollBar verticalScrollBar = scrollPanelMovieList.getVerticalScrollBar();
+            int notches = e.getWheelRotation();
+            int currentValue = verticalScrollBar.getValue();
+            int scrollAmount = 30; 
+            verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
+        });
+
+        MoviesDashboard.add(scrollPanelMovieList);
+
+
+        RoundedButton UnSelectAllMovie = new RoundedButton("Unselected All" , 5);
+        UnSelectAllMovie.setBounds(64, 650, 97, 27);
+        UnSelectAllMovie.setForeground(Color.BLACK);
+        UnSelectAllMovie.setBackground(Color.white);
+        UnSelectAllMovie.addActionListener(e->{
+            for(JCheckBox checkBox : checkBoxesMovieList) {
+                if(checkBox.isSelected()){
+                    checkBox.setSelected(false);
+                }
+                
+            }
+        });
+        MoviesDashboard.add(UnSelectAllMovie);
+
+        
+        RoundedButton selectAllMovie = new RoundedButton("Selected All" , 5);
+        selectAllMovie.setBounds(64 + buttonwidth + gap , 650, 97, 27);
+        selectAllMovie.setForeground(Color.BLACK);
+        selectAllMovie.setBackground(Color.white);
+        selectAllMovie.addActionListener(e->{
+            for(JCheckBox checkBox : checkBoxesMovieList) {
+                if(!checkBox.isSelected()){
+                    checkBox.setSelected(true);
+                }
+            }
+        });
+        MoviesDashboard.add(selectAllMovie);
+
+        RoundedButton EditMovie = new RoundedButton("Edit" , 5);
+        EditMovie.setBounds(64 + buttonwidth*2 + gap*2, 650, 97, 27);
+        EditMovie.setForeground(Color.BLACK);
+        EditMovie.setBackground(Color.white);
+        MoviesDashboard.add(EditMovie);
+
+        RoundedButton AddMovie = new RoundedButton("Add" , 5);
+        AddMovie.setBounds(64 + buttonwidth*3 + gap*3, 650, 97, 27);
+        AddMovie.setForeground(Color.BLACK);
+        AddMovie.setBackground(Color.white);
+        MoviesDashboard.add(AddMovie);
+
+        RoundedButton DeleteMovie = new RoundedButton("Delete" , 5);
+        DeleteMovie.setBounds(64 + buttonwidth*4 + gap*4, 650, 97, 27);
+        DeleteMovie.setForeground(Color.BLACK);
+        DeleteMovie.setBackground(Color.white);
+        MoviesDashboard.add(DeleteMovie);
+
+
+    //------------------------Right Things Movie------------
+
+    JSeparator separator1Movie = new JSeparator();
+    separator1Movie.setOrientation(SwingConstants.VERTICAL);
+    separator1Movie.setBackground(Color.white);
+    separator1Movie.setForeground(Color.white);
+    separator1Movie.setBounds(780, 00, 2, 750);
+    MoviesDashboard.add(separator1Movie);
+
+    JLabel nbrmovie = new JLabel("Total Number of Movies");
+    nbrmovie.setBounds(815, 20, 200, 30);
+    nbrmovie.setForeground(Color.WHITE);
+    nbrmovie.setFont(new Font("Bebas Neue", Font.BOLD, 15));
+    MoviesDashboard.add(nbrmovie);
+
+
+    RoundedPanel CircleMovie = new RoundedPanel(100);
+    CircleMovie.setLayout(null);
+    CircleMovie.setBounds(855, 80, 100, 100);
+    CircleMovie.setBackground( new Color(0, 0, 0, 0));
+    CircleMovie.setRoundedBorder(Color.WHITE, 2);
+    MoviesDashboard.add(CircleMovie);
+
+    JLabel nbrTotalMovie = new JLabel();
+    if(movies.Movies.size() < 10){
+        nbrTotalMovie.setBounds(40, 32, 100, 30);
+        nbrTotalMovie.setText(String.valueOf(movies.Movies.size())); 
+        }else{
+        nbrTotalMovie.setBounds(33, 32, 100, 30);
+        nbrTotalMovie.setText(String.valueOf(movies.Movies.size()));
+    }
+    
+    nbrTotalMovie.setForeground(Color.WHITE);
+    nbrTotalMovie.setFont(new Font("Bebas Neue", Font.BOLD, 30));
+    CircleMovie.add(nbrTotalMovie);
+
+    JSeparator separatorRght1Movie = new JSeparator();
+    separatorRght1Movie.setOrientation(SwingConstants.HORIZONTAL);
+    separatorRght1Movie.setBackground(Color.white);
+    separatorRght1Movie.setForeground(Color.white); 
+    separatorRght1Movie.setBounds(790, 220, 220, 1);
+    MoviesDashboard.add(separatorRght1Movie);
+
+    JLabel NewReleaseMovielbl = new JLabel("Top Watched Movie");
+    NewReleaseMovielbl.setBounds(830, 255, 250, 30);
+    NewReleaseMovielbl.setForeground(Color.WHITE);
+    NewReleaseMovielbl.setFont(new Font("Bebas Neue", Font.BOLD, 15));
+    MoviesDashboard.add(NewReleaseMovielbl);
+
+    JLabel NamereleaseMovie = new JLabel(); 
+    NamereleaseMovie.setBounds(880, 300, 250, 30);
+    NamereleaseMovie.setForeground(Color.WHITE);
+    NamereleaseMovie.setFont(new Font("Roboto", Font.TYPE1_FONT, 13));
+    NamereleaseMovie.setText(String.valueOf(movies.Movies.get(movies.Movies.size()-1).Title));
+    MoviesDashboard.add(NamereleaseMovie);
+
+    JSeparator separatorRght2Movie = new JSeparator();
+    separatorRght2Movie.setOrientation(SwingConstants.HORIZONTAL);
+    separatorRght2Movie.setBackground(Color.white);
+    separatorRght2Movie.setForeground(Color.white);
+    separatorRght2Movie.setBounds(790, 400, 220, 1);
+    MoviesDashboard.add(separatorRght2Movie);
+
+    JLabel MostPopularGenrelbl = new JLabel("Most Watched Genre");
+    MostPopularGenrelbl.setBounds(830, 423, 250, 30);
+    MostPopularGenrelbl.setForeground(Color.WHITE);
+    MostPopularGenrelbl.setFont(new Font("Bebas Neue", Font.BOLD, 15));
+    MoviesDashboard.add(MostPopularGenrelbl);
+
+    JLabel MostPopularGenre = new JLabel();
+    MostPopularGenre.setBounds(880, 460, 250, 30);
+    MostPopularGenre.setForeground(Color.WHITE);
+    MostPopularGenre.setFont(new Font("Roboto", Font.TYPE1_FONT, 13));
+    String MostGenre = null;
+    int maxappeare = 0;
+    
+        for (int i = 0; i < movies.Movies.size(); i++) {
+            String currentGenre = String.valueOf(movies.Movies.get(i).MovieGenre);
+            int currentCount = 0;
+
+            
+            for (int j = 0; j <  movies.Movies.size(); j++) {
+                if (String.valueOf(movies.Movies.get(j).MovieGenre).equals(currentGenre)) {
+                    currentCount++;
+                }
+            }
+
+            
+            if (currentCount > maxappeare) {
+                maxappeare = currentCount;
+                MostGenre = currentGenre;
+            }
+        }
+    MostPopularGenre.setText(MostGenre);
+    MoviesDashboard.add(MostPopularGenre);
+
+    JPanel firstgenrepanel = new JPanel();
+    firstgenrepanel.setBounds(820, 550, 12, 12);
+    firstgenrepanel.setBackground(new Color(255,130,37));
+    firstgenrepanel.setBorder(BorderFactory.createLineBorder(Color.white));
+    MoviesDashboard.add(firstgenrepanel);
+
+    JLabel firstgenre = new JLabel();
+    firstgenre.setBounds(845,544,100,20);
+    firstgenre.setForeground(Color.WHITE);
+    firstgenre.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+    firstgenre.setText(MostGenre);
+    MoviesDashboard.add(firstgenre);
+
+
+    JPanel secondgenrepanel = new JPanel(); 
+    secondgenrepanel.setBounds(820, 575, 12, 12);
+    secondgenrepanel.setBackground(new  Color(180,63,63));
+    secondgenrepanel.setBorder(BorderFactory.createLineBorder(Color.white));
+    MoviesDashboard.add(secondgenrepanel);
+
+    JLabel Secondgenre = new JLabel();
+    Secondgenre.setBounds(845,569,100,20);
+    Secondgenre.setForeground(Color.WHITE);
+    Secondgenre.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+    Secondgenre.setText(MostGenre);
+    MoviesDashboard.add(Secondgenre);
+
+    JPanel thirdgenrepanel = new JPanel(); 
+    thirdgenrepanel.setBounds(820, 600, 12, 12);
+    thirdgenrepanel.setBackground(new Color(23,59,69));
+    thirdgenrepanel.setBorder(BorderFactory.createLineBorder(Color.white));
+    MoviesDashboard.add(thirdgenrepanel);
+
+    JLabel thirdgenre = new JLabel();
+    thirdgenre.setBounds(845,594,100,20);
+    thirdgenre.setForeground(Color.WHITE);
+    thirdgenre.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+    thirdgenre.setText(MostGenre);
+    MoviesDashboard.add(thirdgenre);
+
+    String Mostgenre = null;
+    String secondMostFrequentMovie = null;
+    String thirdMostFrequentMovie = null;
+    int maxcounte = 0;
+    int secondMaxCount = 0;
+    int thirdMaxCount = 0;
+
+    
+    for (int i = 0; i < movies.Movies.size(); i++) {
+        String currentGenre = String.valueOf(movies.Movies.get(i).MovieGenre);
+        int currentCount = 0;
+
+ 
+        for (int j = 0; j < movies.Movies.size(); j++) {
+            if (String.valueOf(movies.Movies.get(j).MovieGenre).equals(currentGenre)) {
+                currentCount++;
+            }
+        }
+
+        
+        if (currentCount > maxcounte) {
+
+            thirdMaxCount = secondMaxCount;
+            thirdMostFrequentMovie = secondMostFrequentMovie;
+
+            secondMaxCount = maxcounte;
+            secondMostFrequentMovie = mostFrequentMovie;
+
+           
+            maxcounte = currentCount;
+            mostFrequentMovie = currentGenre;
+        } else if (currentCount > secondMaxCount && !currentGenre.equals(mostFrequentMovie)) {
+
+            thirdMaxCount = secondMaxCount;
+            thirdMostFrequentMovie = secondMostFrequentMovie;
+
+            secondMaxCount = currentCount;
+            secondMostFrequentMovie = currentGenre;
+        } else if (currentCount > thirdMaxCount && !currentGenre.equals(mostFrequentMovie) && !currentGenre.equals(secondMostFrequentMovie)) {
+
+            thirdMaxCount = currentCount;
+            thirdMostFrequentMovie = currentGenre;
+        }
+    }
+    Secondgenre.setText(secondMostFrequentMovie);
+    thirdgenre.setText(thirdMostFrequentMovie);
+
+    JLabel nbrfirstgenrelbl = new JLabel();
+    nbrfirstgenrelbl.setBounds(950,544,100,20);
+    nbrfirstgenrelbl.setForeground(Color.WHITE);
+    nbrfirstgenrelbl.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+    MoviesDashboard.add(nbrfirstgenrelbl);
+
+    int count = 0;
+    for(int i = 0; i < movies.Movies.size(); i++){
+        if(String.valueOf(movies.Movies.get(i).MovieGenre).equals(MostGenre)){
+            count++;
+        }
+    }
+    nbrfirstgenrelbl.setText(String.valueOf((count*100)/movies.Movies.size() + "%"));
+
+    count =0;
+    JLabel nbrsecondgenrelbl = new JLabel();
+    nbrsecondgenrelbl.setBounds(950,575,100,20);
+    nbrsecondgenrelbl.setForeground(Color.WHITE);
+    nbrsecondgenrelbl.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+    MoviesDashboard.add(nbrsecondgenrelbl);
+
+    for(int i = 0; i < movies.Movies.size(); i++){
+        if(String.valueOf(movies.Movies.get(i).MovieGenre).equals(secondMostFrequentMovie)){
+            count++;
+        }
+    }
+    nbrsecondgenrelbl.setText(String.valueOf((count*100)/movies.Movies.size() + "%"));
+
+    JLabel nbrthirdgenrelbl = new JLabel();
+    nbrthirdgenrelbl.setBounds(950,600,100,20);
+    nbrthirdgenrelbl.setForeground(Color.WHITE);
+    nbrthirdgenrelbl.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+    MoviesDashboard.add(nbrthirdgenrelbl);
+
+    count = 0;
+    for(int i = 0; i < movies.Movies.size(); i++){
+        if(String.valueOf(movies.Movies.get(i).MovieGenre).equals(thirdMostFrequentMovie)){
+            count++;
+        }
+    }
+    nbrthirdgenrelbl.setText(String.valueOf((count*100)/movies.Movies.size() + "%"));
+
+
+    JSeparator separatorRght3Movie = new JSeparator();
+    separatorRght3Movie.setOrientation(SwingConstants.HORIZONTAL);
+    separatorRght3Movie.setBackground(Color.white);
+    separatorRght3Movie.setForeground(Color.white); 
+    separatorRght3Movie.setBounds(790, 670, 220, 1);
+    MoviesDashboard.add(separatorRght3Movie);
+
+    JLabel DatetodayMovie = new JLabel("Date:");
+    DatetodayMovie.setBounds(840, 675, 200, 30);
+    DatetodayMovie.setForeground(Color.WHITE);
+    DatetodayMovie.setFont(new Font("Bebas Neue", Font.BOLD, 13));
+    MoviesDashboard.add(DatetodayMovie);
+    
+    JLabel datenowMovie = new JLabel(LocalDate.now().toString());
+    datenowMovie.setBounds(880, 675, 200, 30);
+    datenowMovie.setForeground(Color.WHITE);
+    datenowMovie.setFont(new Font("Bebas Neue", Font.BOLD, 13));
+    MoviesDashboard.add(datenowMovie);
+
+    
+
+
 
 
 
@@ -2808,7 +3202,7 @@ public class UiClass extends JFrame {
 
 
 
-
+//---------------------fin middle ----------------------
 
 
 
@@ -2823,7 +3217,7 @@ public class UiClass extends JFrame {
         cardContainer.add(MoviesDashboard, "movies");
         cardContainer.add(UserInsightsDashboard, "users");
 
-        ((CardLayout) cardContainer.getLayout()).show(cardContainer, "broadcast");
+        ((CardLayout) cardContainer.getLayout()).show(cardContainer, "movies");
 
 
         MiddlePanel.setLayout(null);
@@ -2832,11 +3226,12 @@ public class UiClass extends JFrame {
 
 
 
-        RoundedButton broadcastButton = new RoundedButton("Broadcast", 20);
-        broadcastButton.setBounds(20, 100, 160, 40);
+        RoundedButton broadcastButton = new RoundedButton("  Broadcast", 20);
+        broadcastButton.setBounds(10, 100, 150, 40);
         broadcastButton.setForeground(Color.WHITE);
         broadcastButton.setBackground(new Color(0, 0, 0, 0));
         broadcastButton.setContentAreaFilled(false);
+        broadcastButton.setLayout(null);
         broadcastButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
         broadcastButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "broadcast"));
         broadcastButton.addMouseListener(new MouseAdapter() {
@@ -2851,8 +3246,13 @@ public class UiClass extends JFrame {
         });
         LeftPanel.add(broadcastButton);
 
+        JLabel broadcastButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\Broadcasticon.png", 20, 20));
+        broadcastButtonicon.setBounds(5, 11, 20, 20);
+        broadcastButton.add(broadcastButtonicon);
+
+
         RoundedButton moviesButton = new RoundedButton("Movies", 20);
-        moviesButton.setBounds(20, 160, 160, 40);
+        moviesButton.setBounds(10, 160, 150, 40);
         moviesButton.setForeground(Color.WHITE);
         moviesButton.setBackground(new Color(0, 0, 0, 0));
         moviesButton.setContentAreaFilled(false);
@@ -2870,8 +3270,12 @@ public class UiClass extends JFrame {
         });
         LeftPanel.add(moviesButton);
 
+        JLabel MovieButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\clapperboard.png", 20, 20));
+        MovieButtonicon.setBounds(5, 11, 20, 20);
+        moviesButton.add(MovieButtonicon);
+
         RoundedButton usersButton = new RoundedButton("Users", 20);
-        usersButton.setBounds(20, 220, 160, 40);
+        usersButton.setBounds(10, 220, 150, 40);
         usersButton.setForeground(Color.WHITE);
         usersButton.setBackground(new Color(0, 0, 0, 0));
         usersButton.setContentAreaFilled(false);
@@ -2888,6 +3292,10 @@ public class UiClass extends JFrame {
             }
         });
         LeftPanel.add(usersButton);
+
+        JLabel usrButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\user1.png", 20, 20));
+        usrButtonicon.setBounds(5, 11, 20, 20);
+        usersButton.add(usrButtonicon);
 
         
         
