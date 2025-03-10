@@ -1,8 +1,10 @@
 package views;
 
+import Model.Client;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.TimerTask;
-
+import controller.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.util.Timer;
@@ -559,15 +561,22 @@ public class login extends JFrame {
         signinbutton.setFont(new Font("Roboto", Font.BOLD, 16));
         signinbutton.setOpaque(false);
         signinbutton.setRoundedBorder(Color.WHITE, 1);
-        cardPanel.add(signinbutton);
-        /*signinbutton.addActionListener(event -> {
-            String username = UserField.getText();
+        signinbutton.addActionListener(event -> {
+            String lname = LastNameField.getText();
+            String user_name = username.getText();
+            String name = UserField.getText();
+            String age = AgeField.getText();
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
-            // Call the login method from the controller
-            // controller.login(username, email, password);
-        });*/
-
+            ClientManager.addClient(user_name,lname,name, email, password, Integer.parseInt(age), 0);
+            emailField.setText("");
+            passwordField.setText("");
+            UserField.setText("");
+            username.setText("");
+            LastNameField.setText("");
+            AgeField.setText("");
+        });
+        cardPanel.add(signinbutton);
 
         JButton goToLoginButton = new JButton("Already have an account? Login");
         goToLoginButton.setBounds(395, 95, 250, 30);

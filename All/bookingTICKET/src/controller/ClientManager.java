@@ -9,17 +9,19 @@ public class ClientManager {
 
     }
     
-    public static void addClient(String name, String email, String password, int age, int balance) {
-        String sql = "INSERT INTO users (Name, Email, Password, Age, Balance) VALUES (?, ?, ?, ?, ?)";
+    public static void addClient(String username ,String lname,String name, String email, String password, int age, int balance) {
+        String sql = "INSERT INTO users (username,LastName,Name, Email, Password, Age, Balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             
-            pstmt.setString(1, name);
-            pstmt.setString(2, email);
-            pstmt.setString(3, password);
-            pstmt.setInt(4, age);
-            pstmt.setInt(5, balance);
+            pstmt.setString(1, username);
+            pstmt.setString(2, name);
+            pstmt.setString(3, lname);
+            pstmt.setString(4, email);
+            pstmt.setString(5, password);
+            pstmt.setInt(6, age);
+            pstmt.setInt(7, balance);
             
             int rowsInserted = pstmt.executeUpdate();
             
