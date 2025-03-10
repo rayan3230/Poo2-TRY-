@@ -7,19 +7,19 @@ public class GestionAccounts {
     public ArrayList<Client> Clients = new ArrayList<>();
 
     public GestionAccounts(){
-        Clients.add(new Client("Rayan3230", "q", 12,"q@gmail.com", "1234567890", "rayan32","123"));
-        Clients.add(new Client("Wassim222", "w", 22,"" , "1234567890", "1234567890", "123"));
-        Clients.add(new Client("Fahd", "Djedi", 10,"fahd@gmail.com", "055098765432", "fahd3123", "zxcvbnm"));
-        Clients.add(new Client("Mohammed", "Mohamed", 30,"mohammed@gmail.com", "055098765432", "mohammed123", "qwer"));
-        Clients.add(new Client("Mahmoud", "Mahmoud", 77,"mahmoud@gmail.com", "055098765432", "mahmoud123", "asdf"));
-        Clients.add(new Client("Hassan", "Hassan", 45,"hassan@gmail.com", "055098765432", "hassan123", "jkl"));
-        Clients.add(new Client("Mehdi","Benazza",19,"Mehdi@gmail.com","0478574834343","Mehdi7478","edfdf"));
-        Clients.add(new Client("Mahmoud", "Mahmoud", 77,"mahmoud@gmail.com", "055098765432", "mahmoud123", "asdf"));
-        Clients.add(new Client("Hassan", "Hassan", 45,"hassan@gmail.com", "055098765432", "hassan999", "jkl"));
-        Clients.add(new Client("Mehdi","Benazza",19,"Mehdi@gmail.com","0478574834343","Mehdi7478","edfdf"));
-        Clients.add(new Client("Mahmoud", "Mahmoud", 77,"mahmoud@gmail.com", "055098765432", "mahmoud123", "asdf"));
-        Clients.add(new Client("Hassan", "Hassan", 45,"hassan@gmail.com", "055098765432", "hassan1999", "jkl"));
-        Clients.add(new Client("Mehdi","Benazza",19,"Mehdi@gmail.com","0478574834343","Mehdi7478","edfdf"));
+        Clients.add(new Client("Rayan3230", "q", 12,1000,"q@gmail.com", "1234567890", "rayan32","123"));
+        Clients.add(new Client("Wassim222", "w", 22,1000,"w@gmail.com" , "1234567890", "1234567890", "123"));
+        Clients.add(new Client("Fahd", "Djedi", 10,1000,"fahd@gmail.com", "055098765432", "fahd3123", "zxcvbnm"));
+        Clients.add(new Client("Mohammed", "Mohamed", 30,64783,"mohammed@gmail.com", "055098765432", "mohammed123", "qwer"));
+        Clients.add(new Client("Mahmoud", "Mahmoud", 10,77485,"mahmoud@gmail.com", "055098765432", "mahmoud123", "asdf"));
+        Clients.add(new Client("Hassan", "Hassan", 45,200,"hassan@gmail.com", "055098765432", "hassan123", "jkl"));
+        Clients.add(new Client("Mehdi","Benazza",19,384,"Mehdi@gmail.com","0478574834343","Mehdi7478","edfdf"));
+        Clients.add(new Client("Mahmoud", "Mahmoud", 77,970,"mahmoud@gmail.com", "055098765432", "mahmoud123", "asdf"));
+        Clients.add(new Client("Hassan", "Hassan", 45,566,"hassan@gmail.com", "055098765432", "hassan999", "jkl"));
+        Clients.add(new Client("Mehdi","Benazza",19,9000,"Mehdi@gmail.com","0478574834343","Mehdi7478","edfdf"));
+        Clients.add(new Client("Mahmoud", "Mahmoud", 77,7599,"mahmoud@gmail.com", "055098765432", "mahmoud123", "asdf"));
+        Clients.add(new Client("Hassan", "Hassan", 45,3022,"hassan@gmail.com", "055098765432", "hassan1999", "jkl"));
+        //Clients.add(new Client("Mehdi","Benazza",19,12000,"Mehdi@gmail.com","0478574834343","Mehdi7478","edfdf"));
 
 
         
@@ -27,14 +27,14 @@ public class GestionAccounts {
        // AdminAccounts.add(new Accounts("admin", "admin", "admin@gmail.com", 0, 0));
     }
     
-    public void AddClientAccount(String firstname,String lastname , int Age ,String phonenumber , String username  ,String password ,String email,double cardNumber , int CCVnbr ) {
+    public void AddClientAccount(String firstname,String lastname , int Age ,int Balance,String phonenumber , String username  ,String password ,String email,double cardNumber , int CCVnbr ) {
         for (Client account : Clients){
             if (account.username.equals(username)) {
                 System.out.println("Account already exists");
                 return;
             }
         }
-        Clients.add(new Client(firstname, lastname , Age ,email, phonenumber , username ,password ));
+        Clients.add(new Client(firstname, lastname , Age ,Balance,email, phonenumber , username ,password ));
         System.out.println("Account created successfully");
 
    }        

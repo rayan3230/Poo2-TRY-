@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -2429,7 +2430,7 @@ public class UiClass extends JFrame {
         for(int i = 0; i < Accounts.Clients.size(); i++) {
             JPanel UserListRow = new JPanel();
             UserListRow.setLayout(null);
-            UserListRow.setBounds(0, i * 50, 650, 40);
+            UserListRow.setBounds(0, i * 50, 700, 40);
             UserListRow.setBackground(new Color(30, 30, 30));
 
             
@@ -2460,7 +2461,7 @@ public class UiClass extends JFrame {
             
             
             JLabel BalanceUser = new JLabel(String.valueOf(Accounts.Clients.get(i).Balance));
-            BalanceUser.setBounds(640, 5, 200, 30);
+            BalanceUser.setBounds(635, 5, 400, 30);
             BalanceUser.setForeground(Color.white);
             BalanceUser.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
             UserListRow.add(BalanceUser);
@@ -2524,12 +2525,12 @@ public class UiClass extends JFrame {
 
         //-------right things
 
-        JSeparator separator2 = new JSeparator();
-        separator2.setOrientation(SwingConstants.VERTICAL);
-        separator2.setBackground(Color.white);
-        separator2.setForeground(Color.white);
-        separator2.setBounds(780, 00, 2, 750);
-        UserInsightsDashboard.add(separator2);
+        JSeparator separator1User = new JSeparator();
+        separator1User.setOrientation(SwingConstants.VERTICAL);
+        separator1User.setBackground(Color.white);
+        separator1User.setForeground(Color.white);
+        separator1User.setBounds(780, 00, 2, 750);
+        UserInsightsDashboard.add(separator1User);
         
 
         JLabel nbrUser = new JLabel("Number of Users");
@@ -2539,12 +2540,12 @@ public class UiClass extends JFrame {
         UserInsightsDashboard.add(nbrUser);
 
 
-        RoundedPanel Circle = new RoundedPanel(100);
-        Circle.setLayout(null);
-        Circle.setBounds(855, 80, 100, 100);
-        Circle.setBackground( new Color(0, 0, 0, 0));
-        Circle.setRoundedBorder(Color.WHITE, 2);
-        UserInsightsDashboard.add(Circle);
+        RoundedPanel CircleUser = new RoundedPanel(100);
+        CircleUser.setLayout(null);
+        CircleUser.setBounds(855, 80, 100, 100);
+        CircleUser.setBackground( new Color(0, 0, 0, 0));
+        CircleUser.setRoundedBorder(Color.WHITE, 2);
+        UserInsightsDashboard.add(CircleUser);
 
         JLabel nbrUserLabel = new JLabel();
          if(Accounts.Clients.size() < 10){
@@ -2558,23 +2559,23 @@ public class UiClass extends JFrame {
         
         nbrUserLabel.setForeground(Color.WHITE);
         nbrUserLabel.setFont(new Font("Bebas Neue", Font.BOLD, 30));
-        Circle.add(nbrUserLabel);
+        CircleUser.add(nbrUserLabel);
         
-        JSeparator separatorRght1 = new JSeparator();
-        separatorRght1.setOrientation(SwingConstants.HORIZONTAL);
-        separatorRght1.setBackground(Color.white);
-        separatorRght1.setForeground(Color.white); 
-        separatorRght1.setBounds(790, 240, 220, 1);
-        UserInsightsDashboard.add(separatorRght1);
+        JSeparator separatorRght1User = new JSeparator();
+        separatorRght1User.setOrientation(SwingConstants.HORIZONTAL);
+        separatorRght1User.setBackground(Color.white);
+        separatorRght1User.setForeground(Color.white); 
+        separatorRght1User.setBounds(790, 240, 220, 1);
+        UserInsightsDashboard.add(separatorRght1User);
 
 
 
-        RoundedPanel Circle2 = new RoundedPanel(100);
-        Circle2.setLayout(null);
-        Circle2.setBounds(855, 320, 100, 100);
-        Circle2.setBackground( new Color(0, 0, 0, 0));
-        Circle2.setRoundedBorder(Color.WHITE, 2);
-        UserInsightsDashboard.add(Circle2);
+        RoundedPanel Circle2User = new RoundedPanel(100);
+        Circle2User.setLayout(null);
+        Circle2User.setBounds(855, 320, 100, 100);
+        Circle2User.setBackground( new Color(0, 0, 0, 0));
+        Circle2User.setRoundedBorder(Color.WHITE, 2);
+        UserInsightsDashboard.add(Circle2User);
 
         JLabel AvgBalancelbl = new JLabel("Average Balance per user ");
         AvgBalancelbl.setBounds(800, 260, 200, 30);
@@ -2586,42 +2587,157 @@ public class UiClass extends JFrame {
         int AvrgBalance;
         int sumBalance = 0;
         for (Client client : Accounts.Clients) {
-            sumBalance = client.Balance;
+            sumBalance += client.Balance;
         }
         AvrgBalance = sumBalance / Accounts.Clients.size();
 
         if(AvrgBalance < 10){
             AvgBalance.setBounds(43, 34, 100, 30);
-            AvgBalance.setText(String.valueOf(AvrgBalance));
+            AvgBalance.setFont(new Font("Bebas Neue", Font.BOLD, 24));
+            AvgBalance.setText(String.valueOf(AvrgBalance)+ "da");
+        }
 
-        }else{
+        if(AvrgBalance > 10 && AvrgBalance<1000 ) {
             AvgBalance.setBounds(47, 32, 100, 30);
-            AvgBalance.setText(String.valueOf(AvgBalance));
+            AvgBalance.setFont(new Font("Bebas Neue", Font.BOLD, 24));
+            AvgBalance.setText(String.valueOf(AvrgBalance)+ "da");
+        }           
+        else if(AvrgBalance > 1000) {
+            AvgBalance.setBounds(17, 32, 100, 30);
+            AvgBalance.setFont(new Font("Bebas Neue", Font.BOLD, 19));
+            AvgBalance.setText(String.valueOf(AvrgBalance) + "da");
         }
 
         AvgBalance.setForeground(Color.WHITE);
-        AvgBalance.setFont(new Font("Bebas Neue", Font.BOLD, 24));
-        Circle2.add(AvgBalance);
+        Circle2User.add(AvgBalance);
 
 
-        // JSeparator separatorRght2 = new JSeparator();
-        // separatorRght2.setOrientation(SwingConstants.HORIZONTAL);
-        // separatorRght2.setBackground(Color.white);
-        // separatorRght2.setForeground(Color.white); 
-        // separatorRght2.setBounds(15, 540, 240, 1);
-        // UserInsightsDashboard.add(separatorRght2);
+        JSeparator separatorRght2User = new JSeparator();
+        separatorRght2User.setOrientation(SwingConstants.HORIZONTAL);
+        separatorRght2User.setBackground(Color.white);
+        separatorRght2User.setForeground(Color.white); 
+        separatorRght2User.setBounds(790, 470, 220, 1);
+        UserInsightsDashboard.add(separatorRght2User);
 
-        // JLabel Datetoday = new JLabel("Date:");
-        // Datetoday.setBounds(60, 630, 200, 30);
-        // Datetoday.setForeground(Color.WHITE);
-        // Datetoday.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        // UserInsightsDashboard.add(Datetoday);
+        JLabel AvregeAgelbl = new JLabel("Most Common Age Groups");
+        AvregeAgelbl.setBounds(820, 490, 200, 30);
+        AvregeAgelbl.setForeground(Color.WHITE);
+        AvregeAgelbl.setFont(new Font("Bebas Neue", Font.BOLD, 13));
+        UserInsightsDashboard.add(AvregeAgelbl);
+
+        JLabel AvrgAge = new JLabel();
+        int avrgAge = 0;
+        int sumAge = 0;
+        for (Client client : Accounts.Clients) {
+            sumAge += client.Age;
+        }
+        avrgAge = sumAge / Accounts.Clients.size();
+        AvrgAge.setText(String.valueOf(avrgAge));
+        AvrgAge.setBounds(890, 530, 100, 20);
+        AvrgAge.setForeground(Color.WHITE);
+        AvrgAge.setFont(new Font("Bebas Neue", Font.BOLD, 19));
+        UserInsightsDashboard.add(AvrgAge);
+
+        JPanel down20 = new JPanel();
+        down20.setBounds(820, 575, 12, 12);
+        down20.setBackground(new Color(180,63,63));
+        down20.setBorder(BorderFactory.createLineBorder(Color.white));
+        UserInsightsDashboard.add(down20);
+
+        JLabel down20lbl = new JLabel(">20");
+        down20lbl.setBounds(845,569,100,20);
+        down20lbl.setForeground(Color.WHITE);
+        down20lbl.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+        UserInsightsDashboard.add(down20lbl);
+
+        JLabel nbrofdown20lbl = new JLabel();
+        nbrofdown20lbl.setBounds(950,569,100,20);
+        nbrofdown20lbl.setForeground(Color.WHITE);
+        nbrofdown20lbl.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+        UserInsightsDashboard.add(nbrofdown20lbl);
+
+
+        JPanel btw21_30 = new JPanel();
+        btw21_30.setBounds(820, 600, 12, 12);
+        btw21_30.setBackground(new Color(255,130,37));
+        btw21_30.setBorder(BorderFactory.createLineBorder(Color.white));
+        UserInsightsDashboard.add(btw21_30);
+
+
+        JLabel btw21_30lbl = new JLabel("21 - 30");
+        btw21_30lbl.setBounds(845,594,100,20);
+        btw21_30lbl.setForeground(Color.WHITE);
+        btw21_30lbl.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+        UserInsightsDashboard.add(btw21_30lbl);
+
+        JLabel nbrbtw21_30lbl = new JLabel();
+        nbrbtw21_30lbl.setBounds(950,594,100,20);
+        nbrbtw21_30lbl.setForeground(Color.WHITE);
+        nbrbtw21_30lbl.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+        UserInsightsDashboard.add(nbrbtw21_30lbl);
+
+
+        JPanel up30 = new JPanel();
+        up30.setBounds(820, 625, 12, 12);
+        up30.setBackground(new Color(23,59,69));
+        up30.setBorder(BorderFactory.createLineBorder(Color.white));
+        UserInsightsDashboard.add(up30);
+
+
+        JLabel up30lbl = new JLabel("<30");
+        up30lbl.setBounds(845,619,100,20);
+        up30lbl.setForeground(Color.WHITE);
+        up30lbl.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+        UserInsightsDashboard.add(up30lbl);
+
+        JLabel nbrup30lbl = new JLabel();
+        nbrup30lbl.setBounds(950,619,100,20);
+        nbrup30lbl.setForeground(Color.WHITE);
+        nbrup30lbl.setFont(new Font("Bebas Neue", Font.BOLD, 12));
+        UserInsightsDashboard.add(nbrup30lbl);
+
+        int nbrup30 = 0;
+        for (Client client : Accounts.Clients) {
+            if(client.Age > 30)//up30
+                nbrup30++;
+        }
+        int nbrofdown20 = 0;
+        for (Client client : Accounts.Clients) {
+            if(client.Age<20)//down 20
+                nbrofdown20++;
+        }
+        int nbrbtw21_30 = 0;
+        for (Client client : Accounts.Clients) {
+            if(client.Age >= 21 && client.Age <= 30)//btw 21 30
+                nbrbtw21_30++;
+        }
+
+        nbrup30lbl.setText(String.valueOf((nbrup30 * 100)/Accounts.Clients.size()) + "%");
+        nbrbtw21_30lbl.setText(String.valueOf((nbrbtw21_30 * 100)/Accounts.Clients.size()) + "%");
+        nbrofdown20lbl.setText(String.valueOf((nbrofdown20 * 100)/Accounts.Clients.size()) + "%");
+
+
+        JSeparator separatorRght3User = new JSeparator();
+        separatorRght3User.setOrientation(SwingConstants.HORIZONTAL);
+        separatorRght3User.setBackground(Color.white);
+        separatorRght3User.setForeground(Color.white); 
+        separatorRght3User.setBounds(790, 670, 220, 1);
+        UserInsightsDashboard.add(separatorRght3User);
+
+
+
+
+        JLabel DatetodayUser = new JLabel("Date:");
+        DatetodayUser.setBounds(840, 675, 200, 30);
+        DatetodayUser.setForeground(Color.WHITE);
+        DatetodayUser.setFont(new Font("Bebas Neue", Font.BOLD, 13));
+        UserInsightsDashboard.add(DatetodayUser);
         
-        // JLabel datenow = new JLabel(LocalDate.now().toString());
-        // datenow.setBounds(100, 630, 200, 30);
-        // datenow.setForeground(Color.WHITE);
-        // datenow.setFont(new Font("Bebas Neue", Font.PLAIN, 13));
-        // UserInsightsDashboard.add(datenow);
+        JLabel datenowUser = new JLabel(LocalDate.now().toString());
+        datenowUser.setBounds(880, 675, 200, 30);
+        datenowUser.setForeground(Color.WHITE);
+        datenowUser.setFont(new Font("Bebas Neue", Font.BOLD, 13));
+        UserInsightsDashboard.add(datenowUser);
 
 
 

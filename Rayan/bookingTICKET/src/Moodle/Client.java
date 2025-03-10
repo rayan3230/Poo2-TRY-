@@ -11,15 +11,15 @@ public class Client extends Accounts{
     public String PhoneNumber;
     public double cardNum;
     public int CCVnbr;
-
-    public ArrayList<Movie.genre> Intrests = new ArrayList<>();
     public int Balance;
+    public ArrayList<Movie.genre> Intrests = new ArrayList<>();
     
 
-    public Client(String firstName, String lastName,int Age ,String email, String phoneNumber, String username, String password) {
+    public Client(String firstName, String lastName,int Age, int Balance ,String email, String phoneNumber, String username, String password) {
 
         super(username, password);
         this.FirstName = firstName;
+        this.Balance = Balance;
         this.Age = Age;
         this.LastName = lastName;
         this.Email = email;
