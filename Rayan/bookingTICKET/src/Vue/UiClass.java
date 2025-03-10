@@ -3225,6 +3225,73 @@ public class UiClass extends JFrame {
 
 
 
+        RoundedButton homebutton = new RoundedButton("Home", 20);
+        homebutton.setBounds(10, 220, 150, 40);
+        homebutton.setForeground(Color.WHITE);
+        homebutton.setBackground(new Color(0, 0, 0, 0));
+        homebutton.setContentAreaFilled(false);
+        homebutton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        LeftPanel.add(homebutton);
+
+        RoundedButton moviesButton = new RoundedButton("Movies", 20);
+        moviesButton.setBounds(10, 160, 150, 40);
+        moviesButton.setForeground(Color.WHITE);
+        moviesButton.setBackground(new Color(0, 0, 0, 0));
+        moviesButton.setContentAreaFilled(false);
+        moviesButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        moviesButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "movies"));
+        moviesButton.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                moviesButton.setBackground(new Color(40, 40, 40));
+                moviesButton.setContentAreaFilled(true);
+            }
+            public void mouseExited(MouseEvent e) {
+                moviesButton.setBackground(new Color(0, 0, 0, 0));
+                moviesButton.setContentAreaFilled(false);
+            }
+        });
+        LeftPanel.add(moviesButton);
+
+        
+        JLabel MovieButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\clapperboard.png", 20, 20));
+        MovieButtonicon.setBounds(5, 11, 20, 20);
+        moviesButton.add(MovieButtonicon);
+
+
+
+        RoundedButton usersButton = new RoundedButton("Users", 20);
+        usersButton.setBounds(10, 220, 150, 40);
+        usersButton.setForeground(Color.WHITE);
+        usersButton.setBackground(new Color(0, 0, 0, 0));
+        usersButton.setContentAreaFilled(false);
+        usersButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        usersButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "users"));
+        usersButton.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                usersButton.setBackground(new Color(40, 40, 40));
+                usersButton.setContentAreaFilled(true);
+            }
+            public void mouseExited(MouseEvent e) {
+                usersButton.setBackground(new Color(0, 0, 0, 0));
+                usersButton.setContentAreaFilled(false);
+            }
+        });
+        LeftPanel.add(usersButton);
+
+        JLabel usrButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\user1.png", 20, 20));
+        usrButtonicon.setBounds(5, 11, 20, 20);
+        usersButton.add(usrButtonicon);
+
+        RoundedButton Theaterbutton = new RoundedButton("Users", 20);
+        Theaterbutton.setBounds(10, 220, 150, 40);
+        Theaterbutton.setForeground(Color.WHITE);
+        Theaterbutton.setBackground(new Color(0, 0, 0, 0));
+        Theaterbutton.setContentAreaFilled(false);
+        Theaterbutton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        LeftPanel.add(Theaterbutton);
+
+
+
 
         RoundedButton broadcastButton = new RoundedButton("  Broadcast", 20);
         broadcastButton.setBounds(10, 100, 150, 40);
@@ -3251,51 +3318,15 @@ public class UiClass extends JFrame {
         broadcastButton.add(broadcastButtonicon);
 
 
-        RoundedButton moviesButton = new RoundedButton("Movies", 20);
-        moviesButton.setBounds(10, 160, 150, 40);
-        moviesButton.setForeground(Color.WHITE);
-        moviesButton.setBackground(new Color(0, 0, 0, 0));
-        moviesButton.setContentAreaFilled(false);
-        moviesButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        moviesButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "movies"));
-        moviesButton.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {
-                moviesButton.setBackground(new Color(40, 40, 40));
-                moviesButton.setContentAreaFilled(true);
-            }
-            public void mouseExited(MouseEvent e) {
-                moviesButton.setBackground(new Color(0, 0, 0, 0));
-                moviesButton.setContentAreaFilled(false);
-            }
-        });
-        LeftPanel.add(moviesButton);
+        RoundedButton Adminbutton = new RoundedButton("Users", 20);
+        Adminbutton.setBounds(10, 220, 150, 40);
+        Adminbutton.setForeground(Color.WHITE);
+        Adminbutton.setBackground(new Color(0, 0, 0, 0));
+        Adminbutton.setContentAreaFilled(false);
+        Adminbutton.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        LeftPanel.add(Adminbutton);
 
-        JLabel MovieButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\clapperboard.png", 20, 20));
-        MovieButtonicon.setBounds(5, 11, 20, 20);
-        moviesButton.add(MovieButtonicon);
 
-        RoundedButton usersButton = new RoundedButton("Users", 20);
-        usersButton.setBounds(10, 220, 150, 40);
-        usersButton.setForeground(Color.WHITE);
-        usersButton.setBackground(new Color(0, 0, 0, 0));
-        usersButton.setContentAreaFilled(false);
-        usersButton.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        usersButton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "users"));
-        usersButton.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {
-                usersButton.setBackground(new Color(40, 40, 40));
-                usersButton.setContentAreaFilled(true);
-            }
-            public void mouseExited(MouseEvent e) {
-                usersButton.setBackground(new Color(0, 0, 0, 0));
-                usersButton.setContentAreaFilled(false);
-            }
-        });
-        LeftPanel.add(usersButton);
-
-        JLabel usrButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\user1.png", 20, 20));
-        usrButtonicon.setBounds(5, 11, 20, 20);
-        usersButton.add(usrButtonicon);
 
         
         
