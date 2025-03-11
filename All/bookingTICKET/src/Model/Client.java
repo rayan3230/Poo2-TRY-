@@ -11,6 +11,7 @@ public class Client extends Account{
     public String PhoneNumber;
     public double cardNum;
     public int CCVnbr;
+    public int Balance;
     public ArrayList<Movie.MovieGenre> Intrests = new ArrayList<>();
     
 
@@ -21,6 +22,7 @@ public class Client extends Account{
         this.LastName = lastName;
         this.Email = email;
         this.PhoneNumber = phoneNumber;
+        this.Balance = 0;
     }
 
 
