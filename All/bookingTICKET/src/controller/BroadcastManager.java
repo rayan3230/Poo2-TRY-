@@ -134,5 +134,70 @@ public class BroadcastManager {
     }
 
 
+    public static void updateBroadcastTheater(int BroadcastId, int TheaterID) {
+        String sql = "UPDATE broadcasts SET TheaterID = ? WHERE BroadcastID = ?";
 
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, TheaterID);
+            pstmt.setInt(2, BroadcastId);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+            System.out.println("Theater updated successfully!");
+            } else {
+            System.out.println("Braodcast not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+
+        public static void updateBroadcastmovie(int BroadcastId, int MovieID) {
+            String sql = "UPDATE broadcasts SET MovieID = ? WHERE BroadcastID = ?";
+    
+            try (Connection conn = DatabaseConnection.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    
+                pstmt.setInt(1, MovieID);
+                pstmt.setInt(2, BroadcastId);
+    
+                int rowsUpdated = pstmt.executeUpdate();
+    
+                if (rowsUpdated > 0) {
+                System.out.println("Theater updated successfully!");
+                } else {
+                System.out.println("Braodcast not found. No update performed.");
+                }
+    
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            }
+
+
+            public static void updateBroadcastDate(int BroadcastId, int MovieID) {
+                String sql = "UPDATE broadcasts SET MovieID = ? WHERE BroadcastID = ?";
+        
+                try (Connection conn = DatabaseConnection.connect();
+                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+                    pstmt.setInt(1, MovieID);
+                    pstmt.setInt(2, BroadcastId);
+        
+                    int rowsUpdated = pstmt.executeUpdate();
+        
+                    if (rowsUpdated > 0) {
+                    System.out.println("Theater updated successfully!");
+                    } else {
+                    System.out.println("Braodcast not found. No update performed.");
+                    }
+        
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                }
 }

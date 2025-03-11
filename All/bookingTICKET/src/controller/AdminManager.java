@@ -111,4 +111,71 @@ public class AdminManager {
         return 0;
     }
 
+
+
+    public static void UpdateAdminName(int Adminid, String name) {
+        String sql = "UPDATE admins SET Name = ? WHERE AdminID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, name);
+            pstmt.setInt(2, Adminid);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+            System.out.println("Admin name updated successfully!");
+            } else {
+            System.out.println("Admin not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+
+        public static void updateAdminEmail(int Adminid, String email) {
+        String sql = "UPDATE admins SET Email = ? WHERE AdminID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            pstmt.setInt(2, Adminid);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+            System.out.println("Admin email updated successfully!");
+            } else {
+            System.out.println("Admin not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+
+        public static void updateAdminPassword(int adminid, String password) {
+        String sql = "UPDATE admins SET password = ? WHERE AdminID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, password);
+            pstmt.setInt(2, adminid);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+            System.out.println("Admin password updated successfully!");
+            } else {
+            System.out.println("Admin not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
 }
