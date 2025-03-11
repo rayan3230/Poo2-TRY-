@@ -179,13 +179,13 @@ public class BroadcastManager {
             }
 
 
-            public static void updateBroadcastDate(int BroadcastId, int MovieID) {
-                String sql = "UPDATE broadcasts SET MovieID = ? WHERE BroadcastID = ?";
+            public static void updateBroadcastDate(int BroadcastId, LocalDate Date) {
+                String sql = "UPDATE broadcasts SET BroadcastDate = ? WHERE BroadcastID = ?";
         
                 try (Connection conn = DatabaseConnection.connect();
                      PreparedStatement pstmt = conn.prepareStatement(sql)) {
         
-                    pstmt.setInt(1, MovieID);
+                    pstmt.setDate(1, java.sql.Date.valueOf(Date));
                     pstmt.setInt(2, BroadcastId);
         
                     int rowsUpdated = pstmt.executeUpdate();

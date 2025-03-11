@@ -219,6 +219,42 @@ public class ClientManager {
             return false;
         }
 
+        public static ResultSet findUsersbyusername(String username) {
+            String sql = "SELECT * FROM users WHERE username = ? ";
+
+            try (Connection conn = DatabaseConnection.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                pstmt.setString(1, username);
+
+                return pstmt.executeQuery();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        
+        public static ResultSet findUsersbyEmail(String email) {
+            String sql = "SELECT * FROM users WHERE Emaik = ? ";
+
+            try (Connection conn = DatabaseConnection.connect();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                pstmt.setString(1, email);
+
+                return pstmt.executeQuery();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+
 
         public static int numberofusers() {
             String sql = "SELECT COUNT(*) FROM users";

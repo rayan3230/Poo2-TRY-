@@ -111,6 +111,38 @@ public class AdminManager {
         return 0;
     }
 
+    public static ResultSet findAdminssbyName(String name) {
+        String sql = "SELECT * FROM admins WHERE Name = ? ";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, name);
+
+            return pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    
+    public static ResultSet findAdminsbyEmail(String email) {
+        String sql = "SELECT FROM admins Where Email = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+
+            return pstmt.executeQuery();
+             } catch (SQLException e) {
+            e.printStackTrace();
+             } 
+        return null;   
+    }
 
 
     public static void UpdateAdminName(int Adminid, String name) {
