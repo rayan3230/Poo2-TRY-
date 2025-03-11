@@ -2552,7 +2552,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         RoundedPanel UserPHOTO = new RoundedPanel(80);
         UserPHOTO.setLayout(null);
-        UserPHOTO.setBackgroundImage("Rayan\\bookingTICKET\\img\\UserIcon1.png");
+        UserPHOTO.setBackgroundImage("All\\bookingTICKET\\img\\UserIcon1.png");
         UserPHOTO.setBounds(5, 10, 30, 30);
         UserPHOTO.setBackground(Color.red);
         UserPanel.add(UserPHOTO);
@@ -2874,7 +2874,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         RoundedPanel UserPHOTOMovie = new RoundedPanel(80);
         UserPHOTOMovie.setLayout(null);
-        UserPHOTOMovie.setBackgroundImage("Rayan\\bookingTICKET\\img\\UserIcon1.png");
+        UserPHOTOMovie.setBackgroundImage("All\\bookingTICKET\\img\\UserIcon1.png");
         UserPHOTOMovie.setBounds(5, 10, 30, 30);
         UserPHOTOMovie.setBackground(Color.red);
         UserPanelMovie.add(UserPHOTOMovie);
@@ -3355,7 +3355,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         RoundedPanel UserPHOTOUser = new RoundedPanel(80);
         UserPHOTOUser.setLayout(null);
-        UserPHOTOUser.setBackgroundImage("Rayan\\bookingTICKET\\img\\UserIcon1.png");
+        UserPHOTOUser.setBackgroundImage("All\\bookingTICKET\\img\\UserIcon1.png");
         UserPHOTOUser.setBounds(5, 10, 30, 30);
         UserPHOTOUser.setBackground(Color.red);
         UserPanelUser.add(UserPHOTOUser);
@@ -3789,7 +3789,7 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         LeftPanel.add(homebutton);
 
-        JLabel HomeButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\home 1.png", 20, 20));
+        JLabel HomeButtonicon = new JLabel(resizedIcon("All\\bookingTICKET\\img\\icon\\home 1.png", 20, 20));
         HomeButtonicon.setBounds(5, 11, 20, 20);
         homebutton.add(HomeButtonicon);
 
@@ -3804,7 +3804,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         LeftPanel.add(moviesButton);
 
         
-        JLabel MovieButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\clapperboard.png", 20, 20));
+        JLabel MovieButtonicon = new JLabel(resizedIcon("All\\bookingTICKET\\img\\icon\\clapperboard.png", 20, 20));
         MovieButtonicon.setBounds(5, 11, 20, 20);
         moviesButton.add(MovieButtonicon);
 
@@ -3820,7 +3820,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         usersButton.setHoverEffect(new Color(0, 0, 0 , 0), new Color(40, 40, 40));
         LeftPanel.add(usersButton);
 
-        JLabel usrButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\user1.png", 20, 20));
+        JLabel usrButtonicon = new JLabel(resizedIcon("All\\bookingTICKET\\img\\icon\\user1.png", 20, 20));
         usrButtonicon.setBounds(5, 11, 20, 20);
         usersButton.add(usrButtonicon);
 
@@ -3834,7 +3834,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         Theaterbutton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "theater"));
         LeftPanel.add(Theaterbutton);
 
-        JLabel TheaterButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\Theatericon.png", 20, 20));
+        JLabel TheaterButtonicon = new JLabel(resizedIcon("All\\bookingTICKET\\img\\icon\\Theatericon.png", 20, 20));
         TheaterButtonicon.setBounds(5, 11, 20, 20);
         Theaterbutton.add(TheaterButtonicon);
 
@@ -3852,7 +3852,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         LeftPanel.add(broadcastButton);
 
 
-        JLabel broadcastButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\Broadcasticon.png", 20, 20));
+        JLabel broadcastButtonicon = new JLabel(resizedIcon("All\\bookingTICKET\\img\\icon\\Broadcasticon.png", 20, 20));
         broadcastButtonicon.setBounds(5, 11, 20, 20);
         broadcastButton.add(broadcastButtonicon);
 
@@ -3867,7 +3867,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         Adminbutton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "admin"));
         LeftPanel.add(Adminbutton);
 
-        JLabel AdminButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\administrator 1.png", 20, 20));
+        JLabel AdminButtonicon = new JLabel(resizedIcon("All\\bookingTICKET\\img\\icon\\administrator 1.png", 20, 20));
         AdminButtonicon.setBounds(5, 11, 20, 20);
         Adminbutton.add(AdminButtonicon);
 
@@ -3888,7 +3888,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         Statsbutton.addActionListener(e -> ((CardLayout) cardContainer.getLayout()).show(cardContainer, "stats"));
         LeftPanel.add(Statsbutton);
 
-        JLabel StatsButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\pie-chart 1.png", 20, 20));
+        JLabel StatsButtonicon = new JLabel(resizedIcon("All\\bookingTICKET\\img\\icon\\pie-chart 1.png", 20, 20));
         StatsButtonicon.setBounds(5, 11, 20, 20);
         Statsbutton.add(StatsButtonicon);
 
@@ -3905,7 +3905,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         });
         LeftPanel.add(Logoutbutton);
 
-        JLabel LogiutButtonicon = new JLabel(resizedIcon("Rayan\\bookingTICKET\\img\\icon\\logout 1.png", 20, 20));
+        JLabel LogiutButtonicon = new JLabel(resizedIcon("All\\bookingTICKET\\img\\icon\\logout 1.png", 20, 20));
         LogiutButtonicon.setBounds(5, 11, 20, 20);
         Logoutbutton.add(LogiutButtonicon);
 
