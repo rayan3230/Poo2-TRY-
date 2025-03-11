@@ -2186,10 +2186,20 @@ public class UiClass extends JFrame {
         });
         BroadcastDashboard.add(selectAllBroad);
 
+        JPanel EditBroadcast = new JPanel();
+        EditBroadcast.setLayout(null);
+        EditBroadcast.setBounds(1620, 590, 550, 110);//420
+        EditBroadcast.setBackground(new Color(30, 30, 30));
+        EditBroadcast.setOpaque(false);
+        
+
         RoundedButton EditBroad = new RoundedButton("Edit" , 5);
         EditBroad.setBounds(64 + buttonwidth*2 + gap*2, 650, 97, 27);
         EditBroad.setForeground(Color.BLACK);
         EditBroad.setBackground(Color.white);
+        EditBroad.addActionListener(e->{
+            System.out.println(".()");
+        });
         BroadcastDashboard.add(EditBroad);
 
         RoundedButton AddBroad = new RoundedButton("Add" , 5);
@@ -2198,10 +2208,11 @@ public class UiClass extends JFrame {
         AddBroad.setBackground(Color.white);
         BroadcastDashboard.add(AddBroad);
 
-        RoundedButton DeleteBroad = new RoundedButton("Delete" , 5);
+        RoundedButton DeleteBroad = new RoundedButton("Delete" , 15);
         DeleteBroad.setBounds(64 + buttonwidth*4 + gap*4, 650, 97, 27);
         DeleteBroad.setForeground(Color.BLACK);
         DeleteBroad.setBackground(Color.white);
+        DeleteBroad.setRoundedBorder(Color.RED, 1);
         BroadcastDashboard.add(DeleteBroad);
 
 

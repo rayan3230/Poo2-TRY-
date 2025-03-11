@@ -10,6 +10,8 @@ public class RoundedButton extends JButton {
     private int radius;
     private Color normalColor; // Normal background color
     private Color hoverColor;  // Background color on hover
+    private Color borderColor; // Border color
+    private int borderThickness; // Border thickness
 
     public RoundedButton(String text, int radius) {
         super(text);
@@ -45,6 +47,13 @@ public class RoundedButton extends JButton {
         });
     }
 
+    
+    public void setRoundedBorder(Color borderColor, int borderThickness) {
+        this.borderColor = borderColor;
+        this.borderThickness = borderThickness;
+        repaint(); // Repaint to apply the border
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -59,17 +68,23 @@ public class RoundedButton extends JButton {
 
         // Draw the rounded rectangle background
         g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), radius, radius));
+
+        // Draw the rounded border if borderColor and borderThickness are se
+        if (borderColor != null && borderThickness > 0) {
+            g2.setColor(borderColor);
+            g2.setStroke(new BasicStroke(borderThickness));
+            g2.draw(new RoundRectangle2D.Double(
+                borderThickness / 1.8, 
+                borderThickness / 1.8, 
+                getWidth() - borderThickness,
+                getHeight() - borderThickness,
+                radius, radius
+            ));
+        }
+
         g2.dispose();
 
         // Paint the text and icon
         super.paintComponent(g);
     }
-
-    // Optional: Remove or comment out the paintBorder method
-    /*
-    @Override
-    protected void paintBorder(Graphics g) {
-        // Border painting removed
-    }
-    */
 }
