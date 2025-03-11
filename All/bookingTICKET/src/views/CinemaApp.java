@@ -158,7 +158,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         MainPanel.add(SignInPanel, "SignIn");
         MainPanel.add(ForgotPasswordPanel, "Forgot Password");
         MainPanel.add(ClientPanel, "Client");
-        MainPanel.add(AdminPanel, "Admin");
+        MainPanel.add(AdminElements, "Admin");
         MainPanel.add(AccountPanel, "Account");
         MainPanel.add(AccountAdminPanel, "Account Admin");
         MainPanel.add(BuyPanel, "Buy");
