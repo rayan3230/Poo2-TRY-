@@ -7,6 +7,8 @@ import Moodle.*;
 import Moodle.Movie.genre;
 import Moodle.Movie.statusFilm;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -29,6 +31,11 @@ public class UiClass extends JFrame {
     public CardLayout cardLayout;
     public Accounts currentuser ;
     public Accounts currentadmin;  
+
+    //Timer
+    public Timer timerslide;
+    public Boolean isPanelVisible = false;
+
 
     
 
@@ -2189,8 +2196,15 @@ public class UiClass extends JFrame {
         JPanel EditBroadcast = new JPanel();
         EditBroadcast.setLayout(null);
         EditBroadcast.setBounds(1620, 590, 550, 110);//420
-        EditBroadcast.setBackground(new Color(30, 30, 30));
+        EditBroadcast.setBackground(Color.white);
         EditBroadcast.setOpaque(false);
+        BroadcastDashboard.add(EditBroadcast);
+
+
+
+            
+
+
         
 
         RoundedButton EditBroad = new RoundedButton("Edit" , 5);
@@ -2198,7 +2212,13 @@ public class UiClass extends JFrame {
         EditBroad.setForeground(Color.BLACK);
         EditBroad.setBackground(Color.white);
         EditBroad.addActionListener(e->{
-            System.out.println(".()");
+            timerslide = new Timer(10, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    slidePanel(EditBroadcast , 420*2 , 20);
+                }
+            });
+            
         });
         BroadcastDashboard.add(EditBroad);
 
@@ -3624,6 +3644,27 @@ public class UiClass extends JFrame {
             textField.setBorder(BorderFactory.createLineBorder(Color.RED)); // Invalid input
          //   JOptionPane.showMessageDialog(this, "Please enter a valid input", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void slidePanel(JPanel slidingPanel,int panelWidth ,int slideSpeed ) {
+        int targetX = isPanelVisible ? 0 : -panelWidth; // Target position
+        int currentX = slidingPanel.getX();
+
+        if (currentX < targetX) {
+            slidingPanel.setLocation(Math.min(currentX + slideSpeed, targetX), 0);
+        } else if (currentX > targetX) {
+            slidingPanel.setLocation(Math.max(currentX - slideSpeed, targetX), 0);
+        }
+
+        // Stop the timer when the target position is reached
+        if (currentX == targetX) {
+            timerslide.stop();
+        }
+    }
+
+    public void togglePanel() {
+        isPanelVisible = !isPanelVisible;
+        timerslide.start();
     }
 
     
