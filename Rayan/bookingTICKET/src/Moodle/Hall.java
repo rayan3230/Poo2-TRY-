@@ -11,7 +11,7 @@ public class Hall {
     public boolean vipSeatsAvailable , regularSeatsAvailable;
     public boolean HallAvailable;
     
-    public Hall(int id , String NameHall, int totalRegularSeats , int totalVipSeats ) {
+    public Hall(  String NameHall, int totalRegularSeats , int totalVipSeats ) {
         this.id = 1 +id;
         this.NameHall = NameHall;
         this.totalRegularSeats = totalRegularSeats;

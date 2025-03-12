@@ -31,9 +31,9 @@ public class GestionBroadcast {
          Movie movie15 = new Movie("The maze runner", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE,LocalDate.of(2030,12,30)  ,LocalTime.of(12,30),MovieAgeRating.PG13);
          Movie movie16 = new Movie("Ant man", "Batman", 120, genre.ACTION, "PG-13", 10.0, 15.0, "C:\\Users\\HP\\Documents\\GitHub Mine\\POO2\\\\Poo2-TRY-\\Rayan\\bookingTICKET\\img\\Fandf.jpg" , statusFilm.AVAILABLE,LocalDate.of(2030,12,30)  ,LocalTime.of(12,30),MovieAgeRating.PG13);
         // Create halls and add them to broadcasts
-        Hall hall1 = new Hall(1, "Aljawhra", 100, 50);
-        Hall hall2 = new Hall(2, "Garden city", 100, 50);
-        Hall hall3 = new Hall(3, "cosmos", 100, 50);
+        Hall hall1 = new Hall( "Aljawhra", 100, 50);
+        Hall hall2 = new Hall( "Garden city", 100, 50);
+        Hall hall3 = new Hall( "cosmos", 100, 50);
         
         broadcasts.add(new Broadcast(movie, hall1, LocalDate.of(2021, 12, 1)));
         broadcasts.add(new Broadcast(movie2, hall2, LocalDate.of(2021, 12, 1)));
