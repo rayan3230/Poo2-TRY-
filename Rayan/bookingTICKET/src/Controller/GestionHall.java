@@ -6,11 +6,18 @@ import java.util.ArrayList;
 
 public class GestionHall {
     public ArrayList<Hall> halls = new ArrayList<>();
-    public int hallCount = 0;
+    
 
+    public GestionHall(){
+        //add halls
+        halls.add(new Hall("mami",30,40));
+        halls.add(new Hall("mami",30,40));
+
+
+    }
     public void addHall(String hallNameHall, int regularSeats, int vipSeats) {
-        hallCount++;
-        Hall hall = new Hall(hallCount, hallNameHall, regularSeats, vipSeats);
+ 
+        Hall hall = new Hall( hallNameHall, regularSeats, vipSeats);
         halls.add(hall);
     }
 
@@ -30,7 +37,7 @@ public class GestionHall {
         if(halls.get(HallId) != null) {
             System.out.println("Hall : " + halls.get(HallId).NameHall + " Deleted ");
             halls.remove(HallId);
-            hallCount--;
+            
         } else {
             System.out.println("Hall Id is null");
         }

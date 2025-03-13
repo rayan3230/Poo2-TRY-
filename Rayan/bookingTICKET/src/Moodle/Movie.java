@@ -1,43 +1,55 @@
 package Moodle;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Movie {
-    public int id;
-    public String Title;
-    public String description;
+public  class  Movie {
+    public int id =0;//
+    public String Title;//
+    public String description;//
     public int duration; // in minutes
-    public String genre;
     public String rating;
     public LocalTime showeTime;
     public double regularSeatPrice;
     public double vipSeatPrice;
     public String imagePath;
-    public String status;
-   
-    // Added field for genre
-    public genre genreEnum;
+    public statusFilm statusfilm;
+    public genre MovieGenre;
+    public LocalDate ReleaseDate;
+    public MovieAgeRating AgeRating;
 
-    enum genre {
-        ACTION,
+    public enum genre {
         COMEDY,
+        ACTION,
         DRAMA,
-        ROMANCE;
+        ROMANCE
+    }
+    public enum statusFilm{
+        AVAILABLE,
+        SOLD_OUT,
+        UPCOMING
     }
 
-    public Movie(String Title,String Description, int duration, String genre, String rating,
-            double regularSeatPrice, double vipSeatPrice , String imagePath, String status) {
+    public enum MovieAgeRating {
+        G, PG6, PG8, PG13, PG16, PG18
+    }
 
-            this.id = id;
+    public Movie(String Title,String Description, int duration, genre genre, String rating,
+            double regularSeatPrice, double vipSeatPrice , String imagePath ,statusFilm status,  LocalDate ReleaseDate ,LocalTime ShowTime ,MovieAgeRating AgeRating) {
+
+            this.id=id+1;
             this.Title = Title;
             this.description = description;
             this.duration = duration;
-            this.genre = genre;
+            this.MovieGenre = genre;
             this.rating = rating;
             this.regularSeatPrice = regularSeatPrice;
             this.vipSeatPrice = vipSeatPrice;
             this.imagePath = imagePath;
-            this.status = status;
+            this.statusfilm = status;
+            this.showeTime = ShowTime;
+            this.ReleaseDate = ReleaseDate;
+            this.AgeRating = AgeRating;
      }
 
     // public void printDuration() {

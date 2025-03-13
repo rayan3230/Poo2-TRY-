@@ -2,7 +2,6 @@ package MainClasses;
 
 import ManagementClasses.*;
 import Personnel.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +10,7 @@ public class Cinema {
     public ArrayList<Movie> movies;
     public ArrayList<Theater> theaters;
     public ArrayList<Ticket> tickets;
+    public ArrayList<Broadcast> broadcasts;
 
     public ArrayList<Admin> admins;
     public ArrayList<Client> clients;
@@ -37,8 +37,19 @@ public class Cinema {
         this.tickets = new ArrayList<Ticket>();
         this.admins = new ArrayList<Admin>();
         this.clients = new ArrayList<Client>();
+        this.broadcasts = new ArrayList<Broadcast>();
 
         this.filter = new Filters();
+
+        Client client1 = new Client("rayan", "mozali", "rayanmozali@gmail.com", 
+                "0000", "rayan", "momo");
+
+        addClient(client1);
+
+        Admin admin1 = new Admin("fahd", "djedi", "fahd@gmail.com", "yuji", "manager");
+
+        addAdmin(admin1);
+
 
         Theater Room1 = new Theater(200, 40, 1, true);
         Theater Room2 = new Theater(300, 60, 2, true);
@@ -56,6 +67,7 @@ public class Cinema {
         AddTheater(Room6);
         AddTheater(Room7);
 
+        /*
         Movie Movie1 = new Movie("Interstellar", "Science_Fiction", 1.75f,
                 "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
                 "Christopher Nolan", "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
@@ -108,7 +120,64 @@ public class Cinema {
                 "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
                 "Francis Ford Coppola", "Marlon Brando, Al Pacino, James Caan",
                 "1972-03-24",
-                9.2f, "PG18", Room2);
+                9.2f, "PG18", Room2);*/
+
+
+
+        // Create movies
+        Movie Movie1 = new Movie("Avengers: Endgame", "Action", 3.02f,
+                "After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.",
+                "Anthony Russo, Joe Russo", "Robert Downey Jr., Chris Evans, Mark Ruffalo",
+                "2019-04-26",
+                8.4f, "PG13", Room1);
+
+        Movie Movie2 = new Movie("Joker", "Crime", 2.02f,
+                "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker.",
+                "Todd Phillips", "Joaquin Phoenix, Robert De Niro, Zazie Beetz",
+                "2019-10-04",
+                8.5f, "R", Room2);
+
+        Movie Movie3 = new Movie("Parasite", "Thriller", 2.12f,
+                "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+                "Bong Joon Ho", "Kang-ho Song, Sun-kyun Lee, Yeo-jeong Jo",
+                "2019-05-30",
+                8.6f, "R", Room3);
+
+        Movie Movie4 = new Movie("Blair Witch", "Horror", 1.29f,
+                "After discovering a video showing what he believes to be his vanished sister Heather, James and a group of friends head to the forest believed to be inhabited by the Blair Witch.",
+                "Adam Wingard", "James Allen McCune, Callie Hernandez, Corbin Reid",
+                "2016-09-16",
+                5.0f, "PG13", Room4);
+
+        Movie Movie5 = new Movie("Batman: Arkham Knight", "Action", 1.75f,
+                "Batman faces the ultimate threat against the city he is sworn to protect. The Scarecrow returns to unite an impressive roster of super villains, including Penguin, Two-Face, and Harley Quinn, to destroy The Dark Knight forever.",
+                "Sefton Hill", "Kevin Conroy, John Noble, Jonathan Banks",
+                "2015-06-23",
+                9.0f, "PG13", Room5);
+
+        Movie Movie6 = new Movie("The Gorge", "Thriller", 2.10f,
+                "A thrilling story set in a remote gorge where a group of friends must survive against all odds.",
+                "Scott Derrickson", "Ethan Hawke, Jeremy Renner, Elizabeth Olsen",
+                "2023-10-13",
+                7.5f, "PG16", Room6);
+
+        Movie Movie7 = new Movie("The Batman", "Action", 2.55f,
+                "When a sadistic serial killer begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption and question his family's involvement.",
+                "Matt Reeves", "Robert Pattinson, Zoë Kravitz, Jeffrey Wright",
+                "2022-03-04",
+                8.2f, "PG13", Room7);
+
+        Movie Movie8 = new Movie("Deadpool 2", "Action", 2.00f,
+                "Foul-mouthed mutant mercenary Wade Wilson (a.k.a. Deadpool), brings together a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg Cable.",
+                "David Leitch", "Ryan Reynolds, Josh Brolin, Morena Baccarin",
+                "2018-05-18",
+                7.7f, "PG18", Room1);
+
+        Movie Movie9 = new Movie("Vice Versa 2", "Animation", 1.45f,
+                "The sequel to the beloved animated film, following the adventures of Riley and her emotions as they navigate new challenges.",
+                "Pete Docter", "Amy Poehler, Bill Hader, Lewis Black",
+                "2023-11-22",
+                8.0f, "PG", Room2);
 
         AddMovie(Movie1);
         AddMovie(Movie2);
@@ -120,7 +189,88 @@ public class Cinema {
         AddMovie(Movie8);
         AddMovie(Movie9);
 
+        Broadcast Broadcast1 = new Broadcast(Movie1, Room1, "2025-03-01");
+        Broadcast Broadcast2 = new Broadcast(Movie2, Room2, "2025-03-10");
+        Broadcast Broadcast3 = new Broadcast(Movie3, Room3, "2025-03-20");
+        Broadcast Broadcast4 = new Broadcast(Movie4, Room4, "2025-05-05");
+        Broadcast Broadcast5 = new Broadcast(Movie5, Room5, "2025-05-15");
+        Broadcast Broadcast6 = new Broadcast(Movie6, Room6, "2025-05-25");
+        Broadcast Broadcast7 = new Broadcast(Movie7, Room7, "2025-04-10");
+        Broadcast Broadcast8 = new Broadcast(Movie8, Room1, "2025-05-30");
+        Broadcast Broadcast9 = new Broadcast(Movie9, Room2, "2025-04-20");
+
+        addBroadcast(Broadcast1);
+        addBroadcast(Broadcast2);
+        addBroadcast(Broadcast3);
+        addBroadcast(Broadcast4);
+        addBroadcast(Broadcast5);
+        addBroadcast(Broadcast6);
+        addBroadcast(Broadcast7);
+        addBroadcast(Broadcast8);
+        addBroadcast(Broadcast9);
+
+
+
     }
+
+    public boolean isAdmin(String email, String password ){
+        //Check if the admin credentials match with the stored admin credentials
+        for(Admin admin : admins){
+            if(admin.username.equals(email) && admin.password.equals(password)){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    public boolean isClient(String email, String password ){
+        //Check if the client credentials match with the stored client credentials
+        for(Client client : clients){
+            if((client.username.equals(email) || client.Email.equals(email))
+                && (client.password.equals(password))){
+                return true;
+            }
+        }
+        
+        //If client credentials don't match, add the client to the clients list
+        return false;
+    }
+
+    public Client getClient(String username, String password){
+        //Check if the client credentials match with the stored client credentials
+        for(Client client : clients){
+            if((client.username.equals(username) || client.Email.equals(username) || client.PhoneNumber.equals(username))
+                && (client.password.equals(password))){
+                return client;
+            }
+        }
+        
+        //If client credentials don't match, return null
+        return null;
+    }
+
+    public Admin getAdmin(String username, String password){
+        //Check if the client credentials match with the stored client credentials
+        for(Admin admin : admins){
+            if((admin.username.equals(username) || admin.Email.equals(username) || admin.PhoneNumber.equals(username))
+                && (admin.password.equals(password))){
+                return admin;
+            }
+        }
+        
+        //If client credentials don't match, return null
+        return null;
+    }
+
+    public void addClient(Client client) {
+        clients.add(client);
+    }
+
+    public void addAdmin(Admin admin) {
+        admins.add(admin);
+    }
+
 
     public void AddMovie(Movie movie) {
         movies.add(movie);
@@ -131,20 +281,20 @@ public class Cinema {
         theaters.add(theater);
     }
 
-    public void AddTicket(Ticket Ticket) {
-        tickets.add(Ticket);
-    }
-
-    public void RemoveTicket(Ticket ticket) {
-        tickets.remove(ticket);
-    }
-
     public void RemoveMovie(Movie movie) {
         movies.remove(movie);
     }
 
     public void RemoveTheater(Theater theater) {
         theaters.remove(theater);
+    }
+
+    public void addBroadcast(Broadcast broadcast) {
+        broadcasts.add(broadcast);
+    }
+
+    public void removeBroadcast(Broadcast broadcast) {
+        broadcasts.remove(broadcast);
     }
 
     public void DisplayMovie() {
@@ -225,157 +375,6 @@ public class Cinema {
         System.out.println("2. Normal");
     }
 
-    public void DisplayMovieDates() {
-        System.out.println("Available Movie Dates: ");
-        for (Movie movie : movies) {
-            System.out.print("Title: " + movie.Title + ", Date: ");
-            for (Ticket ticket : tickets) {
-                if (ticket.movie == movie) {
-                    System.out.print(ticket.Date + ", ");
-                }
-            }
-            System.out.println(" ");
-        }
-    }
-
-    public void DisplayMoviesByGenre(String genre) {
-        for (Movie movie : movies) {
-            if (movie.Genre.equalsIgnoreCase(genre)) {
-                System.out.println("---------------------------------------------");
-                System.out.println("Title: " + movie.Title);
-                System.out.println("Genre: " + movie.Genre);
-                System.out.println("Duration: " + movie.Duration + " minutes");
-                System.out.println("Release Date: " + movie.ReleaseDate);
-                System.out.println("Rating: " + movie.Rating);
-                System.out.println("Age Rating: " + movie.AgeRating);
-                System.out.println("Description: " + movie.Description);
-                System.out.println("Director: " + movie.Director);
-                System.out.println("Cast: " + movie.Cast);
-                System.out.println("---------------------------------------------");
-            }
-        }
-    }
-
-    public void DisplayMoviesByAge(String age) {
-        for (Movie movie : movies) {
-            if (movie.AgeRating.equalsIgnoreCase(age)) {
-                System.out.println("---------------------------------------------");
-                System.out.println("Title: " + movie.Title);
-                System.out.println("Genre: " + movie.Genre);
-                System.out.println("Duration: " + movie.Duration + " minutes");
-                System.out.println("Release Date: " + movie.ReleaseDate);
-                System.out.println("Rating: " + movie.Rating);
-                System.out.println("Age Rating: " + movie.AgeRating);
-                System.out.println("Description: " + movie.Description);
-                System.out.println("Director: " + movie.Director);
-                System.out.println("Cast: " + movie.Cast);
-                System.out.println("---------------------------------------------");
-            }
-        }
-    }
-
-    public void DisplayMoviesByDuration(String duration) {
-        for (Movie movie : movies) {
-            if (movie.Duration <= Integer.parseInt(duration)) {
-                System.out.println("---------------------------------------------");
-                System.out.println("Title: " + movie.Title);
-                System.out.println("Genre: " + movie.Genre);
-                System.out.println("Duration: " + movie.Duration + " minutes");
-                System.out.println("Release Date: " + movie.ReleaseDate);
-                System.out.println("Rating: " + movie.Rating);
-                System.out.println("Age Rating: " + movie.AgeRating);
-                System.out.println("Description: " + movie.Description);
-                System.out.println("Director: " + movie.Director);
-                System.out.println("Cast: " + movie.Cast);
-                System.out.println("---------------------------------------------");
-            }
-        }
-    }
-
-    public void DisplayMoviesByRating(int rating) {
-        for (Movie movie : movies) {
-            if (movie.Rating >= rating) {
-                System.out.println("---------------------------------------------");
-                System.out.println("Title: " + movie.Title);
-                System.out.println("Genre: " + movie.Genre);
-                System.out.println("Duration: " + movie.Duration + " minutes");
-                System.out.println("Release Date: " + movie.ReleaseDate);
-                System.out.println("Rating: " + movie.Rating);
-                System.out.println("Age Rating: " + movie.AgeRating);
-                System.out.println("Description: " + movie.Description);
-                System.out.println("Director: " + movie.Director);
-                System.out.println("Cast: " + movie.Cast);
-                System.out.println("---------------------------------------------");
-            }
-        }
-    }
-
-    public void DisplayMoviesByDate(String date) {
-        for (Movie movie : movies) {
-            if (movie.ReleaseDate.equalsIgnoreCase(date)) {
-                System.out.println("---------------------------------------------");
-                System.out.println("Title: " + movie.Title);
-                System.out.println("Genre: " + movie.Genre);
-                System.out.println("Duration: " + movie.Duration + " minutes");
-                System.out.println("Release Date: " + movie.ReleaseDate);
-                System.out.println("Rating: " + movie.Rating);
-                System.out.println("Age Rating: " + movie.AgeRating);
-                System.out.println("Description: " + movie.Description);
-                System.out.println("Director: " + movie.Director);
-                System.out.println("Cast: " + movie.Cast);
-                System.out.println("---------------------------------------------");
-            }
-        }
-    }
-
-    public void DisplayMoviesByTicketType(String ticketType) {
-        for (Ticket ticket : tickets) {
-            if (ticket.Type.equalsIgnoreCase(ticketType)) {
-                System.out.println("---------------------------------------------");
-                System.out.println("Title: " + ticket.movie.Title);
-                System.out.println("Date: " + ticket.Date);
-                System.out.println("Type: " + ticket.Type);
-                System.out.println("---------------------------------------------");
-            }
-        }
-    }
-
-    public void DisplayMoviesByReleaseDate(String releaseDate) {
-        for (Movie movie : movies) {
-            if (movie.ReleaseDate.equalsIgnoreCase(releaseDate)) {
-                System.out.println("---------------------------------------------");
-                System.out.println("Title: " + movie.Title);
-                System.out.println("Genre: " + movie.Genre);
-                System.out.println("Duration: " + movie.Duration + " minutes");
-                System.out.println("Release Date: " + movie.ReleaseDate);
-                System.out.println("Rating: " + movie.Rating);
-                System.out.println("Age Rating: " + movie.AgeRating);
-                System.out.println("Description: " + movie.Description);
-                System.out.println("Director: " + movie.Director);
-                System.out.println("Cast: " + movie.Cast);
-                System.out.println("---------------------------------------------");
-            }
-        }
-    }
-
-    public void DisplayMoviesByDuration(Float Duration) {
-        for (Movie movie : movies) {
-            if (movie.Duration <= Duration) {
-                System.out.println("---------------------------------------------");
-                System.out.println("Title: " + movie.Title);
-                System.out.println("Genre: " + movie.Genre);
-                System.out.println("Duration: " + movie.Duration + " minutes");
-                System.out.println("Release Date: " + movie.ReleaseDate);
-                System.out.println("Rating: " + movie.Rating);
-                System.out.println("Age Rating: " + movie.AgeRating);
-                System.out.println("Description: " + movie.Description);
-                System.out.println("Director: " + movie.Director);
-                System.out.println("Cast: " + movie.Cast);
-                System.out.println("---------------------------------------------");
-            }
-        }
-    }
-
     public void DisplaySeats(int[] seats) {
         for (int i = 0; i < seats.length; i++) {
             if (seats[i] == 1) {
@@ -437,7 +436,6 @@ public class Cinema {
                 filterList[filterCount] = choice;
                 filterCount++;
                 System.out.println("Enter the date you want to filter by (this mounth) : ");
-                DisplayMovieDates();
                 String date = scanner.next();
                 filter.SetDateFilter(date);
                 break;
@@ -471,98 +469,20 @@ public class Cinema {
         scanner.close();
     }
 
-    public void ApplyFilter() {
-        for (int i = 0; i < filterCount; i++) {
-            switch (filterList[i]) {
-                case 1:
-                    DisplayMoviesByGenre(filter.Genre);
-                    break;
-                case 2:
-                    DisplayMoviesByAge(filter.AgeRestriction);
-                    break;
-                case 3:
-                    DisplayMoviesByDuration(filter.Duration);
-                    break;
-                case 4:
-                    DisplayMoviesByRating(filter.Rating);
-                    break;
-                case 5:
-                    DisplayMoviesByDate(filter.Date);
-                    break;
-                case 6:
-                    DisplayMoviesByTicketType(filter.TicketType);
-                    break;
-                case 7:
-                    DisplayMoviesByReleaseDate(filter.ReleaseDate);
-                    break;
-                case 8:
-                    DisplaySeats(filter.Seats);
-                    break;
-            }
-        }
-    }
-
     public void DisplayAvailableSeatsInRoom(Theater Room) {
         System.out.println("Normal places reamining  :  " + (Room.NormalCapacity - Room.NormalReservedPlaces)
                 + " VIP places remaining  :  " + (Room.VipCapacity - Room.VipReservedPlaces));
     }
 
-    public void BookTicket(int MovieNumber, String TicketType, int Place) {
-        Ticket ticket = new Ticket(Place, TicketType, movies.get(MovieNumber).ReleaseDate, movies.get(MovieNumber));
-        AddTicket(ticket);
-    }
 
-    public Ticket saerchTicketByNumber(int TicketNumber) {
-
-        if (tickets.get(TicketNumber) == null) {
-            System.out.println("Ticket not found.");
-            return null;
+    public void DisplayBroadcast(){
+        System.out.println("Broadcasting movies : ");
+        for(Broadcast broadcast : broadcasts){
+            System.out.println("---------------------------------------------");
+            System.out.println("Movie Title: " + broadcast.movie.Title);
+            System.out.println("Theater Number: " + broadcast.Room.TheaterId);
+            System.out.println("Broadcast Date: " + broadcast.Date);
+            System.out.println("---------------------------------------------");
         }
-
-        Ticket t = tickets.get(TicketNumber);
-        System.out.println("Ticket Number : " + t.number);
-        System.out.println("Type : " + t.Type);
-        System.out.println("Date : " + t.Date);
-        System.out.println("Movie : " + t.movie.Title);
-        return t;
     }
-
-    public Ticket SearchTicketByMovie(Movie movie) {
-        for (Ticket t : tickets) {
-            if (t.movie.equals(movie)) {
-                System.out.println("Ticket Number : " + t.number);
-                System.out.println("Type : " + t.Type);
-                System.out.println("Date : " + t.Date);
-                return t;
-            }
-        }
-        return null;
-    }
-
-    public Ticket SearchTicketByType(String type) {
-        for (Ticket t : tickets) {
-            if (t.Type.equalsIgnoreCase(type)) {
-                System.out.println("Ticket Number : " + t.number);
-                System.out.println("Type : " + t.Type);
-                System.out.println("Date : " + t.Date);
-                System.out.println("Movie : " + t.movie.Title);
-                return t;
-            }
-        }
-        return null;
-    }
-
-    public Ticket SearchTicketByDate(String Date) {
-        for (Ticket t : tickets) {
-            if (t.Date.equalsIgnoreCase(Date)) {
-                System.out.println("Ticket Number : " + t.number);
-                System.out.println("Type : " + t.Type);
-                System.out.println("Date : " + t.Date);
-                System.out.println("Movie : " + t.movie.Title);
-                return t;
-            }
-        }
-        return null;
-    }
-
 }
