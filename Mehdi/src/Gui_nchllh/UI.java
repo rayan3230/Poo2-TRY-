@@ -12,7 +12,7 @@ public static class OdeonSwingApp extends JFrame {
     public OdeonSwingApp() {
         setTitle("Odeon Cinema Booking");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         cardLayout = new CardLayout();

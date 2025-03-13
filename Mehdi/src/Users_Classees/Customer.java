@@ -95,8 +95,10 @@ public class Customer extends User {
     }
 
     public void SortMovieList(List<Film> movies, String Genre, int maxDuration, String Director, String AgeRestriction, String Language){
+        boolean found = false;
         if (Language == null && Genre == null && maxDuration == -1 && Director == null && AgeRestriction == null) {
             WatchMovieList(movies);
+            found = true;
         }else{
             if(Language == null && Genre == null && maxDuration == -1 && Director == null && AgeRestriction != null){
                 for (Film film : movies) {
@@ -109,6 +111,7 @@ public class Customer extends User {
                     for (Film film : movies) {
                         if (film.getDirector().equals(Director)) {
                             System.out.println(film.toString());
+                            found = true;
                         }
                     }
                 }else{
@@ -116,6 +119,7 @@ public class Customer extends User {
                         for (Film film : movies) {
                             if (film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
                                 System.out.println(film.toString());
+                                found = true;
                             }
                         }
                     }else{
@@ -123,6 +127,7 @@ public class Customer extends User {
                             for (Film film : movies) {
                                 if (film.getDuration() <= maxDuration) {
                                     System.out.println(film.toString());
+                                    found = true;
                                 }
                             }
                         }else{
@@ -130,6 +135,7 @@ public class Customer extends User {
                                 for (Film film : movies) {
                                     if (film.getDuration() <= maxDuration && film.getAgeRestriction().equals(AgeRestriction)) {
                                         System.out.println(film.toString());
+                                        found = true;
                                     }
                                 }
                             }else{
@@ -137,6 +143,7 @@ public class Customer extends User {
                                     for (Film film : movies) {
                                         if (film.getDuration() <= maxDuration && film.getDirector().equals(Director)) {
                                             System.out.println(film.toString());
+                                            found = true;
                                         }
                                     }
                                 }else{
@@ -144,6 +151,7 @@ public class Customer extends User {
                                         for (Film film : movies) {
                                             if (film.getDuration() <= maxDuration && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                 System.out.println(film.toString());
+                                                found = true;
                                             }
                                         }
                                     }else{
@@ -151,6 +159,7 @@ public class Customer extends User {
                                             for (Film film : movies) {
                                                 if (film.getGenre().equals(Genre)) {
                                                     System.out.println(film.toString());
+                                                    found = true;
                                                 }
                                             }
                                         }else{
@@ -158,6 +167,7 @@ public class Customer extends User {
                                                 for (Film film : movies) {
                                                     if (film.getGenre().equals(Genre) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                         System.out.println(film.toString());
+                                                        found = true;
                                                     }
                                                 }
                                             }else{
@@ -165,6 +175,7 @@ public class Customer extends User {
                                                     for (Film film : movies) {
                                                         if (film.getGenre().equals(Genre) && film.getDirector().equals(Director)) {
                                                             System.out.println(film.toString());
+                                                            found = true;
                                                         }
                                                     }
                                                 }else{
@@ -172,6 +183,7 @@ public class Customer extends User {
                                                         for (Film film : movies) {
                                                             if (film.getGenre().equals(Genre) && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                 System.out.println(film.toString());
+                                                                found = true;
                                                             }
                                                         }
                                                     }else{
@@ -179,6 +191,7 @@ public class Customer extends User {
                                                             for (Film film : movies) {
                                                                 if (film.getGenre().equals(Genre) && film.getDuration() <= maxDuration) {
                                                                     System.out.println(film.toString());
+                                                                    found = true;
                                                                 }
                                                             }
                                                         }else{
@@ -186,6 +199,7 @@ public class Customer extends User {
                                                                 for (Film film : movies) {
                                                                     if (film.getGenre().equals(Genre) && film.getDuration() <= maxDuration && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                         System.out.println(film.toString());
+                                                                        found = true;
                                                                     }
                                                                 }
                                                                 
@@ -194,6 +208,7 @@ public class Customer extends User {
                                                                     for (Film film : movies) {
                                                                         if (film.getGenre().equals(Genre) && film.getDuration() <= maxDuration && film.getDirector().equals(Director)) {
                                                                             System.out.println(film.toString());
+                                                                            found = true;
                                                                         }
                                                                     }
                                                                 }else{
@@ -201,100 +216,119 @@ public class Customer extends User {
                                                                         for (Film film : movies) {
                                                                             if (film.getGenre().equals(Genre) && film.getDuration() <= maxDuration && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                                 System.out.println(film.toString());
+                                                                                found = true;
                                                                             }
                                                                         }
                                                                     }else{
                                                                         if (Language != null && Genre == null && maxDuration == -1 && Director == null && AgeRestriction == null) {
-                                                                            WatchMovieList(movies);
+                                                                            for (Film film : movies) {
+                                                                                if (film.getLanguage().equals(Language)) {
+                                                                                    System.out.println(film.toString());
+                                                                                    found = true;
+                                                                                }
+                                                                            }
                                                                         } else {
                                                                             if(Language != null && Genre == null && maxDuration == -1 && Director == null && AgeRestriction != null){
                                                                                 for (Film film : movies) {
-                                                                                    if (film.getAgeRestriction().equals(AgeRestriction)) {
+                                                                                    if (film.getLanguage().equals(Language) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                                         System.out.println(film.toString());
+                                                                                        found = true;
                                                                                     }
                                                                                 }
                                                                             }else{ 
                                                                                 if(Language != null && Genre == null && maxDuration == -1 && Director != null && AgeRestriction == null){
                                                                                     for (Film film : movies) {
-                                                                                        if (film.getDirector().equals(Director)) {
+                                                                                        if (film.getLanguage().equals(Language) && film.getDirector().equals(Director)) {
                                                                                             System.out.println(film.toString());
+                                                                                            found = true;
                                                                                         }
                                                                                     }
                                                                                 }else{
                                                                                     if(Language != null && Genre == null && maxDuration == -1 && Director != null && AgeRestriction != null){
                                                                                         for (Film film : movies) {
-                                                                                            if (film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
+                                                                                            if (film.getLanguage().equals(Language) && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                                                 System.out.println(film.toString());
+                                                                                                found = true;
                                                                                             }
                                                                                         }
                                                                                     }else{
                                                                                         if (Language != null && Genre == null && maxDuration != -1 && Director == null && AgeRestriction == null){
                                                                                             for (Film film : movies) {
-                                                                                                if (film.getDuration() <= maxDuration) {
+                                                                                                if (film.getLanguage().equals(Language) && film.getDuration() <= maxDuration) {
                                                                                                     System.out.println(film.toString());
+                                                                                                    found = true;
                                                                                                 }
                                                                                             }
                                                                                         }else{
                                                                                             if(Language != null && Genre == null && maxDuration != -1 && Director == null && AgeRestriction != null){
                                                                                                 for (Film film : movies) {
-                                                                                                    if (film.getDuration() <= maxDuration && film.getAgeRestriction().equals(AgeRestriction)) {
+                                                                                                    if (film.getLanguage().equals(Language) && film.getDuration() <= maxDuration && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                                                         System.out.println(film.toString());
+                                                                                                        found = true;
                                                                                                     }
                                                                                                 }
                                                                                             }else{
                                                                                                 if(Language != null && Genre == null && maxDuration != -1 && Director != null && AgeRestriction == null){
                                                                                                     for (Film film : movies) {
-                                                                                                        if (film.getDuration() <= maxDuration && film.getDirector().equals(Director)) {
+                                                                                                        if (film.getLanguage().equals(Language) && film.getDuration() <= maxDuration && film.getDirector().equals(Director)) {
                                                                                                             System.out.println(film.toString());
+                                                                                                            found = true;
                                                                                                         }
                                                                                                     }
                                                                                                 }else{
                                                                                                     if(Language != null && Genre == null && maxDuration != -1 && Director != null && AgeRestriction != null){
                                                                                                         for (Film film : movies) {
-                                                                                                            if (film.getDuration() <= maxDuration && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
+                                                                                                            if (film.getLanguage().equals(Language) && film.getDuration() <= maxDuration && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                                                                 System.out.println(film.toString());
+                                                                                                                found = true;
                                                                                                             }
                                                                                                         }
                                                                                                     }else{
                                                                                                         if(Language != null && Genre != null && maxDuration == -1 && Director == null && AgeRestriction == null){
                                                                                                             for (Film film : movies) {
-                                                                                                                if (film.getGenre().equals(Genre)) {
+                                                                                                                if (film.getLanguage().equals(Language) && film.getGenre().equals(Genre)) {
                                                                                                                     System.out.println(film.toString());
+                                                                                                                    found = true;
                                                                                                                 }
                                                                                                             }
                                                                                                         }else{
                                                                                                             if(Language != null && Genre != null && maxDuration == -1 && Director == null && AgeRestriction != null){
                                                                                                                 for (Film film : movies) {
-                                                                                                                    if (film.getGenre().equals(Genre) && film.getAgeRestriction().equals(AgeRestriction)) {
+                                                                                                                    if (film.getLanguage().equals(Language) && film.getGenre().equals(Genre) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                                                                         System.out.println(film.toString());
+                                                                                                                        found = true;
                                                                                                                     }
                                                                                                                 }
                                                                                                             }else{
                                                                                                                 if(Language != null && Genre != null && maxDuration == -1 && Director != null && AgeRestriction == null){
                                                                                                                     for (Film film : movies) {
-                                                                                                                        if (film.getGenre().equals(Genre) && film.getDirector().equals(Director)) {
+                                                                                                                        if (film.getLanguage().equals(Language) && film.getGenre().equals(Genre) && film.getDirector().equals(Director)) {
                                                                                                                             System.out.println(film.toString());
+                                                                                                                            found = true;
                                                                                                                         }
                                                                                                                     }
                                                                                                                 }else{
                                                                                                                     if(Language != null && Genre != null && maxDuration == -1 && Director != null && AgeRestriction != null){
                                                                                                                         for (Film film : movies) {
-                                                                                                                            if (film.getGenre().equals(Genre) && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
+                                                                                                                            if (film.getLanguage().equals(Language) && film.getGenre().equals(Genre) && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                                                                                 System.out.println(film.toString());
+                                                                                                                                found = true;
                                                                                                                             }
                                                                                                                         }
                                                                                                                     }else{
                                                                                                                         if(Language != null && Genre != null && maxDuration != -1 && Director == null && AgeRestriction == null){
                                                                                                                             for (Film film : movies) {
-                                                                                                                                if (film.getGenre().equals(Genre) && film.getDuration() <= maxDuration) {
+                                                                                                                                if (film.getLanguage().equals(Language) && film.getGenre().equals(Genre) && film.getDuration() <= maxDuration) {
                                                                                                                                     System.out.println(film.toString());
+                                                                                                                                    found = true;
                                                                                                                                 }
                                                                                                                             }
                                                                                                                         }else{
                                                                                                                             if (Language != null && Genre != null && maxDuration != -1 && Director == null && AgeRestriction != null){
                                                                                                                                 for (Film film : movies) {
-                                                                                                                                    if (film.getGenre().equals(Genre) && film.getDuration() <= maxDuration && film.getAgeRestriction().equals(AgeRestriction)) {
+                                                                                                                                    if (film.getLanguage().equals(Language) && film.getGenre().equals(Genre) && film.getDuration() <= maxDuration && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                                                                                         System.out.println(film.toString());
+                                                                                                                                        found = true;
                                                                                                                                     }
                                                                                                                                 }
                                                                                                                                 
@@ -303,13 +337,15 @@ public class Customer extends User {
                                                                                                                                     for (Film film : movies) {
                                                                                                                                         if (film.getGenre().equals(Genre) && film.getDuration() <= maxDuration && film.getDirector().equals(Director)) {
                                                                                                                                             System.out.println(film.toString());
+                                                                                                                                            found = true;
                                                                                                                                         }
                                                                                                                                     }
                                                                                                                                 }else{
                                                                                                                                     if(Language != null && Genre != null && maxDuration != -1 && Director != null && AgeRestriction != null){
                                                                                                                                         for (Film film : movies) {
-                                                                                                                                            if (film.getGenre().equals(Genre) && film.getDuration() <= maxDuration && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
+                                                                                                                                            if (film.getLanguage().equals(Language) && film.getGenre().equals(Genre) && film.getDuration() <= maxDuration && film.getDirector().equals(Director) && film.getAgeRestriction().equals(AgeRestriction)) {
                                                                                                                                                 System.out.println(film.toString());
+                                                                                                                                                found = true;
                                                                                                                                             }
                                                                                                                                         }
                                                                                                                                     }
@@ -343,6 +379,10 @@ public class Customer extends User {
                     }
                 }
             }
+        }
+
+        if (!found) {
+            System.out.println("Sorry, no movie found according to your description.");
         }
     }        
         
