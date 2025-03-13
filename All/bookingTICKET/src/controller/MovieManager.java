@@ -1,8 +1,16 @@
 package controller;
 
 import Model.*;
+import Model.Movie.Language;
+import Model.Movie.MovieAgeRating;
+import Model.Movie.MovieGenre;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class MovieManager {
     
@@ -225,6 +233,411 @@ public class MovieManager {
         }
         return bestRated;
     }
+
+    public void addMovie(int MovieID, String Title, MovieGenre Genre, float Duration, String Description, String Director,String Cast,LocalDate ReleaseDate, float Rating, MovieAgeRating AgeRating, Language MovieLanguage, String ImagePath, String Trailer){
+        String sql = "INSERT INTO movies (MovieID, Title, Genre, Duration, Description, Director, Cast, ReleaseDate, Rating, AgeRating, MovieLanguage, ImagePath, Trailer) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
+    
+        try(Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, MovieID);
+            pstmt.setString(2, Title);
+            pstmt.setString(3, Genre.toString());
+            pstmt.setFloat(4, Duration);
+            pstmt.setString(5, Description);
+            pstmt.setString(6, Director);
+            pstmt.setString(7, Cast);
+            pstmt.setDate(8, Date.valueOf(ReleaseDate));
+            pstmt.setFloat(9, Rating);
+            pstmt.setString(10, AgeRating.toString());
+            pstmt.setString(11, MovieLanguage.toString());
+            pstmt.setString(12, ImagePath);
+            pstmt.setString(13, Trailer);
+            
+            int rowsInserted = pstmt.executeUpdate();
+            
+            if (rowsInserted > 0) {
+                System.out.println("A new movie was inserted successfully!");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteMovie(int MovieID) {
+        String sql = "DELETE FROM movies WHERE MovieID = ?";
+        
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, MovieID);
+            
+            int rowsDeleted = pstmt.executeUpdate();
+            
+            if (rowsDeleted > 0) {
+                System.out.println("A movie was deleted successfully!");
+            }else{
+                System.out.println("Movie not found. No delete performed.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modifyMovieTitle(int MovieID, String newTitle){
+        String sql = "UPDATE movies SET Title = ? WHERE MovieID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newTitle);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Movie title updated successfully!");
+            } else {
+                System.out.println("Movie not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modifyMovieGenre(int MovieID, MovieGenre newGenre){
+        String sql = "UPDATE movies SET Genre = ? WHERE MovieID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newGenre.toString());
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Movie genre updated successfully!");
+            } else {
+                System.out.println("Movie not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modifyMovieDuration(int MovieID, float newDuration){
+        String sql = "UPDATE movies SET Duration = ? WHERE MovieID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setFloat(1, newDuration);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Movie duration updated successfully!");
+            } else {
+                System.out.println("Movie not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modifyMovieDescription(int MovieID, String newDescription){
+        String sql = "UPDATE movies SET Description = ? WHERE MovieID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newDescription);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Movie description updated successfully!");
+            } else {
+                System.out.println("Movie not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modifyMovieDirector(int MovieID, String newDirector){
+        String sql = "UPDATE movies SET Director = ? WHERE MovieID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newDirector);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Movie director updated successfully!");
+            } else {
+                System.out.println("Movie not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modifyMovieCast(int MovieID, String newCast){
+        String sql = "UPDATE movies SET Cast = ? WHERE MovieID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newCast);
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Movie cast updated successfully!");
+            } else {
+                System.out.println("Movie not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modifyMovieRealiseDate(int MovieID, LocalDate newReleaseDate){
+        String sql = "UPDATE movies SET ReleaseDate = ? WHERE MovieID = ?";
+
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDate(1, Date.valueOf(newReleaseDate));
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Movie release date updated successfully!");
+            } else {
+                System.out.println("Movie not found. No update performed.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+        public void modifyMovieRating(int MovieID, float newRating){
+                String sql = "UPDATE movies SET Rating = ? WHERE MovieID = ?";
+        
+                try (Connection conn = DatabaseConnection.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+                pstmt.setFloat(1, newRating);
+        
+                int rowsUpdated = pstmt.executeUpdate();
+        
+                if (rowsUpdated > 0) {
+                        System.out.println("Movie rating updated successfully!");
+                } else {
+                        System.out.println("Movie not found. No update performed.");
+                }
+        
+                } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                }
+        }
+
+        public void modifyAgeRating(int MovieID, MovieAgeRating newAgeRating){
+                String sql = "UPDATE movies SET AgeRating = ? WHERE MovieID = ?";
+        
+                try (Connection conn = DatabaseConnection.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+                pstmt.setString(1, newAgeRating.toString());
+        
+                int rowsUpdated = pstmt.executeUpdate();
+        
+                if (rowsUpdated > 0) {
+                        System.out.println("Movie age rating updated successfully!");
+                } else {
+                        System.out.println("Movie not found. No update performed.");
+                }
+        
+                } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                }
+        }
+
+        public void modifyMovieLanguage(int MovieID, Language newMovieLanguage){
+                String sql = "UPDATE movies SET MovieLanguage = ? WHERE MovieID = ?";
+        
+                try (Connection conn = DatabaseConnection.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+                pstmt.setString(1, newMovieLanguage.toString());
+        
+                int rowsUpdated = pstmt.executeUpdate();
+        
+                if (rowsUpdated > 0) {
+                        System.out.println("Movie language updated successfully!");
+                } else {
+                        System.out.println("Movie not found. No update performed.");
+                }
+        
+                } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                }
+        }
+
+        public void modifyImagePath(int MovieID, String newImagePath){
+                String sql = "UPDATE movies SET ImagePath = ? WHERE MovieID = ?";
+        
+                try (Connection conn = DatabaseConnection.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+                pstmt.setString(1, newImagePath);
+        
+                int rowsUpdated = pstmt.executeUpdate();
+        
+                if (rowsUpdated > 0) {
+                        System.out.println("Movie image path updated successfully!");
+                } else {
+                        System.out.println("Movie not found. No update performed.");
+                }
+        
+                } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                }
+        }
+
+        public void modifyTrailer(int MovieID, String newTrailer){
+                String sql = "UPDATE movies SET Trailer = ? WHERE MovieID = ?";
+
+                try(Connection conn = DatabaseConnection.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+                pstmt.setString(1, newTrailer);
+
+                int rowsUpdated = pstmt.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                        System.out.println("Movie trailer updated successfully!");
+                } else {
+                        System.out.println("Movie not found. No update performed.");
+                }
+
+                } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                }
+        }
+
+        public void modifyMovie(int MovieID){
+                boolean exit = false;
+                while(!exit){
+                        System.out.println("What do you want to modify?");
+                        System.out.println("1. Title");
+                        System.out.println("2. Genre");
+                        System.out.println("3. Duration");
+                        System.out.println("4. Description");
+                        System.out.println("5. Director");
+                        System.out.println("6. Cast");
+                        System.out.println("7. Release Date");
+                        System.out.println("8. Rating");
+                        System.out.println("9. Age Rating");
+                        System.out.println("10. Language");
+                        System.out.println("11. Image Path");
+                        System.out.println("12. Trailer");
+                        System.out.println("13. Exit");
+                        System.out.println("Enter your choice: (If you press any other key, you will exit)");
+                        
+                        Scanner sc = new Scanner(System.in);
+                        int choice = sc.nextInt();
+
+                        if (choice == 1){
+                                System.out.println("Enter the new title: ");
+                                String newTitle = sc.nextLine();
+                                modifyMovieTitle(MovieID, newTitle);
+                                continue;
+                        }else if (choice == 2){
+                                System.out.println("Enter the new genre: ");
+                                MovieGenre newGenre = MovieGenre.valueOf(sc.nextLine());
+                                modifyMovieGenre(MovieID, newGenre);
+                                continue;
+                        }else if (choice == 3){
+                                System.out.println("Enter the new duration: ");
+                                float newDuration = sc.nextFloat();
+                                modifyMovieDuration(MovieID, newDuration);
+                                continue;
+                        }else if (choice == 4){
+                                System.out.println("Enter the new description: ");
+                                String newDescription = sc.nextLine();
+                                modifyMovieDescription(MovieID, newDescription);
+                                continue;
+                        }else if (choice == 5){
+                                System.out.println("Enter the new director: ");
+                                String newDirector = sc.nextLine();
+                                modifyMovieDirector(MovieID, newDirector);
+                                continue;
+                        }else if (choice == 6){
+                                System.out.println("Enter the new cast: ");
+                                String newCast = sc.nextLine();
+                                modifyMovieCast(MovieID, newCast);
+                                continue;
+                        }else if (choice == 7){
+                                System.out.println("Enter the new release date: ");
+                                LocalDate newReleaseDate = LocalDate.parse(sc.nextLine());
+                                modifyMovieRealiseDate(MovieID, newReleaseDate);
+                                continue;
+                        }else if (choice == 8){
+                                System.out.println("Enter the new rating: ");
+                                float newRating = sc.nextFloat();
+                                modifyMovieRating(MovieID, newRating);
+                                continue;
+                        }else if (choice == 9){
+                                System.out.println("Enter the new age rating: ");
+                                MovieAgeRating newAgeRating = MovieAgeRating.valueOf(sc.nextLine());
+                                modifyAgeRating(MovieID, newAgeRating);
+                                continue;
+                        }else if (choice == 10){
+                                System.out.println("Enter the new language: ");
+                                Language newMovieLanguage = Language.valueOf(sc.nextLine());
+                                modifyMovieLanguage(MovieID, newMovieLanguage);
+                                continue;
+                        }else if (choice == 11){
+                                System.out.println("Enter the new image path: ");
+                                String newImagePath = sc.nextLine();
+                                modifyImagePath(MovieID, newImagePath);
+                                continue;
+                        }else if (choice == 12){
+                                System.out.println("Enter the new trailer: ");
+                                String newTrailer = sc.nextLine();
+                                modifyTrailer(MovieID, newTrailer);
+                                continue;
+                        }else{
+                                exit = true;
+                                System.out.println("Would you like to modify anything else? (Yes/No)");
+                                String answer = sc.nextLine();
+                                if (!answer.equalsIgnoreCase("Yes")) {
+                                    exit = true;
+                                    continue;
+                                }
+                        }
+                        System.out.println("Would you like to modify anything else? (Yes/No)");
+                        String answer = sc.nextLine();
+                        if (!answer.equalsIgnoreCase("Yes")) {
+                                exit = true;
+                        }
+                        sc.close();
+                        
+
+                }
+                
+        }
 
 
 }
