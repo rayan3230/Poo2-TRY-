@@ -4,6 +4,7 @@ import Model.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BroadcastManager {
 
@@ -76,14 +77,14 @@ public class BroadcastManager {
         broadcasts.remove(broadcast);
     }
 
-    public void DisplayBroadcast(){
+        public void DisplayBroadcast(){
         for(Broadcast broadcast : broadcasts){
             System.out.println("Movie: " + broadcast.movie.Title + " Theater: " + broadcast.Room.TheaterId + " Date: " + broadcast.Date);
         }
     }
 
     
-    public void InitiliazeTicket(){
+        public void InitiliazeTicket(){
         for(Broadcast broadcast : broadcasts){
             for(Theater Room : theaterManager.theaters){
                 for(int i = 0; i<Room.NormalSeats.size(); i++){
@@ -99,7 +100,7 @@ public class BroadcastManager {
         
     }
     
-    public void DisplayTickets(Broadcast broadcast){
+        public void DisplayTickets(Broadcast broadcast){
         for (Ticket ticket : broadcast.tickets) {
             System.out.println("---------------------------------");
             System.out.println("Ticket ID: " + ticket.Seat.seatNumber);
@@ -111,7 +112,7 @@ public class BroadcastManager {
         }
     }
 
-    public static void addBroadcast(int MovieID, int TheaterID, String Language, Date BroadcastDate) {
+        public static void addBroadcast(int MovieID, int TheaterID, String Language, Date BroadcastDate) {
         String sql = "INSERT INTO broadcasts (MovieID, TheaterID, Language, BroadcastDate) VALUES (?, ?, ?, ?)";
         
         try (Connection conn = DatabaseConnection.connect();
@@ -134,7 +135,7 @@ public class BroadcastManager {
     }
 
 
-    public static void updateBroadcastTheater(int BroadcastId, int TheaterID) {
+        public static void updateBroadcastTheater(int BroadcastId, int TheaterID) {
         String sql = "UPDATE broadcasts SET TheaterID = ? WHERE BroadcastID = ?";
 
         try (Connection conn = DatabaseConnection.connect();
@@ -177,9 +178,9 @@ public class BroadcastManager {
                 e.printStackTrace();
             }
             }
-
-
-            public static void updateBroadcastDate(int BroadcastId, LocalDate Date) {
+            
+            
+        public static void updateBroadcastDate(int BroadcastId, LocalDate Date) {
                 String sql = "UPDATE broadcasts SET BroadcastDate = ? WHERE BroadcastID = ?";
         
                 try (Connection conn = DatabaseConnection.connect();
@@ -200,4 +201,32 @@ public class BroadcastManager {
                     e.printStackTrace();
                 }
                 }
+
+        public ResultSet SearchBroadcast(String Date, String Movie,String Theater) throws SQLException {
+            String sql = "SELECT * FROM broadcasts WHERE 1=1"; // Always true to append filters
+            List<String> params = new ArrayList<>();
+
+            if (Date != null && !Date.isEmpty()) {
+                sql += " AND BroadcastDate LIKE ?";     // Hadi 3efssa y3eytoulha wild card hadi ra7 t7ewesslek ay Date yebda kima wech rak kateb
+                params.add( Date + "%");
+            }
+            if (Movie != null && !Movie.isEmpty()) {
+                sql += " AND MovieID = ?";
+                params.add(Movie + "%");
+            }
+            if (Theater != null && !Theater.isEmpty()) {
+                sql += " AND TheaterID = ?";
+                params.add(Theater + "%");
+            }
+
+            Connection conn = DatabaseConnection.connect();
+            // Prepare statement and add parameters
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            for (int i = 0; i < params.size(); i++) {
+                stmt.setString(i + 1, params.get(i)); // Bind parameters safely
+            }
+
+            return stmt.executeQuery(); // Return result to display in UI
+        }
+
 }

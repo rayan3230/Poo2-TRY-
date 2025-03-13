@@ -3,6 +3,7 @@ package controller;
 import Model.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdminManager {
 
@@ -111,39 +112,32 @@ public class AdminManager {
         return 0;
     }
 
-    public static ResultSet findAdminssbyName(String name) {
-        String sql = "SELECT * FROM admins WHERE Name = ? ";
+    public ResultSet Searchadmins(String Email, String First,String Last) throws SQLException {
+    String sql = "SELECT * FROM admins WHERE 1=1"; // Always true to append filters
+    List<String> params = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnection.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, name);
-
-            return pstmt.executeQuery();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+    if (Email != null && !Email.isEmpty()) {
+        sql += " AND Email LIKE ?";     // Hadi 3efssa y3eytoulha wild card hadi ra7 t7ewesslek ay email yebda kima wech rak kateb
+        params.add( Email + "%");
+    }
+    if (First != null && !First.isEmpty()) {
+        sql += " AND Name = ?";
+        params.add(First + "%");
+    }
+    if (Last != null && !Last.isEmpty()) {
+        sql += " AND Lastname = ?";
+        params.add(Last + "%");
     }
 
-    
-    public static ResultSet findAdminsbyEmail(String email) {
-        String sql = "SELECT FROM admins Where Email = ?";
-
-        try (Connection conn = DatabaseConnection.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, email);
-
-            return pstmt.executeQuery();
-             } catch (SQLException e) {
-            e.printStackTrace();
-             } 
-        return null;   
+    Connection conn = DatabaseConnection.connect();
+    // Prepare statement and add parameters
+    PreparedStatement stmt = conn.prepareStatement(sql);
+    for (int i = 0; i < params.size(); i++) {
+        stmt.setString(i + 1, params.get(i)); // Bind parameters safely
     }
 
+    return stmt.executeQuery(); // Return result to display in UI
+}
 
     public static void UpdateAdminName(int Adminid, String name) {
         String sql = "UPDATE admins SET Name = ? WHERE AdminID = ?";
@@ -167,7 +161,7 @@ public class AdminManager {
         }
         }
 
-        public static void updateAdminEmail(int Adminid, String email) {
+    public static void updateAdminEmail(int Adminid, String email) {
         String sql = "UPDATE admins SET Email = ? WHERE AdminID = ?";
 
         try (Connection conn = DatabaseConnection.connect();
@@ -189,7 +183,7 @@ public class AdminManager {
         }
         }
 
-        public static void updateAdminPassword(int adminid, String password) {
+    public static void updateAdminPassword(int adminid, String password) {
         String sql = "UPDATE admins SET password = ? WHERE AdminID = ?";
 
         try (Connection conn = DatabaseConnection.connect();

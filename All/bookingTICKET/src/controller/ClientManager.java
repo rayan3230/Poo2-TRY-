@@ -1,6 +1,8 @@
 package controller;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ClientManager {
@@ -219,42 +221,36 @@ public class ClientManager {
             return false;
         }
 
-        public static ResultSet findUsersbyusername(String username) {
-            String sql = "SELECT * FROM users WHERE username = ? ";
+        public ResultSet Searchusers(String Username, String Email,String Last,String First) throws SQLException {
+            String sql = "SELECT * FROM users WHERE 1=1"; // Always true to append filters
+            List<String> params = new ArrayList<>();
 
-            try (Connection conn = DatabaseConnection.connect();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-                pstmt.setString(1, username);
-
-                return pstmt.executeQuery();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (Email != null && !Email.isEmpty()) {
+                sql += " AND Email LIKE ?";     // Hadi 3efssa y3eytoulha wild card hadi ra7 t7ewesslek ay email yebda kima wech rak kateb
+                params.add( Email + "%");
+            }
+            if (First != null && !First.isEmpty()) {
+                sql += " AND Name = ?";
+                params.add(First + "%");
+            }
+            if (Last != null && !Last.isEmpty()) {
+                sql += " AND Lastname = ?";
+                params.add(Last + "%");
+            }
+            if (Username != null && !Username.isEmpty()) {
+                sql += " AND username = ?";
+                params.add(Username + "%");
             }
 
-            return null;
-        }
-
-        
-        public static ResultSet findUsersbyEmail(String email) {
-            String sql = "SELECT * FROM users WHERE Emaik = ? ";
-
-            try (Connection conn = DatabaseConnection.connect();
-                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-                pstmt.setString(1, email);
-
-                return pstmt.executeQuery();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
+            Connection conn = DatabaseConnection.connect();
+            // Prepare statement and add parameters
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            for (int i = 0; i < params.size(); i++) {
+                stmt.setString(i + 1, params.get(i)); // Bind parameters safely
             }
 
-            return null;
+            return stmt.executeQuery(); // Return result to display in UI
         }
-
-
 
         public static int numberofusers() {
             String sql = "SELECT COUNT(*) FROM users";
