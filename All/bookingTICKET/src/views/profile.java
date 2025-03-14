@@ -220,6 +220,19 @@ public class profile extends JFrame {
         });
         editpanel.add(editusernametext);
 
+        editusernamebox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!editusernamebox.isSelected()) {
+                    editusernametext.setEnabled(false);
+                } else {
+                    editusernametext.setEnabled(true);
+                }
+            }
+        });
+
+        editusernametext.setEnabled(false);
+
         JLabel editEmail = new JLabel("Email");
         editEmail.setBounds(23, 222, 150, 30);
         editEmail.setForeground(Color.white);
@@ -254,6 +267,22 @@ public class profile extends JFrame {
             }
         });
         editpanel.add(editemailtext);
+        
+        editemailnamebox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!editemailnamebox.isSelected()) {
+                    editemailtext.setEnabled(false);
+                } else {
+                    editemailtext.setEnabled(true);
+                }
+            }
+        });
+
+        editemailtext.setEnabled(false);
+
+
+
 
         JLabel editAge = new JLabel("Age");
         editAge.setBounds(23, 315, 150, 30);
@@ -290,6 +319,19 @@ public class profile extends JFrame {
         });
         editpanel.add(editAgetext);
 
+        editAgebox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!editAgebox.isSelected()) {
+                    editAgetext.setEnabled(false);
+                } else {
+                    editAgetext.setEnabled(true);
+                }
+            }
+        });
+
+        editAgetext.setEnabled(false);
+
         JLabel editPhonenum = new JLabel("Phone Number");
         editPhonenum.setBounds(23, 409, 150, 30);
         editPhonenum.setForeground(Color.white);
@@ -298,6 +340,7 @@ public class profile extends JFrame {
         JCheckBox editnumbox = new JCheckBox();
         editnumbox.setBounds(246, 419, 20, 20);
         editnumbox.setBackground(secondarycolor);
+        
         editpanel.add(editnumbox);
 
         JTextField editnumtext = new JTextField();
@@ -324,6 +367,20 @@ public class profile extends JFrame {
             }
         });
         editpanel.add(editnumtext);
+        editnumbox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!editnumbox.isSelected()) {
+                    editnumtext.setEnabled(false);
+                } else {
+                    editnumtext.setEnabled(true);
+                }
+            }
+        });
+        
+        editnumtext.setEnabled(editnumbox.isSelected());
+
+
 
         JButton edit = new JButton("Edit Profile");
         edit.setBounds(23, 520, 242, 40);

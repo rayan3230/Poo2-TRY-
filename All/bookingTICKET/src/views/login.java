@@ -37,7 +37,10 @@ public class login extends JFrame {
         cardLayout.show(cardPanel, "login");
     }
 
-    private void createLoginPanel() {
+    private JPanel createLoginPanel() {
+        Color bgcolor = new Color(0x121213);
+        Color secondarycolor = new Color(0x151517);
+
         loginPanel = new JPanel();
         loginPanel.setLayout(null); 
         loginPanel.setBackground(bgcolor);
@@ -259,7 +262,7 @@ public class login extends JFrame {
         cardPanel.add(goToSignUpButton);
 
         goToSignUpButton.addActionListener(event -> cardLayout.show(this.cardPanel, "signup"));
-        loginPanel.add(cardPanel);
+        return loginPanel;
     }
 
 
@@ -273,7 +276,7 @@ public class login extends JFrame {
 
 
 
-    private void createSignUpPanel() {
+    private JPanel createSignUpPanel() {
         signUpPanel = new JPanel();
         signUpPanel.setLayout(null);
         signUpPanel.setBackground(bgcolor);
@@ -604,6 +607,7 @@ public class login extends JFrame {
         goToLoginButton.addActionListener(event -> cardLayout.show(this.cardPanel, "login"));
 
         signUpPanel.add(cardPanel);
+        return signUpPanel;
     }
 
     // ---------- Main Method ----------
