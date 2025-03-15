@@ -163,7 +163,8 @@ public class MovieManager {
                 "Robert Kirkman", "Steven Yeun, J.K. Simmons, Sandra Oh",
                 LocalDate.of(2021, 3, 26),
                 9.7f, Movie.MovieAgeRating.PG18, Movie.Language.VOSTFR, "Invincible.png");
-                Movie25.ImagePath2 ="img\\Films\\invincible-blue.png";
+
+                Movie25.ImagePath2 ="Fahd\\bookingTICKET\\img\\Films\\invincible-blue.png";
         
         AddMovie(Movie1);
         AddMovie(Movie2);

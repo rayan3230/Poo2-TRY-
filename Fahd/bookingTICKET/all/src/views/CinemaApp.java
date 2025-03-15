@@ -4,7 +4,6 @@ import Model.*;
 import controller.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Timer;
 import javax.swing.*;
 
 public class CinemaApp extends JFrame implements ActionListener {
@@ -31,8 +30,9 @@ public class CinemaApp extends JFrame implements ActionListener {
 
     // fonctionnalities elements ---------------------------------------
     public Timer timer, timer2;
-    public int x = -300;
+    public int x = 1500;
     public int xVelocity = 30;
+    public int Counter = 0;
     public JScrollPane scrollPane3, scrollPane4;
 
     // decorative Panels ------------------------------------------------
@@ -2695,6 +2695,7 @@ public class CinemaApp extends JFrame implements ActionListener {
         MoreMovies.setCursor(new Cursor(Cursor.HAND_CURSOR));
         MoreMovies.addActionListener(e -> {
             // handle filter button click
+        ((CardLayout) ContentPanel.getLayout()).show(ContentPanel, "all movies");
         });
         MoreMovies.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -2728,6 +2729,14 @@ public class CinemaApp extends JFrame implements ActionListener {
             int scrollAmount = 30; // Adjust scroll speed
             verticalScrollBar.setValue(currentValue + (notches * scrollAmount));
         });
+
+        JLabel AllMoviesText = new JLabel("Explore more movies");
+        AllMoviesText.setBounds(25, 15, 425, 40);
+        AllMoviesText.setFont(new Font("Inter", Font.BOLD, 32));
+        AllMoviesText.setForeground(Color.white);
+
+        AllMoviePanel.add(AllMoviesText);
+
 
         JPanel AllMovieList = new JPanel();
         AllMovieList.setOpaque(false);
@@ -2853,12 +2862,34 @@ public class CinemaApp extends JFrame implements ActionListener {
         }
 
         //movie panel-----------------------------------
-        JPanel moviePanel = CreateBuyMoviePanel(movieManager.movies.get(24));
+        JPanel BuyMoviePanel = CreateBuyMoviePanel(movieManager.movies.get(24));
+
+        RoundedPanel BuySettings = new RoundedPanel(35);
+        BuySettings.setBounds(x, 0, 300, 750);
+        BuySettings.setLayout(null);
+        BuySettings.setBackground(new Color(0x212121));
+
+        ClientPanel.add(BuySettings);
+
+        JPanel BlurPanel = new JPanel();
+        BlurPanel.setBounds(0, 0, 1200, 750);
+        BlurPanel.setBackground(Color.black);
+        BlurPanel.setVisible(false);
+
+        ClientPanel.add(BlurPanel);
+    
+        timer = new Timer(0, e->{
+            if(x == 900){
+                timer.stop();
+            }
+            x -= xVelocity;
+            BuySettings.setBounds(x, 0, 325, 750);
+        });
 
         ContentPanel.add(scrollPane, "home");
         ContentPanel.add(scrollPane2, "all movies");
-        ContentPanel.add(moviePanel, "buy movie");
-        ((CardLayout) ContentPanel.getLayout()).show(ContentPanel, "buy movie");
+        ContentPanel.add(BuyMoviePanel, "buy movie");
+        ((CardLayout) ContentPanel.getLayout()).show(ContentPanel, "home");
         // -----------------------------------------------------------------------------------------------
 
         // ------------Left panel--------------------------------------------------------
@@ -2966,13 +2997,15 @@ public class CinemaApp extends JFrame implements ActionListener {
         ClientPanel.add(StraightLine);
         // --------------------------------------------------------------------------------------------
 
-        ClientPanel.setComponentZOrder(LeftPanel, 0);
-        ClientPanel.setComponentZOrder(StraightLine, 0);
-        ClientPanel.setComponentZOrder(SearchBar, 0);
-        ClientPanel.setComponentZOrder(FilterButton, 0);
-        ClientPanel.setComponentZOrder(HistoryButton, 0);
-        ClientPanel.setComponentZOrder(AccountButton, 0);
-        ClientPanel.setComponentZOrder(ContentPanel, 1);
+        ClientPanel.setComponentZOrder(LeftPanel, 2);
+        ClientPanel.setComponentZOrder(StraightLine, 2);
+        ClientPanel.setComponentZOrder(SearchBar, 2);
+        ClientPanel.setComponentZOrder(FilterButton, 2);
+        ClientPanel.setComponentZOrder(HistoryButton, 2);
+        ClientPanel.setComponentZOrder(AccountButton, 2);
+        ClientPanel.setComponentZOrder(ContentPanel, 3);
+        ClientPanel.setComponentZOrder(BuySettings, 0);
+        ClientPanel.setComponentZOrder(BlurPanel, 1);
 
         return ClientPanel;
     }
@@ -3045,6 +3078,12 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         BuyButton.addActionListener(e -> {
             // handle buy button click
+            
+            if(x == 900){
+                return;
+            }else{
+                timer.start();
+            }
         });
         BuyButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -3059,28 +3098,28 @@ public class CinemaApp extends JFrame implements ActionListener {
         MoviePanel.add(BuyButton);
 
         //more info button ------------------------------------------------------------
-        JButton MoreInfoButton = new JButton("What trailler");
-        MoreInfoButton.setBounds(200, 545, 150, 50);
-        MoreInfoButton.setFont(new Font("Inter", Font.BOLD, 18));
-        MoreInfoButton.setForeground(Color.white);
-        MoreInfoButton.setBackground(new Color(0x000000));
-        MoreInfoButton.setUI(new RoundButtonUI(new Color(0x000000)));
-        MoreInfoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        JButton TraillerButton = new JButton("What trailler");
+        TraillerButton.setBounds(200, 545, 150, 50);
+        TraillerButton.setFont(new Font("Inter", Font.BOLD, 18));
+        TraillerButton.setForeground(Color.white);
+        TraillerButton.setBackground(new Color(0x000000));
+        TraillerButton.setUI(new RoundButtonUI(new Color(0x000000)));
+        TraillerButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        MoreInfoButton.addActionListener(e -> {
+        TraillerButton.addActionListener(e -> {
             // handle more info button click
         });
-        MoreInfoButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        TraillerButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                MoreInfoButton.setBackground(new Color(0x212121));
+                TraillerButton.setBackground(new Color(0x212121));
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                MoreInfoButton.setBackground(new Color(0x000000));
+                TraillerButton.setBackground(new Color(0x000000));
             }
         });
 
-        MoviePanel.add(MoreInfoButton);
+        MoviePanel.add(TraillerButton);
 
 
         return MoviePanel;
