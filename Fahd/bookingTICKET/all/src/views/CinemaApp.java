@@ -3085,8 +3085,8 @@ public class CinemaApp extends JFrame implements ActionListener {
 
         return MoviePanel;
     }
-    // handle events
-    // ------------------------------------------------------------------------
+    
+    // handle events-----------------------------------------------------------------
     public void HandleLogIn(String email, String password) {
         // handle log in
     }
