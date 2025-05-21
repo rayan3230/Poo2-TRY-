@@ -3,6 +3,8 @@ package controller;
 import Model.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MovieManager {
     
@@ -192,7 +194,19 @@ public class MovieManager {
         AddMovie(Movie24);
         AddMovie(Movie25);
 
+        sortMoviesByName();
+
     }
+
+    // Sort movies by title in alphabetical order
+    public void sortMoviesByName() {
+        Collections.sort(movies, new Comparator<Movie>() {
+                @Override
+                public int compare(Movie m1, Movie m2) {
+                return m1.Title.compareToIgnoreCase(m2.Title);
+                }
+        });
+}
     
     public void AddMovie(Movie movie) {
         movies.add(movie);
@@ -241,6 +255,15 @@ public class MovieManager {
 
     public void setPromotion(int Id1, int Id2){
         this.PromosId = new int[]{Id1, Id2};
+    }
+
+    public int GetMovieByName(String name) {
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).Title.equals(name)) {
+                return i;
+            }
+        }
+        return -1; // Movie not found
     }
 
 

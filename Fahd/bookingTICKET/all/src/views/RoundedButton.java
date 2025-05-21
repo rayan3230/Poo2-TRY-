@@ -20,6 +20,16 @@ public class RoundedButton extends JButton {
         setFocusPainted(false);
     }
 
+    public RoundedButton(String Text, int radius) {
+        this.radius = radius;
+        this.setText(Text);
+
+        // Disable default button styling
+        setContentAreaFilled(false);
+        setBorderPainted(false);
+        setFocusPainted(false);
+    }
+
     // Method to set the hover effect
     public void setHoverEffect(Color normalColor, Color hoverColor) {
 
