@@ -51,5 +51,39 @@ public class ClientManager {
         return null;
     }
 
+    public Client getClientByEmail(String email){
+        //Check if the client credentials match with the stored client credentials
+        for(Client client : clients){
+            if(client.Email.equals(email)){
+                return client;
+            }
+        }
+        
+        //If client credentials don't match, return null
+        return null;
+    }
+    public Client getClientByPhoneNumber(String phoneNumber){
+        //Check if the client credentials match with the stored client credentials
+        for(Client client : clients){
+            if(client.PhoneNumber.equals(phoneNumber)){
+                return client;
+            }
+        }
+        
+        //If client credentials don't match, return null
+        return null;
+    }
+    public Client getClientByUsername(String username){
+        //Check if the client credentials match with the stored client credentials
+        for(Client client : clients){
+            if(client.username.equals(username)){
+                return client;
+            }
+        }
+        
+        //If client credentials don't match, return null
+        return null;
+    }
+
 
 }

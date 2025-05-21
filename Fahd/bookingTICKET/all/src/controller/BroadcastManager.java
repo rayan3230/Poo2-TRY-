@@ -115,5 +115,23 @@ public class BroadcastManager {
         }
     }
 
+    public Broadcast getBroadcastByMovieAndDate(Movie movie, LocalDate date) {
+        for (Broadcast broadcast : broadcasts) {
+            if (broadcast.movie.equals(movie) && broadcast.Date.equals(date)) {
+                return broadcast;
+            }
+        }
+        return null; // Return null if no broadcast is found for the given movie
+    }
+
+    public Theater getTheaterByMovieAndDate(Movie movie, LocalDate date) {
+        for (Broadcast broadcast : broadcasts) {
+            if (broadcast.movie.equals(movie) && broadcast.Date.equals(date)) {
+                return broadcast.Room;
+            }
+        }
+        return null; // Return null if no broadcast is found for the given movie
+    }
+
 
 }
